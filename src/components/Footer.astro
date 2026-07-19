@@ -1,0 +1,125 @@
+---
+import { NAV_LINKS, SOCIAL_LINKS, SITE_TITLE } from "../consts";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
+        <span class="logo-mark" aria-hidden="true">D</span>
+        <span>DAX<span class="logo-accent">Guide</span></span>
+      </a>
+      <p class="footer-tagline">
+        In-depth Power BI, DAX & Power Query tutorials for data analysts.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Site</h4>
+        <ul>
+          {NAV_LINKS.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/rss.xml">RSS Feed</a></li>
+          <li><a href="/sitemap-index.xml">Sitemap</a></li>
+          {SOCIAL_LINKS.github && <li><a href={SOCIAL_LINKS.github} rel="noopener">GitHub</a></li>}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; {year} {SITE_TITLE}. All rights reserved.</p>
+      <p class="footer-disclosure">
+        Some links may be affiliate links. We independently review all products.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 80px;
+    background: var(--c-bg-soft);
+    border-top: 1px solid var(--c-border);
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 48px;
+    padding: 56px 24px 40px;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--c-text);
+    margin-bottom: 12px;
+  }
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--c-accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+  }
+  .logo-accent { color: var(--c-accent); }
+  .footer-tagline {
+    color: var(--c-text-muted);
+    font-size: 0.9rem;
+    max-width: 320px;
+  }
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .footer-col h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-text-dim);
+    margin-bottom: 14px;
+  }
+  .footer-col ul { list-style: none; margin: 0; }
+  .footer-col li { margin-bottom: 8px; }
+  .footer-col a {
+    color: var(--c-text-muted);
+    font-size: 0.9rem;
+  }
+  .footer-bottom {
+    border-top: 1px solid var(--c-border);
+    padding: 20px 0;
+  }
+  .footer-bottom p {
+    font-size: 0.82rem;
+    color: var(--c-text-dim);
+    margin: 0;
+  }
+  .footer-disclosure { margin-top: 4px; }
+
+  @media (max-width: 720px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 24px 28px; }
+    .footer-links { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  }
+</style>

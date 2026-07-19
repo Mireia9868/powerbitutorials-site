@@ -1,0 +1,125 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import TutorialCard from "../../components/TutorialCard.astro";
+import { CATEGORIES } from "../../consts";
+
+export async function getStaticPaths() {
+  return CATEGORIES.map((cat) => ({
+    params: { slug: cat.slug },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+
+const tutorials = (await getCollection("tutorials", ({ data }) => !data.draft))
+  .filter((t) => t.data.category === category.slug)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout
+  title={category.label}
+  description={`${category.description} ${tutorials.length} tutorials available.`}
+>
+  <div class="page-header">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/tutorials">Tutorials</a>
+        <span aria-hidden="true">/</span>
+        <span>{category.label}</span>
+      </nav>
+      <span class="page-eyebrow">Category</span>
+      <h1>{category.label}</h1>
+      <p class="page-sub">{category.description}</p>
+      <p class="page-count">{tutorials.length} tutorial{tutorials.length === 1 ? "" : "s"} in this category</p>
+    </div>
+  </div>
+
+  <div class="container tutorials-layout">
+    <Sidebar />
+
+    <div class="tutorials-main">
+      {tutorials.length > 0 ? (
+        <div class="tutorial-grid">
+          {tutorials.map((t) => <TutorialCard tutorial={t} />)}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <h3>No tutorials here yet</h3>
+          <p>We're working on it. Check back soon, or browse other categories.</p>
+          <a href="/tutorials" class="btn-primary">Browse All Tutorials</a>
+        </div>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding: 40px 0 32px;
+    border-bottom: 1px solid var(--c-border);
+    background: var(--c-bg-soft);
+  }
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--c-text-dim);
+    margin-bottom: 16px;
+  }
+  .breadcrumb a { color: var(--c-text-dim); }
+  .breadcrumb a:hover { color: var(--c-accent); }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--c-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .page-header h1 { font-size: 2.2rem; margin-bottom: 8px; }
+  .page-sub { color: var(--c-text-muted); margin: 0 0 4px; }
+  .page-count { font-size: 0.85rem; color: var(--c-text-dim); margin: 0; }
+
+  .tutorials-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    padding: 40px 24px 80px;
+  }
+  .tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    background: var(--c-bg-soft);
+    border: 1px dashed var(--c-border-strong);
+    border-radius: var(--radius-lg);
+  }
+  .empty-state h3 { margin-bottom: 8px; }
+  .empty-state p { margin-bottom: 20px; }
+  .btn-primary {
+    display: inline-block;
+    padding: 11px 22px;
+    background: var(--c-accent);
+    color: #fff;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--c-accent-hover); text-decoration: none; }
+
+  @media (max-width: 960px) {
+    .tutorials-layout { grid-template-columns: 1fr; }
+    .tutorial-grid { grid-template-columns: 1fr; }
+  }
+</style>

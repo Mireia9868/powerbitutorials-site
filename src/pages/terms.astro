@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_URL } from "../consts";
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description="The terms and conditions governing your use of DAX Guide."
+>
+  <article class="legal-page">
+    <div class="content-width">
+      <span class="page-eyebrow">Legal</span>
+      <h1>Terms of Service</h1>
+      <p class="updated">Last updated: July 19, 2026</p>
+
+      <p>
+        These Terms of Service ("Terms") govern your access to and use of
+        {SITE_URL} (the "Site"). By accessing the Site, you agree to be
+        bound by these Terms. If you do not agree, please do not use the Site.
+      </p>
+
+      <h2>1. Use of the Site</h2>
+      <p>
+        DAX Guide provides tutorials and educational content about Power BI,
+        DAX, and Power Query. You may use the Site for personal, non-commercial
+        educational purposes. You agree not to:
+      </p>
+      <ul>
+        <li>Use the Site in any way that violates applicable laws or regulations</li>
+        <li>Attempt to gain unauthorized access to any part of the Site</li>
+        <li>Interfere with the proper functioning of the Site, including advertising systems</li>
+        <li>Scrape, copy, or republish substantial portions of content without permission</li>
+        <li>Use automated systems (bots, crawlers) to access the Site in a way that sends more requests than a human reasonably could</li>
+      </ul>
+
+      <h2>2. Intellectual property</h2>
+      <p>
+        The Site's content — including articles, code samples, diagrams, and
+        design — is owned by DAX Guide and protected by copyright and other
+        intellectual property laws. You may:
+      </p>
+      <ul>
+        <li>View and read content for personal learning</li>
+        <li>Share links to individual pages</li>
+        <li>Quote brief excerpts with attribution and a link back to the source</li>
+      </ul>
+      <p>
+        You may not reproduce, republish, or distribute full articles without
+        prior written permission. DAX code samples provided in tutorials are
+        released under the MIT license and may be used freely in your own
+        projects.
+      </p>
+
+      <h2>3. Educational content disclaimer</h2>
+      <p>
+        All tutorials and content on the Site are provided for educational
+        purposes only. While we strive for accuracy, Power BI and DAX are
+        complex tools that change frequently. You are responsible for
+        validating any formula, pattern, or technique against your own data
+        before relying on it in production environments.
+      </p>
+
+      <h2>4. No professional advice</h2>
+      <p>
+        Nothing on the Site constitutes professional, financial, or technical
+        consulting advice. We are not liable for any losses or damages
+        arising from the application of techniques described in our content.
+      </p>
+
+      <h2>5. Advertising and affiliate disclosure</h2>
+      <p>
+        The Site is supported by advertising (Google AdSense) and may include
+        affiliate links. Advertising and affiliate relationships do not
+        influence editorial content or product comparisons. Where a link is
+        affiliate, we disclose it. We only recommend tools and services we
+        have genuinely evaluated.
+      </p>
+
+      <h2>6. Third-party links and services</h2>
+      <p>
+        The Site contains links to third-party websites and references
+        third-party products (e.g., Microsoft Power BI). We are not
+        responsible for the content, policies, or practices of third parties.
+        Your use of third-party services is subject to their respective terms.
+      </p>
+
+      <h2>7. Limitation of liability</h2>
+      <p>
+        To the fullest extent permitted by law, DAX Guide and its authors
+        shall not be liable for any indirect, incidental, special,
+        consequential, or punitive damages, or any loss of data, arising
+        from your use of the Site, including but not limited to damages
+        resulting from following any tutorial, formula, or recommendation.
+      </p>
+
+      <h2>8. Indemnification</h2>
+      <p>
+        You agree to indemnify and hold DAX Guide harmless from any claims,
+        damages, or expenses arising from your misuse of the Site or
+        violation of these Terms.
+      </p>
+
+      <h2>9. Changes to the Site and Terms</h2>
+      <p>
+        We may modify or discontinue any part of the Site at any time. We
+        may revise these Terms by posting an updated version on this page.
+        Continued use of the Site after changes constitutes acceptance of
+        the revised Terms.
+      </p>
+
+      <h2>10. Governing law</h2>
+      <p>
+        These Terms are governed by applicable laws without regard to
+        conflict-of-law principles. Any disputes will be resolved in the
+        competent courts of the applicable jurisdiction.
+      </p>
+
+      <h2>11. Contact</h2>
+      <p>
+        Questions about these Terms? <a href="/contact">Contact us</a> or
+        email <a href="mailto:legal@daxguide.com">legal@daxguide.com</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page { padding: 56px 0 80px; }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--c-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .legal-page h1 { font-size: 2.2rem; margin-bottom: 8px; }
+  .updated { color: var(--c-text-dim); font-size: 0.85rem; margin-bottom: 32px; }
+  .legal-page h2 { margin-top: 2.2em; font-size: 1.3rem; }
+  .legal-page p { font-size: 0.95rem; }
+</style>

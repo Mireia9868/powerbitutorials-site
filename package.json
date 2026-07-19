@@ -1,0 +1,30 @@
+{
+  "name": "daxguide-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Power BI & DAX tutorials content site (AdSense MVP)",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "keystatic": "keystatic"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^3.1.9",
+    "@astrojs/rss": "^4.0.9",
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^4.16.18",
+    "reading-time": "^1.5.0"
+  },
+  "devDependencies": {
+    "@keystatic/core": "^0.5.45",
+    "@keystatic/astro": "^5.0.3",
+    "sharp": "^0.33.5"
+  },
+  "engines": {
+    "node": ">=18.17.1"
+  }
+}

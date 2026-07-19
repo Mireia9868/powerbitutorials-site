@@ -1,0 +1,125 @@
+---
+import { CATEGORIES } from "../consts";
+
+const pathname = Astro.url.pathname;
+const activeCat = CATEGORIES.find((c) => pathname.includes(`/category/${c.slug}`))?.slug;
+---
+
+<aside class="sidebar" aria-label="Categories">
+  <div class="sidebar-section">
+    <h3 class="sidebar-title">Categories</h3>
+    <ul class="cat-list">
+      <li>
+        <a href="/tutorials" class={!activeCat ? "active" : ""}>
+          All Tutorials
+        </a>
+      </li>
+      {CATEGORIES.map((cat) => (
+        <li>
+          <a
+            href={`/category/${cat.slug}`}
+            class={activeCat === cat.slug ? "active" : ""}
+          >
+            {cat.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="sidebar-section sidebar-cta">
+    <h3 class="sidebar-title">Newsletter</h3>
+    <p>Get one practical DAX pattern in your inbox every week.</p>
+    <form class="newsletter-form" onsubmit="return false;">
+      <input type="email" placeholder="you@company.com" aria-label="Email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</aside>
+
+<style>
+  .sidebar {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .sidebar-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-text-dim);
+    margin-bottom: 12px;
+  }
+  .cat-list { list-style: none; margin: 0; }
+  .cat-list li { margin: 0; }
+  .cat-list a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--c-text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .cat-list a:hover {
+    color: var(--c-text);
+    background: var(--c-bg-elevated);
+    text-decoration: none;
+  }
+  .cat-list a.active {
+    color: var(--c-accent);
+    background: var(--c-accent-soft);
+    font-weight: 600;
+  }
+  .sidebar-cta {
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .sidebar-cta p {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    color: var(--c-text-muted);
+  }
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .newsletter-form input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-size: 0.85rem;
+    font-family: inherit;
+  }
+  .newsletter-form input:focus {
+    outline: none;
+    border-color: var(--c-accent);
+  }
+  .newsletter-form button {
+    width: 100%;
+    padding: 9px 12px;
+    background: var(--c-accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .newsletter-form button:hover { background: var(--c-accent-hover); }
+
+  @media (max-width: 960px) {
+    .sidebar { position: static; }
+  }
+</style>

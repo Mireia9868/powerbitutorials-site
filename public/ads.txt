@@ -1,0 +1,2 @@
+# AdSense placeholder — Google审批通过后在此文件填入:
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

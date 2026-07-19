@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Page Not Found" noindex={true}>
+  <div class="not-found">
+    <div class="content-width">
+      <div class="nf-code">404</div>
+      <h1>This page wandered off the data model.</h1>
+      <p>
+        The page you're looking for doesn't exist — maybe a typo in the URL,
+        or it was renamed. Let's get you back on track.
+      </p>
+      <div class="nf-actions">
+        <a href="/" class="btn-primary">← Back to Home</a>
+        <a href="/tutorials" class="btn-secondary">Browse Tutorials</a>
+      </div>
+      <div class="nf-suggest">
+        <p>Or try one of these popular guides:</p>
+        <ul>
+          <li><a href="/tutorials/dax-basics">DAX Basics: The Beginner's Guide</a></li>
+          <li><a href="/tutorials/calculate-function">CALCULATE: The Most Important DAX Function</a></li>
+          <li><a href="/tutorials/power-query-getting-started">Getting Started with Power Query</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding: 96px 0;
+    text-align: center;
+  }
+  .nf-code {
+    font-size: 6rem;
+    font-weight: 800;
+    color: var(--c-accent);
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: -0.04em;
+  }
+  .not-found h1 {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+  }
+  .not-found p {
+    color: var(--c-text-muted);
+    margin-bottom: 28px;
+  }
+  .nf-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 11px 22px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--c-accent); color: #fff; }
+  .btn-primary:hover { background: var(--c-accent-hover); text-decoration: none; }
+  .btn-secondary { background: var(--c-bg); color: var(--c-text); border-color: var(--c-border); }
+  .btn-secondary:hover { border-color: var(--c-accent); color: var(--c-accent); text-decoration: none; }
+  .nf-suggest {
+    text-align: left;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+  }
+  .nf-suggest p { margin-bottom: 12px; font-weight: 600; color: var(--c-text); font-size: 0.9rem; }
+  .nf-suggest ul { list-style: none; margin: 0; }
+  .nf-suggest li { margin-bottom: 8px; font-size: 0.9rem; }
+</style>

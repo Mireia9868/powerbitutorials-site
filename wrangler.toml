@@ -1,0 +1,7 @@
+name = "daxguide-site"
+compatibility_date = "2026-07-01"
+pages_build_output_dir = "dist"
+
+# Cloudflare Pages 部署配置
+# 本文件可选 —— 多数情况下直接在 Cloudflare Dashboard 连接 GitHub repo 即可
+# 如使用 wrangler CLI 部署: npx wrangler pages deploy dist --project-name=daxguide-site

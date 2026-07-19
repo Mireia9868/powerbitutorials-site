@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_URL } from "../consts";
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How DAX Guide collects, uses, and protects your data, including cookies, Google AdSense, and Google Analytics."
+>
+  <article class="legal-page">
+    <div class="content-width">
+      <span class="page-eyebrow">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: July 19, 2026</p>
+
+      <p>
+        DAX Guide ("we", "us", or "our") operates {SITE_URL} (the "Site").
+        This Privacy Policy explains what information we collect, how we use
+        it, and the choices you have. By using the Site, you agree to the
+        practices described here.
+      </p>
+
+      <h2>Information we collect</h2>
+      <h3>Information you provide</h3>
+      <p>
+        When you contact us via our contact form or email, we collect the
+        name, email address, and message content you voluntarily provide.
+        We use this solely to respond to your inquiry.
+      </p>
+      <h3>Information collected automatically</h3>
+      <p>
+        Like most websites, we and our third-party partners collect
+        certain technical information automatically when you visit the
+        Site, including: IP address, browser type and version, device
+        type, referring URL, pages visited, time spent on pages, and
+        approximate geographic location (country/region level).
+      </p>
+
+      <h2>Cookies and similar technologies</h2>
+      <p>
+        We use cookies and similar technologies to operate the Site,
+        analyze traffic, and serve advertising. You can control cookies
+        through your browser settings. Disabling cookies may affect
+        Site functionality.
+      </p>
+      <p>Categories of cookies we use:</p>
+      <ul>
+        <li><strong>Essential</strong> — required for the Site to function.</li>
+        <li><strong>Analytics</strong> — help us understand how visitors use the Site (Google Analytics).</li>
+        <li><strong>Advertising</strong> — used by Google AdSense to serve and measure ads.</li>
+      </ul>
+
+      <h2>Google AdSense and the DoubleClick Cookie</h2>
+      <p>
+        We use Google AdSense to display advertisements. Google, as a
+        third-party vendor, uses cookies to serve ads based on your prior
+        visits to this and other websites.
+      </p>
+      <ul>
+        <li>Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our site and/or other sites on the Internet.</li>
+        <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" rel="noopener">Google Ads Settings</a>.</li>
+        <li>You may also opt out of third-party vendors' use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" rel="noopener">aboutads.info</a>.</li>
+        <li>For more information about how Google uses data when you use our site, see <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">Google's privacy policy for partner sites</a>.</li>
+      </ul>
+
+      <h2>Google Analytics</h2>
+      <p>
+        We use Google Analytics to understand Site usage. Google Analytics
+        collects information anonymously and in aggregate. We use this data
+        to improve content and Site performance. See
+        <a href="https://policies.google.com/privacy" rel="noopener">Google's Privacy Policy</a>
+        for details.
+      </p>
+
+      <h2>How we use information</h2>
+      <ul>
+        <li>To operate, maintain, and improve the Site</li>
+        <li>To analyze usage trends and measure advertising performance</li>
+        <li>To respond to your inquiries and feedback</li>
+        <li>To detect, prevent, and address technical issues or abuse</li>
+        <li>To comply with legal obligations</li>
+      </ul>
+
+      <h2>Third-party services</h2>
+      <p>We engage the following third-party services that may process limited data:</p>
+      <ul>
+        <li><strong>Google AdSense</strong> — advertising (Google LLC)</li>
+        <li><strong>Google Analytics</strong> — web analytics (Google LLC)</li>
+        <li><strong>Cloudflare</strong> — content delivery and security</li>
+      </ul>
+
+      <h2>Data retention</h2>
+      <p>
+        We retain contact-form messages for up to 12 months. Analytics data
+        is retained according to Google's default retention settings.
+        Advertising data is governed by the respective ad partner's policies.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>Depending on your jurisdiction (e.g., GDPR, CCPA), you may have the right to:</p>
+      <ul>
+        <li>Access the personal data we hold about you</li>
+        <li>Request correction or deletion of your data</li>
+        <li>Object to or restrict certain processing</li>
+        <li>Opt out of personalized advertising</li>
+        <li>Withdraw consent (where processing is consent-based)</li>
+      </ul>
+      <p>
+        To exercise these rights, <a href="/contact">contact us</a>. We
+        respond to verified requests within 30 days.
+      </p>
+
+      <h2>Children's privacy</h2>
+      <p>
+        The Site is not directed to children under 13, and we do not
+        knowingly collect personal information from children. If you believe
+        a child has provided us information, please contact us and we will
+        delete it.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. Changes are
+        effective when posted on this page. We will update the "Last
+        updated" date above accordingly.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about this Privacy Policy? <a href="/contact">Contact us</a>
+        or email <a href="mailto:privacy@daxguide.com">privacy@daxguide.com</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page { padding: 56px 0 80px; }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--c-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .legal-page h1 { font-size: 2.2rem; margin-bottom: 8px; }
+  .updated { color: var(--c-text-dim); font-size: 0.85rem; margin-bottom: 32px; }
+  .legal-page h2 { margin-top: 2.2em; font-size: 1.3rem; }
+  .legal-page h3 { margin-top: 1.4em; font-size: 1.05rem; color: var(--c-text); }
+  .legal-page p { font-size: 0.95rem; }
+</style>

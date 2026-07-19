@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /keystatic/
+
+Sitemap: https://daxguide.com/sitemap-index.xml

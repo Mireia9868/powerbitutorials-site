@@ -1,0 +1,442 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import TutorialCard from "../../components/TutorialCard.astro";
+import { CATEGORIES, SITE_URL } from "../../consts";
+
+export async function getStaticPaths() {
+  const tutorials = await getCollection("tutorials", ({ data }) => !data.draft);
+  return tutorials.map((tutorial) => ({
+    params: { slug: tutorial.slug },
+    props: { tutorial },
+  }));
+}
+
+interface Props {
+  tutorial: CollectionEntry<"tutorials">;
+}
+
+const { tutorial } = Astro.props;
+const { Content, headings } = await tutorial.render();
+
+const category = CATEGORIES.find((c) => c.slug === tutorial.data.category);
+const allTutorials = (await getCollection("tutorials", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.pubDate.getTime() - b.data.pubDate.getTime());
+
+const idx = allTutorials.findIndex((t) => t.slug === tutorial.slug);
+const prev = idx > 0 ? allTutorials[idx - 1] : null;
+const next = idx < allTutorials.length - 1 ? allTutorials[idx + 1] : null;
+
+const related = allTutorials
+  .filter((t) => t.slug !== tutorial.slug && t.data.category === tutorial.data.category)
+  .slice(0, 3);
+const relatedFallback = related.length > 0
+  ? related
+  : allTutorials.filter((t) => t.slug !== tutorial.slug).slice(0, 3);
+
+const tocItems = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+
+// 阅读时间估算
+const wordCount = tutorial.body.split(/\s+/).filter(Boolean).length;
+const readingTime = Math.max(1, Math.round(wordCount / 220));
+
+const dateStr = tutorial.data.pubDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const updatedStr = tutorial.data.updatedDate?.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const diffClass = tutorial.data.difficulty.toLowerCase();
+
+// JSON-LD Structured Data (SEO + AdSense E-E-A-T)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: tutorial.data.title,
+  description: tutorial.data.description,
+  author: {
+    "@type": "Organization",
+    name: tutorial.data.author,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "DAX Guide",
+    url: SITE_URL,
+  },
+  datePublished: tutorial.data.pubDate.toISOString(),
+  dateModified: (tutorial.data.updatedDate || tutorial.data.pubDate).toISOString(),
+  articleSection: category?.label,
+  keywords: tutorial.data.tags.join(", "),
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": new URL(`/tutorials/${tutorial.slug}`, Astro.site).href,
+  },
+};
+---
+
+<BaseLayout
+  title={tutorial.data.title}
+  description={tutorial.data.description}
+  image={tutorial.data.heroImage}
+  article={true}
+  publishedTime={tutorial.data.pubDate}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <article class="tutorial-article">
+    <div class="tutorial-layout">
+      <!-- Left: TOC -->
+      <aside class="toc-sidebar" aria-label="Table of contents">
+        <div class="toc-inner">
+          {tocItems.length > 0 && (
+            <>
+              <h4 class="toc-title">On this page</h4>
+              <nav class="toc-nav">
+                {tocItems.map((h) => (
+                  <a
+                    href={`#${h.slug}`}
+                    class={`toc-link toc-depth-${h.depth}`}
+                  >
+                    {h.text}
+                  </a>
+                ))}
+              </nav>
+            </>
+          )}
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="tutorial-main">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/tutorials">Tutorials</a>
+          {category && (
+            <>
+              <span aria-hidden="true">/</span>
+              <a href={`/category/${category.slug}`}>{category.label}</a>
+            </>
+          )}
+        </nav>
+
+        <!-- Header -->
+        <header class="article-header">
+          <div class="article-meta">
+            {category && (
+              <a href={`/category/${category.slug}`} class="article-cat">
+                {category.label}
+              </a>
+            )}
+            <span class={`pill pill-${diffClass}`}>{tutorial.data.difficulty}</span>
+            <span class="meta-sep">·</span>
+            <span>{readingTime} min read</span>
+          </div>
+          <h1>{tutorial.data.title}</h1>
+          <p class="article-desc">{tutorial.data.description}</p>
+          <div class="article-info">
+            <div class="author-block">
+              <div class="author-avatar" aria-hidden="true">DG</div>
+              <div>
+                <div class="author-name">{tutorial.data.author}</div>
+                <div class="author-date">
+                  Published <time datetime={tutorial.data.pubDate.toISOString()}>{dateStr}</time>
+                  {updatedStr && (
+                    <span class="updated"> · Updated <time>{updatedStr}</time></span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <AdSlot label="Top of Article Ad" />
+
+        <!-- Content -->
+        <div class="article-content">
+          <Content />
+        </div>
+
+        <!-- Tags -->
+        {tutorial.data.tags.length > 0 && (
+          <div class="article-tags">
+            {tutorial.data.tags.map((tag) => (
+              <a href={`/tutorials?q=${encodeURIComponent(tag)}`} class="tag-link">#{tag}</a>
+            ))}
+          </div>
+        )}
+
+        <AdSlot label="Bottom of Article Ad" />
+
+        <!-- Share -->
+        <div class="share-row">
+          <span>Found this useful?</span>
+          <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(tutorial.data.title)}&url=${new URL(`/tutorials/${tutorial.slug}`, Astro.site).href}`} rel="noopener" class="share-btn">Share on X</a>
+          <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${new URL(`/tutorials/${tutorial.slug}`, Astro.site).href}`} rel="noopener" class="share-btn">LinkedIn</a>
+        </div>
+
+        <!-- Prev / Next -->
+        <nav class="prev-next" aria-label="More tutorials">
+          {prev && (
+            <a href={`/tutorials/${prev.slug}`} class="pn-link pn-prev">
+              <span class="pn-label">← Previous</span>
+              <span class="pn-title">{prev.data.title}</span>
+            </a>
+          )}
+          {next && (
+            <a href={`/tutorials/${next.slug}`} class="pn-link pn-next">
+              <span class="pn-label">Next →</span>
+              <span class="pn-title">{next.data.title}</span>
+            </a>
+          )}
+        </nav>
+      </div>
+
+      <!-- Right: Ad sidebar -->
+      <aside class="ad-sidebar" aria-label="Sponsored">
+        <AdSlot label="Sidebar Ad" />
+      </aside>
+    </div>
+  </article>
+
+  <!-- Related -->
+  {relatedFallback.length > 0 && (
+    <section class="related-section">
+      <div class="container">
+        <h2>Related Tutorials</h2>
+        <div class="related-grid">
+          {relatedFallback.map((t) => <TutorialCard tutorial={t} compact={true} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .tutorial-article { padding: 32px 0 0; }
+  .tutorial-layout {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr) 200px;
+    gap: 40px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* TOC */
+  .toc-sidebar {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    align-self: start;
+    max-height: calc(100vh - var(--header-height) - 48px);
+    overflow-y: auto;
+  }
+  .toc-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-text-dim);
+    margin-bottom: 12px;
+  }
+  .toc-nav { display: flex; flex-direction: column; gap: 2px; }
+  .toc-link {
+    display: block;
+    padding: 5px 10px;
+    font-size: 0.82rem;
+    color: var(--c-text-muted);
+    border-left: 2px solid transparent;
+    border-radius: 0;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .toc-link:hover {
+    color: var(--c-accent);
+    border-left-color: var(--c-accent);
+    text-decoration: none;
+    background: var(--c-bg-soft);
+  }
+  .toc-depth-3 { padding-left: 22px; font-size: 0.78rem; }
+
+  /* Main */
+  .tutorial-main { min-width: 0; }
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--c-text-dim);
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .breadcrumb a { color: var(--c-text-dim); }
+  .breadcrumb a:hover { color: var(--c-accent); }
+
+  .article-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--c-border); }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--c-text-muted);
+    margin-bottom: 14px;
+  }
+  .article-cat {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--c-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .meta-sep { color: var(--c-text-dim); }
+  .article-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .article-desc {
+    font-size: 1.1rem;
+    color: var(--c-text-muted);
+    margin-bottom: 20px;
+  }
+  .author-block { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--c-accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .author-name { font-weight: 600; font-size: 0.92rem; color: var(--c-text); }
+  .author-date { font-size: 0.82rem; color: var(--c-text-dim); }
+  .updated { color: var(--c-text-dim); }
+
+  /* Article content */
+  .article-content {
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  .article-content :global(h2) {
+    margin-top: 2em;
+    padding-top: 0.5em;
+    border-top: 1px solid var(--c-border);
+  }
+  .article-content :global(h2:first-child) {
+    border-top: none;
+    padding-top: 0;
+  }
+  .article-content :global(img) {
+    border: 1px solid var(--c-border);
+    margin: 1.5em 0;
+  }
+  .article-content :global(blockquote) {
+    margin: 1.5em 0;
+  }
+
+  /* Tags */
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 32px 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--c-border);
+  }
+  .tag-link {
+    padding: 4px 12px;
+    background: var(--c-bg-elevated);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: var(--c-text-muted);
+    text-decoration: none;
+  }
+  .tag-link:hover { background: var(--c-accent-soft); color: var(--c-accent); text-decoration: none; }
+
+  /* Share */
+  .share-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    color: var(--c-text-muted);
+  }
+  .share-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--c-text);
+    text-decoration: none;
+  }
+  .share-btn:hover { border-color: var(--c-accent); color: var(--c-accent); text-decoration: none; }
+
+  /* Prev/Next */
+  .prev-next {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .pn-link {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px;
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.15s ease;
+  }
+  .pn-link:hover { border-color: var(--c-accent); text-decoration: none; }
+  .pn-next { text-align: right; }
+  .pn-label { font-size: 0.78rem; color: var(--c-text-dim); margin-bottom: 4px; }
+  .pn-title { font-weight: 600; font-size: 0.95rem; color: var(--c-text); }
+
+  /* Ad sidebar */
+  .ad-sidebar {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    align-self: start;
+  }
+
+  /* Related */
+  .related-section {
+    padding: 56px 0 80px;
+    margin-top: 56px;
+    border-top: 1px solid var(--c-border);
+    background: var(--c-bg-soft);
+  }
+  .related-section h2 { font-size: 1.6rem; margin-bottom: 24px; }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 1100px) {
+    .tutorial-layout { grid-template-columns: minmax(0, 1fr); }
+    .toc-sidebar, .ad-sidebar { display: none; }
+    .related-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .article-header h1 { font-size: 1.7rem; }
+    .prev-next { grid-template-columns: 1fr; }
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>

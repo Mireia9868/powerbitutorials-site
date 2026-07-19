@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_AUTHOR } from "../consts";
+---
+
+<BaseLayout
+  title="About"
+  description="Learn about the DAX Guide editorial team — experienced Power BI practitioners delivering accurate, practical tutorials for data analysts."
+  article={true}
+>
+  <article class="about-page">
+    <div class="content-width">
+      <span class="page-eyebrow">About</span>
+      <h1>We help data analysts master Power BI, faster.</h1>
+
+      <p class="lede">
+        DAX Guide is an independent publication focused on practical,
+        no-fluff tutorials for Power BI, DAX, and Power Query. We write the
+        kind of guides we wish existed when we were learning — clear,
+        example-driven, and grounded in real reporting problems.
+      </p>
+
+      <h2>Our editorial principles</h2>
+      <ul>
+        <li><strong>Accuracy first.</strong> Every DAX formula and Power Query step is tested against a real dataset before publication. If a pattern doesn't work as described, we don't publish it.</li>
+        <li><strong>Practical over theoretical.</strong> We explain <em>why</em> a pattern works, but we always show <em>how</em> to use it — with copy-paste code and realistic scenarios.</li>
+        <li><strong>Independently reviewed.</strong> We do not accept paid placements in our tutorials. Software comparisons reflect our genuine assessment. When a link is affiliate, we disclose it.</li>
+        <li><strong>Continuously updated.</strong> Power BI ships monthly. We revisit and update tutorials as the product evolves, and mark each page with its last-reviewed date.</li>
+      </ul>
+
+      <h2>Who writes this</h2>
+      <p>
+        {SITE_AUTHOR} is a group of Power BI practitioners with hands-on
+        experience building enterprise reporting models across finance,
+        operations, and sales analytics. Our background includes:
+      </p>
+      <ul>
+        <li>10+ years combined experience building Power BI dashboards in production</li>
+        <li>Microsoft Certified: Data Analyst Associate (PL-300)</li>
+        <li>Experience migrating enterprise reporting from Excel/SSAS to Power BI</li>
+        <li>Regular contributors to the Power BI community forums and local user groups</li>
+      </ul>
+
+      <div class="author-card">
+        <div class="author-avatar" aria-hidden="true">DG</div>
+        <div>
+          <h3>DAX Guide Editorial Team</h3>
+          <p>
+            We publish one new tutorial each week, typically on Tuesday.
+            Have a topic request or spotted an error?
+            <a href="/contact">Reach out here</a> — we read every message.
+          </p>
+        </div>
+      </div>
+
+      <h2>How we fund this site</h2>
+      <p>
+        DAX Guide is free to read. We're supported by display advertising
+        (Google AdSense) and a small number of disclosed affiliate links
+        for tools we genuinely use. Advertising never influences tutorial
+        content or product recommendations. If you'd like to support us,
+        the best way is to share a tutorial that helped you.
+      </p>
+
+      <h2>What's next</h2>
+      <p>
+        Our 2026 roadmap includes a complete DAX function reference, a
+        pattern library for common business calculations, and downloadable
+        .pbix sample files for every tutorial. Subscribe to the
+        <a href="/#newsletter">newsletter</a> to follow along.
+      </p>
+
+      <div class="about-cta">
+        <a href="/tutorials" class="btn btn-primary">Browse Tutorials</a>
+        <a href="/contact" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-page { padding: 56px 0 80px; }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--c-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .about-page h1 {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--c-text-muted);
+    margin-bottom: 40px;
+    border-left: 3px solid var(--c-accent);
+    padding-left: 20px;
+  }
+  .about-page h2 { margin-top: 2.5em; }
+  .author-card {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    padding: 20px;
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    margin: 28px 0;
+  }
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--c-accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .author-card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+  .author-card p { margin: 0; font-size: 0.92rem; }
+  .about-cta {
+    display: flex;
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 11px 22px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--c-accent); color: #fff; }
+  .btn-primary:hover { background: var(--c-accent-hover); text-decoration: none; }
+  .btn-secondary { background: var(--c-bg); color: var(--c-text); border-color: var(--c-border); }
+  .btn-secondary:hover { border-color: var(--c-accent); color: var(--c-accent); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .about-page h1 { font-size: 1.9rem; }
+    .author-card { flex-direction: column; text-align: center; }
+    .about-cta { flex-direction: column; }
+  }
+</style>

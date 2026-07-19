@@ -1,0 +1,75 @@
+---
+import { ADSENSE_CLIENT } from "../consts";
+
+export interface Props {
+  slot?: string;
+  format?: string;
+  responsive?: boolean;
+  style?: string;
+  label?: string;
+}
+
+const {
+  slot = "0000000000",
+  format = "auto",
+  responsive = true,
+  style = "display:block",
+  label = "Advertisement",
+} = Astro.props;
+
+// 未配置 AdSense Publisher ID 时显示占位符
+const configured = Boolean(ADSENSE_CLIENT);
+---
+
+<div class="ad-slot" aria-label={label}>
+  {configured ? (
+    <ins
+      class="adsbygoogle"
+      style={style}
+      data-ad-client={ADSENSE_CLIENT}
+      data-ad-slot={slot}
+      data-ad-format={format}
+      data-full-width-responsive={responsive ? "true" : "false"}
+    />
+  ) : (
+    <div class="ad-placeholder">
+      <span>Ad Slot</span>
+      <small>{label} · 配置 ADSENSE_CLIENT 后生效</small>
+    </div>
+  )}
+</div>
+
+{configured && (
+  <script is:inline>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+)}
+
+<style>
+  .ad-slot {
+    margin: 32px 0;
+    text-align: center;
+    min-height: 90px;
+  }
+  .ad-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90px;
+    border: 1px dashed var(--c-border-strong);
+    border-radius: var(--radius);
+    background: var(--c-bg-soft);
+    color: var(--c-text-dim);
+  }
+  .ad-placeholder span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .ad-placeholder small {
+    font-size: 0.7rem;
+    margin-top: 4px;
+  }
+</style>

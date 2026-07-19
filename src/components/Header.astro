@@ -1,0 +1,143 @@
+---
+import { NAV_LINKS, SITE_TITLE } from "../consts";
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label={SITE_TITLE}>
+      <span class="logo-mark" aria-hidden="true">D</span>
+      <span class="logo-text">DAX<span class="logo-accent">Guide</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        {NAV_LINKS.map((link) => (
+          <li>
+            <a href={link.href} class={isActive(link.href) ? "active" : ""}>
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--c-bg);
+    border-bottom: 1px solid var(--c-border);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--c-text);
+    text-decoration: none;
+  }
+  .logo:hover { text-decoration: none; }
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    background: var(--c-accent);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  .logo-accent { color: var(--c-accent); }
+  .main-nav ul {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+  }
+  .main-nav a {
+    display: block;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    color: var(--c-text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .main-nav a:hover {
+    color: var(--c-text);
+    background: var(--c-bg-elevated);
+    text-decoration: none;
+  }
+  .main-nav a.active {
+    color: var(--c-accent);
+    background: var(--c-accent-soft);
+  }
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--c-text);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 720px) {
+    .main-nav {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      background: var(--c-bg);
+      border-bottom: 1px solid var(--c-border);
+      padding: 12px 24px;
+      transform: translateY(-120%);
+      transition: transform 0.25s ease;
+    }
+    .main-nav.open { transform: translateY(0); }
+    .main-nav ul {
+      flex-direction: column;
+      gap: 0;
+    }
+    .main-nav a { padding: 12px; }
+    .nav-toggle { display: flex; }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const nav = document.querySelector(".main-nav");
+  toggle?.addEventListener("click", () => {
+    const open = nav?.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(!!open));
+  });
+</script>

@@ -1,0 +1,203 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import TutorialCard from "../../components/TutorialCard.astro";
+import { CATEGORIES } from "../../consts";
+
+const allTutorials = (await getCollection("tutorials", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout
+  title="All Tutorials"
+  description="Browse every Power BI, DAX, and Power Query tutorial. Filter by category or search by keyword."
+>
+  <div class="page-header">
+    <div class="container">
+      <span class="page-eyebrow">Tutorials</span>
+      <h1>All Tutorials</h1>
+      <p class="page-sub">
+        {allTutorials.length} hands-on guides on Power BI, DAX, and Power Query.
+        Use the filters to narrow down.
+      </p>
+    </div>
+  </div>
+
+  <div class="container tutorials-layout">
+    <Sidebar />
+
+    <div class="tutorials-main">
+      <div class="filter-bar">
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input
+            type="search"
+            id="tutorial-search"
+            placeholder="Search by title, tag, or keyword…"
+            aria-label="Search tutorials"
+          />
+        </div>
+        <div class="filter-chips" role="tablist" aria-label="Category filter">
+          <button class="chip active" data-cat="all">All</button>
+          {CATEGORIES.map((c) => (
+            <button class="chip" data-cat={c.slug}>{c.label}</button>
+          ))}
+        </div>
+      </div>
+
+      <div class="tutorial-grid" id="tutorial-grid">
+        {allTutorials.map((t) => (
+          <div
+            class="tutorial-item"
+            data-title={t.data.title.toLowerCase()}
+            data-desc={t.data.description.toLowerCase()}
+            data-cat={t.data.category}
+            data-tags={t.data.tags.join(" ").toLowerCase()}
+          >
+            <TutorialCard tutorial={t} />
+          </div>
+        ))}
+      </div>
+
+      <div class="no-results" id="no-results" hidden>
+        <p>No tutorials match your search. Try a different keyword or category.</p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--c-border);
+    background: var(--c-bg-soft);
+  }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--c-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .page-header h1 { font-size: 2.2rem; margin-bottom: 8px; }
+  .page-sub { color: var(--c-text-muted); margin: 0; }
+
+  .tutorials-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    padding: 40px 24px 80px;
+  }
+  .tutorials-main { min-width: 0; }
+
+  .filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    color: var(--c-text-dim);
+  }
+  .search-box:focus-within { border-color: var(--c-accent); }
+  .search-box input {
+    flex: 1;
+    border: none;
+    background: none;
+    color: var(--c-text);
+    font-size: 0.92rem;
+    font-family: inherit;
+  }
+  .search-box input:focus { outline: none; }
+
+  .filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    padding: 6px 14px;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 999px;
+    color: var(--c-text-muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+  .chip:hover { border-color: var(--c-accent); color: var(--c-accent); }
+  .chip.active {
+    background: var(--c-accent);
+    color: #fff;
+    border-color: var(--c-accent);
+  }
+
+  .tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .no-results {
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--c-text-muted);
+    background: var(--c-bg-soft);
+    border: 1px dashed var(--c-border-strong);
+    border-radius: var(--radius);
+  }
+
+  @media (max-width: 960px) {
+    .tutorials-layout { grid-template-columns: 1fr; }
+    .tutorial-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const search = document.getElementById("tutorial-search");
+  const chips = document.querySelectorAll(".chip");
+  const items = document.querySelectorAll(".tutorial-item");
+  const noResults = document.getElementById("no-results");
+  let activeCat = "all";
+
+  function applyFilters() {
+    const q = (search?.value || "").trim().toLowerCase();
+    let visible = 0;
+    items.forEach((item) => {
+      const el = item as HTMLElement;
+      const title = el.dataset.title || "";
+      const desc = el.dataset.desc || "";
+      const tags = el.dataset.tags || "";
+      const cat = el.dataset.cat || "";
+      const matchCat = activeCat === "all" || cat === activeCat;
+      const matchQuery = !q || title.includes(q) || desc.includes(q) || tags.includes(q);
+      const show = matchCat && matchQuery;
+      el.style.display = show ? "" : "none";
+      if (show) visible++;
+    });
+    if (noResults) noResults.hidden = visible > 0;
+  }
+
+  search?.addEventListener("input", applyFilters);
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      chips.forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+      activeCat = (chip as HTMLElement).dataset.cat || "all";
+      applyFilters();
+    });
+  });
+</script>
