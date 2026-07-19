@@ -29,6 +29,10 @@ A well-modeled Power BI dataset has two types of tables:
 
 The fact table holds "what happened," the dimension tables hold "who, what, when, where." This separation is the foundation of the star schema.
 
+![Star schema diagram showing a central fact table surrounded by dimension tables](/images/tutorials/data-modeling-star-schema/star-schema-diagram.svg)
+
+In the diagram above, `FACT_Sales` sits at the center with foreign keys pointing outward to four dimension tables. Each dimension connects to the fact table with a one-to-many relationship — the "star" pattern that gives this design its name.
+
 ### Why not just use one big table?
 
 Many beginners load a single flat Excel sheet with every column. It works for a 50-row prototype, but at scale:

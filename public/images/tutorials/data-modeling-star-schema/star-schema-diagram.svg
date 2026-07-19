@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Segoe UI, system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#fafaf7" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="36" font-size="18" font-weight="700" fill="#1a1a1a" text-anchor="middle">Star Schema: Sales Data Model</text>
+
+  <!-- Fact table (center) -->
+  <rect x="300" y="200" width="200" height="100" rx="8" fill="#f2c811" stroke="#e0b90f" stroke-width="2"/>
+  <text x="400" y="225" font-size="14" font-weight="800" fill="#1a1a1a" text-anchor="middle">FACT_Sales</text>
+  <line x1="310" y1="235" x2="490" y2="235" stroke="#1a1a1a" stroke-width="1" opacity="0.2"/>
+  <text x="400" y="252" font-size="11" fill="#1a1a1a" text-anchor="middle">DateKey (FK)</text>
+  <text x="400" y="268" font-size="11" fill="#1a1a1a" text-anchor="middle">ProductKey (FK)</text>
+  <text x="400" y="284" font-size="11" fill="#1a1a1a" text-anchor="middle">StoreKey (FK)</text>
+
+  <!-- Dim_Date (top) -->
+  <rect x="320" y="70" width="160" height="80" rx="8" fill="#fff" stroke="#e5e3d8" stroke-width="2"/>
+  <text x="400" y="95" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">DIM_Date</text>
+  <line x1="330" y1="105" x2="470" y2="105" stroke="#e5e3d8" stroke-width="1"/>
+  <text x="400" y="122" font-size="11" fill="#4a4a4a" text-anchor="middle">DateKey (PK)</text>
+  <text x="400" y="138" font-size="11" fill="#4a4a4a" text-anchor="middle">Year, Quarter, Month</text>
+  <!-- Connection line -->
+  <line x1="400" y1="150" x2="400" y2="200" stroke="#8a8a8a" stroke-width="1.5"/>
+
+  <!-- Dim_Product (left) -->
+  <rect x="60" y="210" width="160" height="80" rx="8" fill="#fff" stroke="#e5e3d8" stroke-width="2"/>
+  <text x="140" y="235" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">DIM_Product</text>
+  <line x1="70" y1="245" x2="210" y2="245" stroke="#e5e3d8" stroke-width="1"/>
+  <text x="140" y="262" font-size="11" fill="#4a4a4a" text-anchor="middle">ProductKey (PK)</text>
+  <text x="140" y="278" font-size="11" fill="#4a4a4a" text-anchor="middle">Category, Brand</text>
+  <!-- Connection line -->
+  <line x1="220" y1="250" x2="300" y2="250" stroke="#8a8a8a" stroke-width="1.5"/>
+
+  <!-- Dim_Store (right) -->
+  <rect x="580" y="210" width="160" height="80" rx="8" fill="#fff" stroke="#e5e3d8" stroke-width="2"/>
+  <text x="660" y="235" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">DIM_Store</text>
+  <line x1="590" y1="245" x2="730" y2="245" stroke="#e5e3d8" stroke-width="1"/>
+  <text x="660" y="262" font-size="11" fill="#4a4a4a" text-anchor="middle">StoreKey (PK)</text>
+  <text x="660" y="278" font-size="11" fill="#4a4a4a" text-anchor="middle">Region, City</text>
+  <!-- Connection line -->
+  <line x1="500" y1="250" x2="580" y2="250" stroke="#8a8a8a" stroke-width="1.5"/>
+
+  <!-- Dim_Customer (bottom) -->
+  <rect x="320" y="370" width="160" height="80" rx="8" fill="#fff" stroke="#e5e3d8" stroke-width="2"/>
+  <text x="400" y="395" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">DIM_Customer</text>
+  <line x1="330" y1="405" x2="470" y2="405" stroke="#e5e3d8" stroke-width="1"/>
+  <text x="400" y="422" font-size="11" fill="#4a4a4a" text-anchor="middle">CustomerKey (PK)</text>
+  <text x="400" y="438" font-size="11" fill="#4a4a4a" text-anchor="middle">Segment, Name</text>
+  <!-- Connection line -->
+  <line x1="400" y1="300" x2="400" y2="370" stroke="#8a8a8a" stroke-width="1.5"/>
+
+  <!-- Labels on connections -->
+  <text x="260" y="244" font-size="9" fill="#8a8a8a" text-anchor="middle">1:many</text>
+  <text x="540" y="244" font-size="9" fill="#8a8a8a" text-anchor="middle">1:many</text>
+  <text x="412" y="178" font-size="9" fill="#8a8a8a">1:many</text>
+  <text x="412" y="342" font-size="9" fill="#8a8a8a">1:many</text>
+
+  <!-- Legend -->
+  <rect x="60" y="430" width="14" height="14" rx="3" fill="#f2c811"/>
+  <text x="80" y="442" font-size="11" fill="#4a4a4a">Fact Table</text>
+  <rect x="160" y="430" width="14" height="14" rx="3" fill="#fff" stroke="#e5e3d8" stroke-width="2"/>
+  <text x="180" y="442" font-size="11" fill="#4a4a4a">Dimension Table</text>
+</svg>
