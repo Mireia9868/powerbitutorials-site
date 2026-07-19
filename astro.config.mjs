@@ -10,7 +10,7 @@ const enableKeystatic = process.env.NODE_ENV !== "production";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://daxguide.com",
+  site: "https://powerbitutorials.com",
   integrations: [
     mdx(),
     // sitemap 改用自定义端点 src/pages/sitemap.xml.js，避免 @astrojs/sitemap 兼容问题

@@ -20,9 +20,10 @@
     "reading-time": "^1.5.0"
   },
   "devDependencies": {
-    "@keystatic/core": "^0.5.45",
     "@keystatic/astro": "^5.0.3",
-    "sharp": "^0.33.5"
+    "@keystatic/core": "^0.5.45",
+    "sharp": "^0.33.5",
+    "wrangler": "^4.112.0"
   },
   "engines": {
     "node": ">=18.17.1"

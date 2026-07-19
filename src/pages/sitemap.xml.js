@@ -2,7 +2,7 @@ import { getCollection } from "astro:content";
 import { CATEGORIES } from "../consts";
 
 export async function GET({ site }) {
-  const baseUrl = site?.toString().replace(/\/$/, "") || "https://daxguide.com";
+  const baseUrl = site?.toString().replace(/\/$/, "") || "https://powerbitutorials.com";
 
   const tutorials = await getCollection("tutorials");
   const urls = [];

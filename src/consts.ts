@@ -2,7 +2,7 @@
 export const SITE_TITLE = "DAX Guide — Power BI Tutorials";
 export const SITE_DESCRIPTION =
   "In-depth Power BI, DAX, and Power Query tutorials for data analysts. From beginner basics to advanced time intelligence, learn to build better dashboards.";
-export const SITE_URL = "https://daxguide.com";
+export const SITE_URL = "https://powerbitutorials.com";
 export const SITE_AUTHOR = "DAX Guide Editorial Team";
 export const SITE_LANG = "en";
 
@@ -52,7 +52,7 @@ export const ADSENSE_CLIENT = ""; // 留空则不渲染广告脚本
 
 // 社交 (可选)
 export const SOCIAL_LINKS = {
-  github: "https://github.com/your-org/daxguide",
+  github: "https://github.com/Mireia9868/powerbitutorials-site",
   twitter: "",
   rss: "/rss.xml",
 };
