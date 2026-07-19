@@ -16,7 +16,7 @@ const tutorials = defineCollection({
     ]),
     difficulty: z.enum(["Beginner", "Intermediate", "Advanced"]),
     tags: z.array(z.string()).default([]),
-    author: z.string().default("DAX Guide Editorial Team"),
+    author: z.string().default("Power BI Tutorials Team"),
     heroImage: z.string().optional(),
     draft: z.boolean().default(false),
     featured: z.boolean().default(false),

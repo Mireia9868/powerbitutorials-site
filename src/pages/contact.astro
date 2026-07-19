@@ -4,7 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Contact"
-  description="Get in touch with the DAX Guide team — topic requests, error reports, partnership inquiries, and general feedback."
+  description="Get in touch with the Power BI Tutorials team — topic requests, error reports, partnership inquiries, and general feedback."
 >
   <div class="contact-page">
     <div class="content-width">
@@ -43,7 +43,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
         </div>
 
-        <form class="contact-form" onsubmit="return false;">
+        <form class="contact-form" action="mailto:hello@powerbitutorials.com" method="post" enctype="text/plain">
           <h3>Send a message</h3>
           <div class="form-row">
             <label for="name">Name</label>
@@ -69,8 +69,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
           <button type="submit" class="btn-primary">Send Message</button>
           <p class="form-note">
-            Note: this is a static demo form. Wire it up to Formspree, Getform,
-            or your own endpoint before going live.
+            Your message opens in your email client. We typically reply within 2 business days.
           </p>
         </form>
       </div>

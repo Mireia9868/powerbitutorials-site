@@ -6,7 +6,7 @@ updatedDate: 2026-07-15
 category: "power-query"
 difficulty: "Beginner"
 tags: ["power-query", "etl", "m-language", "data-prep"]
-author: "DAX Guide Editorial Team"
+author: "Power BI Tutorials Team"
 featured: true
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2026-07-13
 category: "data-modeling"
 difficulty: "Intermediate"
 tags: ["data-modeling", "star-schema", "relationships", "performance"]
-author: "DAX Guide Editorial Team"
+author: "Power BI Tutorials Team"
 featured: false
 ---
 

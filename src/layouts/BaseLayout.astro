@@ -16,13 +16,13 @@ export interface Props {
 const {
   title,
   description = SITE_DESCRIPTION,
-  image = "/og-default.png",
+  image = "/og-default.svg",
   article = false,
   publishedTime,
   noindex = false,
 } = Astro.props;
 
-const pageTitle = title ? `${title} — DAX Guide` : SITE_TITLE;
+const pageTitle = title ? `${title} — Power BI Tutorials` : SITE_TITLE;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 ---
@@ -48,7 +48,7 @@ const ogImage = new URL(image, Astro.site);
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content="DAX Guide" />
+    <meta property="og:site_name" content="Power BI Tutorials" />
     {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
 
     <!-- Twitter -->
@@ -58,10 +58,10 @@ const ogImage = new URL(image, Astro.site);
     <meta name="twitter:image" content={ogImage} />
 
     <!-- RSS -->
-    <link rel="alternate" type="application/rss+xml" title="DAX Guide" href={new URL("rss.xml", Astro.site)} />
+    <link rel="alternate" type="application/rss+xml" title="Power BI Tutorials" href={new URL("rss.xml", Astro.site)} />
 
     <!-- Sitemap -->
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
 
     <!-- AdSense (仅当配置了 Publisher ID 时加载) -->
     {ADSENSE_CLIENT && (

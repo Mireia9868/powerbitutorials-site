@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /keystatic/
 
-Sitemap: https://daxguide.com/sitemap-index.xml
+Sitemap: https://powerbitutorials.com/sitemap.xml

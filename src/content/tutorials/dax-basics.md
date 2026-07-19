@@ -6,7 +6,7 @@ updatedDate: 2026-07-10
 category: "dax"
 difficulty: "Beginner"
 tags: ["dax", "basics", "measures", "calculated-columns"]
-author: "DAX Guide Editorial Team"
+author: "Power BI Tutorials Team"
 featured: true
 ---
 

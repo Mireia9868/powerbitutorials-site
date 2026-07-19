@@ -1,9 +1,9 @@
 // 站点全局常量 — 改这里即可全站生效
-export const SITE_TITLE = "DAX Guide — Power BI Tutorials";
+export const SITE_TITLE = "Power BI Tutorials — DAX, Power Query & Data Modeling";
 export const SITE_DESCRIPTION =
   "In-depth Power BI, DAX, and Power Query tutorials for data analysts. From beginner basics to advanced time intelligence, learn to build better dashboards.";
 export const SITE_URL = "https://powerbitutorials.com";
-export const SITE_AUTHOR = "DAX Guide Editorial Team";
+export const SITE_AUTHOR = "Power BI Tutorials Team";
 export const SITE_LANG = "en";
 
 // 导航
