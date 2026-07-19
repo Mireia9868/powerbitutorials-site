@@ -52,7 +52,7 @@ export const ADSENSE_CLIENT = "ca-pub-2269516311541291";
 
 // Google Search Console 验证 — 在 GSC 后台添加站点后会得到一串 verification token，填到这里
 // 留空则不渲染 google-site-verification meta tag
-export const GOOGLE_SITE_VERIFICATION = "";
+export const GOOGLE_SITE_VERIFICATION = "RhRJDyl7Kr3qeHJGS9OgURTXvuGgzgcbYkDk47WwUHQ";
 
 // 社交 (可选)
 export const SOCIAL_LINKS = {
