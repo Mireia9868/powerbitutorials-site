@@ -64,11 +64,11 @@ const isActive = (href: string) =>
     height: 30px;
     border-radius: 7px;
     background: var(--c-accent);
-    color: #fff;
+    color: var(--c-accent-text);
     font-size: 1rem;
     font-weight: 800;
   }
-  .logo-accent { color: var(--c-accent); }
+  .logo-accent { color: var(--c-accent-dark); }
   .main-nav ul {
     display: flex;
     gap: 4px;
@@ -91,7 +91,7 @@ const isActive = (href: string) =>
     text-decoration: none;
   }
   .main-nav a.active {
-    color: var(--c-accent);
+    color: var(--c-accent-dark);
     background: var(--c-accent-soft);
   }
   .nav-toggle {

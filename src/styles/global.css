@@ -1,29 +1,31 @@
 /* Power BI Tutorials — Global Styles
-   亮色为主，专业干净，可读性优先 (AdSense审核友好)
+   Power BI 黄白配色，贴近官方品牌设计 (AdSense审核友好)
 */
 :root {
-  /* Colors */
+  /* Colors — Power BI Brand */
   --c-bg: #ffffff;
-  --c-bg-soft: #f8fafc;
-  --c-bg-elevated: #f1f5f9;
-  --c-border: #e2e8f0;
-  --c-border-strong: #cbd5e1;
-  --c-text: #0f172a;
-  --c-text-muted: #475569;
-  --c-text-dim: #94a3b8;
-  --c-accent: #059669;
-  --c-accent-hover: #047857;
-  --c-accent-soft: #ecfdf5;
-  --c-accent-border: #a7f3d0;
-  --c-code-bg: #1e293b;
-  --c-code-text: #e2e8f0;
+  --c-bg-soft: #fafaf7;
+  --c-bg-elevated: #f5f4ee;
+  --c-border: #e5e3d8;
+  --c-border-strong: #d4d2c2;
+  --c-text: #1a1a1a;
+  --c-text-muted: #4a4a4a;
+  --c-text-dim: #8a8a8a;
+  --c-accent: #f2c811;        /* Power BI 标志黄 */
+  --c-accent-hover: #e0b90f;   /* 深黄 hover */
+  --c-accent-soft: #fffbea;    /* 浅黄背景 */
+  --c-accent-border: #f2c811;
+  --c-accent-text: #1a1a1a;    /* 黄色背景上的文字色（黑色） */
+  --c-accent-dark: #8a6d0a;    /* 浅色背景上的黄色文字（深金棕，保证可读性） */
+  --c-code-bg: #252423;        /* Power BI Dark */
+  --c-code-text: #f5f4ee;
   --c-warn: #d97706;
   --c-danger: #dc2626;
   --c-info: #2563eb;
 
   /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "SF Mono", "Fira Code", "JetBrains Mono", Consolas, Monaco, monospace;
+  --font-sans: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Code", "SF Mono", "Fira Code", "JetBrains Mono", Consolas, Monaco, monospace;
 
   /* Layout */
   --max-width: 1120px;
@@ -38,19 +40,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --c-bg: #0b0f17;
-    --c-bg-soft: #131927;
-    --c-bg-elevated: #1a2235;
-    --c-border: #2a3754;
-    --c-border-strong: #3a4a6b;
-    --c-text: #e8edf5;
-    --c-text-muted: #94a3b8;
-    --c-text-dim: #64748b;
-    --c-accent: #10b981;
-    --c-accent-hover: #34d399;
-    --c-accent-soft: rgba(16, 185, 129, 0.1);
-    --c-accent-border: rgba(16, 185, 129, 0.3);
-    --c-code-bg: #050810;
+    --c-bg: #1a1a1a;
+    --c-bg-soft: #232323;
+    --c-bg-elevated: #2d2d2d;
+    --c-border: #3a3a3a;
+    --c-border-strong: #4a4a4a;
+    --c-text: #f5f4ee;
+    --c-text-muted: #b0b0b0;
+    --c-text-dim: #808080;
+    --c-accent: #f2c811;
+    --c-accent-hover: #ffd633;
+    --c-accent-soft: rgba(242, 200, 17, 0.1);
+    --c-accent-border: rgba(242, 200, 17, 0.4);
+    --c-accent-text: #1a1a1a;
+    --c-accent-dark: #f2c811;  /* 暗色模式下黄色文字可读 */
+    --c-code-bg: #0d0d0d;
   }
 }
 
@@ -76,7 +80,7 @@ body {
 }
 
 a {
-  color: var(--c-accent);
+  color: var(--c-accent-dark);
   text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -114,7 +118,7 @@ code {
   font-family: var(--font-mono);
   font-size: 0.875em;
   background: var(--c-bg-elevated);
-  color: var(--c-accent);
+  color: var(--c-accent-dark);
   padding: 0.15em 0.4em;
   border-radius: 4px;
   border: 1px solid var(--c-border);
@@ -203,7 +207,7 @@ hr {
   font-weight: 600;
   letter-spacing: 0.02em;
 }
-.pill-beginner { background: var(--c-accent-soft); color: var(--c-accent); border: 1px solid var(--c-accent-border); }
+.pill-beginner { background: var(--c-accent-soft); color: #8a6d0a; border: 1px solid var(--c-accent-border); }
 .pill-intermediate { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
 .pill-advanced { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
 
@@ -215,7 +219,7 @@ hr {
 /* Selection */
 ::selection {
   background: var(--c-accent);
-  color: #fff;
+  color: var(--c-accent-text);
 }
 
 /* Focus */

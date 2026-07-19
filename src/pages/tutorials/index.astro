@@ -78,8 +78,8 @@ const allTutorials = (await getCollection("tutorials", ({ data }) => !data.draft
   .page-eyebrow {
     display: inline-block;
     font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--c-accent);
+    font-weight: 700;
+    color: var(--c-accent-dark);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 10px;
@@ -142,8 +142,9 @@ const allTutorials = (await getCollection("tutorials", ({ data }) => !data.draft
   .chip:hover { border-color: var(--c-accent); color: var(--c-accent); }
   .chip.active {
     background: var(--c-accent);
-    color: #fff;
+    color: var(--c-accent-text);
     border-color: var(--c-accent);
+    font-weight: 700;
   }
 
   .tutorial-grid {

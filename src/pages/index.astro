@@ -127,7 +127,7 @@ const tutorialCount = allTutorials.length;
   .hero {
     padding: 72px 0 64px;
     background:
-      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(5,150,105,0.10), transparent 70%),
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(242,200,17,0.15), transparent 70%),
       var(--c-bg);
     border-bottom: 1px solid var(--c-border);
   }
@@ -135,8 +135,8 @@ const tutorialCount = allTutorials.length;
   .hero-eyebrow {
     display: inline-block;
     font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--c-accent);
+    font-weight: 700;
+    color: var(--c-accent-dark);
     background: var(--c-accent-soft);
     border: 1px solid var(--c-accent-border);
     padding: 4px 12px;
@@ -151,7 +151,7 @@ const tutorialCount = allTutorials.length;
     line-height: 1.1;
     margin-bottom: 18px;
   }
-  .hero-accent { color: var(--c-accent); }
+  .hero-accent { color: var(--c-accent-dark); }
   .hero-sub {
     font-size: 1.1rem;
     color: var(--c-text-muted);
@@ -176,7 +176,7 @@ const tutorialCount = allTutorials.length;
   }
   .btn-primary {
     background: var(--c-accent);
-    color: #fff;
+    color: var(--c-accent-text);
   }
   .btn-primary:hover { background: var(--c-accent-hover); text-decoration: none; }
   .btn-secondary {
@@ -250,25 +250,25 @@ const tutorialCount = allTutorials.length;
   .cat-card:hover {
     border-color: var(--c-accent-border);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px -12px rgba(5,150,105,0.2);
+    box-shadow: 0 8px 24px -12px rgba(242,200,17,0.3);
     text-decoration: none;
   }
   .cat-icon {
     width: 44px;
     height: 44px;
     border-radius: var(--radius);
-    background: var(--c-accent-soft);
-    color: var(--c-accent);
+    background: var(--c-accent);
+    color: var(--c-accent-text);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 14px;
   }
   .cat-card h3 { font-size: 1rem; margin-bottom: 4px; }
   .cat-card p { font-size: 0.82rem; color: var(--c-text-muted); margin-bottom: 12px; flex: 1; }
-  .cat-arrow { font-size: 0.82rem; font-weight: 600; color: var(--c-accent); }
+  .cat-arrow { font-size: 0.82rem; font-weight: 700; color: var(--c-accent-dark); }
 
   .section-cta { background: var(--c-bg-soft); }
   .cta-inner {
@@ -298,10 +298,10 @@ const tutorialCount = allTutorials.length;
   .cta-form button {
     padding: 12px 20px;
     background: var(--c-accent);
-    color: #fff;
+    color: var(--c-accent-text);
     border: none;
     border-radius: var(--radius);
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     white-space: nowrap;
   }
