@@ -46,9 +46,13 @@ export const CATEGORIES = [
 // 难度
 export const DIFFICULTY_LEVELS = ["Beginner", "Intermediate", "Advanced"];
 
-// AdSense — 部署后填入你的 Publisher ID
-// 格式: ca-pub-XXXXXXXXXXXXXXXX
-export const ADSENSE_CLIENT = "ca-pub-2269516311541291"; // 留空则不渲染广告脚本
+// AdSense — Publisher ID
+// 格式: ca-pub-XXXXXXXXXXXXXXXX，留空则不渲染广告脚本
+export const ADSENSE_CLIENT = "ca-pub-2269516311541291";
+
+// Google Search Console 验证 — 在 GSC 后台添加站点后会得到一串 verification token，填到这里
+// 留空则不渲染 google-site-verification meta tag
+export const GOOGLE_SITE_VERIFICATION = "";
 
 // 社交 (可选)
 export const SOCIAL_LINKS = {
