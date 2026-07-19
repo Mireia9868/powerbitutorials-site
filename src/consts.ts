@@ -48,7 +48,7 @@ export const DIFFICULTY_LEVELS = ["Beginner", "Intermediate", "Advanced"];
 
 // AdSense — 部署后填入你的 Publisher ID
 // 格式: ca-pub-XXXXXXXXXXXXXXXX
-export const ADSENSE_CLIENT = ""; // 留空则不渲染广告脚本
+export const ADSENSE_CLIENT = "ca-pub-2269516311541291"; // 留空则不渲染广告脚本
 
 // 社交 (可选)
 export const SOCIAL_LINKS = {
