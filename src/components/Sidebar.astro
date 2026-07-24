@@ -3,6 +3,8 @@ import { CATEGORIES } from "../consts";
 
 const pathname = Astro.url.pathname;
 const activeCat = CATEGORIES.find((c) => pathname.includes(`/category/${c.slug}`))?.slug;
+// Buttondown username — change this if your Buttondown newsletter username differs
+const BUTTONDOWN_USER = "mireia";
 ---
 
 <aside class="sidebar" aria-label="Categories">
@@ -29,11 +31,19 @@ const activeCat = CATEGORIES.find((c) => pathname.includes(`/category/${c.slug}`
 
   <div class="sidebar-section sidebar-cta">
     <h3 class="sidebar-title">Newsletter</h3>
-    <p>Get one practical DAX pattern in your inbox every week.</p>
-    <form class="newsletter-form" onsubmit="return false;">
-      <input type="email" placeholder="you@company.com" aria-label="Email" required />
+    <p id="newsletter-desc">Get one practical DAX pattern in your inbox every week.</p>
+    <form
+      class="newsletter-form"
+      action={`https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USER}`}
+      method="post"
+      target="buttondown-frame"
+    >
+      <input type="email" name="email" placeholder="you@company.com" aria-label="Email" required />
+      <input type="hidden" name="embed" value="1" />
       <button type="submit">Subscribe</button>
     </form>
+    <p id="newsletter-status" class="newsletter-status"></p>
+    <iframe name="buttondown-frame" title="Newsletter response" style="display:none"></iframe>
   </div>
 </aside>
 
@@ -118,8 +128,43 @@ const activeCat = CATEGORIES.find((c) => pathname.includes(`/category/${c.slug}`
     transition: background 0.15s ease;
   }
   .newsletter-form button:hover { background: var(--c-accent-hover); }
+  .newsletter-status {
+    font-size: 0.8rem;
+    color: var(--c-text-dim);
+    margin-top: 8px;
+    min-height: 1.2em;
+  }
 
   @media (max-width: 960px) {
     .sidebar { position: static; }
   }
 </style>
+
+<script is:inline define:vars={{ BUTTONDOWN_USER }}>
+  (function () {
+    const form = document.querySelector(".newsletter-form");
+    const status = document.getElementById("newsletter-status");
+    const frame = document.querySelector('iframe[name="buttondown-frame"]');
+    let submitting = false;
+
+    if (!form || !status || !frame) return;
+
+    frame.addEventListener("load", function () {
+      if (!submitting) return;
+      submitting = false;
+      status.textContent = "Almost there! Check your inbox to confirm your subscription.";
+      status.style.color = "var(--c-accent-dark)";
+      form.reset();
+      form.querySelector("button").disabled = false;
+      form.querySelector("button").textContent = "Subscribe";
+    });
+
+    form.addEventListener("submit", function () {
+      submitting = true;
+      status.textContent = "Submitting...";
+      const btn = form.querySelector("button");
+      btn.disabled = true;
+      btn.textContent = "Subscribing...";
+    });
+  })();
+</script>
