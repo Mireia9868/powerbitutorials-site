@@ -53,7 +53,9 @@ const updatedStr = tutorial.data.updatedDate?.toLocaleDateString("en-US", {
 });
 const diffClass = tutorial.data.difficulty.toLowerCase();
 
-// JSON-LD Structured Data (SEO + AdSense E-E-A-T)
+const tutorialUrl = new URL(`/tutorials/${tutorial.slug}`, Astro.site).href;
+
+// JSON-LD: TechArticle (SEO + AdSense E-E-A-T)
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
@@ -74,8 +76,40 @@ const jsonLd = {
   keywords: tutorial.data.tags.join(", "),
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": new URL(`/tutorials/${tutorial.slug}`, Astro.site).href,
+    "@id": tutorialUrl,
   },
+};
+
+// JSON-LD: BreadcrumbList (rich results in Google/Bing)
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: SITE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Tutorials",
+      item: `${SITE_URL}/tutorials/`,
+    },
+    ...(category ? [{
+      "@type": "ListItem",
+      position: 3,
+      name: category.label,
+      item: `${SITE_URL}/category/${category.slug}/`,
+    }] : []),
+    {
+      "@type": "ListItem",
+      position: category ? 4 : 3,
+      name: tutorial.data.title,
+      item: tutorialUrl,
+    },
+  ],
 };
 ---
 
@@ -87,6 +121,7 @@ const jsonLd = {
   publishedTime={tutorial.data.pubDate}
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
 
   <article class="tutorial-article">
     <div class="tutorial-layout">
@@ -177,8 +212,8 @@ const jsonLd = {
         <!-- Share -->
         <div class="share-row">
           <span>Found this useful?</span>
-          <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(tutorial.data.title)}&url=${new URL(`/tutorials/${tutorial.slug}`, Astro.site).href}`} rel="noopener" class="share-btn">Share on X</a>
-          <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${new URL(`/tutorials/${tutorial.slug}`, Astro.site).href}`} rel="noopener" class="share-btn">LinkedIn</a>
+          <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(tutorial.data.title)}&url=${tutorialUrl}`} rel="noopener" class="share-btn">Share on X</a>
+          <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${tutorialUrl}`} rel="noopener" class="share-btn">LinkedIn</a>
         </div>
 
         <!-- Prev / Next -->
