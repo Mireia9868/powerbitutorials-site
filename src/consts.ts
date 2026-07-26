@@ -56,7 +56,7 @@ export const GOOGLE_SITE_VERIFICATION = "RhRJDyl7Kr3qeHJGS9OgURTXvuGgzgcbYkDk47W
 
 // Bing Webmaster Tools 验证 — 在 https://www.bing.com/webmasters 添加站点后获取
 // 留空则不渲染 bing 验证 meta tag
-export const BING_SITE_VERIFICATION = "";
+export const BING_SITE_VERIFICATION = "A2FC1B495860A9DD04B4F99C18F4A9EA";
 
 // IndexNow 密钥 — 用于 Bing/Yandex 即时索引通知
 // 生成方式: 生成一个随机字符串，放到 public/indexnow-key.txt
