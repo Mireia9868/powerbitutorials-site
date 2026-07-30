@@ -152,11 +152,11 @@ const breadcrumbJsonLd = {
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="/">Home</a>
           <span aria-hidden="true">/</span>
-          <a href="/tutorials">Tutorials</a>
+          <a href="/tutorials/">Tutorials</a>
           {category && (
             <>
               <span aria-hidden="true">/</span>
-              <a href={`/category/${category.slug}`}>{category.label}</a>
+              <a href={`/category/${category.slug}/`}>{category.label}</a>
             </>
           )}
         </nav>
@@ -165,7 +165,7 @@ const breadcrumbJsonLd = {
         <header class="article-header">
           <div class="article-meta">
             {category && (
-              <a href={`/category/${category.slug}`} class="article-cat">
+              <a href={`/category/${category.slug}/`} class="article-cat">
                 {category.label}
               </a>
             )}
@@ -219,13 +219,13 @@ const breadcrumbJsonLd = {
         <!-- Prev / Next -->
         <nav class="prev-next" aria-label="More tutorials">
           {prev && (
-            <a href={`/tutorials/${prev.slug}`} class="pn-link pn-prev">
+            <a href={`/tutorials/${prev.slug}/`} class="pn-link pn-prev">
               <span class="pn-label">← Previous</span>
               <span class="pn-title">{prev.data.title}</span>
             </a>
           )}
           {next && (
-            <a href={`/tutorials/${next.slug}`} class="pn-link pn-next">
+            <a href={`/tutorials/${next.slug}/`} class="pn-link pn-next">
               <span class="pn-label">Next →</span>
               <span class="pn-title">{next.data.title}</span>
             </a>
