@@ -8,9 +8,18 @@ import { CATEGORIES, SITE_DESCRIPTION } from "../consts";
 const allTutorials = (await getCollection("tutorials", ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const featured = allTutorials.filter((t) => t.data.featured).slice(0, 3);
-const featuredFallback = featured.length > 0 ? featured : allTutorials.slice(0, 3);
-const latest = allTutorials.slice(0, 6);
+const featuredArticles = allTutorials.filter((t) => t.data.featured);
+const featuredIds = new Set(featuredArticles.map((t) => t.id));
+
+// Featured: up to 6 (featured first, pad with latest)
+const featuredFallback = [
+  ...featuredArticles,
+  ...allTutorials.filter((t) => !featuredIds.has(t.id)),
+].slice(0, 6);
+
+// Latest: 6 latest NOT already shown in Featured above
+const featuredShownIds = new Set(featuredFallback.map((t) => t.id));
+const latest = allTutorials.filter((t) => !featuredShownIds.has(t.id)).slice(0, 6);
 
 const tutorialCount = allTutorials.length;
 ---
@@ -46,7 +55,7 @@ const tutorialCount = allTutorials.length;
     </div>
   </section>
 
-  <!-- Featured -->
+  <!-- Featured (6 cards: featured first, pad with latest) -->
   <section class="section">
     <div class="container">
       <div class="section-head">
@@ -62,9 +71,7 @@ const tutorialCount = allTutorials.length;
     </div>
   </section>
 
-  <div class="container"><AdSlot label="In-feed Ad" /></div>
-
-  <!-- Categories -->
+  <!-- Categories (3 columns × 2 rows, no orphan) -->
   <section class="section section-soft">
     <div class="container">
       <div class="section-head">
@@ -75,13 +82,14 @@ const tutorialCount = allTutorials.length;
       </div>
       <div class="cat-grid">
         {CATEGORIES.map((cat) => (
-          <a href={`/category/${cat.slug}`} class="cat-card">
+          <a href={`/category/${cat.slug}/`} class="cat-card">
             <div class="cat-icon" aria-hidden="true">
               {cat.slug === "dax" && "ƒ"}
               {cat.slug === "power-query" && "⇄"}
               {cat.slug === "data-modeling" && "◈"}
               {cat.slug === "visualization" && "▤"}
               {cat.slug === "time-intelligence" && "◷"}
+              {cat.slug === "service" && "⚙"}
             </div>
             <h3>{cat.label}</h3>
             <p>{cat.description}</p>
@@ -92,7 +100,7 @@ const tutorialCount = allTutorials.length;
     </div>
   </section>
 
-  <!-- Latest -->
+  <!-- Latest (skips Featured cards above) -->
   <section class="section">
     <div class="container">
       <div class="section-head">
@@ -212,13 +220,13 @@ const tutorialCount = allTutorials.length;
   }
   .search-form input:focus { outline: none; }
 
-  .section { padding: 64px 0; border-bottom: 1px solid var(--c-border); }
+  .section { padding: 56px 0; border-bottom: 1px solid var(--c-border); }
   .section-soft { background: var(--c-bg-soft); }
   .section-head {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     gap: 16px;
   }
   .section-head h2 { margin: 0; font-size: 1.85rem; }
@@ -228,18 +236,19 @@ const tutorialCount = allTutorials.length;
   .card-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 20px;
   }
 
+  /* Categories: 3 cols on desktop → 6 cards = 2 rows of 3, no orphan */
   .cat-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
   .cat-card {
     display: flex;
     flex-direction: column;
-    padding: 24px 20px;
+    padding: 24px 22px;
     background: var(--c-bg);
     border: 1px solid var(--c-border);
     border-radius: var(--radius-lg);
@@ -266,9 +275,9 @@ const tutorialCount = allTutorials.length;
     font-weight: 800;
     margin-bottom: 14px;
   }
-  .cat-card h3 { font-size: 1rem; margin-bottom: 4px; }
-  .cat-card p { font-size: 0.82rem; color: var(--c-text-muted); margin-bottom: 12px; flex: 1; }
-  .cat-arrow { font-size: 0.82rem; font-weight: 700; color: var(--c-accent-dark); }
+  .cat-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .cat-card p { font-size: 0.85rem; color: var(--c-text-muted); margin-bottom: 14px; flex: 1; line-height: 1.45; }
+  .cat-arrow { font-size: 0.85rem; font-weight: 700; color: var(--c-accent-dark); }
 
   .section-cta { background: var(--c-bg-soft); }
   .cta-inner {
