@@ -10,7 +10,7 @@ export interface Props {
 const { tutorial, compact = false } = Astro.props;
 const { data } = tutorial;
 const category = CATEGORIES.find((c) => c.slug === data.category);
-const url = `/tutorials/${tutorial.slug}`;
+const url = `/tutorials/${tutorial.slug}/`;
 
 const diffClass = data.difficulty.toLowerCase();
 const dateStr = data.pubDate.toLocaleDateString("en-US", {
