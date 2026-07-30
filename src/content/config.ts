@@ -13,6 +13,7 @@ const tutorials = defineCollection({
       "data-modeling",
       "visualization",
       "time-intelligence",
+      "service",
     ]),
     difficulty: z.enum(["Beginner", "Intermediate", "Advanced"]),
     tags: z.array(z.string()).default([]),
