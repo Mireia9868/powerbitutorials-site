@@ -31,11 +31,11 @@ const tutorialCount = allTutorials.length;
           real datasets, copy-paste code.
         </p>
         <div class="hero-cta">
-          <a href="/tutorials" class="btn btn-primary">Browse Tutorials</a>
-          <a href="/tutorials/dax-basics" class="btn btn-secondary">Start with DAX Basics →</a>
+          <a href="/tutorials/" class="btn btn-primary">Browse Tutorials</a>
+          <a href="/tutorials/dax-basics/" class="btn btn-secondary">Start with DAX Basics →</a>
         </div>
         <div class="hero-search">
-          <form action="/tutorials" method="get" class="search-form">
+          <form action="/tutorials/" method="get" class="search-form">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
             </svg>
@@ -54,7 +54,7 @@ const tutorialCount = allTutorials.length;
           <h2>Featured Tutorials</h2>
           <p class="section-sub">Hand-picked guides every analyst should read first.</p>
         </div>
-        <a href="/tutorials" class="section-link">View all →</a>
+        <a href="/tutorials/" class="section-link">View all →</a>
       </div>
       <div class="card-grid-3">
         {featuredFallback.map((t) => <TutorialCard tutorial={t} />)}
@@ -100,7 +100,7 @@ const tutorialCount = allTutorials.length;
           <h2>Latest Tutorials</h2>
           <p class="section-sub">Fresh from the editor — published weekly.</p>
         </div>
-        <a href="/tutorials" class="section-link">View all →</a>
+        <a href="/tutorials/" class="section-link">View all →</a>
       </div>
       <div class="card-grid-3">
         {latest.map((t) => <TutorialCard tutorial={t} />)}
