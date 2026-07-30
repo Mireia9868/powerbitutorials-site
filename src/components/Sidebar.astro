@@ -12,14 +12,14 @@ const BUTTONDOWN_USER = "mireia";
     <h3 class="sidebar-title">Categories</h3>
     <ul class="cat-list">
       <li>
-        <a href="/tutorials" class={!activeCat ? "active" : ""}>
+        <a href="/tutorials/" class={!activeCat ? "active" : ""}>
           All Tutorials
         </a>
       </li>
       {CATEGORIES.map((cat) => (
         <li>
           <a
-            href={`/category/${cat.slug}`}
+            href={`/category/${cat.slug}/`}
             class={activeCat === cat.slug ? "active" : ""}
           >
             {cat.label}
