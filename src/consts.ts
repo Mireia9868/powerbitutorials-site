@@ -41,6 +41,11 @@ export const CATEGORIES = [
     label: "Time Intelligence",
     description: "Date-based calculations and YTD/MTD patterns.",
   },
+  {
+    slug: "service",
+    label: "Power BI Service",
+    description: "Workspaces, gateways, deployment, and administration.",
+  },
 ];
 
 // 难度
