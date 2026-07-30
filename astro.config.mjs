@@ -22,6 +22,7 @@ export default defineConfig({
       wrap: true,
     },
   },
+  trailingSlash: "always",
   build: {
     inlineStylesheets: "auto",
   },
