@@ -9,9 +9,9 @@ export const SITE_LANG = "en";
 // 导航
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/tutorials", label: "Tutorials" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/tutorials/", label: "Tutorials" },
+  { href: "/about/", label: "About" },
+  { href: "/contact/", label: "Contact" },
 ];
 
 // 教程分类 (与 content collection schema 的 category 对应)
