@@ -66,6 +66,10 @@ export const BING_SITE_VERIFICATION = "A2FC1B495860A9DD04B4F99C18F4A9EA";
 // IndexNow 密钥 — 用于 Bing/Yandex 即时索引通知
 // 生成方式: 生成一个随机字符串，放到 public/indexnow-key.txt
 // 留空则不启用 IndexNow 自动提交
+// Google Analytics 4 — Measurement ID
+// 格式: G-XXXXXXXXXX，留空则不渲染 GA4 脚本
+export const GA4_MEASUREMENT_ID = "G-GMYRVPSEHX";
+
 export const INDEXNOW_KEY = "";
 
 // 社交 (可选)
