@@ -1,6 +1,6 @@
 ---
-title: "Power BI Performance Optimization: Make Slow Reports Fast"
-description: "Slow Power BI reports frustrate users and kill adoption. Learn the systematic approach to diagnosing and fixing performance issues — from Performance Analyzer to DAX optimization to model tuning."
+title: "Power BI Performance Optimization & DAX Optimization: Make Slow Reports Fast"
+description: "Power BI running slow? Fix report performance with Performance Analyzer, DAX optimization, VertiPaq tuning, and model design. Covers DAX patterns, query reduction, and common bottlenecks."
 pubDate: 2026-07-20
 category: "data-modeling"
 difficulty: "Advanced"
