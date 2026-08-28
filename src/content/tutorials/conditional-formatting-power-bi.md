@@ -1,25 +1,25 @@
 ---
-title: "Power BI Conditional Formatting: Complete Guide (Formula, Measure, Text, Color Rules)"
-description: "Learn Power BI conditional formatting based on formula, measure, and text. Covers background color, font color, data bars, icons, copy formatting, and design rules to make reports scannable."
+title: "Conditional Formatting in Power BI: A Complete Guide (Based on Measure, Formula & Text)"
+description: "Learn every type of conditional formatting in Power BI — background color, font color, data bars, and icons — plus how to drive them with a measure, a formula, or a text field. Includes copy-paste DAX and real Contoso examples."
 pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Beginner"
-tags: ["visualization", "conditional-formatting", "color-rules", "data-bars", "matrix", "formula", "measure", "text-formatting"]
+tags: ["visualization", "conditional-formatting", "color-rules", "data-bars", "matrix", "based-on-measure", "field-value"]
 author: "Power BI Tutorials Team"
 featured: false
 ---
 
-A matrix with 200 cells of raw numbers is unreadable. The same matrix with conditional formatting reveals patterns instantly — high values stand out, low values fade, and outliers draw the eye. This guide covers every conditional formatting option in Power BI, including formula-based rules, measure-based formatting, and text-based formatting.
+A matrix with 200 cells of raw numbers is unreadable. The same matrix with conditional formatting reveals patterns instantly — high values stand out, low values fade, and outliers draw the eye. Most tutorials stop at "pick a color scale." They don't show you how to make formatting follow your actual business logic, which is where the real value is. This guide covers all four formatting types and then goes deeper: how to drive each one with a measure, a formula, or plain text.
 
 ## The four formatting types
 
 ### 1. Background color scaling
 
-Shades each cell based on its value, from a minimum color to a maximum color.
+Shades each cell based on its value, from a minimum color (e.g., light) to a maximum color (e.g., dark).
 
 **When to use:** comparing values across a range, where relative magnitude matters.
 
-**How to apply:** click the dropdown next to a measure in a visual → **Conditional formatting → Background color**.
+**How to apply:** click the dropdown next to a measure in a visual → Conditional formatting → Background color.
 
 **Settings:**
 - **Color scale:** gradient from min to max. Choose two colors (e.g., white to blue) or three (e.g., red for low, yellow for mid, green for high).
@@ -59,90 +59,6 @@ Adds an icon next to the value — arrows up/down, circles, flags, traffic light
 - **Layout:** icon only, icon left of value, or icon right of value.
 
 **Caution:** icons are the most overused formatting type. Three icons per cell across 200 cells is visual noise. Use them sparingly — for status indicators, not for every value.
-
-## Conditional formatting based on a formula
-
-The "Rule" option in conditional formatting lets you apply formatting when a DAX expression returns true. This is useful when the condition depends on more than the cell value itself.
-
-Example: highlight any region where revenue is above target AND growth is positive.
-
-```dax
-Format Flag =
-IF(
-    [Total Revenue] > [Target Revenue] && [YoY Growth %] > 0,
-    1,
-    0
-)
-```
-
-In the conditional formatting pane, choose **Rules** and base the rule on the `Format Flag` measure. Set values equal to 1 to get a green background, and 0 to stay neutral.
-
-**When to use a formula:**
-- The condition involves multiple measures.
-- You need AND/OR logic that a simple color scale can't express.
-- You want to compare the cell value to a target or benchmark.
-
-## Conditional formatting based on a measure
-
-Sometimes you want the formatting of one column to depend on the value of another measure. Power BI lets you select **Field value** in the conditional formatting pane and point to a measure that returns a color name, hex code, or numeric flag.
-
-Example: return a hex color based on profit margin.
-
-```dax
-Margin Color =
-SWITCH(
-    TRUE(),
-    [Profit Margin %] >= 0.30, "#2E7D32",  -- green
-    [Profit Margin %] >= 0.15, "#F9A825",  -- yellow
-    "#C62828"                              -- red
-)
-```
-
-Apply this measure as the **Background color → Field value**. The column does not need to display the margin measure — it just needs to exist in the model.
-
-**Best practice:** keep the measure simple. Avoid complex filters inside the color measure because it runs once per visible cell.
-
-## Conditional formatting based on text
-
-Text columns can trigger conditional formatting too. You need a measure that evaluates the text value and returns a numeric flag or color.
-
-Example: color rows where the product category is "Electronics".
-
-```dax
-Category Flag =
-IF(
-    SELECTEDVALUE(Products[Category]) = "Electronics",
-    1,
-    0
-)
-```
-
-Use this flag in a rule-based background color. If you need different colors for multiple categories, return hex codes instead:
-
-```dax
-Category Color =
-SWITCH(
-    SELECTEDVALUE(Products[Category]),
-    "Electronics", "#E3F2FD",
-    "Furniture", "#F1F8E9",
-    "Clothing", "#FFF3E0",
-    "#FFFFFF"
-)
-```
-
-Note: `SELECTEDVALUE` returns the single value in the current filter context. In a table or matrix, this works row by row.
-
-## How to copy conditional formatting
-
-To copy conditional formatting from one visual to another, use **Format painter**:
-
-1. Select the visual with the formatting you want to copy.
-2. Click the **Format painter** icon in the Home ribbon (it looks like a paintbrush).
-3. Click the target visual.
-
-Format painter copies most formatting settings, including conditional formatting rules, color scales, data bars, and icons. It does **not** copy field-level settings like which measure is in each column.
-
-**Limitation:** format painter works within the same report page or across pages in the same file. It does not work across separate `.pbix` files. For reusable formatting across files, document your color hex codes and threshold rules, then recreate them manually.
 
 ## Pattern 1: Highlighting performance vs. target
 
@@ -186,6 +102,137 @@ A matrix showing revenue by product per month. Add data bars to the revenue valu
 
 This combines the precision of numbers with the visual comparison of a bar chart — ideal for detailed analysis tables.
 
+## Pattern 4: Highlighting outliers
+
+Use field-based formatting to highlight cells that meet a specific condition (e.g., revenue above a threshold).
+
+```dax
+// Measure that returns a color hex code
+Revenue Color =
+IF([Total Revenue] > 50000, "#FF6B6B", "#FFFFFF")
+```
+
+Apply this as the background color via "Field value" formatting. Cells above 50,000 get a red background; others stay white.
+
+## Conditional formatting based on a measure
+
+This is the pattern most people search for and the one that delivers the most control. Instead of letting Power BI auto-scale colors, you write a measure that returns a color, then point the formatting at that measure using **Field value**.
+
+The setup is always the same:
+
+1. Write a measure that returns a hex color string (or a number, if you want Power BI to map it onto a color scale).
+2. In the visual, open the column/measure dropdown → **Conditional formatting** → **Background color** (or Font color).
+3. Set **Format by** to **Field value**.
+4. Pick your color measure.
+
+Here's a practical example using Adventure Works. Suppose you want a region to turn green when it beats its sales target by more than 5%, amber when it's within 5% below target, and red when it's worse than that.
+
+```dax
+// Returns a hex color based on a measure ratio
+CF Sales vs Target =
+VAR Pct = DIVIDE([Total Sales], [Sales Target], 0)
+RETURN
+    SWITCH(
+        TRUE(),
+        Pct > 1.05, "#22C55E",   // green: > 5% over target
+        Pct >= 0.95, "#F59E0B",  // amber: within 5% of target
+        "#EF4444"                // red: more than 5% under target
+    )
+```
+
+Point Background color → Field value → `CF Sales vs Target`. Now the color reflects your real business rule, not Power BI's guess about the data range.
+
+You can also return numbers instead of colors. If you feed a measure that returns 0, 1, or 2 into **Format by: Field value** with a color scale, Power BI maps those numbers onto your chosen gradient. That's useful when the logic is simpler as an index.
+
+```dax
+// Returns an index: 2 = good, 1 = ok, 0 = bad
+CF Status Index =
+VAR Pct = DIVIDE([Total Sales], [Sales Target], 0)
+RETURN
+    SWITCH(
+        TRUE(),
+        Pct > 1.0, 2,
+        Pct >= 0.9, 1,
+        0
+    )
+```
+
+Apply a three-color scale to this index with green at 2, yellow at 1, red at 0.
+
+## Conditional formatting based on a formula
+
+When you don't need a full DAX measure, the **Rules** option lets you build conditional formatting directly from the field value. This is the fastest route for one-off formatting and for non-numeric logic.
+
+Open the column dropdown → **Conditional formatting** → **Font color** → **Format by: Rules**.
+
+Each rule has three parts:
+- **Field:** the column or measure the rule evaluates
+- **Operator:** is greater than, is less than, contains, begins with, is blank, and more
+- **Value:** a number, text, or other column
+
+Common rule patterns:
+
+**Numeric thresholds:**
+- If `[Total Sales]` **is greater than** `1000000` → green font
+- Else if `[Total Sales]` **is less than** `100000` → red font
+
+**Text contains:**
+- If `[Region]` **contains** `West` → blue font
+
+**Date rules:**
+- If `[Order Date]` **is after** `August 1, 2026` → purple font
+
+The catch: rules evaluate the formatted field only. If you want a cell's color to depend on a *different* column, you need a measure (the previous section) or a calculated column. Rules can't reference arbitrary other columns directly.
+
+```dax
+// Use a calculated column when rule needs another column's value
+Is High Priority =
+IF(
+    Sales[Region] = "West" && Sales[Total Sales] > 500000,
+    "Yes",
+    "No"
+)
+```
+
+Then apply a rule: If `[Is High Priority]` **is** `Yes` → orange background.
+
+## Conditional formatting based on text
+
+Text columns can't be color-scaled the way numbers can, but they're some of the most useful formatting targets — status, category, region, owner. You have two routes.
+
+**Route A: Rules with text operators.** As above, use **contains**, **begins with**, or **is** to map text values to colors. A column of order statuses (Shipped, Pending, Cancelled) maps cleanly:
+
+- `[Status]` **is** `Shipped` → green
+- `[Status]` **is** `Pending` → amber
+- `[Status]` **is** `Cancelled` → red
+
+**Route B: A measure that translates text into color.** When the text logic is reusable across multiple visuals, wrap it in a measure so you maintain it in one place.
+
+```dax
+// Text-to-color measure for an Order Status column
+CF Order Status =
+SWITCH(
+    SELECTEDVALUE(Orders[Status]),
+    "Shipped", "#22C55E",
+    "Pending", "#F59E0B",
+    "Cancelled", "#EF4444",
+    "Returned", "#8B5CF6",
+    "#64748B"   // default gray for anything else
+)
+```
+
+Apply as Field value → Background color on any visual that shows `Orders[Status]`. If you later add a "Refunded" status, you edit one measure instead of hunting through every visual.
+
+**Combining text and value:** a real report often needs both. At Contoso, the shipping manager wants overdue orders flagged red, but only when the status is still "Pending." That's a measure, not a rule:
+
+```dax
+CF Overdue Pending =
+VAR DaysLate = DATEDIFF(SELECTEDVALUE(Orders[Due Date]), TODAY(), DAY)
+VAR Status = SELECTEDVALUE(Orders[Status])
+RETURN
+    IF(Status = "Pending" && DaysLate > 0, "#EF4444", "#FFFFFF")
+```
+
 ## Design principles
 
 ### Principle 1: One formatting type per cell
@@ -216,29 +263,24 @@ Red/green is the most common formatting choice and the most common accessibility
 
 **Mistake 4: Not updating formatting after changing measures.** If you swap the measure in a visual, the conditional formatting may point to the old measure. Check formatting settings after any measure change.
 
+**Mistake 5: Pointing Field value at the wrong aggregation.** When you use a color measure via Field value, make sure the measure is at the same granularity as the visual. A color measure that returns one value for the whole table will paint every cell the same color.
+
 ## FAQ
 
-**Can Power BI conditional formatting use a formula?**
-Yes. Choose **Conditional formatting → Background color (or font color) → Rules** and write a DAX expression that returns true or false. You can also use a measure that returns a numeric flag.
+**Can I copy conditional formatting from one visual to another?**
+There's no native "copy formatting" button between unrelated visuals, but you can reuse the same color measure across every visual, which achieves the same result. For report-level consistency, a JSON theme applied in the report settings carries color rules across visuals. See our guide on [copying conditional formatting](/tutorials/copy-conditional-formatting-power-bi/).
 
-**Can conditional formatting be based on another measure?**
-Yes. Select **Field value** in the conditional formatting pane and point to a measure that returns a color hex code or numeric flag. The target column's formatting will then depend on that measure.
+**Does conditional formatting slow down my report?**
+Field-value formatting that relies on a heavy measure adds DAX evaluation per cell, so yes, it can — but only noticeably on very large matrices. Keep color measures simple (SWITCH + DIVIDE, no iterators) and you'll be fine.
 
-**How do I conditionally format text in Power BI?**
-Create a measure that evaluates the text value (using `SELECTEDVALUE`) and returns a flag or color. Then apply that measure as a rule-based or field-value background color.
+**Why does my text-based rule color every cell the same?**
+Usually because the rule field and the visual field don't match, or the text has trailing spaces. Trim the source column in Power Query and confirm the rule field equals the exact displayed value.
 
-**How do I copy conditional formatting to another visual?**
-Use the **Format painter** tool in the Home ribbon. Select the source visual, click Format painter, then click the target visual. It copies conditional formatting rules, color scales, data bars, and icons.
-
-**Why is my conditional formatting not showing?**
-Common causes: the measure returns blank, the threshold is wrong, the color contrast is too low, or the formatting is applied to a different field than you expect. Check the conditional formatting pane and test with a simple rule first.
+**Can I format charts the same way as tables?**
+Partially. Charts use "Data colors" conditional formatting rather than cell rules. Bar charts, gauges, and KPI visuals all support it differently. We cover the specifics in [conditional formatting for charts](/tutorials/conditional-formatting-charts-power-bi/).
 
 ## What's next
 
-- [Power BI Performance Optimization: Make Slow Reports Fast](/tutorials/power-bi-performance-optimization/)
-- [DAX Variables Guide: Cleaner, Faster Measures](/tutorials/dax-variables-guide/)
-- [Power BI Dashboard Design Principles](/tutorials/power-bi-dashboard-design-principles/)
-
-## Summary
-
-Conditional formatting turns walls of numbers into scannable visuals. Use background color for magnitude comparisons, data bars for combined precision and visual comparison, and icons for direction or status. Formula-based and measure-based formatting give you precise control over when colors apply. Apply one formatting type per cell, choose colors intentionally, and test for accessibility. The goal is to make patterns visible — not to color every cell for the sake of it.
+- [How to Copy Conditional Formatting in Power BI](/tutorials/copy-conditional-formatting-power-bi/) — reuse color rules across visuals and reports without rebuilding them.
+- [Conditional Formatting for Charts, Bar Charts & Gauges](/tutorials/conditional-formatting-charts-power-bi/) — apply color logic to visual elements, not just matrix cells.
+- [The DAX SWITCH Function Explained](/tutorials/dax-switch-function/) — the backbone of most color measures in this guide.

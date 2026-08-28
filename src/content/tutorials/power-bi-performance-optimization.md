@@ -1,15 +1,15 @@
 ---
-title: "Power BI Performance Optimization & DAX Optimization: Make Slow Reports Fast"
-description: "Power BI running slow? Fix report performance with Performance Analyzer, DAX optimization, VertiPaq tuning, and model design. Covers DAX patterns, query reduction, and common bottlenecks."
+title: "Power BI Performance Optimization: A Complete Guide to Faster Reports and DAX"
+description: "Slow Power BI reports frustrate users and kill adoption. Learn the systematic approach to diagnosing and fixing performance issues — from Performance Analyzer to DAX optimization to model tuning — with copy-paste patterns that actually speed things up."
 pubDate: 2026-07-20
 category: "data-modeling"
 difficulty: "Advanced"
-tags: ["performance", "optimization", "dax", "data-modeling", "vertipaq"]
+tags: ["performance", "optimization", "dax", "data-modeling", "vertipaq", "performance-analyzer"]
 author: "Power BI Tutorials Team"
 featured: true
 ---
 
-A Power BI report that takes 20 seconds to load isn't just annoying — it kills adoption. Users abandon slow reports and go back to Excel. This guide covers the systematic approach to diagnosing and fixing performance issues, from the easiest wins to advanced model tuning.
+A Power BI report that takes 20 seconds to load isn't just annoying — it kills adoption. Users abandon slow reports and go back to Excel. This guide covers the systematic approach to diagnosing and fixing performance issues, from the easiest wins to advanced model tuning and DAX optimization.
 
 ## The performance diagnosis workflow
 
@@ -23,7 +23,7 @@ In Power BI Desktop, go to **View → Performance Analyzer → Start recording**
 - **Visual display** — time spent rendering the chart
 - **Network** — time fetching data from the source
 
-If the DAX query time dominates, optimize your measures or model. If visual display dominates, reduce the number of visuals or simplify them. If network dominates, check your data source connection.
+If the DAX query time dominates, optimize your measures or model. If visual display dominates, reduce the number of visuals or simplify them. If network dominates, check your data source connection. For a step-by-step walkthrough, see our [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer-guide/).
 
 ### Step 2: Check model size
 
@@ -73,6 +73,8 @@ By default, every visual cross-filters every other visual on the page. If you ha
 Select a visual → Format pane → "Edit interactions" → turn off cross-filtering for visuals that don't need it.
 
 ## DAX optimization patterns
+
+Most slow reports are slow because of DAX, not the model. These patterns fix the majority of DAX performance problems. For a dedicated deep dive, see our [DAX optimization guide](/tutorials/power-bi-dax-optimization/).
 
 ### Use column filters, not FILTER()
 
@@ -136,6 +138,18 @@ SWITCH(
 
 `DIVIDE` is not just safer — the engine optimizes it differently than the `/` operator, and it handles BLANK denominators without error-handling overhead.
 
+### Watch out for context transition in iterators
+
+`SUMX` and `FILTER` over a table force context transition when they hit a measure. If your iterator wraps a measure that itself is expensive, the cost multiplies by row count. Push the filter outside the iterator and let CALCULATE handle it, like the FILTER examples above.
+
+### Time intelligence: mark your date table
+
+Unmarked date tables force Power BI to scan the entire date column for every time-intelligence calculation. Mark a proper date table (Modeling → Mark as Date Table) so the engine uses the date index. Pair it with a clean [star schema](/tutorials/data-modeling-star-schema) and your YTD/QTD calculations stop materializing the whole fact table.
+
+### Limit window functions on big tables
+
+`OFFSET`, `INDEX`, and `WINDOW` are powerful but memory-hungry on large fact tables because they materialize partitions. Use them on aggregated or summarized tables, not on 100M-row fact tables directly. When possible, pre-aggregate with a summary table first.
+
 ## Model optimization
 
 ### Star schema (non-negotiable)
@@ -195,6 +209,7 @@ Slow refreshes often indicate model issues. If refresh time grows over time, che
 - [ ] Unused columns loaded into the model
 - [ ] No marked date table (time intelligence scans instead of using indexes)
 - [ ] Complex DAX in card visuals (cards compute on every interaction)
+- [ ] Window functions running against the raw fact table
 
 ## FAQ
 
@@ -207,6 +222,9 @@ Import for anything under 1GB — it's 10-100x faster. DirectQuery only when dat
 **Why is my report fast in Desktop but slow in Service?**
 Check your capacity. Shared capacity has resource limits. Also, the Service may have different data freshness — if Desktop has cached data and Service is querying live, timing differs.
 
+**My DAX runs fine on 1M rows but dies at 50M — what changed?**
+Volume exposes bad patterns. `FILTER(ALL(...))`, nested iterators, and unmarked date tables all scale linearly or worse. The same measure that costs 50ms on 1M rows can cost several seconds at 50M. Apply the DAX optimization patterns above before adding hardware.
+
 ## What's next
 
-Performance optimization is iterative. Start with the quick wins (remove columns, reduce visuals), then tackle DAX patterns, then model structure. For DAX-specific debugging, see our [DAX troubleshooting guide](/tutorials/dax-troubleshooting-guide). For model design, revisit the [star schema guide](/tutorials/data-modeling-star-schema).
+Performance optimization is iterative. Start with the quick wins (remove columns, reduce visuals), then tackle DAX patterns, then model structure. For a focused DAX tuning reference, see our [DAX optimization guide](/tutorials/power-bi-dax-optimization/). To find what's actually slow in your report, start with the [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer-guide/). For model design, revisit the [star schema guide](/tutorials/data-modeling-star-schema).
