@@ -36,3 +36,7 @@ gsc-ga4-service-account.json
 ga4-property-id.txt
 daily-*.md
 review-*.md
+
+# python cache
+scripts/__pycache__/
+__pycache__/
