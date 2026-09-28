@@ -3,7 +3,7 @@
 powerbitutorials.com — 每日真实流量达成汇报引擎（前 30 天试点用）
 ==================================================================
 数据源（按可用度自动降级，与 weekly_review.py 同源）：
-  1) outputs/gsc-ga4-service-account.json 存在 + GA4 属性 ID 文件存在 → 直连 GA4 + GSC（全自动）
+  1) 仓库根目录 gsc-ga4-service-account.json + ga4-property-id.txt 存在（Actions 由 Secrets 生成）→ 直连 GA4 + GSC（全自动）
   2) 否则 → CSV 回退 + sitemap 文章数 + 本地生产进度（仍可汇报「内容引擎」达成情况）
 
 汇报口径（对齐用户要求）：
@@ -11,7 +11,7 @@ powerbitutorials.com — 每日真实流量达成汇报引擎（前 30 天试点
   - 环比增长：DoD（昨日 vs 前日）+ WoW（昨日 vs 7 天前同日）
   - 增长来源：① GA4 渠道构成（sessionDefaultChannelGroup，近 7 天）② GSC 上升查询（近 7 天 vs 前 7 天）
 产出：
-  outputs/daily-YYYYMMDD.md  （邮件正文）
+  daily-YYYYMMDD.md（仓库根目录，邮件正文）
   末尾打印 ALERT / INFO 行，供自动化区分「日报」与「告警」
 """
 import os, json, re, datetime, subprocess
@@ -164,7 +164,7 @@ def main():
             A(f"- ⚠️ GA4 拉取失败：{ga4.get('error') if ga4 else 'unknown'}")
             info.append("GA4 拉取失败，检查服务账号 Viewer 权限 / ga4-property-id.txt")
     else:
-        A(f"- ⚠️ 未授权 → 实时浏览量暂不可用。建服务账号放 `outputs/gsc-ga4-service-account.json` + `ga4-property-id.txt` 后自动接管。")
+        A(f"- ⚠️ 未授权 → 实时浏览量暂不可用。仓库 Secrets 配好 `GSC_SA_JSON` + `GA4_PROPERTY_ID` 后自动接管（脚本会写到仓库根目录的 gsc-ga4-service-account.json / ga4-property-id.txt）。")
         A(f"- 当前用 Cloudflare 估算真人 UV ~85/天（含机器人 UV 不可用，详见周报）。")
     A("")
 

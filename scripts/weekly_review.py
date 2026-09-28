@@ -3,10 +3,10 @@
 powerbitutorials.com — 每周真实流量复盘引擎
 ===========================================
 数据源（按可用度自动降级）：
-  1) outputs/gsc-ga4-service-account.json 存在 + 库已装  → 直连 GA4 Data API + GSC Search Console API（全自动）
-  2) 否则 → 读 outputs/gcs-export.csv（你手动导出的 GSC 查询表）+ 实时 sitemap 文章数
+  1) 仓库根目录 gsc-ga4-service-account.json 存在 + 库已装（Actions 从 Secrets 生成）  → 直连 GA4 Data API + GSC Search Console API（全自动）
+  2) 否则 → 读仓库根目录 gcs-export.csv（手动导出的 GSC 查询表快照）+ 实时 sitemap 文章数
 产出：
-  outputs/review-YYYYMMDD.md  （完整复盘报告）
+  review-YYYYMMDD.md（仓库根目录，完整复盘报告）
   末尾打印 ALERT / INFO 行，供自动化邮件发送时区分「周报」与「告警」
 
 口径说明：
@@ -192,7 +192,7 @@ def main():
     # 数据源
     creds, pid, status = load_api()
     A(f"## 二、数据源状态")
-    A(f"- 服务账号：{status} ｜ GA4 数字属性 ID：{pid or '未配置(outputs/ga4-property-id.txt)'}")
+    A(f"- 服务账号：{status} ｜ GA4 数字属性 ID：{pid or '未配置(Secrets: GA4_PROPERTY_ID)'}")
     A("")
 
     # GA4 真实 UV
@@ -229,7 +229,7 @@ def main():
             A(f"- ⚠️ GA4 拉取失败：{ga4.get('error') if ga4 else 'unknown'}")
             info.append("GA4 拉取失败，UV 用估算基线；检查服务账号 GA4 属性 Viewer 权限与 ga4-property-id.txt")
     else:
-        A(f"- ⚠️ 未配置服务账号/GA4 属性 ID → 真实 UV 暂用估算基线 **~{BASELINE_UV}/天**（放 outputs/gsc-ga4-service-account.json + ga4-property-id.txt 后自动接管）")
+        A(f"- ⚠️ 未配置服务账号/GA4 属性 ID → 真实 UV 暂用估算基线 **~{BASELINE_UV}/天**（在仓库 Secrets 配好 GSC_SA_JSON + GA4_PROPERTY_ID 后自动接管）")
         A(f"- 本周轨迹预期 UV：{expected_uv():.0f}/天（当前估算 {BASELINE_UV}/天，缺口 {expected_uv()-BASELINE_UV:.0f}/天）")
     A("")
 
@@ -276,7 +276,7 @@ def main():
     else:
         rows = read_gcs_csv()
         if rows:
-            A(f"- 手动 GSC 导出 {len(rows)} 条 query（放 outputs/gsc-export.csv）。Top 曝光低排名查询：")
+            A(f"- 手动 GSC 导出 {len(rows)} 条 query（来自仓库内 gsc-export.csv）。Top 曝光低排名查询：")
             parsed = []
             for r in rows:
                 try:
@@ -294,7 +294,7 @@ def main():
             if gaps:
                 info.append(f"本周内容缺口 Top：{gaps[0][0]}（曝光 {gaps[0][1]}，排名 {gaps[0][2]:.0f}）— 优先扩写")
         else:
-            A("- ⚠️ 无 GSC 数据（既无服务账号也无 outputs/gcs-export.csv）")
+            A("- ⚠️ 无 GSC 数据（既无服务账号也无 gcs-export.csv 快照）")
     A("")
 
     # 总结与下一步
