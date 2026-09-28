@@ -117,6 +117,36 @@ Your markdown content here. Use ## for section headings (auto-added to TOC).
 
 > AdSense does NOT ban AI content. It bans *low-value* content. The human edit step (real examples, screenshots, fact-checking) is what makes AI-assisted content approvable.
 
+## 云端自动化（GitHub Actions）
+
+站点内容生产与流量复盘已完全云端化，不依赖本机、也不依赖 WorkBuddy / 任何桌面端是否开机。
+
+| Workflow | 触发（UTC） | 作用 |
+|---|---|---|
+| `publish.yml` | 每日 15:00（= 08:00 PDT） | 生成 1–2 篇教程 → 第二个模型审稿 → 提交推送 → 邮件汇报 |
+| `daily-report.yml` | 每日 04:00（= 21:00 PDT） | GA4 真人 UV / 环比 / 增长来源 → 邮件 |
+| `weekly-review.yml` | 每周一 16:00（= 周一 09:00 PDT） | 周复盘 + 异常告警 → 邮件 |
+
+- **LLM**：DeepSeek。`deepseek-chat` 生成、`deepseek-reasoner` 审稿，两者构成"另一个 AI"复核。
+- **投递优先级**：163 SMTP 邮件（主）→ 飞书机器人（备）→ Resend（备）；任一失败不影响其他。
+- **护栏**：每日最多 2 篇；仓库中已存在但尚未上线（不在 sitemap）的文章超过 20 篇则中止并告警（通常意味着 Cloudflare Pages 部署中断）；sitemap 拉取失败时自动跳过该护栏。
+
+### 需要在 仓库 Settings → Secrets and variables → Actions 配置
+
+| Secret | 必填 | 说明 |
+|---|---|---|
+| `DEEPSEEK_API_KEY` | ✅ | platform.deepseek.com 的 API key |
+| `SMTP_USER` / `SMTP_PASS` | ✅ | 163 邮箱地址 / **SMTP 授权码**（不是登录密码） |
+| `GSC_SA_JSON` | ✅ | Search Console + GA4 服务账号 JSON（整段粘贴） |
+| `GA4_PROPERTY_ID` | ✅ | GA4 媒体资源 ID（纯数字） |
+| `REPORT_TO` | ⬜ | 汇报收件人，默认 `mireia1998@163.com`，逗号可多个 |
+| `SMTP_HOST` / `SMTP_PORT` | ⬜ | 默认 `smtp.163.com` / `465`（SSL） |
+| `LLM_MODEL` / `REVIEW_MODEL` | ⬜ | 默认 `deepseek-chat` / `deepseek-reasoner` |
+| `FEISHU_WEBHOOK` / `FEISHU_SECRET` | ⬜ | 备用通道 |
+| `RESEND_API_KEY` / `RESEND_FROM` | ⬜ | 备用通道 |
+
+配好后在 Actions 页手动 `Run workflow` 一次即可验证全链路。
+
 ## Deploy to Cloudflare Pages
 
 ### Method 1: Git integration (recommended)

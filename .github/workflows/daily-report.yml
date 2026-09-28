@@ -1,5 +1,6 @@
 name: Daily Traffic Report (21:00 PDT)
 # 云端每日达成汇报：浏览量 / 环比增长 / 增长来源。不依赖本机设备 / WorkBuddy。
+# 投递优先级：163 邮件（主）→ 飞书 → Resend。
 # 时区：21:00 PDT = 次日 04:00 UTC。
 on:
   schedule:
@@ -17,22 +18,38 @@ jobs:
       - name: Install deps
         run: pip install -q google-api-python-client google-analytics-data
       - name: Materialize secrets to files
-        run: |
-          [ -n "$GSC_SA_JSON" ] && echo "$GSC_SA_JSON" > gcs-ga4-service-account.json
-          [ -n "$GA4_PROPERTY_ID" ] && echo "$GA4_PROPERTY_ID" > ga4-property-id.txt
         env:
           GSC_SA_JSON: ${{ secrets.GSC_SA_JSON }}
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+        run: |
+          [ -n "$GSC_SA_JSON" ] && echo "$GSC_SA_JSON" > gcs-ga4-service-account.json
+          [ -n "$GA4_PROPERTY_ID" ] && echo "$GA4_PROPERTY_ID" > ga4-property-id.txt
+          exit 0
       - name: Run daily report
         run: python scripts/daily_report.py
-      - name: Deliver
+      - name: Deliver (email primary)
         if: always()
         env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST || 'smtp.163.com' }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT || '465' }}
+          SMTP_SSL: "true"
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+          REPORT_TO: ${{ secrets.REPORT_TO || 'mireia1998@163.com' }}
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_FROM: ${{ secrets.RESEND_FROM }}
-          REPORT_TO: ${{ secrets.REPORT_TO }}
         run: |
           F=$(ls daily-*.md 2>/dev/null | head -1)
-          python scripts/deliver.py "$F" "powerbitutorials 每日达成"
+          if [ -z "$F" ]; then
+            {
+              echo "# 每日达成汇报缺失"
+              echo
+              echo "- 运行状态：${{ job.status }}"
+              echo "- daily_report.py 未产出 daily-*.md（多为 GSC/GA4 凭据缺失或配额问题），请查看 Actions 日志。"
+            } > /tmp/daily-fallback.md
+            F=/tmp/daily-fallback.md
+          fi
+          python scripts/deliver.py "$F" "【powerbitutorials】每日达成 $(date -u +%F)"
