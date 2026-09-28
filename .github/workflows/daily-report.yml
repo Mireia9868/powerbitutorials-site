@@ -1,0 +1,38 @@
+name: Daily Traffic Report (21:00 PDT)
+# 云端每日达成汇报：浏览量 / 环比增长 / 增长来源。不依赖本机设备 / WorkBuddy。
+# 时区：21:00 PDT = 次日 04:00 UTC。
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: pip install -q google-api-python-client google-analytics-data
+      - name: Materialize secrets to files
+        run: |
+          [ -n "$GSC_SA_JSON" ] && echo "$GSC_SA_JSON" > gcs-ga4-service-account.json
+          [ -n "$GA4_PROPERTY_ID" ] && echo "$GA4_PROPERTY_ID" > ga4-property-id.txt
+        env:
+          GSC_SA_JSON: ${{ secrets.GSC_SA_JSON }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+      - name: Run daily report
+        run: python scripts/daily_report.py
+      - name: Deliver
+        if: always()
+        env:
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+          REPORT_TO: ${{ secrets.REPORT_TO }}
+        run: |
+          F=$(ls daily-*.md 2>/dev/null | head -1)
+          python scripts/deliver.py "$F" "powerbitutorials 每日达成"

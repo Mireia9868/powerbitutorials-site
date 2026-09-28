@@ -30,3 +30,9 @@ pnpm-debug.log*
 
 # Keystatic local storage artifacts
 .keystatic/
+
+# CI runtime artifacts (written from secrets, never commit)
+gsc-ga4-service-account.json
+ga4-property-id.txt
+daily-*.md
+review-*.md

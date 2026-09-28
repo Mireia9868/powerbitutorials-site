@@ -1,0 +1,50 @@
+name: Publish Power BI Tutorials (Daily)
+# 云端定时生成+发布，不依赖本机设备 / WorkBuddy 是否运行。
+# 时区：GitHub Actions 为 UTC。08:00 PDT = 15:00 UTC。
+on:
+  schedule:
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: pip install -q anthropic openai
+      - name: Generate + review + publish
+        env:
+          LLM_PROVIDER: ${{ secrets.LLM_PROVIDER || 'anthropic' }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          AUTO_PUBLISH: "false"
+        run: python scripts/generate_article.py
+      - name: Commit & push new articles
+        run: |
+          git config user.email "bot@powerbitutorials.com"
+          git config user.name "Content Bot"
+          git add src/content/tutorials/
+          git commit -m "auto: publish tutorials $(date +%F)" || echo "nothing to commit"
+          git push
+      - name: Notify (what was published)
+        if: always()
+        env:
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+          REPORT_TO: ${{ secrets.REPORT_TO }}
+        run: |
+          git log -1 --pretty=format:"# 自动发布 %ad%n%n%s" --date=short > /tmp/pubnote.md
+          # 列出本次新增文章
+          git show --stat --oneline HEAD | sed -n '1,40p' >> /tmp/pubnote.md
+          python scripts/deliver.py /tmp/pubnote.md "powerbitutorials 自动发布"
