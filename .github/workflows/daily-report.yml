@@ -17,14 +17,37 @@ jobs:
           python-version: "3.12"
       - name: Install deps
         run: pip install -q google-api-python-client google-analytics-data
+      - name: Check secret presence (masked — shows only true/false)
+        # 不泄漏明文：用 secrets.X != '' 比较，GitHub 只回 true/false
+        env:
+          HAS_SA: ${{ secrets.GSC_SA_JSON != '' }}
+          HAS_PID: ${{ secrets.GA4_PROPERTY_ID != '' }}
+          HAS_DK: ${{ secrets.DEEPSEEK_API_KEY != '' }}
+          HAS_SMTP: ${{ secrets.SMTP_PASS != '' }}
+          HAS_USER: ${{ secrets.SMTP_USER != '' }}
+        run: |
+          echo "GSC_SA_JSON        present : $HAS_SA"
+          echo "GA4_PROPERTY_ID    present : $HAS_PID"
+          echo "DEEPSEEK_API_KEY   present : $HAS_DK"
+          echo "SMTP_PASS          present : $HAS_SMTP"
+          echo "SMTP_USER          present : $HAS_USER"
       - name: Materialize secrets to files
         env:
           GSC_SA_JSON: ${{ secrets.GSC_SA_JSON }}
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
         run: |
-          [ -n "$GSC_SA_JSON" ] && echo "$GSC_SA_JSON" > gcs-ga4-service-account.json
-          [ -n "$GA4_PROPERTY_ID" ] && echo "$GA4_PROPERTY_ID" > ga4-property-id.txt
-          exit 0
+          if [ -n "$GSC_SA_JSON" ]; then
+            printf '%s\n' "$GSC_SA_JSON" > gcs-ga4-service-account.json
+            echo "wrote gsc-ga4-service-account.json ($(wc -c < gcs-ga4-service-account.json) bytes)"
+          else
+            echo "::error::Secret GSC_SA_JSON is EMPTY at runtime — check repository secret name/value"
+          fi
+          if [ -n "$GA4_PROPERTY_ID" ]; then
+            printf '%s\n' "$GA4_PROPERTY_ID" > ga4-property-id.txt
+            echo "wrote ga4-property-id.txt ($(wc -c < ga4-property-id.txt) bytes)"
+          else
+            echo "::error::Secret GA4_PROPERTY_ID is EMPTY at runtime — check repository secret name/value"
+          fi
       - name: Run daily report
         run: python scripts/daily_report.py
       - name: Deliver (email primary)

@@ -26,6 +26,17 @@ jobs:
           else
             pip install -q openai
           fi
+      - name: Check secret presence (masked — shows only true/false)
+        env:
+          HAS_DK: ${{ secrets.DEEPSEEK_API_KEY != '' }}
+          HAS_SA: ${{ secrets.GSC_SA_JSON != '' }}
+          HAS_PID: ${{ secrets.GA4_PROPERTY_ID != '' }}
+          HAS_SMTP: ${{ secrets.SMTP_PASS != '' }}
+        run: |
+          echo "DEEPSEEK_API_KEY   present : $HAS_DK"
+          echo "GSC_SA_JSON        present : $HAS_SA"
+          echo "GA4_PROPERTY_ID    present : $HAS_PID"
+          echo "SMTP_PASS          present : $HAS_SMTP"
       - name: Generate + review drafts
         env:
           LLM_PROVIDER: ${{ secrets.LLM_PROVIDER || 'deepseek' }}
