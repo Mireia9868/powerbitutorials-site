@@ -48,13 +48,18 @@ def pct(n, d):
 
 # ---- 文章数 + 生产进度 ----
 def fetch_live_urls():
+    """已上线教程 URL 集合。拉取失败返回 None。
+    必须区分「拉取失败」与「0 篇」——否则一次网络抖动就会被报成"线上 0 篇文章"。"""
     try:
-        out = subprocess.run(["curl", "-sL", "--max-time", "25", SITEMAP],
-                             capture_output=True, text=True).stdout
-        return {u.rstrip("/") for u in re.findall(r"<loc>([^<]+)</loc>", out)
+        r = subprocess.run(["curl", "-sL", "--max-time", "25", SITEMAP],
+                           capture_output=True, text=True)
+        if r.returncode != 0:
+            return None
+        urls = {u.rstrip("/") for u in re.findall(r"<loc>([^<]+)</loc>", r.stdout)
                 if "/tutorials/" in u and not u.rstrip("/").endswith("/tutorials")}
+        return urls or None
     except Exception:
-        return set()
+        return None
 
 def production_progress():
     """本地内容引擎达成：草稿数、待发布数、日历发布日志条数。"""
@@ -178,7 +183,7 @@ def main():
             info.append("GA4 拉取失败，检查服务账号 Viewer 权限 / ga4-property-id.txt")
     else:
         A(f"- ⚠️ 未授权 → 实时浏览量暂不可用。仓库 Secrets 配好 `GSC_SA_JSON` + `GA4_PROPERTY_ID` 后自动接管（脚本会写到仓库根目录的 gsc-ga4-service-account.json / ga4-property-id.txt）。")
-        A(f"- 当前用 Cloudflare 估算真人 UV ~85/天（含机器人 UV 不可用，详见周报）。")
+        A("- ⚠️ 无实时数据源：本段**不提供任何估算数字**（此前的「Cloudflare 估算 ~85/天」是硬编码残留，已移除，避免陈旧数字被当成当日数据）。")
     A("")
 
     # 增长来源
@@ -240,7 +245,10 @@ def main():
     A(f"## 四、内容引擎达成（本地）")
     urls = fetch_live_urls()
     dm, ll = production_progress()
-    A(f"- 线上教程文章数（sitemap）：**{len(urls)}** 篇（目标 200）")
+    if urls is None:
+        A("- 线上教程文章数（sitemap）：⚠️ 本次拉取异常，文章数不可用（**不要按 0 篇解读**）")
+    else:
+        A(f"- 线上教程文章数（sitemap）：**{len(urls)}** 篇（目标 200）")
     A(f"- 草稿目录文章草稿数：{dm} 篇 ｜ 日历发布日志记录：{ll} 条")
     A(f"- 今日待办：发布当日草稿 + 1 个技术微任务（内链/schema/索引/CTR 轮换）")
     A("")
