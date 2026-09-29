@@ -19,7 +19,14 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT = REPO_ROOT
-SA_JSON = OUT / "gsc-ga4-service-account.json"
+SA_JSON_NAMES = ("gsc-ga4-service-account.json", "gcs-ga4-service-account.json")
+def _resolve_sa_json():
+    for n in SA_JSON_NAMES:
+        p = OUT / n
+        if p.exists() and p.stat().st_size > 0:
+            return p
+    return OUT / SA_JSON_NAMES[0]
+SA_JSON = _resolve_sa_json()
 GSC_CSV = OUT / "gcs-export.csv"
 GA4_PID_FILE = OUT / "ga4-property-id.txt"
 SITE_URL = "https://powerbitutorials.com/"          # GSC 属性（URL 前缀）；若是网域属性改 "sc-domain:powerbitutorials.com"
@@ -94,19 +101,21 @@ def read_gcs_csv():
 
 # ---- GA4 + GSC API ----
 def load_api():
-    if not SA_JSON.exists():
-        return None, None, "no-service-account"
+    """SA 缺失与 GA4 属性缺失分开报，避免把「凭据文件没落地」误诊成「Secret 没填」。"""
+    pid = None
+    if GA4_PID_FILE.exists():
+        pid = GA4_PID_FILE.read_text(encoding="utf-8").strip() or None
+    if not (SA_JSON.exists() and SA_JSON.stat().st_size > 0):
+        found = [n for n in SA_JSON_NAMES if (OUT / n).exists()]
+        return None, pid, f"no-service-account（期望 {SA_JSON_NAMES[0]}，实际存在：{found or '无凭据文件'}）"
     try:
         from google.oauth2 import service_account
         SCOPES = ["https://www.googleapis.com/auth/analytics.readonly",
                   "https://www.googleapis.com/auth/webmasters.readonly"]
         creds = service_account.Credentials.from_service_account_file(str(SA_JSON), scopes=SCOPES)
-        pid = None
-        if GA4_PID_FILE.exists():
-            pid = GA4_PID_FILE.read_text().strip()
-        return creds, pid, "ok"
+        return creds, pid, f"ok（{SA_JSON.name}）" if pid else "no-ga4-pid"
     except Exception as e:
-        return None, None, f"load-error:{e}"
+        return None, pid, f"load-error:{e}"
 
 def ga4_pull(creds, pid, start, end):
     """返回 dict: activeUsers(区间合计), sessions, screenPageViews, daily(list of (date,au)), top_pages, channels"""

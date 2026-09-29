@@ -20,7 +20,15 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT = REPO_ROOT
 DRAFTS = OUT / "powerbitutorials-drafts"
-SA_JSON = OUT / "gsc-ga4-service-account.json"
+# 凭据文件名以 gsc- 为准；同时接受历史误拼 gcs-，避免命名漂移再次造成静默降级
+SA_JSON_NAMES = ("gsc-ga4-service-account.json", "gcs-ga4-service-account.json")
+def _resolve_sa_json():
+    for n in SA_JSON_NAMES:
+        p = OUT / n
+        if p.exists() and p.stat().st_size > 0:
+            return p
+    return OUT / SA_JSON_NAMES[0]
+SA_JSON = _resolve_sa_json()
 GA4_PID_FILE = OUT / "ga4-property-id.txt"
 GSC_CSV = OUT / "gcs-export.csv"
 SITE_URL = "https://powerbitutorials.com/"
@@ -70,13 +78,18 @@ def production_progress():
 
 # ---- API ----
 def load_api():
-    if not SA_JSON.exists():
-        return None, None, "no-service-account"
-    try:
-        pid = GA4_PID_FILE.read_text().strip() if GA4_PID_FILE.exists() else None
-        return "creds", pid, "ok" if pid else "no-ga4-pid"
-    except Exception as e:
-        return None, None, f"load-error:{e}"
+    """返回 (可用标志, GA4 属性 ID, 状态描述)。
+    注意：SA 缺失与 GA4 属性缺失是两件事，必须分别报出，否则会把「凭据文件没落地」误诊为「Secret 没填」。"""
+    sa_ok = SA_JSON.exists() and SA_JSON.stat().st_size > 0
+    pid = None
+    if GA4_PID_FILE.exists():
+        pid = GA4_PID_FILE.read_text(encoding="utf-8").strip() or None
+    if sa_ok and pid:
+        return True, pid, f"ok（{SA_JSON.name}）"
+    if not sa_ok:
+        found = [n for n in SA_JSON_NAMES if (OUT / n).exists()]
+        return None, pid, f"no-service-account（期望 {SA_JSON_NAMES[0]}，实际存在：{found or '无凭据文件'}）"
+    return "creds", None, "no-ga4-pid"
 
 def ga4_day(pid, start, end, dims, mets):
     from google.analytics.data_v1beta import (BetaAnalyticsDataClient, RunReportRequest,

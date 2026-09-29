@@ -18,13 +18,29 @@ jobs:
       - name: Install deps
         run: pip install -q google-api-python-client google-analytics-data
       - name: Materialize secrets to files
+        # 文件名必须与 scripts/*.py 的 SA_JSON 常量一致：gsc-ga4-service-account.json
+        # （历史 bug：曾写成 gcs-...，脚本永远找不到凭据，静默降级成估算口径）
         env:
           GSC_SA_JSON: ${{ secrets.GSC_SA_JSON }}
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
         run: |
-          [ -n "$GSC_SA_JSON" ] && echo "$GSC_SA_JSON" > gcs-ga4-service-account.json
-          [ -n "$GA4_PROPERTY_ID" ] && echo "$GA4_PROPERTY_ID" > ga4-property-id.txt
-          exit 0
+          if [ -n "$GSC_SA_JSON" ]; then
+            printf '%s\n' "$GSC_SA_JSON" > gsc-ga4-service-account.json
+            echo "wrote gsc-ga4-service-account.json ($(wc -c < gsc-ga4-service-account.json) bytes)"
+          else
+            echo "::warning::Secret GSC_SA_JSON 为空 —— 周报将降级为静态快照口径"
+          fi
+          if [ -n "$GA4_PROPERTY_ID" ]; then
+            printf '%s\n' "$GA4_PROPERTY_ID" > ga4-property-id.txt
+            echo "wrote ga4-property-id.txt ($(wc -c < ga4-property-id.txt) bytes)"
+          else
+            echo "::warning::Secret GA4_PROPERTY_ID 为空 —— 周报将降级为静态快照口径"
+          fi
+      - name: Verify credentials (loud failure instead of silent degradation)
+        env:
+          HAS_SA: ${{ secrets.GSC_SA_JSON != '' }}
+          HAS_PID: ${{ secrets.GA4_PROPERTY_ID != '' }}
+        run: python scripts/check_credentials.py
       - name: Run weekly review
         run: python scripts/weekly_review.py
       - name: Deliver (email primary)
