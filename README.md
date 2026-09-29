@@ -130,6 +130,8 @@ Your markdown content here. Use ## for section headings (auto-added to TOC).
 - **LLM**：DeepSeek。`deepseek-chat` 生成、`deepseek-reasoner` 审稿，两者构成"另一个 AI"复核。
 - **投递优先级**：163 SMTP 邮件（主）→ 飞书机器人（备）→ Resend（备）；任一失败不影响其他。
 - **护栏**：每日最多 2 篇；仓库中已存在但尚未上线（不在 sitemap）的文章超过 20 篇则中止并告警（通常意味着 Cloudflare Pages 部署中断）；sitemap 拉取失败时自动跳过该护栏。
+- **内容质检**：生成后、提交前跑 `scripts/validate_content.py --changed`。它会按 `src/content/config.ts` 的 schema 校验 frontmatter（必填字段 / enum / 日期格式 / 是否有 schema 未定义的字段）。不合格就不提交并触发告警邮件——因为 Astro 构建失败会导致**整站停更**，比不发布更糟。另：`generate_article.py` 的 `repair_links()` 会把模型编造的、指向不存在文章的内链降级为纯文本，防止上线 404。
+- **本地预检**：`scripts/verify_sa_access.py` 可在配 Secret 前确认服务账号对 GA4 / GSC 的读权限是否给对（用法见文件头）。
 
 ### 需要在 仓库 Settings → Secrets and variables → Actions 配置
 
