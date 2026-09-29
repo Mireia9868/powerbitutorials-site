@@ -37,6 +37,12 @@ jobs:
           echo "GSC_SA_JSON        present : $HAS_SA"
           echo "GA4_PROPERTY_ID    present : $HAS_PID"
           echo "SMTP_PASS          present : $HAS_SMTP"
+      - name: Deploy health check (生成前先确认线上还在涨)
+        # 仓库里有、但 sitemap 里没有的文章 = 已入库未上线。
+        # 部署正常时这个数每天都归零；持续累积说明 Cloudflare Pages 部署断了，
+        # 此时再生成只会让仓库无限堆积、线上篇数纹丝不动 —— 到阈值就停下并告警。
+        # 阈值 6 ≈ 三天产量，留足 Cloudflare 部署延迟的余量。
+        run: python scripts/check_deploy_health.py --fail 6
       - name: Generate + review drafts
         env:
           LLM_PROVIDER: ${{ secrets.LLM_PROVIDER || 'deepseek' }}
@@ -55,8 +61,16 @@ jobs:
           git config user.email "bot@powerbitutorials.com"
           git config user.name "Content Bot"
           git add src/content/tutorials/ .article-reviews/
-          git commit -m "auto: publish tutorials $(date +%F)" || echo "nothing to commit"
-          git push
+          # 零产出必须显式告警：原来只打印 "nothing to commit"，
+          # 生成失败与「真的没有新题」看起来一模一样，绿勾掩盖了故障。
+          if git diff --cached --quiet; then
+            echo "::warning::本次运行没有产出任何新文章 —— 请回看 Generate 步骤日志："
+            echo "::warning::  · 若打印 no new topics → 选题队列已耗尽，需补充 topic_queue.json"
+            echo "::warning::  · 若打印 FAILED <slug> → LLM 调用/审稿失败，检查 DEEPSEEK_API_KEY 与额度"
+          else
+            git commit -m "auto: publish tutorials $(date +%F)"
+            git push
+          fi
       - name: Notify (email primary)
         if: always()
         env:

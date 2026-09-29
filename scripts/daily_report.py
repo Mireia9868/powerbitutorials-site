@@ -20,6 +20,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT = REPO_ROOT
 DRAFTS = OUT / "powerbitutorials-drafts"
+CONTENT_DIR = REPO_ROOT / "src" / "content" / "tutorials"
 # 凭据文件名以 gsc- 为准；同时接受历史误拼 gcs-，避免命名漂移再次造成静默降级
 SA_JSON_NAMES = ("gsc-ga4-service-account.json", "gcs-ga4-service-account.json")
 def _resolve_sa_json():
@@ -250,6 +251,20 @@ def main():
     else:
         A(f"- 线上教程文章数（sitemap）：**{len(urls)}** 篇（目标 200）")
     A(f"- 草稿目录文章草稿数：{dm} 篇 ｜ 日历发布日志记录：{ll} 条")
+    # 部署健康：仓库有、线上没有 = 已入库未上线。持续不为零 = 部署链路断了，
+    # 此时「生成成功」是假象——文章只会在仓库里堆积，线上篇数纹丝不动。
+    if urls is not None:
+        live_slugs = {u.rstrip("/").rsplit("/", 1)[-1] for u in urls}
+        local_slugs = {p.stem for p in CONTENT_DIR.glob("*.md")} if CONTENT_DIR.exists() else set()
+        if local_slugs and (local_slugs & live_slugs):
+            not_live = sorted(local_slugs - live_slugs)
+            if not_live:
+                shown = "、".join(not_live[:5]) + ("…" if len(not_live) > 5 else "")
+                A(f"- 🚨 部署健康：**{len(not_live)} 篇已入库但未上线**（{shown}）"
+                  f" → 生成在继续但线上不涨，Cloudflare Pages 部署多半已中断，需人工确认")
+                alerts.append(f"部署中断：{len(not_live)} 篇已入库未上线，线上文章数停止增长")
+            else:
+                A("- ✅ 部署健康：仓库与线上文章一致，新文章可正常上线")
     A(f"- 今日待办：发布当日草稿 + 1 个技术微任务（内链/schema/索引/CTR 轮换）")
     A("")
 
