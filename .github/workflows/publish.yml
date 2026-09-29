@@ -36,6 +36,9 @@ jobs:
           REVIEW_MODEL: ${{ secrets.REVIEW_MODEL || 'deepseek-reasoner' }}
           AUTO_PUBLISH: "false"
         run: python scripts/generate_article.py
+      - name: Validate drafts (拦掉会让 Astro 构建失败的稿件)
+        # 失败 = 不提交、保留已生成文件供人工查看，并触发出告警邮件（Notify 步骤为 always）
+        run: python scripts/validate_content.py --changed
       - name: Commit & push new articles
         run: |
           git config user.email "bot@powerbitutorials.com"

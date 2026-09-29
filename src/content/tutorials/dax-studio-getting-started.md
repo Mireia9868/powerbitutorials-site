@@ -72,4 +72,4 @@ A: Performance Analyzer lives inside Power BI and times whole visuals. DAX Studi
 - [DAX Troubleshooting Guide](/tutorials/dax-troubleshooting-guide/)
 - [DAX Basics](/tutorials/dax-basics/)
 - [Filter Context vs Row Context](/tutorials/filter-context-row-context-explained/)
-- [Storage vs Formula Engine](/tutorials/dax-storage-vs-formula-engine/)
+- [DAX Performance Optimization](/tutorials/power-bi-dax-optimization/)

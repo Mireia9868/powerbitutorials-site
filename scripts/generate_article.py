@@ -202,6 +202,25 @@ def assemble(topic, body):
         difficulty=topic["difficulty"])
     return fm + "\n" + body + "\n"
 
+LINK_RE = re.compile(r"\[([^\]]+)\]\(/tutorials/([a-z0-9\-]+)/?\)")
+
+def repair_links(md, allowed):
+    """模型常编造不存在的内链 → 上线即 404。把非白名单链接降级为纯文本。"""
+    removed = []
+
+    def repl(m):
+        text, slug = m.group(1), m.group(2)
+        if slug in allowed:
+            return m.group(0)
+        removed.append(slug)
+        return text
+
+    out = LINK_RE.sub(repl, md)
+    if removed:
+        log(f"LINK repair: 移除 {len(set(removed))} 个不存在的内链 {sorted(set(removed))}")
+    return out
+
+
 def validate(md):
     if md.count("```") % 2 != 0:
         raise ValueError("unbalanced code fences")
@@ -229,14 +248,18 @@ def main():
         log("no new topics to generate today (queue exhausted or all exist)")
         sys.exit(0)
     auto_publish = os.environ.get("AUTO_PUBLISH","false").lower() == "true"
+    made_this_run = set()
     for topic in topics:
         try:
             body = generate(topic, sorted(real_slugs)[:40])
             md = assemble(topic, body)
+            # 内链白名单 = 已上线文章 + 本轮同批生成的文章（允许互链）
+            md = repair_links(md, set(real_slugs) | made_this_run | {topic["slug"]})
             validate(md)
             rev = review(md, topic, sorted(real_slugs)[:40])
             (CONTENT_DIR / f"{topic['slug']}.md").write_text(md)
             (REVIEW_DIR / f"{topic['slug']}.review.md").write_text("# Review: "+topic['slug']+"\n\n"+rev)
+            made_this_run.add(topic["slug"])
             log(f"generated + reviewed: {topic['slug']}")
         except Exception as e:
             log(f"FAILED {topic['slug']}: {e}")
