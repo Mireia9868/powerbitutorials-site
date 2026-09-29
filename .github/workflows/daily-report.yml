@@ -80,7 +80,10 @@ jobs:
               echo "# 每日达成汇报缺失"
               echo
               echo "- 运行状态：${{ job.status }}"
-              echo "- daily_report.py 未产出 daily-*.md（多为 GSC/GA4 凭据缺失或配额问题），请查看 Actions 日志。"
+              echo "- daily_report.py 未产出 daily-*.md。按下面顺序排查："
+              echo "  1. 若运行是红色：看 **Verify credentials** 步骤的报错行（凭据文件没落地 / JSON 非法 / 属性 ID 不是纯数字），这是最常见的现在原因。"
+              echo "  2. 若凭据自检通过仍是降级口径：看 **Check secret presence** 步骤，确认 GSC_SA_JSON / GA4_PROPERTY_ID 是否 true。"
+              echo "  3. 都正常：查 GA4/GSC 配额或服务账号权限（GA4 需 Viewer、GSC 需受限用户）。"
             } > /tmp/daily-fallback.md
             F=/tmp/daily-fallback.md
           fi
