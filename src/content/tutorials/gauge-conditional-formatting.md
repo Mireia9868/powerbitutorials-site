@@ -14,8 +14,6 @@ The gauge visual has a reputation problem. Analysts either love it or dismiss it
 
 This tutorial walks through conditional formatting on Power BI gauges: setting a fixed target and bands first, then moving to dynamic targets driven by DAX measures, and finally applying rule-based color logic to the fill, target line, and callout value.
 
-![Figure 1: Power BI gauge visual showing a value against a colored target band](placeholder)
-
 ## Why gauges resist simple conditional formatting
 
 Open the Format pane for a gauge and you will find Fill, Target, and Callout value sections. Each one accepts a color, but the classic "fx" conditional formatting button that appears on tables and matrices is not always available. Gauge visuals expose color as a property, not as a format rule with a data-driven binding.
@@ -50,8 +48,6 @@ RETURN
 
 The `Gauge Max` measure multiplies the larger of target or actual by 1.25. That produces a stable axis with visible headroom. A hard-coded maximum like 1000000 breaks the moment a region reports a different scale.
 
-![Figure 2: Fields well with Value, Target, and Maximum populated by measures](placeholder)
-
 Drop `Total Sales` into the **Value** field, `Sales Target` into **Target**, and `Gauge Max` into **Maximum value**. The gauge now rescales per region or period automatically.
 
 ## Step 2: Make the target dynamic
@@ -79,8 +75,6 @@ The gauge fill color follows the **Fill** property in the Format pane. Two pract
 **Route B: swap the visual.** Because the standard gauge treats color as a format property rather than a data binding, the more reliable technique is to build three gauge copies stacked in a bookmark group, each pre-colored, and show the correct one via a bookmark. That is heavier, but it always works. If you go this direction, the mechanics are documented in [bookmarks navigation in Power BI](/tutorials/bookmarks-navigation-power-bi/).
 
 For most dashboards, Route A is enough. The rules evaluate the aggregated value shown in the gauge, so a single gauge in a card-stacked layout will color correctly per region.
-
-![Figure 3: Conditional formatting rules applied to the gauge fill color](placeholder)
 
 ## Step 4: Format the callout value
 
@@ -112,8 +106,6 @@ A zero target still draws the line at the origin, which is visually honest and t
 ## When to skip the gauge
 
 Gauges consume a lot of space for one number. If your dashboard compares five regions, a bar chart with a target reference line is denser and easier to scan. Gauges earn their place when there is exactly one KPI per gauge and the target is the whole story. For layout guidance, [dashboard design principles](/tutorials/power-bi-dashboard-design-principles/) covers the trade-offs.
-
-![Figure 4: Comparison of gauge versus bar chart with target line for multiple regions](placeholder)
 
 ## Common mistakes
 

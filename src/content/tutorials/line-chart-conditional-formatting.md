@@ -22,8 +22,6 @@ A line chart in Power BI is built from a category axis, a value axis, and one or
 
 The important nuance: a line needs at least one point per category to carry a color. If you turn off markers *and* use a rule that colors points, nothing appears to change, because the colored element is invisible. Always enable markers when you test a point-level rule, then decide whether to keep them on.
 
-![Figure 1: Line chart with per-point conditional formatting on revenue](placeholder)
-
 ## Prerequisites
 
 Before you start, confirm the following:
@@ -52,8 +50,6 @@ RETURN
 
 That measure returns a hex string. Power BI accepts hex strings for the **Format by: Field value** option in the color dialog.
 
-![Figure 2: Assigning a measure to the conditional color of a line chart](placeholder)
-
 ## Step 1: Open the Conditional Formatting Dialog
 
 Select the line chart. In the Visualizations pane, open the **Format** tab (the paint roller, not the magnifier). Expand the section that holds the element you want to color.
@@ -76,8 +72,6 @@ The dialog offers three options.
 
 For the running example, choose **Field value** and select `Revenue Color`.
 
-![Figure 3: Format by field value using a DAX measure](placeholder)
-
 ## Step 3: Use Rules When You Do Not Need DAX
 
 Rules are faster to set up and easier to hand off to someone who does not read DAX. A common pattern for a margin line:
@@ -92,8 +86,6 @@ Rules are faster to set up and easier to hand off to someone who does not read D
 Rules are evaluated top to bottom. The first match wins, so put the tightest band first. If two rules overlap, the upper one takes precedence and the lower never fires.
 
 One limitation: rules apply to the field you choose in **Based on field**, and that field must be in the visual. If your threshold depends on a measure you do not want on the chart, use a field-value measure instead and hide the measure from the tooltip if needed.
-
-![Figure 4: Rule-based formatting with three thresholds](placeholder)
 
 ## Step 4: Color by a Related Dimension
 
@@ -127,8 +119,6 @@ Common failures and their causes:
 | Colors differ from expected hex | Theme overrides, or you pasted a name Power BI does not recognize |
 
 To confirm the measure is correct, drop it into a table visual with the axis field. The values you see are exactly what the color rule receives. If the table looks right and the chart does not, the problem is the formatting property, not the DAX.
-
-![Figure 5: Table visual used to debug the color measure](placeholder)
 
 ## Performance Notes
 
