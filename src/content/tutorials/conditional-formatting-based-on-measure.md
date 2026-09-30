@@ -44,8 +44,6 @@ DIVIDE (
 
 `Gross Margin %` is a valid numeric measure and can be dropped straight into a gradient rule. Open the visual's Format pane, expand **Cell elements**, turn **Background color** on, set **Format style** to *Gradient*, and choose `Gross Margin %` as the **What field should we base this on?** field.
 
-![Figure 1: Gradient conditional formatting sourcing a DAX measure in the background color settings](placeholder)
-
 A nuance that trips people up: measures are evaluated in the filter context of the cell, not the filter context of the visual. When you apply the gradient to a matrix cell that sits at Product × Month, `Gross Margin %` is computed for that Product and that Month, not for the grand total. That is almost always what you want, and it is precisely why a measure beats a calculated column here. A calculated column would be evaluated at row level in the source table and would ignore the matrix layout entirely.
 
 ## Rules instead of gradients
@@ -61,8 +59,6 @@ Gradients are fine for continuous values. For business thresholds you want rules
 Rules evaluate top to bottom in the order you create them, so put the most specific first. A rule that says ">= 0.2" placed above ">= 0.35" will catch everything and the second rule never fires.
 
 You can also base rules on a different measure than the one displayed. A matrix showing Revenue as the value can still color its background by `Gross Margin %`. Power BI allows any measure in the *What field should we base this on?* dropdown that is valid in the current context.
-
-![Figure 2: Rule-based conditional formatting using a margin measure with three threshold bands](placeholder)
 
 ## Returning a color from DAX
 
@@ -88,8 +84,6 @@ RETURN
 Two details matter. First, `SWITCH ( TRUE (), ... )` is the standard way to express if/else-if chains in DAX; each condition is evaluated until one returns TRUE. Second, `ISBLANK` is checked first because a blank margin (no sales in the period) should not be colored red. Without that guard, `BLANK() >= 0.35` evaluates to FALSE and a missing month would render as a failure.
 
 To apply it: set **Format style** to *Field value*, then select `Margin Color`. The cell background now reflects the measure's own decision.
-
-![Figure 3: Field value conditional formatting where DAX returns a hex color code](placeholder)
 
 ## Formatting a chart's data points
 
@@ -117,8 +111,6 @@ IF ( [Revenue Rank] <= 3, "#1565C0", "#B0BEC5" )
 
 Set the column color with *Field value* and pick `Rank Color`.
 
-![Figure 4: Column chart colored by a rank measure using the fx conditional formatting dialog](placeholder)
-
 ## Debugging: when the color does not appear
 
 Most failures fall into four buckets.
@@ -132,8 +124,6 @@ Most failures fall into four buckets.
 **You are formatting the wrong element.** In a matrix, *Cell elements → Background color* colors values; *Column headers* and *Row headers* are separate sections with their own color controls. People often configure the value section and wonder why the header stays stubbornly grey.
 
 There is one more subtlety worth internalizing: conditional formatting measures are evaluated **per rendered cell**, which means a large matrix with a heavy measure can become slow. If you notice lag, check Performance Analyzer and look at the DAX query count. A simple `DIVIDE`-based measure is cheap; one that iterates `ALLSELECTED` across a wide table is not, and the cost multiplies by the number of cells on screen.
-
-![Figure 5: Performance Analyzer showing the DAX cost of per-cell formatting measures](placeholder)
 
 ## Choosing between a column and a measure
 

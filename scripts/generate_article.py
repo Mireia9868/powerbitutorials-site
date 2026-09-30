@@ -123,7 +123,7 @@ HARD RULES:
 - Format: Markdown. NO YAML frontmatter in the body (the system adds it separately).
 - Length: >= 800 words, step-by-step, practical.
 - Code: include >= 1 fenced code block (```dax or ```powerquery) with correct syntax.
-- Images: use placeholders like ![Figure N: short english description](placeholder). Alt text MUST be English.
+- Images: DO NOT write any image or figure markup, and do not write figure placeholders. There is no screenshot pipeline yet, and any image reference breaks the static build. Use prose, tables and fenced code blocks instead.
 - FAQ at end: each question as a level-3 heading "### Q: ...", answer below. >= 3 Q/A pairs.
 - Internal links: at the end add a "## Related Reading" section linking to >= 6 EXISTING articles using relative paths /tutorials/<slug>/. Only link slugs that are REAL (provided in the brief).
 - Technical accuracy: DAX/Power Query code must be correct; state nuances precisely (e.g. EARLIER requires a nested row context, not just calculated columns).
@@ -221,11 +221,48 @@ def repair_links(md, allowed):
     return out
 
 
+# ── 图片引用：Astro/vite 会把「非绝对路径」的图片 src 当成模块去 import ──
+# 模型一旦写出 ![Figure N: ...](placeholder)（历史上 prompt 甚至这么要求过），
+# 构建就会报 `Rollup failed to resolve import "placeholder"` → 整站停更。
+# 只有 http(s) / data: / 指向 public/ 下真实文件的绝对路径才算安全。
+IMG_RE = re.compile(
+    r"^[ \t]*!\[([^\]]*)\]\(([^)\s]+)(?:\s+[\"'][^\"']*[\"'])?\)[ \t]*$", re.M)
+PUBLIC_DIR = REPO / "public"
+
+
+def image_src_ok(src):
+    if src.startswith(("http://", "https://", "data:")):
+        return True
+    if src.startswith("/"):
+        return (PUBLIC_DIR / src.lstrip("/")).exists()
+    return False  # 相对路径 → vite 当模块解析 → 构建失败
+
+
+def strip_bad_images(md):
+    """移除无法解析的图片引用，避免单行占位图把整站构建搞挂。"""
+    removed = []
+
+    def repl(m):
+        src = m.group(2)
+        if image_src_ok(src):
+            return m.group(0)
+        removed.append(src)
+        return ""
+
+    out = IMG_RE.sub(repl, md)
+    if removed:
+        log(f"IMAGE repair: 移除 {len(removed)} 个无法解析的图片引用 {sorted(set(removed))} "
+            f"（会让 Astro 构建失败）")
+    return out
+
+
 def validate(md):
     if md.count("```") % 2 != 0:
         raise ValueError("unbalanced code fences")
-    if "](placeholder)" in md:
-        pass  # allowed; images pending
+    # 构建安全兜底：strip_bad_images 之后仍残留，说明它没跑到或漏了 —— 必须硬失败
+    bad = [m.group(2) for m in IMG_RE.finditer(md) if not image_src_ok(m.group(2))]
+    if bad:
+        raise ValueError(f"unresolvable image src would break the Astro build: {sorted(set(bad))}")
     if not re.search(r"^### Q:", md, re.M):
         raise ValueError("no FAQ level-3 headings")
     if "slug:" in md.split("---")[1] if md.startswith("---") else False:
@@ -255,6 +292,8 @@ def main():
             md = assemble(topic, body)
             # 内链白名单 = 已上线文章 + 本轮同批生成的文章（允许互链）
             md = repair_links(md, set(real_slugs) | made_this_run | {topic["slug"]})
+            # 图片同理：无法解析的 src 会让 Astro 构建失败 → 整站停更
+            md = strip_bad_images(md)
             validate(md)
             rev = review(md, topic, sorted(real_slugs)[:40])
             (CONTENT_DIR / f"{topic['slug']}.md").write_text(md)

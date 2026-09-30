@@ -14,8 +14,6 @@ A bar chart that renders every bar in the same shade of blue forces the reader t
 
 This tutorial covers the three formatting paths available on a bar chart in Power BI Desktop — color by rules, color by value (gradient), and color driven by a DAX measure — and explains when each one is the right tool. It is aimed at beginners, but the DAX section assumes you can write a basic measure.
 
-![Figure 1: A bar chart with default single-color bars next to the same chart with value-based color formatting](placeholder)
-
 ## The three conditional formatting paths
 
 Power BI exposes conditional formatting for bar chart colors in three ways:
@@ -37,8 +35,6 @@ Rules are the fastest way to get colored bars, and they work fine when your thre
 5. In the *Format style* dropdown, choose **Rules**.
 6. Set *Apply to* to **Color by** and pick the field the rules should evaluate — typically your measure, such as `Total Sales`.
 7. Define the rule: *if value is* **>=** *and* **is less than** a number, then choose a color. Use **+ New rule** to add more bands.
-
-![Figure 2: The conditional formatting dialog set to Rules, with two value bands](placeholder)
 
 A common beginner mistake is leaving *Summarization* on the wrong aggregation. If the rule panel shows *Sum of Sales* but your chart plots a measure named *Total Sales*, the rule evaluates a different number than the bar height and the colors will look wrong. Match the field exactly.
 
@@ -83,8 +79,6 @@ Two things matter here. First, `SWITCH(TRUE(), ...)` evaluates conditions in ord
 
 You can also return named colors such as `"red"` or `"Green"`, but hex codes give you control over the exact shade. Avoid returning `BLANK()` when you actually want a neutral color; blank may fall back to the visual default, which is rarely what you intended. Return an explicit hex value instead.
 
-![Figure 3: A bar chart where each bar is colored by a DAX measure against a target line](placeholder)
-
 ### Making the color react to a slicer
 
 Because the measure is evaluated per category, it already reacts to filters applied to the visual. If a slicer limits the chart to one region, only that region's bar is drawn and colored. What the measure cannot do on its own is react to a *selection* made somewhere else on the page, unless the two visuals are related through the filter context. Use **Edit interactions** if you need a table selection to drive the colors.
@@ -127,8 +121,6 @@ If you find yourself typing thresholds into the rules dialog every quarter, move
 - **Gradient hiding the signal.** When all values are similar, a gradient makes small differences look dramatic. Use a fixed min/max when the comparison should be stable.
 - **Text instead of color.** A measure that returns a number for the color field silently falls back to the default. Return a string.
 - **Palette clashing with the report theme.** Custom hex colors ignore the report theme, so a theme change will not update them. If you rely on theming, keep custom colors to a minimum.
-
-![Figure 4: The same bar chart rendered with rules, gradient, and a DAX color measure side by side](placeholder)
 
 ## FAQ
 

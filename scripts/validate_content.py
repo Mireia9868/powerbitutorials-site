@@ -21,11 +21,16 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CONFIG = REPO_ROOT / "src" / "content" / "config.ts"
 CONTENT_DIR = REPO_ROOT / "src" / "content" / "tutorials"
+PUBLIC_DIR = REPO_ROOT / "public"
 
 REQUIRED = ["title", "description", "pubDate", "category", "difficulty"]
 KNOWN_FIELDS = {"title", "description", "pubDate", "updatedDate", "category",
                 "difficulty", "tags", "author", "heroImage", "draft", "featured"}
 DIFFICULTY_ENUM = {"Beginner", "Intermediate", "Advanced"}
+
+# 正文图片引用：Astro/vite 会把「非绝对路径」的 src 当模块去 import。
+# 一次 ![Figure 1: ...](placeholder) 就能让整站构建失败（2026-09-29 实际发生）。
+IMG_RE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)(?:\s+[\"'][^\"']*[\"'])?\)")
 
 
 def parse_schema():
@@ -92,6 +97,27 @@ def check_file(path, cat_enum):
     # 正文至少要有点内容，防空稿上线
     if len(body.strip()) < 400:
         warns.append(f"正文过短（{len(body.strip())} 字符），疑似生成失败")
+
+    # 图片引用必须能被静态构建解析，否则 Rollup 报
+    # `failed to resolve import "..."` → 整个站点停止部署（比不发布更糟）→ 属 errors
+    seen_img = set()
+    for m in IMG_RE.finditer(body):
+        src = m.group(1)
+        if src in seen_img:
+            continue
+        seen_img.add(src)
+        if src.startswith(("http://", "https://", "data:")):
+            continue
+        if src.startswith("/"):
+            if not (PUBLIC_DIR / src.lstrip("/")).exists():
+                errs.append(f"图片路径不存在：{src}（public/ 下未找到该文件）")
+            continue
+        if src == "placeholder":
+            errs.append("正文含占位图引用 ![...](placeholder) —— "
+                        "Astro 会把它当模块 import，构建直接失败")
+        else:
+            errs.append(f"图片用了相对路径 `{src}` —— vite 会当模块解析导致构建失败；"
+                        f"请改用 /images/... 绝对路径或删除该行")
 
     # 内链必须指向真实存在的 slug，避免 404（不影响构建，故为 warning）
     dead = set()
