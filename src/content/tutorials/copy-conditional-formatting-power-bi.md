@@ -2,6 +2,7 @@
 title: "How to Copy Conditional Formatting in Power BI Reports"
 description: "Power BI has no native copy-paste for conditional formatting between visuals — but you have three reliable ways to reuse color rules at scale. Learn how to share formatting with measures, JSON themes, and report-level settings."
 pubDate: 2026-08-28
+updatedDate: 2026-10-12
 category: "visualization"
 difficulty: "Intermediate"
 tags: ["visualization", "conditional-formatting", "json-theme", "report-design", "reuse"]
@@ -93,8 +94,20 @@ Yes. Duplicated visuals keep their own rule settings; they don't link back to th
 **What about paginated reports?**
 Paginated (SSRS-style) reports handle color through expressions, which are inherently reusable across textboxes. Different tool, same principle: define the logic once.
 
+
+**How do I copy conditional formatting from one column to another?**
+Duplicate the visual (Method 3) and change only the field feeding the new column — the rules travel with the copy. For logic-based rules, point both visuals at the same color measure (Method 1) so the rule applies to any column automatically, with no per-column setup.
+
+**Can I copy conditional formatting to another visual or another column?**
+Within one report, duplication carries the rules to the new visual. To apply the same rule to a different column, the cleanest path is a Field-value color measure that any visual can reference. There is no "paste formatting" button across unrelated visuals.
+
+**Why does my copied formatting look different on the new visual?**
+Two causes: the color measure's granularity doesn't match the new visual's grain, or you duplicated a visual whose rules were hand-built and now drift from the original. Measure-based formatting stays identical everywhere; hand-built rules don't.
+
 ## What's next
 
+- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-complete-guide/) — the full cluster, from rules to reuse.
 - [Conditional Formatting in Power BI: A Complete Guide](/tutorials/conditional-formatting-power-bi/) — the measure and rule patterns this article builds on.
-- [Conditional Formatting for Charts, Bar Charts & Gauges](/tutorials/conditional-formatting-charts-power-bi/) — applying the same reuse principles to visual elements.
+- [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/) — drive colors from a DAX measure instead of fixed rules.
+- [Conditional Formatting for Charts, Bar Charts & Gauges](/tutorials/conditional-formatting-charts-power-bi/) — gauge, bar, and line chart guides.
 - [Power BI Dashboard Design Principles](/tutorials/power-bi-dashboard-design-principles/) — keep color consistent across the whole report, not just formatted cells.

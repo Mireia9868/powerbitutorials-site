@@ -160,3 +160,15 @@ The blank rule fires only when the measure itself returns `BLANK()`. A value of 
 - [DAX Variables Best Practices](/tutorials/dax-variables-best-practices/)
 - [Power BI Visual Types Guide](/tutorials/power-bi-visual-types-guide/)
 - [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer-guide/)
+<!-- CF-CLUSTER-NAV -->
+## More conditional formatting guides
+
+- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-complete-guide/)
+- [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
+- [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
+- [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
+- [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting-power-bi/)
+- [Gauge Conditional Formatting](/tutorials/gauge-conditional-formatting/)
+- [Bar Chart Conditional Formatting](/tutorials/bar-chart-conditional-formatting/)
+- [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
+

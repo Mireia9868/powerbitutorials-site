@@ -2,6 +2,7 @@
 title: "Power Query Conditional Columns: Build If-Then-Else Logic Without Code"
 description: "Conditional columns let you create new columns based on if-then-else logic using a visual interface — no M code required. This guide covers the UI, nested conditions, the M code underneath, and the patterns for categorizing, flagging, and bucketing data."
 pubDate: 2026-07-23
+updatedDate: 2026-10-12
 category: "power-query"
 difficulty: "Beginner"
 tags: ["power-query", "conditional-columns", "if-then-else", "m-language", "transformations"]
@@ -272,6 +273,13 @@ Yes. The condition is part of the query steps and re-evaluates on every refresh.
 
 **Can I use conditional columns with calculated tables in DAX?**
 No. Conditional columns are created in Power Query (M language) before the data reaches the DAX engine. If you need conditional logic after the data is loaded, use a DAX calculated column with the `IF()` or `SWITCH()` function instead.
+
+
+**What is the Power Query "if then else" syntax?**
+In a Custom Column it's `if [Score] > 90 then "A" else "B"`. The keywords are lowercase and case-sensitive. The Conditional Column dialog builds the same logic visually — its If / Then / Else fields map directly to `if` / `then` / `else` in M.
+
+**How do I handle nulls in a conditional column?**
+Use `if [Discount] = null then 0 else [Discount]`, or the shorter coalesce form `[Discount] ?? 0`. In the Conditional Column dialog, choose the "equals" operator and type `null` (without quotes) to compare against a blank.
 
 ## What's next
 

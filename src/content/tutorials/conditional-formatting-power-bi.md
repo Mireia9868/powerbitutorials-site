@@ -284,3 +284,15 @@ Partially. Charts use "Data colors" conditional formatting rather than cell rule
 - [How to Copy Conditional Formatting in Power BI](/tutorials/copy-conditional-formatting-power-bi/) — reuse color rules across visuals and reports without rebuilding them.
 - [Conditional Formatting for Charts, Bar Charts & Gauges](/tutorials/conditional-formatting-charts-power-bi/) — apply color logic to visual elements, not just matrix cells.
 - [The DAX SWITCH Function Explained](/tutorials/dax-switch-function/) — the backbone of most color measures in this guide.
+<!-- CF-CLUSTER-NAV -->
+## More conditional formatting guides
+
+- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-complete-guide/)
+- [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
+- [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
+- [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
+- [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting-power-bi/)
+- [Gauge Conditional Formatting](/tutorials/gauge-conditional-formatting/)
+- [Bar Chart Conditional Formatting](/tutorials/bar-chart-conditional-formatting/)
+- [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
+

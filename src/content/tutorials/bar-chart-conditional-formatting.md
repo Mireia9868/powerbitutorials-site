@@ -150,3 +150,15 @@ Yes, and this is the main reason to use the Field option. Create a one-row targe
 - [Filter Context and Row Context Explained](/tutorials/filter-context-row-context-explained/)
 - [Power BI Visual Types Guide](/tutorials/power-bi-visual-types-guide/)
 - [Power BI Visual Calculations](/tutorials/power-bi-visual-calculations/)
+<!-- CF-CLUSTER-NAV -->
+## More conditional formatting guides
+
+- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-complete-guide/)
+- [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
+- [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
+- [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
+- [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting-power-bi/)
+- [Gauge Conditional Formatting](/tutorials/gauge-conditional-formatting/)
+- [Bar Chart Conditional Formatting](/tutorials/bar-chart-conditional-formatting/)
+- [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
+

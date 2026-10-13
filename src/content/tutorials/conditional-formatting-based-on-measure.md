@@ -167,3 +167,15 @@ There is no documented hard limit, but the format pane becomes unwieldy past a h
 - [DAX RANKX Function](/tutorials/dax-rankx-function/)
 - [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer-guide/)
 - [DAX Troubleshooting Guide](/tutorials/dax-troubleshooting-guide/)
+<!-- CF-CLUSTER-NAV -->
+## More conditional formatting guides
+
+- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-complete-guide/)
+- [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
+- [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
+- [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
+- [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting-power-bi/)
+- [Gauge Conditional Formatting](/tutorials/gauge-conditional-formatting/)
+- [Bar Chart Conditional Formatting](/tutorials/bar-chart-conditional-formatting/)
+- [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
+

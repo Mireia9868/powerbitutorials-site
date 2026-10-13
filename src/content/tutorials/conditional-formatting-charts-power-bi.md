@@ -126,3 +126,15 @@ No. Rules compare against numbers you type or a fixed value. To compare against 
 - [Conditional Formatting in Power BI: A Complete Guide](/tutorials/conditional-formatting-power-bi/) — the measure and rule foundations for all chart formatting here.
 - [How to Copy Conditional Formatting in Power BI](/tutorials/copy-conditional-formatting-power-bi/) — reuse these color measures across every chart.
 - [Power BI Dashboard Design Principles](/tutorials/power-bi-dashboard-design-principles/) — keep chart colors consistent with the rest of the report.
+<!-- CF-CLUSTER-NAV -->
+## More conditional formatting guides
+
+- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-complete-guide/)
+- [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
+- [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
+- [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
+- [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting-power-bi/)
+- [Gauge Conditional Formatting](/tutorials/gauge-conditional-formatting/)
+- [Bar Chart Conditional Formatting](/tutorials/bar-chart-conditional-formatting/)
+- [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
+

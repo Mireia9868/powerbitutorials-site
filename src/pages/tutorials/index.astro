@@ -5,7 +5,7 @@ import Sidebar from "../../components/Sidebar.astro";
 import TutorialCard from "../../components/TutorialCard.astro";
 import { CATEGORIES } from "../../consts";
 
-const allTutorials = (await getCollection("tutorials", ({ data }) => !data.draft))
+const allTutorials = (await getCollection("tutorials", ({ slug, data }) => !data.draft && !slug.startsWith("de-")))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 

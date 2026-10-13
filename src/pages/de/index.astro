@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TutorialCard from "../../components/TutorialCard.astro";
+
+const deTutorials = (await getCollection("tutorials", ({ slug, data }) => !data.draft && slug.startsWith("de-")))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout
+  title="Power BI Tutorials auf Deutsch"
+  description="Power BI, DAX und Power Query Anleitungen auf Deutsch. Schritt für Schritt erklärt, von den Grundlagen bis zur Performance-Optimierung."
+>
+  <div class="page-header">
+    <div class="container">
+      <span class="page-eyebrow">Deutsch</span>
+      <h1>Power BI Tutorials auf Deutsch</h1>
+      <p class="page-sub">
+        {deTutorials.length} Anleitungen zu Power BI, DAX und Power Query — auf Deutsch.
+        <a href="/tutorials/">English version →</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container de-layout">
+    {deTutorials.length > 0 ? (
+      <div class="de-grid">
+        {deTutorials.map((t) => <TutorialCard tutorial={t} />)}
+      </div>
+    ) : (
+      <p class="empty">Noch keine deutschen Artikel verfügbar. Bald mehr.</p>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--c-border);
+    background: var(--c-bg-soft);
+  }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--c-accent-dark);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .page-header h1 { font-size: 2.2rem; margin-bottom: 8px; }
+  .page-sub { color: var(--c-text-muted); margin: 0; }
+  .page-sub a { color: var(--c-accent-dark); }
+  .de-layout { padding: 40px 24px 80px; }
+  .de-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .empty { padding: 48px 0; color: var(--c-text-muted); }
+  @media (max-width: 960px) {
+    .de-grid { grid-template-columns: 1fr; }
+  }
+</style>

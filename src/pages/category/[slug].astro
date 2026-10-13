@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.props;
 
-const tutorials = (await getCollection("tutorials", ({ data }) => !data.draft))
+const tutorials = (await getCollection("tutorials", ({ slug, data }) => !data.draft && !slug.startsWith("de-")))
   .filter((t) => t.data.category === category.slug)
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
