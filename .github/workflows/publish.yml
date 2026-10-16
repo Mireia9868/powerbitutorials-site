@@ -3,8 +3,11 @@ name: Publish Power BI Tutorials (Daily)
 # LLM：DeepSeek（deepseek-chat 生成 / deepseek-reasoner 审稿，构成"另一个 AI"复核）
 # 时区：GitHub Actions 为 UTC。08:00 PDT = 15:00 UTC。
 on:
-  schedule:
-    - cron: "0 15 * * *"
+  # 整改期暂停自动发布：注释掉每日 cron，保留 workflow_dispatch 手动触发。
+  # 原因：AdSense 判 low value content，站点已 88 篇且同主题重复，每日新增 2 篇会稀释合并整改。
+  # 整改完成、Request review 通过后再恢复此处 cron。
+  # schedule:
+  #   - cron: "0 15 * * *"
   workflow_dispatch:
 permissions:
   contents: write
