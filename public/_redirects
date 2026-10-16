@@ -23,3 +23,8 @@
 /tutorials/power-bi-performance-analyzer-guide/ /tutorials/power-bi-performance-analyzer/ 301
 /tutorials/what-is-dax-power-bi /tutorials/dax-basics 301
 /tutorials/what-is-dax-power-bi/ /tutorials/dax-basics/ 301
+# P1 图表 4 篇（轻合并：bar+gauge 并入 charts 入口，line+kpi 保留独立）
+/tutorials/bar-chart-conditional-formatting /tutorials/conditional-formatting-charts-power-bi 301
+/tutorials/bar-chart-conditional-formatting/ /tutorials/conditional-formatting-charts-power-bi/ 301
+/tutorials/gauge-conditional-formatting /tutorials/conditional-formatting-charts-power-bi 301
+/tutorials/gauge-conditional-formatting/ /tutorials/conditional-formatting-charts-power-bi/ 301
