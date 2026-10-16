@@ -1,0 +1,8 @@
+# AdSense low-value-content remediation — consolidate duplicate tutorials (301)
+# Redundant slug -> canonical slug
+/tutorials/power-bi-drillthrough /tutorials/power-bi-drill-through 301
+/tutorials/power-bi-drillthrough/ /tutorials/power-bi-drill-through/ 301
+/tutorials/dax-calculate-function /tutorials/calculate-function 301
+/tutorials/dax-calculate-function/ /tutorials/calculate-function/ 301
+/tutorials/power-bi-sales-dashboard /tutorials/power-bi-sales-dashboard-tutorial 301
+/tutorials/power-bi-sales-dashboard/ /tutorials/power-bi-sales-dashboard-tutorial/ 301
