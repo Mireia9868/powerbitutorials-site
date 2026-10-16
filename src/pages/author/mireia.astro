@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Mireia — Author"
+  description="Mireia，powerbitutorials.com 主理人，专注用真实场景讲清 Power BI、DAX 与 Power Query。"
+  article={true}
+>
+  <article class="about-page">
+    <div class="content-width">
+      <span class="page-eyebrow">Author</span>
+      <h1>Mireia</h1>
+
+      <div class="author-card">
+        <div class="author-avatar" aria-hidden="true">M</div>
+        <div>
+          <h3>powerbitutorials.com 主理人</h3>
+          <p>
+            把实战中验证过的 Power BI、DAX 与 Power Query 模式整理成可复现的教程。
+          </p>
+        </div>
+      </div>
+
+      <p>
+        Mireia 写的每篇教程都基于真实数据集与场景，目标是让你不仅能照做，还能理解背后的机制（筛选上下文、上下文转换、星型建模等），从而自己解决业务里的计算问题。
+      </p>
+
+      <div class="about-cta">
+        <a href="/tutorials" class="btn btn-primary">浏览 Mireia 的教程</a>
+        <a href="/contact" class="btn btn-secondary">联系我</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-page { padding: 56px 0 80px; }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--c-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .about-page h1 { font-size: 2.4rem; margin-bottom: 20px; }
+  .author-card {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    padding: 20px;
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    margin: 24px 0;
+  }
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .author-card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+  .author-card p { margin: 0; font-size: 0.92rem; }
+  .about-cta { display: flex; gap: 12px; margin-top: 32px; }
+  .btn {
+    display: inline-block;
+    padding: 11px 22px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--c-accent); color: var(--c-accent-text); }
+  .btn-secondary { background: var(--c-bg); color: var(--c-text); border-color: var(--c-border); }
+  @media (max-width: 640px) {
+    .about-page h1 { font-size: 1.9rem; }
+    .author-card { flex-direction: column; text-align: center; }
+    .about-cta { flex-direction: column; }
+  }
+</style>

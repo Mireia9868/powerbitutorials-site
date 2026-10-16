@@ -1,78 +1,52 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SITE_AUTHOR } from "../consts";
 ---
 
 <BaseLayout
   title="About"
-  description="Learn about the Power BI Tutorials editorial team — experienced Power BI practitioners delivering accurate, practical tutorials for data analysts."
+  description="powerbitutorials.com 由 Mireia 主理，专注用真实场景讲清 Power BI、DAX 与 Power Query 的实战教程。"
   article={true}
 >
   <article class="about-page">
     <div class="content-width">
       <span class="page-eyebrow">About</span>
-      <h1>We help data analysts master Power BI, faster.</h1>
+      <h1>用真实场景，讲清 Power BI。</h1>
 
       <p class="lede">
-        Power BI Tutorials is an independent publication focused on practical,
-        no-fluff tutorials for Power BI, DAX, and Power Query. We write the
-        kind of guides we wish existed when we were learning — clear,
-        example-driven, and grounded in real reporting problems.
+        powerbitutorials.com 是一个独立教程站，由 Mireia 主理。我们专注用可复现的示例和真实业务场景，讲清 Power BI、DAX 与 Power Query 里那些容易卡住人的地方。
       </p>
 
-      <h2>Our editorial principles</h2>
+      <h2>我们怎么写教程</h2>
       <ul>
-        <li><strong>Accuracy first.</strong> Every DAX formula and Power Query step is tested against a real dataset before publication. If a pattern doesn't work as described, we don't publish it.</li>
-        <li><strong>Practical over theoretical.</strong> We explain <em>why</em> a pattern works, but we always show <em>how</em> to use it — with copy-paste code and realistic scenarios.</li>
-        <li><strong>Independently reviewed.</strong> We do not accept paid placements in our tutorials. Software comparisons reflect our genuine assessment. When a link is affiliate, we disclose it.</li>
-        <li><strong>Continuously updated.</strong> Power BI ships monthly. We revisit and update tutorials as the product evolves, and mark each page with its last-reviewed date.</li>
+        <li><strong>示例可复现。</strong> 每篇的 DAX 公式和 Power Query 步骤都基于真实数据集，你照着做能得到同样的结果。</li>
+        <li><strong>讲清为什么。</strong> 不只给代码，也解释筛选上下文、上下文转换这些底层机制，让你能自己改。</li>
+        <li><strong>持续更新。</strong> Power BI 持续演进，我们会随产品更新教程，并标注每篇的最后复核日期。</li>
       </ul>
 
-      <h2>Who writes this</h2>
+      <h2>关于主理人</h2>
       <p>
-        {SITE_AUTHOR} is a group of Power BI practitioners with hands-on
-        experience building enterprise reporting models across finance,
-        operations, and sales analytics. Our background includes:
+        Mireia 把实战中验证过的 Power BI 模式整理成这套教程。如果你有主题建议或发现错误，欢迎联系。
       </p>
-      <ul>
-        <li>10+ years combined experience building Power BI dashboards in production</li>
-        <li>Microsoft Certified: Data Analyst Associate (PL-300)</li>
-        <li>Experience migrating enterprise reporting from Excel/SSAS to Power BI</li>
-        <li>Regular contributors to the Power BI community forums and local user groups</li>
-      </ul>
 
       <div class="author-card">
-        <div class="author-avatar" aria-hidden="true">PT</div>
+        <div class="author-avatar" aria-hidden="true">M</div>
         <div>
-          <h3>Power BI Tutorials Editorial Team</h3>
+          <h3>Mireia</h3>
           <p>
-            We publish one new tutorial each week, typically on Tuesday.
-            Have a topic request or spotted an error?
-            <a href="/contact">Reach out here</a> — we read every message.
+            powerbitutorials.com 主理人。
+            <a href="/contact">联系我</a> — 每一条反馈都会看。
           </p>
         </div>
       </div>
 
-      <h2>How we fund this site</h2>
+      <h2>站点如何运转</h2>
       <p>
-        Power BI Tutorials is free to read. We're supported by display advertising
-        (Google AdSense) and a small number of disclosed affiliate links
-        for tools we genuinely use. Advertising never influences tutorial
-        content or product recommendations. If you'd like to support us,
-        the best way is to share a tutorial that helped you.
-      </p>
-
-      <h2>What's next</h2>
-      <p>
-        Our 2026 roadmap includes a complete DAX function reference, a
-        pattern library for common business calculations, and downloadable
-        .pbix sample files for every tutorial. Subscribe to the
-        <a href="/#newsletter">newsletter</a> to follow along.
+        本站免费阅读，由展示广告（Google AdSense）支持。广告内容不影响教程的中立性与推荐。如果某篇帮到了你，分享给同事就是最好的支持。
       </p>
 
       <div class="about-cta">
-        <a href="/tutorials" class="btn btn-primary">Browse Tutorials</a>
-        <a href="/contact" class="btn btn-secondary">Contact Us</a>
+        <a href="/tutorials" class="btn btn-primary">浏览教程</a>
+        <a href="/contact" class="btn btn-secondary">联系我</a>
       </div>
     </div>
   </article>
