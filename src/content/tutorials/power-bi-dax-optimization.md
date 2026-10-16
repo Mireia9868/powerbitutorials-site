@@ -181,3 +181,10 @@ When Server Timings shows 80%+ SE time and the page loads acceptably for users. 
 - [Power BI Performance Optimization: Complete Guide](/tutorials/power-bi-performance-optimization/) — the model-side fixes that pair with these DAX patterns.
 - [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer-guide/) — measure what's slow before you optimize.
 - [The DAX Variables Guide](/tutorials/dax-variables-guide/) — Pattern 3 in depth, with more reuse examples.
+<!-- PERF-CLUSTER-NAV -->
+## More performance optimization guides
+
+- [Power BI Performance Optimization: A Complete Guide](/tutorials/power-bi-performance-optimization/)
+- [DAX Optimization Techniques](/tutorials/dax-optimization-techniques/)
+- [Power Query Query Folding](/tutorials/power-query-query-folding/)
+- [Using Performance Analyzer in Power BI](/tutorials/power-bi-performance-analyzer/)

@@ -228,3 +228,10 @@ Volume exposes bad patterns. `FILTER(ALL(...))`, nested iterators, and unmarked 
 ## What's next
 
 Performance optimization is iterative. Start with the quick wins (remove columns, reduce visuals), then tackle DAX patterns, then model structure. For a focused DAX tuning reference, see our [DAX optimization guide](/tutorials/power-bi-dax-optimization/). To find what's actually slow in your report, start with the [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer-guide/). For model design, revisit the [star schema guide](/tutorials/data-modeling-star-schema).
+<!-- PERF-CLUSTER-NAV -->
+## More performance optimization guides
+
+- [Power BI DAX Optimization](/tutorials/power-bi-dax-optimization/)
+- [DAX Optimization Techniques](/tutorials/dax-optimization-techniques/)
+- [Power Query Query Folding](/tutorials/power-query-query-folding/)
+- [Using Performance Analyzer in Power BI](/tutorials/power-bi-performance-analyzer/)

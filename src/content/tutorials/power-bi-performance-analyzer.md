@@ -130,6 +130,13 @@ Not exactly. It measures the visual's own drawing time, not the time until the u
 
 Under 200 ms for a warm cache is comfortable. 200–500 ms usually indicates room to improve. Above 500 ms is when users start to notice, and above 1 second you should treat it as a bug regardless of how many visuals are on the page.
 
+<!-- PERF-CLUSTER-NAV -->
+## More performance optimization guides
+
+- [Power BI Performance Optimization: A Complete Guide](/tutorials/power-bi-performance-optimization/)
+- [Power BI DAX Optimization](/tutorials/power-bi-dax-optimization/)
+- [DAX Optimization Techniques](/tutorials/dax-optimization-techniques/)
+- [Power Query Query Folding](/tutorials/power-query-query-folding/)
 ## Related Reading
 
 - [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer-guide/)

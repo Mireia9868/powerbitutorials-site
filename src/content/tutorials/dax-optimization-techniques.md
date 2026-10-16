@@ -185,6 +185,13 @@ Yes, in nested row contexts where you genuinely need to compare the current oute
 
 Run the measure's DAX in DAX Studio with Server Timings enabled. If storage engine time dominates and the query count is low, the model's column cardinality or relationship design is the bottleneck. If formula engine time is high, the DAX itself is the problem. Fixing the model first usually gives bigger wins than rewriting measures.
 
+<!-- PERF-CLUSTER-NAV -->
+## More performance optimization guides
+
+- [Power BI Performance Optimization: A Complete Guide](/tutorials/power-bi-performance-optimization/)
+- [Power BI DAX Optimization](/tutorials/power-bi-dax-optimization/)
+- [Power Query Query Folding](/tutorials/power-query-query-folding/)
+- [Using Performance Analyzer in Power BI](/tutorials/power-bi-performance-analyzer/)
 ## Related Reading
 
 - [DAX Variables Guide](/tutorials/dax-variables-guide/)

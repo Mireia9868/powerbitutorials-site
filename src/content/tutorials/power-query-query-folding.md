@@ -177,6 +177,13 @@ Yes, significantly. In Import mode, a non-folding step means local processing wi
 
 It hurts folding, because it forces the table into local memory and cuts the query chain. It occasionally helps a narrow class of merge operations where the same small table is read repeatedly in a nested context, but for large tables in Import queries it is usually a mistake. Remove it and re-measure before assuming it helps.
 
+<!-- PERF-CLUSTER-NAV -->
+## More performance optimization guides
+
+- [Power BI Performance Optimization: A Complete Guide](/tutorials/power-bi-performance-optimization/)
+- [Power BI DAX Optimization](/tutorials/power-bi-dax-optimization/)
+- [DAX Optimization Techniques](/tutorials/dax-optimization-techniques/)
+- [Using Performance Analyzer in Power BI](/tutorials/power-bi-performance-analyzer/)
 ## Related Reading
 
 - [DirectQuery vs Import Mode in Power BI](/tutorials/directquery-vs-import-mode/)
