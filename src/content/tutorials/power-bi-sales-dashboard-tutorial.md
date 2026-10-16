@@ -5,7 +5,7 @@ pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Intermediate"
 tags: ["project", "sales", "dashboard", "end-to-end", "tutorial"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: true
 ---
 
