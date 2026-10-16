@@ -5,7 +5,7 @@ pubDate: 2026-07-20
 category: "data-modeling"
 difficulty: "Advanced"
 tags: ["performance", "optimization", "dax", "data-modeling", "vertipaq", "performance-analyzer"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: true
 ---
 

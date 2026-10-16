@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 category: "power-query"
 difficulty: "Beginner"
 tags: ["power-query", "group-by", "aggregation"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 Group By is a Power Query transformation that takes a table of detailed rows and collapses them into summary rows based on one or more grouping columns. It is the Power Query equivalent of a SQL GROUP BY clause or an Excel pivot table — but with a visual interface and no formulas required.

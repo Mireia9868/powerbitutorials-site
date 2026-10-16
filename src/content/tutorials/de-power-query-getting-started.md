@@ -6,7 +6,7 @@ updatedDate: 2026-10-12
 category: "power-query"
 difficulty: "Beginner"
 tags: ["power-query", "einstieg", "etl", "transformation", "m-language"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

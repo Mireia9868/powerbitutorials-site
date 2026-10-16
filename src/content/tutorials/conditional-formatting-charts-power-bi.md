@@ -5,7 +5,7 @@ pubDate: 2026-08-28
 category: "visualization"
 difficulty: "Intermediate"
 tags: ["visualization", "conditional-formatting", "bar-chart", "gauge", "data-colors", "kpi"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

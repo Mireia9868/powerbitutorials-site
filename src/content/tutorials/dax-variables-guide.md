@@ -5,7 +5,7 @@ pubDate: 2026-07-28
 category: "dax"
 difficulty: "Intermediate"
 tags: ["dax", "variables", "var", "performance"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 # DAX Variables (VAR/RETURN): Write Cleaner and Faster Measures

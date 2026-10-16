@@ -6,7 +6,7 @@ updatedDate: 2026-10-12
 category: "visualization"
 difficulty: "Intermediate"
 tags: ["visualization", "conditional-formatting", "json-theme", "report-design", "reuse"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

@@ -6,7 +6,7 @@ updatedDate: 2026-07-20
 category: "data-modeling"
 difficulty: "Intermediate"
 tags: ["data-modeling", "star-schema", "relationships", "performance"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

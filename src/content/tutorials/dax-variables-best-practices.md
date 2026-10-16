@@ -5,7 +5,7 @@ pubDate: 2026-07-15
 category: "dax"
 difficulty: "Intermediate"
 tags: ["dax", "variables", "var", "return", "performance", "readability"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

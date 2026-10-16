@@ -6,7 +6,7 @@ updatedDate: 2026-10-12
 category: "data-modeling"
 difficulty: "Intermediate"
 tags: ["data-modeling", "relationships", "cardinality", "many-to-many", "bridge-table"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

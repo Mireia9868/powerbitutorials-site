@@ -5,7 +5,7 @@ pubDate: 2026-07-18
 category: "visualization"
 difficulty: "Beginner"
 tags: ["visualization", "charts", "bar-chart", "line-chart", "matrix", "visual-types"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

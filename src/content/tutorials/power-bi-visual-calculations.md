@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 category: "dax"
 difficulty: "Intermediate"
 tags: ["visual calculations", "running sum", "moving average", "DAX", "Power BI Desktop"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 If you've ever built a running total in DAX, you know the drill: write a measure with CALCULATE, fight with ALLSELECTED for twenty minutes, then watch it break the moment someone drills into a subcategory. Visual Calculations fix that mess. They live on the visual itself — not in your semantic model — which means no measure sprawl, no filter context surprises, and no digging through 200 measures to find the one that's scoped wrong.

@@ -5,7 +5,7 @@ pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Beginner"
 tags: ["visualization", "conditional-formatting", "color-rules", "data-bars", "matrix", "based-on-measure", "field-value"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

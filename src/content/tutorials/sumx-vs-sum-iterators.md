@@ -5,7 +5,7 @@ pubDate: 2026-07-14
 category: "dax"
 difficulty: "Beginner"
 tags: ["dax", "sumx", "sum", "iterators", "aggregation"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

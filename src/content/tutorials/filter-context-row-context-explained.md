@@ -6,7 +6,7 @@ updatedDate: 2026-07-20
 category: "dax"
 difficulty: "Intermediate"
 tags: ["dax", "filter-context", "row-context", "evaluation-context", "calculate"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2026-07-18
 category: "power-query"
 difficulty: "Intermediate"
 tags: ["power-query", "parameters", "dynamic-sources", "environment-switching", "m"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

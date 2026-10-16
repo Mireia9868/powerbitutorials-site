@@ -5,7 +5,7 @@ pubDate: 2026-09-23
 category: "dax"
 difficulty: "Beginner"
 tags: ["power bi", "percentage of total", "dax all", "allexcept", "share"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 draft: false
 ---

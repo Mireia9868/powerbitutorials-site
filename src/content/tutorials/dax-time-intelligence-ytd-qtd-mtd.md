@@ -5,7 +5,7 @@ pubDate: 2026-07-28
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["time-intelligence", "dax", "ytd", "dateadd", "calendar"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 # DAX Time Intelligence: YTD, QTD, and MTD Complete Guide

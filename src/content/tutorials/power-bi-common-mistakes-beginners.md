@@ -5,7 +5,7 @@ pubDate: 2026-07-20
 category: "dax"
 difficulty: "Beginner"
 tags: ["beginner", "mistakes", "dax", "data-modeling", "best-practices"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: true
 ---
 

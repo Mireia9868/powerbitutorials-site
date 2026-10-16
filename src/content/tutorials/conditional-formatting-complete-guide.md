@@ -6,7 +6,7 @@ updatedDate: 2026-10-12
 category: "visualization"
 difficulty: "Beginner"
 tags: ["conditional-formatting", "visualization", "color-rules", "field-value", "reuse"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

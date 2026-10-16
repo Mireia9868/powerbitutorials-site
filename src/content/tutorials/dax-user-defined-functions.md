@@ -5,7 +5,7 @@ pubDate: 2026-08-03
 category: "dax"
 difficulty: "Intermediate"
 tags: ["DAX UDF", "user-defined functions", "FUNCTION keyword", "reusable logic", "DAX"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 Every Power BI developer hits the same wall eventually: you write a margin calculation, it works, and then you copy-paste it into six different measures because DAX doesn't have functions. You try calculation groups, but they're overkill for a simple parameterized formula. You look at Power Query's custom functions with envy.

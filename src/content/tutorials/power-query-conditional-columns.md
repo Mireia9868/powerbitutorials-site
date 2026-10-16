@@ -6,7 +6,7 @@ updatedDate: 2026-10-12
 category: "power-query"
 difficulty: "Beginner"
 tags: ["power-query", "conditional-columns", "if-then-else", "m-language", "transformations"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 draft: false
 ---

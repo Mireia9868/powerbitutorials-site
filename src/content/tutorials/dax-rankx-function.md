@@ -5,7 +5,7 @@ pubDate: 2026-07-23
 category: "dax"
 difficulty: "Intermediate"
 tags: ["dax", "rankx", "ranking", "topn", "best-practices"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 draft: false
 ---

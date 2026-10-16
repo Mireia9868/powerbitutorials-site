@@ -5,7 +5,7 @@ pubDate: 2026-09-23
 category: "power-query"
 difficulty: "Beginner"
 tags: ["power bi", "power query", "unpivot", "wide to long", "data shaping"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 draft: false
 ---

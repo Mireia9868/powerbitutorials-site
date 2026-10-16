@@ -5,7 +5,7 @@ pubDate: 2026-07-28
 category: "data-modeling"
 difficulty: "Intermediate"
 tags: ["data-modeling", "star-schema", "performance", "relationships"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 # Power BI Star Schema: The Data Model That Scales

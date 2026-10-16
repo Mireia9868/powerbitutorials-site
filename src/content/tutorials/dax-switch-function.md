@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 category: "dax"
 difficulty: "Intermediate"
 tags: ["dax", "switch", "conditional-logic"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 SWITCH is the DAX function for evaluating a single expression against multiple possible values and returning different results for each match. It replaces chains of nested IF statements with a flat, readable structure that is easier to maintain and debug.

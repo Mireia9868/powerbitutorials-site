@@ -5,7 +5,7 @@ pubDate: 2026-07-19
 category: "visualization"
 difficulty: "Intermediate"
 tags: ["visualization", "bookmarks", "navigation", "buttons", "report-design"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

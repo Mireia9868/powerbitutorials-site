@@ -5,7 +5,7 @@ pubDate: 2026-08-28
 category: "dax"
 difficulty: "Advanced"
 tags: ["dax", "optimization", "performance", "variables", "calculate", "time-intelligence"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

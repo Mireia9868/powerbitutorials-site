@@ -5,7 +5,7 @@ pubDate: 2026-07-06
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["dax", "time-intelligence", "ytd", "yoy", "calendar-table"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2026-08-28
 category: "data-modeling"
 difficulty: "Intermediate"
 tags: ["performance", "performance-analyzer", "dax-studio", "troubleshooting", "optimization"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

@@ -6,7 +6,7 @@ updatedDate: 2026-10-15
 category: "visualization"
 difficulty: "Intermediate"
 tags: ["conditional formatting", "troubleshooting", "errors", "data model"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 You build a report, drop a field onto a visual, and Power BI throws a **"Conflicting metrics"** error. No clear line number, no obvious culprit. This guide breaks down what the error really means and how to fix it without guessing.

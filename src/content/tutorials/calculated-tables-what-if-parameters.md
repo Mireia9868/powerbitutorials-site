@@ -5,7 +5,7 @@ pubDate: 2026-07-16
 category: "data-modeling"
 difficulty: "Intermediate"
 tags: ["data-modeling", "calculated-tables", "what-if-parameters", "dax", "scenario-analysis"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

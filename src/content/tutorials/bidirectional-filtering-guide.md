@@ -5,7 +5,7 @@ pubDate: 2026-07-13
 category: "data-modeling"
 difficulty: "Advanced"
 tags: ["data-modeling", "bidirectional-filtering", "cross-filter", "performance", "ambiguity"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

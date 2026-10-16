@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 category: "visualization"
 difficulty: "Intermediate"
 tags: ["visualization", "field-parameters", "dynamic-reports"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 Field Parameters are a Power BI feature that lets users dynamically choose which fields or measures appear in a visual. Instead of building separate charts for Sales, Profit, and Quantity — or creating complex bookmark navigation — you create one visual and let users swap the metric with a slicer.

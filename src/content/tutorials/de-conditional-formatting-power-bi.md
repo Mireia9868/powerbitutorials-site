@@ -6,7 +6,7 @@ updatedDate: 2026-10-12
 category: "visualization"
 difficulty: "Beginner"
 tags: ["conditional-formatting", "bedingte-formatierung", "visualization", "farben", "power-bi"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

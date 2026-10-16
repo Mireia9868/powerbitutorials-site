@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 category: "power-query"
 difficulty: "Beginner"
 tags: ["power-query", "merge", "append", "join", "combine-queries"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

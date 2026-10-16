@@ -5,7 +5,7 @@ pubDate: 2026-09-23
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["power bi", "time intelligence", "month over month", "year over year", "dax template"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 draft: false
 ---

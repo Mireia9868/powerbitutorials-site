@@ -5,7 +5,7 @@ pubDate: 2026-07-20
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["dax", "sameperiodlastyear", "yoy", "mom", "date-comparison", "time-intelligence"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2026-07-20
 category: "dax"
 difficulty: "Intermediate"
 tags: ["dax", "troubleshooting", "errors", "debugging", "best-practices"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: true
 ---
 

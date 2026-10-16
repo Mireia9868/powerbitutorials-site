@@ -6,7 +6,7 @@ updatedDate: 2026-10-12
 category: "data-modeling"
 difficulty: "Intermediate"
 tags: ["performance", "optimierung", "dax", "datenmodell", "power-bi"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

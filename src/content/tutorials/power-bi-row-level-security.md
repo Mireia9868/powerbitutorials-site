@@ -5,7 +5,7 @@ pubDate: 2026-07-23
 category: "data-modeling"
 difficulty: "Intermediate"
 tags: ["data-modeling", "rls", "security", "dynamic-rls", "userprinciplename"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 draft: false
 ---

@@ -5,7 +5,7 @@ pubDate: 2026-07-19
 category: "power-query"
 difficulty: "Beginner"
 tags: ["power-query", "transformations", "cleanup", "data-prep", "etl"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 

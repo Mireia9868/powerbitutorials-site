@@ -5,7 +5,7 @@ pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Intermediate"
 tags: ["dashboard", "design", "ux", "visualization", "best-practices"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: true
 ---
 

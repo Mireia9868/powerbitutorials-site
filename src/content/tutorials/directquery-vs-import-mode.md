@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 category: "data-modeling"
 difficulty: "Advanced"
 tags: ["data-modeling", "directquery", "import-mode", "storage-mode", "performance"]
-author: "Power BI Tutorials Team"
+author: Mireia
 ---
 
 Every Power BI dataset uses a storage mode that determines how data is retrieved when a user interacts with a report. The choice between Import Mode and DirectQuery — or a hybrid of both — affects query speed, data freshness, source load, and the DAX functions available to you.

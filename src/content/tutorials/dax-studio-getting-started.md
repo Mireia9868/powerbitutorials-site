@@ -5,7 +5,7 @@ pubDate: 2026-09-23
 category: "dax"
 difficulty: "Intermediate"
 tags: ["power bi", "dax studio", "query plan", "performance", "vertipaq"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 draft: false
 ---

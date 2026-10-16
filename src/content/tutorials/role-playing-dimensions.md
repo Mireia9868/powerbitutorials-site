@@ -5,7 +5,7 @@ pubDate: 2026-09-23
 category: "data-modeling"
 difficulty: "Advanced"
 tags: ["power bi", "role playing dimension", "date table", "multiple relationships", "star schema"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 draft: false
 ---

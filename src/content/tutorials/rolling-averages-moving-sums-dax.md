@@ -5,7 +5,7 @@ pubDate: 2026-07-19
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["dax", "rolling-average", "moving-sum", "window-functions", "time-intelligence"]
-author: "Power BI Tutorials Team"
+author: Mireia
 featured: false
 ---
 
