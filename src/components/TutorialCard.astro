@@ -26,11 +26,6 @@ const dateStr = data.pubDate.toLocaleDateString("en-US", {
     <div class="card-image">
       {data.heroImage ? <img src={data.heroImage} alt={data.title} loading="lazy" /> : <TutorialArtwork category={data.category} title={data.title} />}
     </div>
-    {false && (
-      <div class="card-image">
-        <img src={data.heroImage} alt={data.title} loading="lazy" />
-      </div>
-    )}
     <div class="card-body">
       <div class="card-meta">
         {category && <span class="card-cat">{category.label}</span>}
