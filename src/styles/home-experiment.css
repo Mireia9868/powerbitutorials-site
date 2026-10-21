@@ -98,3 +98,12 @@ html[data-home-variant="C"] .ab-home .cta-form input {border-radius:0}
 @media(max-width:980px){.ab-hero-grid{grid-template-columns:1fr}.ab-hero-visual{min-height:400px;max-width:680px;width:100%;margin:auto}.ab-topic-strip{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:650px){.ab-hero{padding-top:25px}.ab-hero-copy{padding:6px 0}.ab-home .ab-hero h1{font-size:clamp(38px,10vw,53px)}.ab-hero-sub{font-size:15px}.ab-hero-visual{min-height:350px;padding:18px 0 45px}.ab-dash-kpis strong{font-size:15px}.ab-dash-chart{height:140px}.ab-barset{height:90px}.ab-dax-card{font-size:10px;width:74%;bottom:0}.ab-dax-code{font-size:9px}.ab-topic-strip{grid-template-columns:repeat(2,1fr)}.ab-topic-strip a{font-size:10px;padding:13px 8px}.ab-hero-benefits{gap:8px}html[data-home-variant="C"] .ab-home .ab-hero h1{font-size:clamp(37px,10vw,55px)}html[data-home-variant="C"] .ab-hero-visual{min-height:360px}html[data-home-variant="C"] .ab-visual-issue span{font-size:45px}}
 @media(prefers-reduced-motion:reduce){.ab-home *, .ab-home *::before,.ab-home *::after{transition:none!important;animation:none!important}}
+
+/* Both variants intentionally stay bright even if the visitor prefers a dark OS theme.
+   Keeps the shared site header and cards readable during the visual comparison. */
+html[data-home-variant] { --c-bg:#ffffff; --c-bg-soft:#f8f9fb; --c-bg-elevated:#f5f4ee; --c-border:#e5e3d8; --c-text:#1a1a1a; --c-text-muted:#4a4a4a; --c-text-dim:#777; --c-accent:#f2c811; --c-accent-hover:#e0b90f; --c-accent-soft:#fffbea; --c-accent-border:#f2c811; --c-accent-text:#1a1a1a; --c-accent-dark:#8a6d0a; --c-code-bg:#252423; }
+html[data-home-variant="C"] { --c-bg:#f7f5ee; --c-bg-soft:#f0ede5; --c-bg-elevated:#ede5da; --c-border:#cfc8ba; --c-text:#171615; --c-text-muted:#51483f; --c-accent:#e45235; --c-accent-hover:#cf4228; --c-accent-soft:#f9e9e2; --c-accent-border:#e5a093; --c-accent-text:#ffffff; --c-accent-dark:#ba3720; }
+html[data-home-variant="C"] .site-header {background:#f7f5ee;}
+html[data-home-variant="C"] .site-header .logo {font-family:Georgia,"Times New Roman",serif;font-size:1.2rem;}
+html[data-home-variant="C"] .site-header .logo-mark {border-radius:0;}
+html[data-home-variant="C"] .main-nav a {font-family:Georgia,"Times New Roman",serif;}
