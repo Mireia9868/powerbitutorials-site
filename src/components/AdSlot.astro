@@ -17,12 +17,12 @@ const {
   label = "Advertisement",
 } = Astro.props;
 
-// 未配置 AdSense Publisher ID 时显示占位符
+// 运行 Adsterra 期间 ADSENSE_CLIENT 已置空：未配置时不渲染任何 AdSense 元素（含占位盒子）
 const configured = Boolean(ADSENSE_CLIENT);
 ---
 
-<div class="ad-slot" aria-label={label}>
-  {configured ? (
+{configured && (
+  <div class="ad-slot" aria-label={label}>
     <ins
       class="adsbygoogle"
       style={style}
@@ -31,13 +31,8 @@ const configured = Boolean(ADSENSE_CLIENT);
       data-ad-format={format}
       data-full-width-responsive={responsive ? "true" : "false"}
     />
-  ) : (
-    <div class="ad-placeholder">
-      <span>Ad Slot</span>
-      <small>{label} · 配置 ADSENSE_CLIENT 后生效</small>
-    </div>
-  )}
-</div>
+  </div>
+)}
 
 {configured && (
   <script is:inline>
@@ -51,25 +46,7 @@ const configured = Boolean(ADSENSE_CLIENT);
     text-align: center;
     min-height: 90px;
   }
-  .ad-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 90px;
-    border: 1px dashed var(--c-border-strong);
-    border-radius: var(--radius);
-    background: var(--c-bg-soft);
-    color: var(--c-text-dim);
-  }
-  .ad-placeholder span {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-  .ad-placeholder small {
-    font-size: 0.7rem;
-    margin-top: 4px;
+  .ad-slot ins {
+    display: block;
   }
 </style>
