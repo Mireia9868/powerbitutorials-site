@@ -70,6 +70,29 @@ const websiteJsonLd = isHomepage ? {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Assign a stable, anonymous homepage visual variant before first paint. -->
+    {isHomepage && (
+      <script is:inline>
+        (function () {
+          var key = 'pbi-home-ac-202610-v1';
+          var variant = 'A';
+          try {
+            var existing = localStorage.getItem(key);
+            if (existing === 'A' || existing === 'C') variant = existing;
+            else {
+              var bucket = new Uint32Array(1);
+              if (window.crypto && window.crypto.getRandomValues) {
+                window.crypto.getRandomValues(bucket);
+                variant = bucket[0] % 2 ? 'C' : 'A';
+              } else variant = Math.random() < 0.5 ? 'A' : 'C';
+              localStorage.setItem(key, variant);
+            }
+          } catch (err) { variant = 'A'; }
+          document.documentElement.setAttribute('data-home-variant', variant);
+        })();
+      </script>
+    )}
+
     <!-- Primary Meta -->
     <title>{pageTitle}</title>
     <meta name="title" content={pageTitle} />
