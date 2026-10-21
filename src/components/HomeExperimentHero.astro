@@ -1,0 +1,73 @@
+---
+import { CATEGORIES } from "../consts";
+
+interface Props {
+  tutorialCount: number;
+}
+const { tutorialCount } = Astro.props;
+---
+
+<section class="ab-hero" aria-label="Start learning Power BI">
+  <div class="container ab-hero-grid">
+    <div class="ab-hero-copy">
+      <p class="ab-hero-kicker"><span aria-hidden="true" class="ab-kicker-rule"></span> THE PRACTICAL DATA JOURNAL <span class="ab-kicker-number">/ 01</span></p>
+      <h1>Master Power BI,<br /><span class="ab-hero-highlight">one practical tutorial</span> at a time.</h1>
+      <p class="ab-hero-sub">
+        {tutorialCount}+ practical guides to Power BI, DAX, Power Query and data modeling.
+        Clear explanations, real examples, and code you can use in your next report.
+      </p>
+      <div class="ab-hero-actions">
+        <a class="ab-btn ab-btn-primary" href="/tutorials/" data-ab-action="browse">Browse Tutorials <span aria-hidden="true">↗</span></a>
+        <a class="ab-btn ab-btn-secondary" href="/tutorials/dax-basics/" data-ab-action="dax_basics">Start with DAX Basics <span aria-hidden="true">→</span></a>
+      </div>
+      <form class="ab-search" action="/tutorials/" method="get" role="search" data-ab-search>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+        <input type="search" name="q" placeholder="Search DAX, Power Query, data modeling…" aria-label="Search Power BI tutorials" />
+        <button type="submit">Search</button>
+      </form>
+      <div class="ab-hero-benefits" aria-label="What to expect">
+        <span>✦ Step-by-step lessons</span>
+        <span>✦ Real-world examples</span>
+        <span>✦ All skill levels</span>
+      </div>
+    </div>
+
+    <div class="ab-hero-visual" aria-label="Illustration of Power BI analytics, data charts and DAX formulas">
+      <div class="ab-visual-grid" aria-hidden="true"></div>
+      <div class="ab-visual-topline" aria-hidden="true"><span>POWER BI / WORKSPACE</span><span>DATA → INSIGHT</span></div>
+      <div class="ab-dash" aria-hidden="true">
+        <div class="ab-dash-header"><span class="ab-dash-mark">▥</span><strong>Sales Overview</strong><span class="ab-dash-dots">● ● ●</span></div>
+        <div class="ab-dash-kpis">
+          <div><small>Total sales</small><strong>$2.48M</strong><em>↗ 12.5%</em></div>
+          <div><small>Total orders</small><strong>6,920</strong><em>↗ 8.1%</em></div>
+          <div><small>Customers</small><strong>1,284</strong><em>↗ 11.3%</em></div>
+        </div>
+        <div class="ab-dash-chart">
+          <div class="ab-chart-head"><strong>Sales trend</strong><small>Jan — Dec</small></div>
+          <div class="ab-barset">
+            {[34,46,43,59,54,67,64,78,73,89,83,100].map((height) => (
+              <span class="ab-chart-bar" style={`height: ${height}%`}></span>
+            ))}
+          </div>
+          <div class="ab-chart-labels"><span>JAN</span><span>APR</span><span>JUL</span><span>OCT</span><span>DEC</span></div>
+        </div>
+      </div>
+      <div class="ab-dax-card" aria-hidden="true">
+        <div class="ab-dax-head"><span class="ab-dax-dot"></span> DAX <span>MEASURES / 001</span></div>
+        <div class="ab-dax-code"><span class="ab-syntax-name">Total Sales</span> =<br /><span class="ab-syntax-fn">CALCULATE</span> (<br />&nbsp; <span class="ab-syntax-fn">SUM</span> ( Sales[Amount] ),<br />&nbsp; Sales[Status] = <span class="ab-syntax-string">"Complete"</span><br />)</div>
+      </div>
+      <div class="ab-visual-issue" aria-hidden="true"><span>01</span><small>THE POWER<br/>OF DATA</small></div>
+    </div>
+  </div>
+  <div class="container">
+    <nav class="ab-topic-strip" aria-label="Explore popular Power BI topics">
+      {CATEGORIES.map((cat) => (
+        <a href={`/category/${cat.slug}/`} data-ab-action="hero_category">
+          <span class="ab-topic-sign" aria-hidden="true">
+            {cat.slug === "dax" ? "∑" : cat.slug === "power-query" ? "⇄" : cat.slug === "data-modeling" ? "◇" : cat.slug === "visualization" ? "▥" : cat.slug === "time-intelligence" ? "◷" : "☁"}
+          </span><span>{cat.label}</span><span class="ab-topic-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </nav>
+  </div>
+</section>
