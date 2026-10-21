@@ -24,6 +24,8 @@ jobs:
           test -f dist/index.html
           test -f dist/tutorials/index.html
           grep -q 'data-ab-home' dist/index.html
-          grep -q 'data-home-variant' dist/index.html
+          grep -q 'design_preview' dist/index.html
+          grep -q 'designVariant' dist/index.html
+          test -f dist/category/dax/index.html
           grep -q 'experiment_exposure' dist/index.html
           echo 'Homepage experiment checks passed'

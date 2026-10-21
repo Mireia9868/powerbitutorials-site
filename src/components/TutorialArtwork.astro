@@ -1,0 +1,42 @@
+---
+interface Props { category:string; title:string; }
+const {category,title}=Astro.props;
+const palette:Record<string,string>={dax:"DAX / FORMULAS","power-query":"TRANSFORM / CLEAN","data-modeling":"RELATE / MODEL",visualization:"CHART / DESIGN","time-intelligence":"MEASURE / TIME",service:"PUBLISH / SHARE"};
+---
+<div class="tutorial-art" data-category={category} role="img" aria-label={`Illustrated thumbnail for ${title}`}>
+ <span class="tutorial-art-label">{palette[category]||"POWER BI / GUIDE"}</span>
+ <div class="tutorial-art-visual" aria-hidden="true">
+  {category==="dax"&&<div class="mini-code"><span>Revenue =</span><br/><b>CALCULATE</b> (<br/>&nbsp; SUM ( Sales[Value] ),<br/>&nbsp; <em>ALL</em> ( 'Date' )<br/>)</div>}
+  {category==="power-query"&&<div class="mini-flow"><span>Source</span><i>→</i><span>Clean</span><i>→</i><span>Load</span></div>}
+  {category==="data-modeling"&&<div class="mini-model"><span>Dates</span><i>──┐</i><strong>Sales</strong><i>└──</i><span>Product</span></div>}
+  {(category==="visualization"||category==="time-intelligence")&&<div class="mini-bars">{[30,47,40,64,55,81,73,94].map(h=><span style={`height:${h}%`}></span>)}</div>}
+  {category==="service"&&<div class="mini-cloud">☁ <span>↗</span></div>}
+ </div>
+ <span class="tutorial-art-footer">POWER BI TUTORIALS <span>↗</span></span>
+</div>
+<style>
+.tutorial-art{height:100%;min-height:160px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:16px 19px;background:#ececf0;color:#1a2638}
+.tutorial-art:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#9eabb025 1px,transparent 1px),linear-gradient(90deg,#9eabb025 1px,transparent 1px);background-size:25px 25px}
+.tutorial-art-label,.tutorial-art-footer{position:relative;z-index:1;font:700 10px var(--font-mono);letter-spacing:.12em}.tutorial-art-footer{display:flex;justify-content:space-between}
+.tutorial-art-visual{position:relative;z-index:1;margin:auto;width:88%;height:95px;display:flex;align-items:center;justify-content:center}
+.tutorial-art[data-category="dax"]{background:#202a38;color:#dfe9f4}
+.tutorial-art[data-category="power-query"]{background:#f7eac5}
+.tutorial-art[data-category="data-modeling"]{background:#ebe6db}
+.tutorial-art[data-category="visualization"]{background:#edf2f9}
+.tutorial-art[data-category="time-intelligence"]{background:#f4e4cc}
+.tutorial-art[data-category="service"]{background:#e1ebe7}
+.mini-code{font:11px/1.5 var(--font-mono);width:100%;padding:9px 13px;border-left:3px solid #ffd13d;background:#121b2d;color:#c8e8f7;text-align:left}
+.mini-code b{color:#f8bf31}.mini-code em{color:#7ad8bd;font-style:normal}
+.mini-flow,.mini-model{display:flex;justify-content:space-between;align-items:center;width:100%;font:700 11px var(--font-mono)}
+.mini-flow span,.mini-model span,.mini-model strong{padding:13px 9px;border:1px solid #d3b351;background:#fffef9}
+.mini-flow i,.mini-model i{font-style:normal;color:#bb8920}
+.mini-model{gap:4px}.mini-model strong{background:#eac452;color:#111}
+.mini-bars{height:100%;width:100%;display:flex;align-items:flex-end;gap:8px;border-bottom:2px solid #a2adb9;padding:10px 10px 0}
+.mini-bars span{flex:1;background:#f1b91f}
+.mini-cloud{font-size:68px;color:#279c84}.mini-cloud span{font-size:35px}
+:global(html[data-design-variant="C"]) .tutorial-art{border-radius:0;background-color:#f0e3d5;color:#35271e}
+:global(html[data-design-variant="C"]) .tutorial-art[data-category="dax"]{background:#292625;color:#f1e0d0}
+:global(html[data-design-variant="C"]) .tutorial-art[data-category="visualization"]{background:#f6d9be}
+:global(html[data-design-variant="C"]) .tutorial-art .mini-bars span{background:#e65436}
+:global(html[data-design-variant="C"]) .tutorial-art .mini-model strong{background:#df5239;color:#fff}
+</style>

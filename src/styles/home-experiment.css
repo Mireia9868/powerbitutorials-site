@@ -107,3 +107,24 @@ html[data-home-variant="C"] .site-header {background:#f7f5ee;}
 html[data-home-variant="C"] .site-header .logo {font-family:Georgia,"Times New Roman",serif;font-size:1.2rem;}
 html[data-home-variant="C"] .site-header .logo-mark {border-radius:0;}
 html[data-home-variant="C"] .main-nav a {font-family:Georgia,"Times New Roman",serif;}
+
+/* Keep all pages in their visitor's allocated theme; editorial hero is a different composition. */
+.ab-home .section-cta .btn-primary{display:inline-flex;align-items:center;padding:13px 21px;border-radius:var(--radius);font-weight:800;background:var(--c-accent);color:var(--c-accent-text);text-decoration:none}
+.editorial-cutout{display:none}
+html[data-design-variant="C"] .ab-home{background:#f7f5ee}
+html[data-design-variant="C"] .ab-hero-grid{min-height:590px}
+html[data-design-variant="C"] .ab-hero-kicker{font-family:var(--font-mono);font-size:11px}
+html[data-design-variant="C"] .ab-home .ab-hero h1{max-width:720px}
+html[data-design-variant="C"] .ab-hero-visual{background:#ede9df;transform:none;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);padding-top:85px}
+html[data-design-variant="C"] .ab-hero-visual:after{content:"";position:absolute;right:16px;bottom:28px;border-top:18px solid #de5038;border-bottom:18px solid #eec348;width:120px;height:50px;opacity:.8;z-index:-1}
+html[data-design-variant="C"] .editorial-cutout{display:flex;align-items:center;position:absolute;top:10px;right:14px;color:#dc5037;gap:16px;z-index:2;font:700 11px/1.4 var(--font-mono);letter-spacing:.1em}
+html[data-design-variant="C"] .editorial-cutout strong{font:700 88px/1 Georgia,serif;letter-spacing:-.08em}
+html[data-design-variant="C"] .editorial-cutout small{font:700 9px/1.5 var(--font-mono);color:#3a332f}
+html[data-design-variant="C"] .ab-dash{background:#fefbf1;border:1px solid #cfc2ac;box-shadow:12px 12px 0 #de503833;transform:rotate(-2.5deg);max-width:88%}
+html[data-design-variant="C"] .ab-dax-card{transform:rotate(1.5deg);background:#25211f;box-shadow:9px 9px 0 #e65235;right:12px;bottom:20px}
+html[data-design-variant="C"] .ab-chart-bar{background:linear-gradient(#eac754,#d75134)}
+html[data-design-variant="C"] .ab-visual-issue{display:none}
+html[data-design-variant="C"] .ab-topic-strip{border-top:2px solid #2b2420;border-bottom:2px solid #2b2420}
+html[data-design-variant="C"] .ab-home .section-cta{background:#e9ded0}
+html[data-design-variant="C"] .ab-home .section-cta .btn-primary{background:#e45235;color:#fff;border-radius:0}
+@media(max-width:640px){html[data-design-variant="C"] .editorial-cutout strong{font-size:56px}html[data-design-variant="C"] .ab-hero-visual{padding-top:62px}}

@@ -1,5 +1,6 @@
 ---
 import { CATEGORIES } from "../consts";
+import TutorialArtwork from "./TutorialArtwork.astro";
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
@@ -22,11 +23,9 @@ const dateStr = data.pubDate.toLocaleDateString("en-US", {
 
 <article class={`tutorial-card ${compact ? "compact" : ""}`}>
   <a href={url} class="card-link">
-    {data.heroImage && (
-      <div class="card-image">
-        <img src={data.heroImage} alt={data.title} loading="lazy" />
-      </div>
-    )}
+    <div class="card-image">
+      {data.heroImage ? <img src={data.heroImage} alt={data.title} loading="lazy" /> : <TutorialArtwork category={data.category} title={data.title} />}
+    </div>
     <div class="card-body">
       <div class="card-meta">
         {category && <span class="card-cat">{category.label}</span>}

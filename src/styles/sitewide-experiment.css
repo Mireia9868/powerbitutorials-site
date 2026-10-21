@@ -1,0 +1,46 @@
+/* Shared A/C design tokens and sitewide continuity.  Preview query is never included in canonicals. */
+html[data-design-variant="A"]{--c-bg:#fff;--c-bg-soft:#f7f8fb;--c-bg-elevated:#f4f6f9;--c-border:#e1e5eb;--c-border-strong:#bdc6d3;--c-text:#131b2b;--c-text-muted:#495569;--c-text-dim:#6b788b;--c-accent:#ffca23;--c-accent-hover:#efb71b;--c-accent-soft:#fff9e7;--c-accent-border:#f3cb62;--c-accent-text:#141822;--c-accent-dark:#976e00;--radius:10px;--radius-lg:14px;--max-width:1320px}
+html[data-design-variant="C"]{--c-bg:#f7f5ee;--c-bg-soft:#f0ede5;--c-bg-elevated:#eee7dd;--c-border:#d7cebd;--c-border-strong:#b7a89a;--c-text:#171615;--c-text-muted:#4d463d;--c-text-dim:#77675a;--c-accent:#e45235;--c-accent-hover:#cf4027;--c-accent-soft:#fbe9e1;--c-accent-border:#dba18d;--c-accent-text:white;--c-accent-dark:#bc3523;--radius:0px;--radius-lg:0px;--max-width:1320px}
+html[data-design-variant] body,html[data-design-variant] .site-header{background:var(--c-bg);color:var(--c-text)}
+html[data-design-variant] .site-header{box-shadow:0 2px 12px #141b2708}
+html[data-design-variant] .logo-mark,html[data-design-variant] .footer-logo .logo-mark{background:var(--c-accent);color:var(--c-accent-text);border-radius:var(--radius-sm)}
+html[data-design-variant] .logo-accent{color:var(--c-accent-dark)}
+html[data-design-variant] .main-nav a.active{color:var(--c-accent-dark)}
+html[data-design-variant] .site-footer{background:var(--c-bg-soft);border-top:1px solid var(--c-border)}
+html[data-design-variant] .site-footer a:hover{color:var(--c-accent-dark)}
+html[data-design-variant] .cookie-consent{background:#222333;color:#fff}
+html[data-design-variant] .cookie-consent .cookie-consent__text{color:#f5f5f5}
+html[data-design-variant] .cookie-consent .cookie-consent__btn--primary{background:var(--c-accent);color:var(--c-accent-text)}
+html[data-design-variant] .cookie-consent .cookie-consent__link{color:#f9cd73}
+html[data-design-variant] .page-header{background:var(--c-bg-soft);border-color:var(--c-border)}
+html[data-design-variant] .page-eyebrow,html[data-design-variant] .article-cat{color:var(--c-accent-dark)}
+html[data-design-variant] .tutorial-card{background:var(--c-bg);border-color:var(--c-border);border-radius:var(--radius-lg);overflow:hidden}
+html[data-design-variant] .tutorial-card .card-image{aspect-ratio:16/9}
+html[data-design-variant] .tutorial-card .card-title{color:var(--c-text)}
+html[data-design-variant] .tutorial-card:hover{box-shadow:0 14px 29px #212b3815;border-color:var(--c-accent-border)}
+html[data-design-variant] .sidebar,html[data-design-variant] .toc-sidebar{color:var(--c-text)}
+html[data-design-variant] .sidebar-cta,html[data-design-variant] .filter-bar,html[data-design-variant] .toc-nav{border-color:var(--c-border)}
+html[data-design-variant] .cat-list a.active,html[data-design-variant] .chip.active{background:var(--c-accent-soft);color:var(--c-accent-dark)}
+html[data-design-variant] .article-header,html[data-design-variant] .tutorial-main,html[data-design-variant] .article-content{color:var(--c-text)}
+html[data-design-variant] .article-content a{color:var(--c-accent-dark)}
+html[data-design-variant] .newsletter-form button,html[data-design-variant] .btn-primary{background:var(--c-accent);color:var(--c-accent-text)}
+html[data-design-variant] .section-cta{background:var(--c-bg-soft)}
+html[data-design-variant="A"] .site-footer{background:#f5f7fa}
+html[data-design-variant="A"] .section-cta{background:#fff6dc}
+html[data-design-variant="C"] body,html[data-design-variant="C"] .page-header h1,html[data-design-variant="C"] .article-header h1,html[data-design-variant="C"] .card-title,html[data-design-variant="C"] .section-head h2,html[data-design-variant="C"] .sidebar-title,html[data-design-variant="C"] .site-footer h4{font-family:Georgia,"Times New Roman",serif}
+html[data-design-variant="C"] .page-header h1,html[data-design-variant="C"] .article-header h1{font-weight:700;letter-spacing:-.04em}
+html[data-design-variant="C"] .site-header .logo,html[data-design-variant="C"] .footer-logo{font-family:Georgia,"Times New Roman",serif}
+html[data-design-variant="C"] .site-header .logo{font-size:1.15rem}
+html[data-design-variant="C"] .site-footer{border-top:3px solid #e45235}
+html[data-design-variant="C"] .tutorial-card{box-shadow:none;border-width:1px}
+html[data-design-variant="C"] .tutorial-card .card-cat{color:#c13f28}
+html[data-design-variant="C"] .section-cta{border-top:2px solid #cbb8a9;border-bottom:2px solid #cbb8a9}
+html[data-design-variant="C"] .section-cta h2{font-family:Georgia,"Times New Roman",serif;font-size:2rem}
+html[data-design-variant="C"] .cookie-consent{background:#28201d}
+html[data-design-variant="C"] .cookie-consent__btn--primary{background:#e45235;color:#fff}
+html[data-design-variant="C"] .cookie-consent__link{color:#ffc09f}
+html[data-design-variant="C"] .card-image img{border-radius:0}
+html[data-design-variant="C"] .cat-icon{background:#f0d6c8;color:#c54025}
+html[data-design-variant="C"] .cat-card{border-radius:0}
+html[data-design-variant="C"] .category-symbol{color:var(--c-accent-dark)}
+@media(max-width:700px){html[data-design-variant] .tutorial-card .card-image{aspect-ratio:16/9}}

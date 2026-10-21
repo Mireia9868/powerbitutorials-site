@@ -1,5 +1,6 @@
 ---
 import { CATEGORIES } from "../consts";
+import CategoryIcon from "./CategoryIcon.astro";
 
 const pathname = Astro.url.pathname;
 const activeCat = CATEGORIES.find((c) => pathname.includes(`/category/${c.slug}`))?.slug;
@@ -22,7 +23,7 @@ const BUTTONDOWN_USER = "mireia";
             href={`/category/${cat.slug}/`}
             class={activeCat === cat.slug ? "active" : ""}
           >
-            {cat.label}
+            <CategoryIcon category={cat.slug} size={16} /> {cat.label}
           </a>
         </li>
       ))}
