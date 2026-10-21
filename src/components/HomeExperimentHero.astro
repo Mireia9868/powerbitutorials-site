@@ -1,5 +1,6 @@
 ---
 import { CATEGORIES } from "../consts";
+import CategoryIcon from "./CategoryIcon.astro";
 
 interface Props {
   tutorialCount: number;
@@ -10,7 +11,7 @@ const { tutorialCount } = Astro.props;
 <section class="ab-hero" aria-label="Start learning Power BI">
   <div class="container ab-hero-grid">
     <div class="ab-hero-copy">
-      <p class="ab-hero-kicker"><span aria-hidden="true" class="ab-kicker-rule"></span> THE PRACTICAL DATA JOURNAL <span class="ab-kicker-number">/ 01</span></p>
+      <p class="ab-hero-kicker"><span aria-hidden="true" class="ab-kicker-rule"></span> PRACTICAL POWER BI LESSONS <span class="ab-kicker-number">/ 01</span></p>
       <h1>Master Power BI,<br /><span class="ab-hero-highlight">one practical tutorial</span> at a time.</h1>
       <p class="ab-hero-sub">
         {tutorialCount}+ practical guides to Power BI, DAX, Power Query and data modeling.
@@ -63,9 +64,7 @@ const { tutorialCount } = Astro.props;
     <nav class="ab-topic-strip" aria-label="Explore popular Power BI topics">
       {CATEGORIES.map((cat) => (
         <a href={`/category/${cat.slug}/`} data-ab-action="hero_category">
-          <span class="ab-topic-sign" aria-hidden="true">
-            {cat.slug === "dax" ? "∑" : cat.slug === "power-query" ? "⇄" : cat.slug === "data-modeling" ? "◇" : cat.slug === "visualization" ? "▥" : cat.slug === "time-intelligence" ? "◷" : "☁"}
-          </span><span>{cat.label}</span><span class="ab-topic-arrow" aria-hidden="true">↗</span>
+          <span class="ab-topic-sign" aria-hidden="true"><CategoryIcon category={cat.slug} size={21} /></span><span>{cat.label}</span><span class="ab-topic-arrow" aria-hidden="true">↗</span>
         </a>
       ))}
     </nav>
