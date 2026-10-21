@@ -17,7 +17,7 @@ const {
   label = "Advertisement",
 } = Astro.props;
 
-// 运行 Adsterra 期间 ADSENSE_CLIENT 已置空：未配置时不渲染任何 AdSense 元素（含占位盒子）
+// ADSENSE_CLIENT 为空时不渲染任何 AdSense 元素（含占位盒子）；当前未启用 AdSense
 const configured = Boolean(ADSENSE_CLIENT);
 ---
 

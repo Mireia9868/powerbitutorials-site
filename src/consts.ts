@@ -54,7 +54,7 @@ export const DIFFICULTY_LEVELS = ["Beginner", "Intermediate", "Advanced"];
 
 // AdSense — Publisher ID
 // 格式: ca-pub-XXXXXXXXXXXXXXXX，留空则不渲染广告脚本
-// 2026-10-20: 运行 Adsterra 期间置空并关闭 AdSense 脚本（避免两者共存违反 AdSense 政策）
+// AdSense 当前未启用（空值则不渲染任何 AdSense 广告脚本）；此前因站点被 AdSense 标记为低价值内容而暂停，恢复前需先解决内容合规问题
 export const ADSENSE_CLIENT = "";
 
 // Google Search Console 验证 — 在 GSC 后台添加站点后会得到一串 verification token，填到这里
