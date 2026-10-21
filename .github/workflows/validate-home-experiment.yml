@@ -1,0 +1,29 @@
+name: Validate Homepage A-C Experiment
+on:
+  pull_request:
+    paths:
+      - 'src/pages/index.astro'
+      - 'src/components/HomeExperimentHero.astro'
+      - 'src/styles/home-experiment.css'
+      - 'src/layouts/BaseLayout.astro'
+      - '.github/workflows/validate-home-experiment.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Verify output pages
+        run: |
+          test -f dist/index.html
+          test -f dist/tutorials/index.html
+          grep -q 'data-ab-home' dist/index.html
+          grep -q 'data-home-variant' dist/index.html
+          grep -q 'experiment_exposure' dist/index.html
+          echo 'Homepage experiment checks passed'
