@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "../styles/sitewide-experiment.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieConsent from "../components/CookieConsent.astro";
@@ -70,28 +71,43 @@ const websiteJsonLd = isHomepage ? {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Assign a stable, anonymous homepage visual variant before first paint. -->
-    {isHomepage && (
-      <script is:inline>
-        (function () {
-          var key = 'pbi-home-ac-202610-v1';
-          var variant = 'A';
-          try {
-            var existing = localStorage.getItem(key);
-            if (existing === 'A' || existing === 'C') variant = existing;
-            else {
-              var bucket = new Uint32Array(1);
-              if (window.crypto && window.crypto.getRandomValues) {
-                window.crypto.getRandomValues(bucket);
-                variant = bucket[0] % 2 ? 'C' : 'A';
-              } else variant = Math.random() < 0.5 ? 'A' : 'C';
-              localStorage.setItem(key, variant);
+    <script is:inline>
+      (function () {
+        var key = 'pbi-design-ac-202610-v2';
+        var url = new URL(window.location.href);
+        var requested = url.searchParams.get('design_preview');
+        var preview = requested === 'A' || requested === 'C';
+        var variant = 'A';
+        try {
+          var stored = localStorage.getItem(key);
+          if (preview) variant = requested;
+          else if (stored === 'A' || stored === 'C') variant = stored;
+          else {
+            var cryptoNumbers = new Uint32Array(1);
+            if (window.crypto && window.crypto.getRandomValues) {
+              window.crypto.getRandomValues(cryptoNumbers);
+              variant = cryptoNumbers[0] % 2 ? 'C' : 'A';
+            } else variant = Math.random() < 0.5 ? 'A' : 'C';
+            localStorage.setItem(key, variant);
+          }
+        } catch (e) { variant = preview ? requested : 'A'; }
+        document.documentElement.dataset.designVariant = variant;
+        document.documentElement.dataset.homeVariant = variant;
+        document.documentElement.dataset.designPreview = preview ? 'true' : 'false';
+        // Preserve an explicitly selected preview through internal navigation, without changing canonical URLs.
+        if (preview) {
+          document.addEventListener('click', function (event) {
+            var link = event.target.closest('a[href]');
+            if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            var target = new URL(link.href, window.location.href);
+            if (target.origin === location.origin && target.pathname !== '/rss.xml' && !target.pathname.includes('.xml')) {
+              target.searchParams.set('design_preview', variant);
+              link.href = target.href;
             }
-          } catch (err) { variant = 'A'; }
-          document.documentElement.setAttribute('data-home-variant', variant);
-        })();
-      </script>
-    )}
+          }, true);
+        }
+      })();
+    </script>
 
     <!-- Primary Meta -->
     <title>{pageTitle}</title>
@@ -152,6 +168,47 @@ const websiteJsonLd = isHomepage ? {
       </script>
     )}
 
+    <script is:inline>
+      (function () {
+        var variant = document.documentElement.dataset.designVariant || 'A';
+        var preview = document.documentElement.dataset.designPreview === 'true';
+        var experiment = 'site_design_ac_202610';
+        var consentKey = 'cookie-consent-v1';
+        var sentExposure = false;
+        window.dataLayer = window.dataLayer || [];
+        // Define a function even before the external analytics script finishes loading.
+        function consentGranted() {
+          try { return localStorage.getItem(consentKey) === 'accepted'; } catch (e) { return false; }
+        }
+        function emit(name, values) {
+          if (preview || !consentGranted() || typeof window.gtag !== 'function') return;
+          window.gtag('event', name, Object.assign({experiment_id:experiment, design_variant:variant}, values || {}));
+        }
+        function exposure() {
+          if (sentExposure || preview || !consentGranted()) return;
+          sentExposure = true;
+          emit('experiment_exposure', {experiment_variant:variant});
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+          exposure();
+          document.getElementById('cookie-accept')?.addEventListener('click', function () { setTimeout(exposure, 350); });
+          document.addEventListener('click', function (e) {
+            var link = e.target.closest('a[href]');
+            if (!link) return;
+            var destination = new URL(link.href, location.href);
+            if (destination.origin !== location.origin) return;
+            var path = destination.pathname;
+            if (path.startsWith('/tutorials/') && path !== '/tutorials/') emit('design_tutorial_click', {destination:path});
+            else if (path.startsWith('/category/')) emit('design_category_click', {destination:path});
+            else if (path === '/tutorials/') emit('design_library_click', {destination:path});
+          });
+          document.addEventListener('submit', function (event) {
+            var form = event.target;
+            if (form.querySelector('input[name=q]')) emit('design_search', {source_path:location.pathname});
+          });
+        });
+      })();
+    </script>
     <!-- WebSite + Organization JSON-LD (homepage only) -->
     {isHomepage && (
       <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
