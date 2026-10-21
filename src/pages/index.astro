@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import HomeExperimentHero from "../components/HomeExperimentHero.astro";
+import "../styles/home-experiment.css";
 import TutorialCard from "../components/TutorialCard.astro";
 import AdSlot from "../components/AdSlot.astro";
 import { CATEGORIES, SITE_DESCRIPTION } from "../consts";
@@ -25,35 +27,8 @@ const tutorialCount = allTutorials.length;
 ---
 
 <BaseLayout description={SITE_DESCRIPTION}>
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-content">
-        <span class="hero-eyebrow">Power BI · DAX · Power Query</span>
-        <h1>
-          Master Power BI, one<br />
-          <span class="hero-accent">practical tutorial</span> at a time.
-        </h1>
-        <p class="hero-sub">
-          {tutorialCount}+ hands-on tutorials for data analysts. From your first DAX
-          measure to advanced time intelligence patterns — clear explanations,
-          real datasets, copy-paste code.
-        </p>
-        <div class="hero-cta">
-          <a href="/tutorials/" class="btn btn-primary">Browse Tutorials</a>
-          <a href="/tutorials/dax-basics/" class="btn btn-secondary">Start with DAX Basics →</a>
-        </div>
-        <div class="hero-search">
-          <form action="/tutorials/" method="get" class="search-form">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-            </svg>
-            <input type="search" name="q" placeholder="Search tutorials… (e.g. CALCULATE, YTD, filter)" aria-label="Search" />
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="ab-home" data-ab-home>
+    <HomeExperimentHero tutorialCount={tutorialCount} />
 
   <!-- Featured (6 cards: featured first, pad with latest) -->
   <section class="section">
@@ -129,6 +104,45 @@ const tutorialCount = allTutorials.length;
       </form>
     </div>
   </section>
+  </div>
+  <script is:inline>
+    (function () {
+      var home = document.querySelector('[data-ab-home]');
+      if (!home) return;
+      var variant = document.documentElement.getAttribute('data-home-variant') === 'C' ? 'C' : 'A';
+      var consentKey = 'cookie-consent-v1';
+      var experimentId = 'homepage_design_ac_202610';
+      var tracked = false;
+      function allowed() {
+        try { return localStorage.getItem(consentKey) === 'accepted'; } catch (e) { return false; }
+      }
+      function send(name, attrs) {
+        if (!allowed() || typeof window.gtag !== 'function') return;
+        window.gtag('event', name, Object.assign({experiment_id: experimentId, variant: variant}, attrs || {}));
+      }
+      function exposure() {
+        if (tracked || !allowed()) return;
+        tracked = true;
+        send('experiment_exposure', {experiment_variant: variant});
+      }
+      exposure();
+      document.getElementById('cookie-accept')?.addEventListener('click', function () { setTimeout(exposure, 0); });
+      home.addEventListener('click', function (e) {
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        if (href.startsWith('/tutorials/') && href !== '/tutorials/') send('ab_tutorial_open', {destination: href});
+        else if (href.startsWith('/category/')) send('ab_category_open', {destination: href});
+        else if (href === '/tutorials/') send('ab_library_open', {destination: href});
+      });
+      home.querySelectorAll('[data-ab-search]').forEach(function (form) {
+        form.addEventListener('submit', function () {
+          var field = form.querySelector('input[name=q]');
+          send('ab_search_submit', {search_length: field && field.value ? field.value.trim().length : 0});
+        });
+      });
+    })();
+  </script>
 </BaseLayout>
 
 <style>
