@@ -1,6 +1,6 @@
 ---
 title: "Power Query M Language Basics: Functions, Tables, and Records"
-description: "M is the functional language behind Power Query. It looks nothing like DAX or Excel formulas, but once you understand its three core data structures and how functions compose, the editor becomes far less intimidating. This guide covers the fundamentals with practical examples."
+description: "M is functional, not a spreadsheet formula. Its three core data structures, how functions compose, and why the editor stops being scary."
 pubDate: 2026-07-16
 category: "power-query"
 difficulty: "Beginner"
@@ -160,3 +160,6 @@ SafeConvert = Table.AddColumn(Source, "ParsedQty", each try Number.From([Qty]) o
 ## Summary
 
 M is built on three structures (tables, records, lists) and one pattern (`let ... in`). Functions are the core abstraction, and `each` is the standard way to write row-level logic. Master these fundamentals and the Advanced Editor stops being intimidating — it becomes the most powerful part of Power Query.
+
+Microsoft documents this feature in [its Power Query M formula language reference](https://learn.microsoft.com/en-us/powerquery-m/).
+

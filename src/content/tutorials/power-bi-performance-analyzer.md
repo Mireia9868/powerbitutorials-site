@@ -104,7 +104,7 @@ You open a sales dashboard and the total render time is 3.8 seconds. Performance
 | Slicer: country | 620 ms | 20 ms | 8 ms |
 | Card: total revenue | 180 ms | 10 ms | 5 ms |
 
-The Top 10 products table is the obvious target. Copy its query into DAX Studio. Server Timings shows FE 2,200 ms, SE 210 ms, scan count 14. That is a row-context problem, not a data-volume problem. The measure likely uses `FILTER` over the product table with a nested measure. Rewrite using `TOPN` with variables, or move the top-N filter to the visual's Top N filter (which is optimized to use the storage engine). The query drops to 300 ms. The slicer is next: 620 ms to display 200 country values is fine, but you can drop to 40 ms by replacing it with a dropdown or list (both use less layout work than a tile slicer with 200 values).
+The Top 10 products table is the obvious target. Copy its query into DAX Studio. Server Timings shows FE 2,200 ms, SE 210 ms, scan count 14. That is a row-context problem, not a data-volume problem. The measure likely uses `FILTER` over the product table with a nested measure. Rewrite using `TOPN` with variables, or move the top-N filter to the visual's Top N filter (which is optimized to use the storage engine). The query drops to 300 ms. The slicer is next: 620 ms to display 200 country values is fine, but you can drop to 40 ms by replacing it with a dropdown or list (both use less layout work than a tile slicer with 200 values). Microsoft documents every case in the [VALUES reference](https://learn.microsoft.com/en-us/dax/values-function-dax).
 
 Total render time after fixes: about 900 ms. The improvements came from measurement, not intuition.
 

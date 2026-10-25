@@ -150,6 +150,8 @@ A card does not expose a per-value background property, so it cannot take a back
 
 Copy the visual with `Ctrl+C` and `Ctrl+V`, then paste it onto the target page. All rules that are measure-bound are preserved. Column-bound rules survive only if the columns remain in the visual.
 
+Behaviour described here follows [Microsoft's Conditional formatting in Power BI documentation](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-conditional-table-formatting).
+
 ## Related Reading
 
 - [Conditional formatting in Power BI: the complete guide](/tutorials/conditional-formatting-power-bi/)

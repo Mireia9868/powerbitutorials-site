@@ -1,6 +1,6 @@
 ---
 title: "Role-Playing Dimensions in Power BI: One Date Table, Multiple Relationships"
-description: "A role-playing dimension is a single table used in multiple roles — Order Date, Ship Date, Due Date. Learn the three ways to model it in Power BI without breaking relationships."
+description: "One date table, three roles: order, ship, due. The three ways to model role-playing dimensions without breaking relationships."
 pubDate: 2026-09-23
 category: "data-modeling"
 difficulty: "Advanced"
@@ -81,6 +81,8 @@ A: Only if you also create a bidirectional filter that creates multiple paths. K
 
 **Q: Should the Date table be marked as a date table?**
 A: Yes — right-click it → Mark as Date Table. This enables proper time intelligence on the active role.
+
+For the official documentation behind this topic, see [Microsoft Relationships in Power BI models](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-relationships-understand).
 
 ## Related Reading
 

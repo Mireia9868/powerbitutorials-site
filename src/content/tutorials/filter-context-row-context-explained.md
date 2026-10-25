@@ -1,6 +1,6 @@
 ---
 title: "Filter Context vs Row Context in DAX: The Core Mental Model"
-description: "Filter context and row context are the two evaluation contexts that govern every DAX formula. Most calculation errors trace back to confusing them. This guide breaks down both, shows how they interact, and gives you the mental model to predict formula behavior before you write it."
+description: "Two evaluation contexts govern every DAX result. How they differ, how they interact, and the mental model that predicts a formula's output."
 pubDate: 2026-07-12
 updatedDate: 2026-07-20
 category: "dax"
@@ -33,7 +33,7 @@ Three things contribute to filter context:
 
 1. **Slicers and filters** on the page.
 2. **Visual cross-filtering** — clicking a bar in one chart filters the matrix next to it.
-3. **`CALCULATE` modifiers** — `CALCULATE([Measure], Product[Category] = "Bikes")` injects a filter.
+3. **`CALCULATE` modifiers** — `CALCULATE([Measure], Product[Category] = "Bikes")` injects a filter. See the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax) for the complete rules.
 
 The critical insight: filter context propagates through **relationships**. If you filter `Product[Category]`, the filter flows downstream to `Sales` via the one-to-many relationship. It does *not* flow upstream unless you enable bidirectional filtering (which has performance costs and can cause silent double-counting).
 
@@ -199,7 +199,7 @@ DIVIDE(
     SUMX(VALUES(Product[Category]), [Revenue]),
     SUMX(VALUES(Product[Category]), [Cost])
 )
-```
+```. Refer to the [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax) for edge cases.
 
 ## How to debug evaluation context
 

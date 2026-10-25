@@ -87,6 +87,8 @@ A: Usually the date table doesn't span a full extra year, or the relationship is
 **Q: Can I compare to a custom fiscal year?**
 A: Yes — use `DATESYTD` with a `FiscalYearEndDate` argument, or build a fiscal date table. Standard `SAMEPERIODLASTYEAR` follows the calendar.
 
+Microsoft documents this feature in [its Time intelligence functions reference](https://learn.microsoft.com/en-us/dax/time-intelligence-functions-dax).
+
 ## Related Reading
 
 - [SamePeriodLastYear Comparison Patterns](/tutorials/sameperiodlastyear-comparison-patterns/)

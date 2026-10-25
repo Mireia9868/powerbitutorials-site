@@ -1,6 +1,6 @@
 ---
 title: "Conditional Formatting Based on a Measure in Power BI"
-description: "Conditional formatting in Power BI splits into two worlds. The simple one is rules you set from a field in your data: sales above a threshold turn green, below turn red."
+description: "Rule-based formatting only goes so far. Drive colours from a DAX measure instead, with a worked example and copy-paste formulas."
 pubDate: 2026-09-28
 category: visualization
 tags: ["conditional formatting", "measures"]
@@ -81,7 +81,7 @@ RETURN
     )
 ```
 
-Two details matter. First, `SWITCH ( TRUE (), ... )` is the standard way to express if/else-if chains in DAX; each condition is evaluated until one returns TRUE. Second, `ISBLANK` is checked first because a blank margin (no sales in the period) should not be colored red. Without that guard, `BLANK() >= 0.35` evaluates to FALSE and a missing month would render as a failure.
+Two details matter. First, `SWITCH ( TRUE (), ... )` is the standard way to express if/else-if chains in DAX; each condition is evaluated until one returns TRUE. Second, `ISBLANK` is checked first because a blank margin (no sales in the period) should not be colored red. Without that guard, `BLANK() >= 0.35` evaluates to FALSE and a missing month would render as a failure. Refer to the [BLANK reference](https://learn.microsoft.com/en-us/dax/blank-function-dax) for edge cases.
 
 To apply it: set **Format style** to *Field value*, then select `Margin Color`. The cell background now reflects the measure's own decision.
 

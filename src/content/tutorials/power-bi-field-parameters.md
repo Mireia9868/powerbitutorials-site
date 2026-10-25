@@ -1,6 +1,6 @@
 ---
 title: "Power BI Field Parameters: Let Users Swap Metrics and Dimensions"
-description: "Field Parameters let report users dynamically switch between measures or dimensions in a single visual — no bookmarks, no separate pages. Learn setup, slicer integration, DAX integration, limitations, and common mistakes."
+description: "Field parameters let one visual switch between measures or dimensions at runtime. Setup, slicer wiring, and the limitations nobody mentions."
 pubDate: 2026-07-26
 category: "visualization"
 difficulty: "Intermediate"
@@ -17,7 +17,7 @@ This guide covers how to set up Field Parameters, integrate them with slicers, c
 Before Field Parameters, there were two ways to let users switch metrics:
 
 1. **Bookmark navigation** — Build separate visuals for each metric, then use bookmarks and buttons to show/hide them. Complex, fragile, and doubles the visual count.
-2. **SWITCH measures** — Use a disconnected table with `SELECTEDVALUE()` and a `SWITCH()` measure. Works but requires DAX knowledge and does not support swapping dimensions (only measures).
+2. **SWITCH measures** — Use a disconnected table with `SELECTEDVALUE()` and a `SWITCH()` measure. Works but requires DAX knowledge and does not support swapping dimensions (only measures). The [SWITCH documentation](https://learn.microsoft.com/en-us/dax/switch-function-dax) has the full specification.
 
 Field Parameters solve both problems. They work for measures **and** dimensions, require no DAX, and are native to Power BI's visual framework.
 

@@ -124,7 +124,8 @@ HARD RULES:
 - Length: >= 800 words, step-by-step, practical.
 - Code: include >= 1 fenced code block (```dax or ```powerquery) with correct syntax.
 - Images: DO NOT write any image or figure markup, and do not write figure placeholders. There is no screenshot pipeline yet, and any image reference breaks the static build. Use prose, tables and fenced code blocks instead.
-- FAQ at end: each question as a level-3 heading "### Q: ...", answer below. >= 3 Q/A pairs.
+- CITATIONS (required): include 1-3 inline links to authoritative sources, placed where the claim they support is made — not dumped in a list at the end. Allowed targets: learn.microsoft.com (function reference, feature docs) and sqlbi.com (DAX patterns, articles). Never invent a URL: if you are not certain the exact page exists, link to the parent function/feature page you are sure of, e.g. https://learn.microsoft.com/en-us/dax/calculate-function-dax. A tutorial with zero citations is rejected.
+- FAQ at end: each question as a level-3 heading "### Q: ...", answer below. >= 3 Q/A pairs. Non-negotiable.
 - Internal links: at the end add a "## Related Reading" section linking to >= 6 EXISTING articles using relative paths /tutorials/<slug>/. Only link slugs that are REAL (provided in the brief).
 - Technical accuracy: DAX/Power Query code must be correct; state nuances precisely (e.g. EARLIER requires a nested row context, not just calculated columns).
 - DO NOT invent internal links to slugs not in the provided list."""
@@ -187,12 +188,14 @@ def assemble(topic, body):
         if t and not t.startswith("#") and not t.startswith("![") and "```" not in t:
             first_para = t; break
     desc = re.sub(r"\s+", " ", first_para).strip()
-    if len(desc) > 190:
-        m = re.search(r"^(.{60,190}?[.!?])(\s|$)", desc)
+    # Google 在 SERP 里只显示约 155–160 字符；超出部分被截断成半句话。
+    # 上限设在 150，给不同宽度留余量。
+    if len(desc) > 150:
+        m = re.search(r"^(.{60,150}?[.!?])(\s|$)", desc)
         if m:
             desc = m.group(1)
         else:
-            cut = desc[:190]
+            cut = desc[:150]
             desc = cut[:cut.rfind(" ")] if " " in cut else cut
     pubdate = datetime.date.today().isoformat()
     tags = ", ".join(f'"{t}"' for t in topic.get("tags", [topic["category"]]))

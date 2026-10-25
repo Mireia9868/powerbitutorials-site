@@ -1,6 +1,6 @@
 ---
 title: "DAX Basics: The Beginner's Guide to Data Analysis Expressions"
-description: "Learn what DAX is, how measures differ from calculated columns, and write your first five formulas with confidence. A practical starting point for every Power BI analyst."
+description: "What DAX is, why measures and calculated columns are not interchangeable, and the five formulas to write on your first day."
 pubDate: 2026-06-15
 updatedDate: 2026-07-20
 category: "dax"
@@ -66,7 +66,7 @@ Total Quantity = SUM(Sales[Quantity])
 Avg Order Value = DIVIDE([Total Revenue], [Total Quantity])
 ```
 
-Notice we use `DIVIDE` instead of `/`. `DIVIDE` handles divide-by-zero errors gracefully and returns BLANK instead of an error — always prefer it. The `/` operator will throw "Cannot divide by zero" if the denominator is zero or BLANK, which breaks your entire visual.
+Notice we use `DIVIDE` instead of `/`. `DIVIDE` handles divide-by-zero errors gracefully and returns BLANK instead of an error — always prefer it. The `/` operator will throw "Cannot divide by zero" if the denominator is zero or BLANK, which breaks your entire visual. Microsoft documents every case in the [DIVIDE reference](https://learn.microsoft.com/en-us/dax/divide-function-dax).
 
 **Total Cost** (calculated column referenced by a measure):
 
@@ -74,7 +74,7 @@ Notice we use `DIVIDE` instead of `/`. `DIVIDE` handles divide-by-zero errors gr
 Total Cost = SUMX(Sales, Sales[Quantity] * Sales[UnitCost])
 ```
 
-`SUMX` is an iterator — it walks row by row, computes the expression, then sums the results. Iterators (`SUMX`, `AVERAGEX`, `MINX`, etc.) are essential when a calculation needs row-level arithmetic before aggregation.
+`SUMX` is an iterator — it walks row by row, computes the expression, then sums the results. Iterators (`SUMX`, `AVERAGEX`, `MINX`, etc.) are essential when a calculation needs row-level arithmetic before aggregation. Microsoft's [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax) covers the full syntax.
 
 Why not make `Quantity * UnitCost` a calculated column? You could — but if `UnitCost` changes frequently, a measure recomputes on every refresh without bloating the model. For large fact tables, the iterator pattern is more memory-efficient.
 

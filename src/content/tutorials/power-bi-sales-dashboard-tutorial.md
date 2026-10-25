@@ -1,6 +1,6 @@
 ---
 title: "Build a Sales Dashboard in Power BI: End-to-End Tutorial"
-description: "Follow a real-world project from raw data to finished dashboard. Learn data import, Power Query cleaning, star schema modeling, DAX measures, and visual design — all in one walkthrough."
+description: "One project, end to end: import, clean in Power Query, model a star schema, write the measures, then design the dashboard."
 pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Intermediate"
@@ -74,7 +74,7 @@ The targets file likely has months as columns (wide format). Unpivot:
 2. Transform → Unpivot Other Columns
 3. Rename: `Attribute` → `Month`, `Value` → `TargetRevenue`
 4. Set `TargetRevenue` to Currency
-5. Convert `Month` text ("Jan 2026") to a date that matches your date table
+5. Convert `Month` text ("Jan 2026") to a date that matches your date table. The [DATE documentation](https://learn.microsoft.com/en-us/dax/date-function-dax) has the full specification.
 
 ## Step 2: Build the star schema
 

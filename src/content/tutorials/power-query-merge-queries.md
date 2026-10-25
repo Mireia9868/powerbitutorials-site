@@ -174,6 +174,8 @@ Almost always a data type mismatch or invisible whitespace. A text `"1001"` will
 
 Yes, on the next refresh. The merge is baked into the query's M code, so pressing **Refresh** re-runs the join against the current source data. If you are using a DirectQuery source, the join behaviour depends on query folding, which is a separate consideration from Import mode.
 
+For the official documentation behind this topic, see [Microsoft Merge queries](https://learn.microsoft.com/en-us/power-query/merge-queries-overview).
+
 ## Related Reading
 
 - [Merge vs Append Queries](/tutorials/merge-vs-append-queries/)

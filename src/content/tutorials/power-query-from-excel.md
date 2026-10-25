@@ -138,6 +138,8 @@ Connect to the Workbook container once, filter the navigation table to the sheet
 
 The engine is the same M language, and the transformation steps behave identically. The differences are in the output: Excel loads into a worksheet table or the Data Model, while Power BI loads into the model behind the report. Query code you write in Excel can be copied into Power BI's Advanced Editor and will usually run without changes.
 
+For the full specification, see [Microsoft Excel connector](https://learn.microsoft.com/en-us/power-query/connectors/excel).
+
 ## Related Reading
 
 - [Power BI Excel Integration: A Practical Guide](/tutorials/power-bi-excel-integration/)

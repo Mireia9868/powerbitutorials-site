@@ -1,6 +1,6 @@
 ---
 title: "DirectQuery vs Import Mode: Choosing the Right Power BI Storage Mode"
-description: "Import Mode caches data in memory for fast queries, while DirectQuery sends every visual request back to the source database. Learn when to use each, how Dual mode works, and the performance trade-offs that determine your report architecture."
+description: "Import caches data in memory; DirectQuery queries the source per visual. When each wins, how Dual mode works, and the trade-offs."
 pubDate: 2026-07-26
 category: "data-modeling"
 difficulty: "Advanced"
@@ -200,3 +200,6 @@ For most business reports, 8 times per day (every 3 hours) is sufficient. For op
 - Understand relationships that cross storage modes: [One-to-many and many-to-many](/tutorials/relationships-one-to-many-many-to-many/)
 - Optimize your model for fast queries: [Power BI performance optimization](/tutorials/power-bi-performance-optimization/)
 - Secure your model: [Power BI Row-Level Security](/tutorials/power-bi-row-level-security/)
+
+The underlying documentation for this feature is [Microsoft DirectQuery in Power BI](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about).
+

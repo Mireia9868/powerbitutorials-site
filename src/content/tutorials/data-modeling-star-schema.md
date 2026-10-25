@@ -1,6 +1,6 @@
 ---
 title: "Star Schema Data Modeling: The Foundation of Fast Power BI Reports"
-description: "A well-designed star schema makes DAX easier and reports faster. Learn fact vs. dimension tables, relationship cardinality, and why bidirectional filters are usually a mistake."
+description: "Fact vs dimension tables, relationship cardinality, and why bidirectional filters usually make a model slower instead of better."
 pubDate: 2026-07-13
 updatedDate: 2026-07-20
 category: "data-modeling"
@@ -217,6 +217,6 @@ See our [performance optimization guide](/tutorials/power-bi-performance-optimiz
 
 ## What's next
 
-A clean star schema makes everything downstream easier: DAX, time intelligence, performance tuning, even security (row-level security is much simpler on dimension tables). Once your model is solid, revisit [DAX Basics](/tutorials/dax-basics) and [CALCULATE](/tutorials/calculate-function) — the formulas will feel dramatically more natural.
+A clean star schema makes everything downstream easier: DAX, time intelligence, performance tuning, even security (row-level security is much simpler on dimension tables). Once your model is solid, revisit [DAX Basics](/tutorials/dax-basics) and [CALCULATE](/tutorials/calculate-function) — the formulas will feel dramatically more natural. The [CALCULATE documentation](https://learn.microsoft.com/en-us/dax/calculate-function-dax) has the full specification.
 
 For more on relationships and filtering, see our [relationships guide](/tutorials/relationships-one-to-many-many-to-many) and [bidirectional filtering guide](/tutorials/bidirectional-filtering-guide).

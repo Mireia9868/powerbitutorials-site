@@ -1,6 +1,6 @@
 ---
 title: "Power BI Conflicting Metrics Error: Causes and Fixes"
-description: "The 'conflicting metrics' error in Power BI stops a visual from rendering and confuses even experienced users. Learn what actually triggers it, the four most common causes, and the step-by-step fixes that resolve it."
+description: "Why Power BI refuses to render a visual with conflicting metrics, the four usual causes, and the step-by-step fix for each."
 pubDate: 2026-10-15
 updatedDate: 2026-10-15
 category: "visualization"
@@ -59,3 +59,6 @@ Because the conflict depends on the exact combination of fields in that visual. 
 
 **Can I prevent this with a better data model?**
 Yes. A clean [star schema](/tutorials/data-modeling-star-schema/) with explicit measures — and no raw numeric columns dragged into visuals — eliminates almost all of these conflicts.
+
+Behaviour described here follows [Microsoft's Visual types in Power BI documentation](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a).
+

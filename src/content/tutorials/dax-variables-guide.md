@@ -1,6 +1,6 @@
 ---
 title: "DAX Variables (VAR/RETURN): Write Cleaner and Faster Measures"
-description: "DAX variables make complex measures readable, prevent repeated calculations, and eliminate an entire class of context-transition bugs. This guide covers the syntax, scope rules, four practical patterns, and the performance gains you get from using variables correctly."
+description: "VAR makes long measures readable, stops repeated evaluation and removes a class of context-transition bugs. Scope rules and patterns."
 pubDate: 2026-07-28
 category: "dax"
 difficulty: "Intermediate"
@@ -122,7 +122,7 @@ RETURN
     DIVIDE(CurrentCategorySales, AllCategoriesSales)
 ```
 
-`CurrentCategorySales` is evaluated in the **original** filter context (whatever the visual provides). `AllCategoriesSales` is evaluated after removing the category filter. The order matters: if you declared `AllCategoriesSales` first and then tried to "go back," you couldn't — there's no way to restore a filter context once `CALCULATE` modifies it. Variables are the solution: they capture a snapshot.
+`CurrentCategorySales` is evaluated in the **original** filter context (whatever the visual provides). `AllCategoriesSales` is evaluated after removing the category filter. The order matters: if you declared `AllCategoriesSales` first and then tried to "go back," you couldn't — there's no way to restore a filter context once `CALCULATE` modifies it. Variables are the solution: they capture a snapshot. Microsoft documents every case in the [FILTER reference](https://learn.microsoft.com/en-us/dax/filter-function-dax).
 
 ### Pattern 3: Prevent Repeated Calculations (Performance)
 
@@ -294,7 +294,7 @@ CALCULATE(
 )
 ```
 
-`VariableSales` was evaluated at the moment of declaration. It holds a **number**, not a formula. Wrapping it in `CALCULATE` with different filters doesn't change its value — it's already been computed. If you need the expression to re-evaluate under a new filter context, use the measure directly inside `CALCULATE`.
+`VariableSales` was evaluated at the moment of declaration. It holds a **number**, not a formula. Wrapping it in `CALCULATE` with different filters doesn't change its value — it's already been computed. If you need the expression to re-evaluate under a new filter context, use the measure directly inside `CALCULATE`. Microsoft's [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax) covers the full syntax.
 
 ## Frequently Asked Questions
 

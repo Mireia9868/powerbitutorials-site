@@ -1,6 +1,6 @@
 ---
 title: "Bookmarks and Navigation in Power BI: Build Interactive Report Tours"
-description: "Bookmarks capture the state of a report page — filters, selections, visibility, and sort order. Combined with buttons, they turn a static page into an interactive experience: tabbed navigation, drill-through stories, and self-guided report tours. This guide covers the mechanics and four patterns that work."
+description: "Bookmarks capture filters, selections and sort order. Four patterns for turning a static report page into tabbed, guided navigation."
 pubDate: 2026-07-19
 category: "visualization"
 difficulty: "Intermediate"
@@ -109,3 +109,6 @@ Users click "Last Year" and the slicer (and all visuals) update instantly — wi
 ## Summary
 
 Bookmarks capture report state — filters, visibility, selections — and buttons let users navigate between states. Use them for tabbed navigation, drill-through stories, self-guided tours, and preset filter buttons. Keep bookmark counts low (3–7 per page), name them clearly, and style buttons to look interactive. The result is a report that guides users through a narrative rather than dumping data on a page.
+
+Behaviour described here follows [Microsoft's Bookmarks in Power BI documentation](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks).
+

@@ -1,6 +1,6 @@
 ---
 title: "Power BI Performance Optimization: A Complete Guide to Faster Reports and DAX"
-description: "Slow Power BI reports frustrate users and kill adoption. Learn the systematic approach to diagnosing and fixing performance issues — from Performance Analyzer to DAX optimization to model tuning — with copy-paste patterns that actually speed things up."
+description: "Find the bottleneck before optimising: Performance Analyzer, then DAX, then the model. A diagnosis order that saves hours of guessing."
 pubDate: 2026-07-20
 category: "data-modeling"
 difficulty: "Advanced"
@@ -86,7 +86,7 @@ CALCULATE([Total Revenue], FILTER(Sales, Sales[Status] = "Paid"))
 CALCULATE([Total Revenue], Sales[Status] = "Paid")
 ```
 
-The boolean filter uses the VertiPaq column dictionary — it's an index lookup, not a row scan. `FILTER(ALL(Sales), ...)` scans every row in the fact table, which is fatal on large models.
+The boolean filter uses the VertiPaq column dictionary — it's an index lookup, not a row scan. `FILTER(ALL(Sales), ...)` scans every row in the fact table, which is fatal on large models. See the [FILTER reference](https://learn.microsoft.com/en-us/dax/filter-function-dax) for the complete rules.
 
 ### Avoid FILTER inside iterators
 
@@ -132,7 +132,7 @@ SWITCH(
     [Rev] < 10000, "L",
     "XL"
 )
-```
+```. The [SWITCH documentation](https://learn.microsoft.com/en-us/dax/switch-function-dax) has the full specification.
 
 ### Use DIVIDE instead of /
 

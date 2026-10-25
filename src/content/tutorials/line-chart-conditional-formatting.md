@@ -150,6 +150,8 @@ No, there is no cross-filter between measures. What the measure can see is the f
 
 The blank rule fires only when the measure itself returns `BLANK()`. A value of zero is not blank. If your underlying data has zeros for months with no sales, apply a rule for `= 0` separately, or wrap the measure so zeros return `BLANK()`.
 
+For the full specification, see [Microsoft Conditional formatting in Power BI](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-conditional-table-formatting).
+
 ## Related Reading
 
 - [Conditional Formatting in Power BI: The Complete Guide](/tutorials/conditional-formatting-power-bi/)

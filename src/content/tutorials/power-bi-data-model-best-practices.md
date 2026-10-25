@@ -28,7 +28,7 @@ The practical test: draw your tables on paper and connect them. If you see relat
 The default one-to-many relationship from a dimension to a fact table, filtering in a single direction, is correct the vast majority of the time. Two rules keep you out of trouble:
 
 1. Keep filter direction single. Bidirectional cross-filtering creates ambiguous filter paths and unpredictable results once multiple fact tables exist.
-2. Set the relationship to **inactive** and activate it with `USERELATIONSHIP` when you need a second role for the same dimension — for example, Order Date and Ship Date both pointing at the Date table.
+2. Set the relationship to **inactive** and activate it with `USERELATIONSHIP` when you need a second role for the same dimension — for example, Order Date and Ship Date both pointing at the Date table. Microsoft documents every case in the [DATE reference](https://learn.microsoft.com/en-us/dax/date-function-dax).
 
 If you genuinely need a dimension to filter another dimension (a common demand with role-playing hierarchies), consider a bridge table rather than turning on bidirectional filtering across the board.
 

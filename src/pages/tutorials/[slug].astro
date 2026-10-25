@@ -62,8 +62,9 @@ const jsonLd = {
   headline: tutorial.data.title,
   description: tutorial.data.description,
   author: {
-    "@type": "Organization",
+    "@type": "Person",
     name: tutorial.data.author,
+    url: `${SITE_URL}/author/mireia/`,
   },
   publisher: {
     "@type": "Organization",
@@ -119,6 +120,7 @@ const breadcrumbJsonLd = {
   image={tutorial.data.heroImage}
   article={true}
   publishedTime={tutorial.data.pubDate}
+  noindex={tutorial.slug.startsWith("de-")}
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
@@ -177,9 +179,11 @@ const breadcrumbJsonLd = {
           <p class="article-desc">{tutorial.data.description}</p>
           <div class="article-info">
             <div class="author-block">
-              <div class="author-avatar" aria-hidden="true">DG</div>
+              <div class="author-avatar" aria-hidden="true">M</div>
               <div>
-                <div class="author-name">{tutorial.data.author}</div>
+                <div class="author-name">
+                  <a href="/author/mireia/">{tutorial.data.author}</a>
+                </div>
                 <div class="author-date">
                   Published <time datetime={tutorial.data.pubDate.toISOString()}>{dateStr}</time>
                   {updatedStr && (

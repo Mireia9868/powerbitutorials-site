@@ -1,6 +1,6 @@
 ---
 title: "DAX Optimization Techniques to Speed Up Power BI"
-description: "DAX optimization is less about typing faster formulas and more about understanding what the VertiPaq engine and the formula engine actually do when a measure runs."
+description: "DAX speed is decided by what VertiPaq and the formula engine do at query time, not by how clever the formula looks."
 pubDate: 2026-10-02
 category: dax
 tags: ["performance", "dax"]
@@ -58,7 +58,7 @@ Total Sales Fast = SUM ( Sales[LineAmount] )
 
 The tradeoff is that `LineAmount` becomes a stored column, which adds to model size and refresh time. For a row-level multiplication on a large fact table, that is usually a good trade. For a one-off measure used in a single visual, the iterator is fine.
 
-When you genuinely need row-by-row logic, filter the iterator's table argument as tightly as possible. `SUMX ( FILTER ( Sales, Sales[Year] = 2024 ), ... )` is far worse than `CALCULATE ( SUMX ( Sales, ... ), Sales[Year] = 2024 )`, because the second form lets the storage engine apply the filter before iteration begins.
+When you genuinely need row-by-row logic, filter the iterator's table argument as tightly as possible. `SUMX ( FILTER ( Sales, Sales[Year] = 2024 ), ... )` is far worse than `CALCULATE ( SUMX ( Sales, ... ), Sales[Year] = 2024 )`, because the second form lets the storage engine apply the filter before iteration begins. The [SUMX documentation](https://learn.microsoft.com/en-us/dax/sumx-function-dax) has the full specification.
 
 ## Technique 3: Never Use FILTER on a Column Directly
 
@@ -80,7 +80,7 @@ CALCULATE (
 )
 ```
 
-`FILTER ( Sales, ... )` returns a table, and a table filter is evaluated by the formula engine as a callback. Column predicates inside `CALCULATE` are translated into storage engine queries. Use `FILTER` only when the condition spans multiple columns or involves a measure, and even then consider `KEEPFILTERS` or a `TREATAS` pattern first.
+`FILTER ( Sales, ... )` returns a table, and a table filter is evaluated by the formula engine as a callback. Column predicates inside `CALCULATE` are translated into storage engine queries. Use `FILTER` only when the condition spans multiple columns or involves a measure, and even then consider `KEEPFILTERS` or a `TREATAS` pattern first. The [FILTER documentation](https://learn.microsoft.com/en-us/dax/filter-function-dax) has the full specification.
 
 ## Technique 4: CALCULATE with KEEPFILTERS and Context Transition Costs
 

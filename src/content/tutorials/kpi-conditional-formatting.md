@@ -1,6 +1,6 @@
 ---
 title: "KPI Visual Conditional Formatting in Power BI"
-description: "The KPI visual in Power BI is a small chart with a big constraint: it renders exactly one value per card, plus a trend axis, and it has no legend, no series color, and no per-category row"
+description: "The KPI visual renders one value per card with no legend or series colour. How to get conditional formatting out of that constraint."
 pubDate: 2026-09-30
 category: visualization
 tags: ["conditional formatting", "kpi"]
@@ -124,6 +124,8 @@ No. The up/down arrow and its "good/bad" coloring come from the **Trend line** s
 ### Q: How many thresholds can I encode before the measure gets slow?
 
 There is no hard limit, but each branch adds a comparison. A `SWITCH ( TRUE (), ... )` with eight to ten branches on a measure that already performs a division is still cheap at typical visual cardinality. The cost becomes noticeable when the measure scans a large fact table per cell and the KPI page has many visuals. Use `VAR` to compute shared subexpressions once, and profile the page with Performance Analyzer before optimizing blindly.
+
+The underlying documentation for this feature is [Microsoft Conditional formatting in Power BI](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-conditional-table-formatting).
 
 ## Related Reading
 

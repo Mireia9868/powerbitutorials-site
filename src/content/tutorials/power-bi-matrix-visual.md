@@ -1,6 +1,6 @@
 ---
 title: "Power BI Matrix Visual: Best Practices and Tips"
-description: "The matrix visual is the workhorse of Power BI reporting. It handles hierarchies, cross-tabulation, expand/collapse, and drill-down better than any other built-in visual."
+description: "The matrix handles hierarchy, cross-tabulation and expand/collapse better than any other built-in visual. Layout, totals and common traps."
 pubDate: 2026-10-13
 category: visualization
 tags: ["matrix", "visualization"]
@@ -166,6 +166,8 @@ No. Columns accept fields from tables, not measures. If you need dynamic column 
 ### Q: Why is the grand total for my percentage measure different from the average shown?
 
 Because they are different calculations. The grand total recomputes the ratio using the numerator and denominator totals, which is the correct weighted result. The average of the visible percentages is an unweighted mean and will always differ unless every group has an identical denominator.
+
+Microsoft documents this feature in [its Matrix visual reference](https://learn.microsoft.com/en-us/power-bi/visuals/desktop-matrix-visual).
 
 ## Related Reading
 

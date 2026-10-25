@@ -1,6 +1,6 @@
 ---
 title: "Time Intelligence in DAX: YTD, YoY, and Rolling Patterns That Work"
-description: "Time intelligence is 80% of business reporting. Learn the calendar table setup, YTD/QTD/MTD functions, year-over-year comparison, and the rolling-average pattern every analyst needs."
+description: "Calendar table setup, YTD/QTD/MTD, year-over-year and rolling averages: the four patterns that cover most business reporting."
 pubDate: 2026-07-06
 category: "time-intelligence"
 difficulty: "Intermediate"
@@ -18,7 +18,7 @@ Time intelligence functions will silently return wrong results — or blank — 
 1. **One row per day**, no gaps, covering the full date range of your fact data (and ideally a buffer on both ends).
 2. **A `Date` column** of type `Date` (not `DateTime`, not text).
 3. **Marked as a date table** — in Power BI Desktop, select the table → Table Tools → Mark as Date Table → choose the Date column.
-4. **A relationship** from `Date[Date]` to your fact table's date column (one-to-many, single direction).
+4. **A relationship** from `Date[Date]` to your fact table's date column (one-to-many, single direction). Microsoft's [DATE reference](https://learn.microsoft.com/en-us/dax/date-function-dax) covers the full syntax.
 
 You can generate this table in Power Query or DAX. The DAX approach is fastest to prototype:
 
@@ -156,7 +156,7 @@ Distinct from the rolling 12-month *average* — MAT sums; rolling 12M averages.
 2. **Using `Date[Date]` from the fact table instead of the calendar table.** Time intelligence requires the *calendar* table's date column.
 3. **Mixing `TOTALYTD` with manual date filters.** `TOTALYTD` respects the current filter context, so a slicer on `Date[Month] = "February"` returns only February YTD — which is just February. Use `ALL(Date)` as the third argument if you want YTD to ignore the month slicer.
 4. **Comparing partial periods to full periods.** "Revenue LY" for November 2025 returns November 2024 — correct. But "Revenue LY YTD" through November 2025 should return Jan–Nov 2024, not all of 2024. Pattern 4 above handles this.
-5. **Assuming `SAMEPERIODLASTYEAR` works without a calendar table.** It needs a contiguous date range. Gaps in the calendar produce blank rows.
+5. **Assuming `SAMEPERIODLASTYEAR` works without a calendar table.** It needs a contiguous date range. Gaps in the calendar produce blank rows. The [MONTH documentation](https://learn.microsoft.com/en-us/dax/month-function-dax) has the full specification.
 
 ## Reference: time intelligence function cheat sheet
 

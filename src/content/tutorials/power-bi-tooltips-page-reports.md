@@ -1,6 +1,6 @@
 ---
 title: "Power BI Tooltips: From Basic Hover to Full Page Reports"
-description: "Tooltips are the most underrated interaction in Power BI. A default tooltip shows the data point's values — useful but limited. Custom tooltip pages turn a hover into a mini-report: related metrics, trends, and context. This guide covers building both and the three patterns where tooltips shine."
+description: "A default tooltip shows one value. A report page tooltip shows a mini-report on hover. How to build both, and three places they pay off."
 pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Intermediate"
@@ -111,3 +111,6 @@ Use tooltips for context the user wants without leaving the page. Use drill-thro
 ## Summary
 
 Default tooltips show values; custom tooltip pages show context. Use them for trend-on-hover, composition breakdowns, and benchmark comparisons. Keep tooltip pages small (3–5 visuals), fast (simple measures), and focused (one question per tooltip). Match the tooltip's filter context to the source visual's grouping, and remember that tooltips don't work on touch devices — don't hide critical information behind a hover.
+
+For the full specification, see [Microsoft Report page tooltips](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-tooltips).
+

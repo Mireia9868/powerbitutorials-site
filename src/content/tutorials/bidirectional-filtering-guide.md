@@ -1,6 +1,6 @@
 ---
 title: "Bidirectional Filtering in Power BI: When It Helps and When It Hurts"
-description: "Bidirectional filtering is powerful and dangerous. It solves certain modeling problems elegantly — and creates performance disasters and ambiguous filter paths when overused. This guide covers what bidirectional filtering does, the three scenarios where it's the right tool, and the warning signs that you're using it wrong."
+description: "Bidirectional filtering solves some models cleanly and breaks others. The three valid cases, the ambiguity it creates, and the warning signs."
 pubDate: 2026-07-13
 category: "data-modeling"
 difficulty: "Advanced"
@@ -121,3 +121,6 @@ This applies bidirectional filtering only for this measure. The relationship sta
 ## Summary
 
 Bidirectional filtering is a tool, not a default. Use it for bridge tables in many-to-many scenarios, where it's the standard pattern. Avoid it for fact-to-fact relationships unless no alternative exists — prefer DAX with `CROSSFILTER` for targeted bidirectional behavior. Never enable bidirectional filtering without tracing the filter paths and testing performance. The safest model is single-direction everywhere, with bidirectional applied surgically only where needed.
+
+For the official documentation behind this topic, see [Microsoft Bidirectional cross-filtering](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-bidirectional-filtering).
+

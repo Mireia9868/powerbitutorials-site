@@ -1,6 +1,6 @@
 ---
 title: "DAX Troubleshooting Guide: Fix the 15 Most Common Errors"
-description: "DAX errors are notoriously unhelpful. This guide covers the 15 most common DAX errors — from blank results to wrong totals to circular dependencies — with exact before-and-after fixes you can copy-paste."
+description: "Fifteen DAX errors that look cryptic, from blank results to wrong totals to circular dependencies, with the exact fix for each."
 pubDate: 2026-07-20
 category: "dax"
 difficulty: "Intermediate"
@@ -76,7 +76,7 @@ DIVIDE(
     SUMX(VALUES(Product[Category]), [Revenue]),
     SUMX(VALUES(Product[Category]), [Cost])
 )
-```
+```. Microsoft documents every case in the [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax).
 
 ### 5. Percentage always shows 100%
 
@@ -243,7 +243,7 @@ CALCULATE([Rev], FILTER(Sales, [Total Revenue] > 100))
 
 // Fix — use VALUES to iterate over the column, not the fact table
 CALCULATE([Rev], FILTER(VALUES(Product[Category]), [Total Revenue] > 100))
-```
+```. The [VALUES documentation](https://learn.microsoft.com/en-us/dax/values-function-dax) has the full specification.
 
 ### 15. Wrong results from context transition inside iterators
 

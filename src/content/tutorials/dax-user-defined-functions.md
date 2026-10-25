@@ -1,6 +1,6 @@
 ---
 title: "DAX User-Defined Functions (UDF): Reusable Logic Without Calculation Groups"
-description: "DAX UDFs went GA in June 2026. Learn how the FUNCTION keyword lets you package reusable parameterized logic — tax calculations, currency conversion, margin formulas — and call it from any measure or column."
+description: "DAX UDFs are GA as of June 2026. Package tax, currency and margin logic once with the FUNCTION keyword, then reuse it anywhere."
 pubDate: 2026-08-03
 category: "dax"
 difficulty: "Intermediate"
@@ -233,3 +233,6 @@ FUNCTION GrossMargin = (revenue : NUMERIC, cost : NUMERIC) =>
 - Learn [DAX variables](/tutorials/dax-variables-guide/) — they work inside UDF bodies and make complex functions readable
 - Read about [field parameters](/tutorials/power-bi-field-parameters/) for another approach to dynamic measure logic (complementary, not competing with UDFs)
 - Check the [DAX troubleshooting guide](/tutorials/dax-troubleshooting-guide/) when your UDF returns unexpected results — the same debugging principles apply
+
+Microsoft documents this feature in [its User-defined functions in DAX reference](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions).
+

@@ -1,6 +1,6 @@
 ---
 title: "Merge vs Append Queries in Power Query: Which One Do You Need?"
-description: "Merge and append are the two ways to combine tables in Power Query, and they do completely different things. Merge is a SQL-style join — it adds columns. Append is a union — it stacks rows. This guide covers the difference, the join types, and the performance implications of each."
+description: "Merge is a join that adds columns. Append is a union that stacks rows. The difference, the join types, and which one costs more to refresh."
 pubDate: 2026-07-17
 category: "power-query"
 difficulty: "Beginner"
@@ -133,3 +133,6 @@ Load `Orders` and `Customers` as separate tables. In the Power BI model view, cr
 ## Summary
 
 Merge adds columns (join). Append adds rows (union). Use merge for lookups and enrichment — but prefer relationships in the model when possible. Use append to combine similarly structured tables, like monthly exports or regional files. Match column names before appending, and use integer keys for faster merges.
+
+Behaviour described here follows [Microsoft's Merge queries documentation](https://learn.microsoft.com/en-us/power-query/merge-queries-overview).
+

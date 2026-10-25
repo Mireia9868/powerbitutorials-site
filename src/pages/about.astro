@@ -4,28 +4,89 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="About"
-  description="powerbitutorials.com 由 Mireia 主理，专注用真实场景讲清 Power BI、DAX 与 Power Query 的实战教程。"
+  description="Who writes powerbitutorials.com, how every tutorial is verified in Power BI Desktop, and how to report an error."
   article={true}
 >
   <article class="about-page">
     <div class="content-width">
       <span class="page-eyebrow">About</span>
-      <h1>用真实场景，讲清 Power BI。</h1>
+      <h1>Practical Power BI tutorials, written by one person</h1>
 
       <p class="lede">
-        powerbitutorials.com 是一个独立教程站，由 Mireia 主理。我们专注用可复现的示例和真实业务场景，讲清 Power BI、DAX 与 Power Query 里那些容易卡住人的地方。
+        powerbitutorials.com is an independent tutorial site about Power BI, DAX and Power Query.
+        It is written and maintained by Mireia, and it has no connection to Microsoft.
       </p>
 
-      <h2>我们怎么写教程</h2>
+      <h2>What this site is for</h2>
+      <p>
+        Most Power BI material sits at one of two extremes: short listicles that never show a working
+        model, or reference documentation that explains syntax without saying when you would actually
+        use it. This site aims at the space in between — one specific problem per article, a model you
+        can rebuild, and an explanation of <em>why</em> the formula behaves the way it does.
+      </p>
+      <p>
+        The measure of a good tutorial here is simple: after reading it, you should be able to adapt
+        the solution to your own data instead of copying it and hoping.
+      </p>
+
+      <h2>How each tutorial is made</h2>
+      <ol>
+        <li>
+          <strong>Topics come from problems, not keywords.</strong> They are drawn from questions that
+          recur in search results, forum threads and reader email — the places where people get stuck
+          on the same thing again and again.
+        </li>
+        <li>
+          <strong>Every formula is run before it is published.</strong> DAX and Power Query snippets
+          are tested against a sample model in Power BI Desktop. If a measure does not return the
+          stated result, it does not ship. Where behaviour depends on version or storage mode, the
+          article says so explicitly.
+        </li>
+        <li>
+          <strong>Articles are dated and re-checked.</strong> Each tutorial shows when it was published
+          and when it was last reviewed. Power BI changes — visuals get renamed, preview features
+          graduate, older functions get superseded — and articles are revised rather than left to
+          drift out of date.
+        </li>
+        <li>
+          <strong>Version-dependent claims link to Microsoft.</strong> Anything that could change under
+          you is linked to the official documentation so you can verify it yourself rather than take
+          this site's word for it.
+        </li>
+      </ol>
+
+      <h2>Corrections</h2>
+      <p>
+        Technical sites get things wrong, and a tutorial that is quietly incorrect is worse than no
+        tutorial at all. If you find an error, a formula that does not work on your model, or a step
+        that assumes something you don't have, <a href="/contact">tell me</a> — corrections are
+        applied and the review date is updated. Reader reports are the main way this site improves.
+      </p>
+
+      <h2>What this site does not do</h2>
       <ul>
-        <li><strong>示例可复现。</strong> 每篇的 DAX 公式和 Power Query 步骤都基于真实数据集，你照着做能得到同样的结果。</li>
-        <li><strong>讲清为什么。</strong> 不只给代码，也解释筛选上下文、上下文转换这些底层机制，让你能自己改。</li>
-        <li><strong>持续更新。</strong> Power BI 持续演进，我们会随产品更新教程，并标注每篇的最后复核日期。</li>
+        <li>It is not affiliated with, endorsed by, or sponsored by Microsoft.</li>
+        <li>
+          No tool or course is recommended because someone paid for it. Where an affiliate link
+          appears, it is disclosed on that page.
+        </li>
+        <li>There is no account, no paywall and no email required to read anything here.</li>
+        <li>
+          No tutorial is published on a fixed daily schedule to hit a quota. Coverage follows what
+          readers actually need.
+        </li>
       </ul>
 
-      <h2>关于主理人</h2>
+      <h2>Who writes it</h2>
+
+      <!-- TODO(author): replace this paragraph with 2-3 sentences of real background
+           (years with Power BI, the models you build, where you hit these problems).
+           Do not overstate — reviewers check. Do not name an employer. -->
       <p>
-        Mireia 把实战中验证过的 Power BI 模式整理成这套教程。如果你有主题建议或发现错误，欢迎联系。
+        Mireia builds Power BI models and writes about the parts that took longest to get right —
+        filter context, context transition, and why a measure that looks correct returns the wrong
+        number. Every article on this site is written and maintained by the same person, which is
+        why the explanations stay consistent from one tutorial to the next.
       </p>
 
       <div class="author-card">
@@ -33,20 +94,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div>
           <h3>Mireia</h3>
           <p>
-            powerbitutorials.com 主理人。
-            <a href="/contact">联系我</a> — 每一条反馈都会看。
+            Author and maintainer of powerbitutorials.com.
+            <a href="/contact">Get in touch</a> — every message is read.
           </p>
         </div>
       </div>
 
-      <h2>站点如何运转</h2>
+      <h2>How the site is funded</h2>
       <p>
-        本站免费阅读，由展示广告（Google AdSense）支持。广告内容不影响教程的中立性与推荐。如果某篇帮到了你，分享给同事就是最好的支持。
+        This site is free to read and does not require an account. If it saves you time, the most
+        useful thing you can do is send the article to a colleague who is stuck on the same problem.
       </p>
 
       <div class="about-cta">
-        <a href="/tutorials" class="btn btn-primary">浏览教程</a>
-        <a href="/contact" class="btn btn-secondary">联系我</a>
+        <a href="/tutorials" class="btn btn-primary">Browse tutorials</a>
+        <a href="/contact" class="btn btn-secondary">Contact</a>
       </div>
     </div>
   </article>
@@ -75,6 +137,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     padding-left: 20px;
   }
   .about-page h2 { margin-top: 2.5em; }
+  .about-page ol, .about-page ul { padding-left: 1.4em; }
+  .about-page li { margin-bottom: 0.7em; }
   .author-card {
     display: flex;
     gap: 18px;

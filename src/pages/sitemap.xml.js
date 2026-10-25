@@ -12,6 +12,7 @@ export async function GET({ site }) {
     { loc: "/", priority: "1.0", changefreq: "weekly" },
     { loc: "/tutorials/", priority: "0.9", changefreq: "weekly" },
     { loc: "/about/", priority: "0.5", changefreq: "monthly" },
+    { loc: "/author/mireia/", priority: "0.5", changefreq: "monthly" },
     { loc: "/contact/", priority: "0.5", changefreq: "monthly" },
     { loc: "/privacy/", priority: "0.3", changefreq: "yearly" },
     { loc: "/terms/", priority: "0.3", changefreq: "yearly" },
@@ -30,8 +31,11 @@ export async function GET({ site }) {
   }
 
   // 教程详情页
+  // 德语区（slug 前缀 de-）目前是 noindex 的半成品，不进 sitemap：
+  // 一个 noindex 的 URL 出现在 sitemap 里是明确的实现错误。
   for (const t of tutorials) {
     if (t.data.draft) continue;
+    if (t.slug.startsWith("de-")) continue;
     urls.push({
       loc: `${baseUrl}/tutorials/${t.slug}/`,
       priority: "0.8",

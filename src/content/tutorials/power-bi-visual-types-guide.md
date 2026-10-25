@@ -1,6 +1,6 @@
 ---
 title: "Power BI Visual Types: A Practical Guide to Choosing the Right Chart"
-description: "Power BI offers dozens of visual types, but most reports use the same handful. This guide covers the core visuals — bar, line, card, matrix, map, and scatter — with guidance on when each is appropriate, common mistakes, and the visual hierarchy that makes reports readable."
+description: "Bar, line, card, matrix, map and scatter: when each is the right choice, the mistakes that make them unreadable, and how to order them."
 pubDate: 2026-07-18
 category: "visualization"
 difficulty: "Beginner"
@@ -133,3 +133,6 @@ A good report follows a visual hierarchy: top-level summary, supporting detail, 
 ## Summary
 
 Most reports need only five visual types: bar, line, card, matrix, and map. Choose based on the question — trends use lines, comparisons use bars, single numbers use cards, cross-tabs use matrices, geography uses maps. Structure reports in layers: summary at the top, trends in the middle, detail at the bottom. Keep pages to 4–7 visuals, use color intentionally, and always provide context with titles and filter indicators.
+
+Microsoft documents this feature in [its Visual types in Power BI reference](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a).
+

@@ -1,6 +1,6 @@
 ---
 title: "One-to-Many vs Many-to-Many Relationships in Power BI: A Practical Guide"
-description: "Relationship cardinality determines how filters flow through your data model. One-to-many is the default and the safest choice. Many-to-many is sometimes necessary but introduces ambiguity and performance costs. This guide covers both, when each is appropriate, and the patterns that make many-to-many manageable."
+description: "Cardinality decides how filters travel. One-to-many is the safe default; many-to-many is sometimes needed but costs clarity and speed."
 pubDate: 2026-07-11
 updatedDate: 2026-10-12
 category: "data-modeling"
@@ -151,4 +151,6 @@ One-to-many is the default and the safest relationship type. Many-to-many is som
 - [Star Schema Design in Power BI](/tutorials/data-modeling-star-schema/) — the pattern one-to-many relationships are built on.
 - [Role-Playing Dimensions in Power BI](/tutorials/role-playing-dimensions/) — handling multiple date relationships with `USERELATIONSHIP`.
 - [Bidirectional Filtering in Power BI](/tutorials/bidirectional-filtering-guide/) — when (and when not) to open filter flow both ways.
+
+For the official documentation behind this topic, see [Microsoft Relationships in Power BI models](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-relationships-understand).
 

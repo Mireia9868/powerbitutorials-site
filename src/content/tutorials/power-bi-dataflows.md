@@ -170,6 +170,8 @@ Yes, in one direction at a time. A dataflow can reference entities from another 
 
 They fail too, or they refresh against the last successful dataflow snapshot. In Import mode, dependent datasets simply cannot pick up new data until the dataflow succeeds. PowerShell and the REST API can help you orchestrate refresh order so the dataflow runs first.
 
+Microsoft documents this feature in [its Dataflows reference](https://learn.microsoft.com/en-us/power-bi/transform-model/dataflows/dataflows-introduction-self-service).
+
 ## Related Reading
 
 - [DirectQuery vs Import Mode](/tutorials/directquery-vs-import-mode/)

@@ -1,6 +1,6 @@
 ---
 title: "Conditional Formatting for Charts, Bar Charts & Gauges in Power BI"
-description: "Charts don't use cell rules — they use Data colors conditional formatting. This guide goes deep on bar/column and gauge visuals: color by value, by rule, or with a DAX measure, plus dynamic targets, rank coloring, and KPI status logic. Line charts and KPI cards have their own dedicated guides linked inside."
+description: "Charts use Data colors, not cell rules. Colour bar, column and gauge visuals by value, rule or measure, with dynamic targets and KPI logic."
 pubDate: 2026-08-28
 updatedDate: 2026-09-24
 category: "visualization"
@@ -87,7 +87,7 @@ RETURN
 
 Two things matter here. First, `SWITCH(TRUE(), ...)` evaluates conditions in order and returns the first match, so the most specific band must come first. Second, the color strings are hex literals wrapped in quotes — Power BI expects text, not a color object.
 
-You can also return named colors such as `"red"` or `"Green"`, but hex codes give you control over the exact shade. Avoid returning `BLANK()` when you actually want a neutral color; blank may fall back to the visual default, which is rarely what you intended. Return an explicit hex value instead.
+You can also return named colors such as `"red"` or `"Green"`, but hex codes give you control over the exact shade. Avoid returning `BLANK()` when you actually want a neutral color; blank may fall back to the visual default, which is rarely what you intended. Return an explicit hex value instead. Microsoft documents every case in the [BLANK reference](https://learn.microsoft.com/en-us/dax/blank-function-dax).
 
 The same pattern works for category-vs-target coloring — point **Data colors → fx → Field value** at a measure that compares each bar to its own target, and the logic lives in one measure you can reuse across every bar chart in the report:
 
@@ -194,7 +194,7 @@ VAR CurrentTarget = [Sales Target]
 VAR CurrentSales = [Total Sales]
 RETURN
     MAX ( CurrentTarget, CurrentSales ) * 1.25
-```
+```. See the [MAX reference](https://learn.microsoft.com/en-us/dax/max-function-dax) for the complete rules.
 
 The `Gauge Max` measure multiplies the larger of target or actual by 1.25. That produces a stable axis with visible headroom. A hard-coded maximum like 1000000 breaks the moment a region reports a different scale.
 

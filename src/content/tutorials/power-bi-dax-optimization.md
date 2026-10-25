@@ -1,6 +1,6 @@
 ---
 title: "Power BI DAX Optimization: 10 Patterns That Actually Speed Up Measures"
-description: "Most slow Power BI reports are slow because of DAX, not the model. Learn the 10 optimization patterns that fix the majority of DAX performance problems, with copy-paste measures and Server Timings context."
+description: "Most slow reports are slow because of DAX. Ten patterns that fix the common cases, with Server Timings readings to prove it worked."
 pubDate: 2026-08-28
 category: "dax"
 difficulty: "Advanced"
@@ -69,7 +69,7 @@ SWITCH(TRUE(),
 )
 ```
 
-SWITCH stops at the first true branch and reads cleaner. See the full breakdown in our [SWITCH function guide](/tutorials/dax-switch-function/).
+SWITCH stops at the first true branch and reads cleaner. See the full breakdown in our [SWITCH function guide](/tutorials/dax-switch-function/). The [SWITCH documentation](https://learn.microsoft.com/en-us/dax/switch-function-dax) has the full specification.
 
 ## 5. Use DIVIDE, not the / operator
 
@@ -81,7 +81,7 @@ Ratio = DIVIDE([Total Revenue], [Total Cost], 0)   // safe, optimized
 
 ## 6. Avoid context transition inside iterators
 
-When an iterator like `SUMX` or `FILTER` hits a measure, it triggers **context transition** — the row context becomes a filter context for every row. If the measure is expensive, cost scales with row count. Push filters outside the iterator (Patterns 1–2) so CALCULATE handles them once.
+When an iterator like `SUMX` or `FILTER` hits a measure, it triggers **context transition** — the row context becomes a filter context for every row. If the measure is expensive, cost scales with row count. Push filters outside the iterator (Patterns 1–2) so CALCULATE handles them once. Refer to the [FILTER reference](https://learn.microsoft.com/en-us/dax/filter-function-dax) for edge cases.
 
 ## 7. Mark your date table
 

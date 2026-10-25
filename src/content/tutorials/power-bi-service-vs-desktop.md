@@ -134,6 +134,8 @@ Yes. Open the report in the Service, use File → Download a copy to get a `.pbi
 
 Usually not. Cloud-to-cloud sources work without a gateway. You need one when the source is on-premises or behind a corporate network, such as SQL Server on an internal VM or an Excel file on a network share.
 
+For the official documentation behind this topic, see [Microsoft Power BI service overview](https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-service-overview).
+
 ## Related Reading
 
 - [/tutorials/directquery-vs-import-mode/](/tutorials/directquery-vs-import-mode/)

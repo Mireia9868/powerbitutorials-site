@@ -1,6 +1,6 @@
 ---
 title: "Power BI Dashboard Design: 12 Principles for Clear, Actionable Reports"
-description: "A good Power BI dashboard isn't just charts on a page — it's a designed experience. Learn 12 principles for building dashboards that users actually understand and act on, from layout to color to interaction design."
+description: "Twelve principles for dashboards people actually act on: layout, colour, density, and the interactions that guide rather than distract."
 pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Intermediate"
@@ -189,3 +189,6 @@ Under 3 seconds for the first visual, under 8 seconds for a full page. If you're
 - Master [bookmarks and navigation](/tutorials/bookmarks-navigation-power-bi) for multi-page reports
 - Use [conditional formatting](/tutorials/conditional-formatting-power-bi) to highlight exceptions
 - See our [performance guide](/tutorials/power-bi-performance-optimization) to keep dashboards fast
+
+For the full specification, see [Microsoft Dashboards in the Power BI service](https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboards).
+
