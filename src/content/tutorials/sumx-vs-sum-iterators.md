@@ -1,6 +1,6 @@
 ---
 title: "SUMX vs SUM in DAX: When Iterators Matter and When They Don't"
-description: "SUM is simple and fast. SUMX is flexible and powerful. Choosing the wrong one leads to incorrect totals or bloated models. This guide covers the difference, when each is appropriate, and the three patterns where SUMX is the only correct choice."
+description: "SUM reads a column; SUMX evaluates a row expression. When the difference changes your totals, and when SUMX is the only correct choice."
 pubDate: 2026-07-14
 category: "dax"
 difficulty: "Beginner"
@@ -43,7 +43,7 @@ Total Revenue = SUM(Sales[Quantity] * Sales[UnitPrice])
 
 // This works — SUMX evaluates the multiplication per row
 Total Revenue = SUMX(Sales, Sales[Quantity] * Sales[UnitPrice])
-```
+```. Microsoft documents every case in the [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax).
 
 `SUMX` walks every row in the (filtered) `Sales` table, computes `Quantity * UnitPrice` for that row, stores it in memory, then sums all the stored values.
 
@@ -153,7 +153,7 @@ Both are correct. The `CALCULATE` version is easier to read and lets the engine 
 
 ## Summary
 
-Use `SUM` for simple column totals. Use `SUMX` when you need row-by-row math, conditional aggregation, or multi-table expressions. Don't use `SUMX` as a default — it adds complexity without benefit when `SUM` suffices. When in doubt, start with `SUM` and switch to `SUMX` only if the expression requires row context.
+Use `SUM` for simple column totals. Use `SUMX` when you need row-by-row math, conditional aggregation, or multi-table expressions. Don't use `SUMX` as a default — it adds complexity without benefit when `SUM` suffices. When in doubt, start with `SUM` and switch to `SUMX` only if the expression requires row context. Microsoft's [SUM reference](https://learn.microsoft.com/en-us/dax/sum-function-dax) covers the full syntax.
 
 ## Related Reading
 

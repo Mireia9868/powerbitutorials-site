@@ -1,6 +1,6 @@
 ---
 title: "Conditional Formatting in Power BI: A Complete Guide (Based on Measure, Formula & Text)"
-description: "Learn every type of conditional formatting in Power BI — background color, font color, data bars, and icons — plus how to drive them with a measure, a formula, or a text field. Includes copy-paste DAX and real Contoso examples."
+description: "Background colour, font colour, data bars and icons: every conditional formatting type, driven by a measure, formula or text field."
 pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Beginner"
@@ -295,6 +295,8 @@ Partially. Charts use "Data colors" conditional formatting rather than cell rule
 - [Gauge Conditional Formatting](/tutorials/conditional-formatting-charts-power-bi/)
 - [Bar Chart Conditional Formatting](/tutorials/conditional-formatting-charts-power-bi/)
 - [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
+
+Microsoft documents this feature in [its Conditional formatting in Power BI reference](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-conditional-table-formatting).
 
 ## Related Reading
 

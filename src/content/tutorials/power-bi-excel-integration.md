@@ -1,6 +1,6 @@
 ---
 title: "Power BI and Excel Integration: The Complete Guide"
-description: "Excel and Power BI are not competing tools. In most organizations they sit at opposite ends of the same workflow: Excel is where data gets assembled, corrected, and negotiated, while Power"
+description: "Excel assembles and argues over the data; Power BI models and distributes it. How the two hand off without duplicating work."
 pubDate: 2026-10-06
 category: power-query
 tags: ["excel", "integration"]
@@ -162,6 +162,8 @@ Only if the workbook is genuinely owned by a process, not a person. Once a repor
 ### Q: How do I keep a workbook and a Power BI model in sync?
 
 Store the workbook in OneDrive or SharePoint, connect with the web connector, and schedule the refresh to run at a time when editors are offline. Keep field names stable. Renaming a table in Excel breaks the query, and the error surfaces at refresh time, not when the change was made.
+
+For the full specification, see [Microsoft Connect to Excel workbooks](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-connect-excel).
 
 ## Related Reading
 

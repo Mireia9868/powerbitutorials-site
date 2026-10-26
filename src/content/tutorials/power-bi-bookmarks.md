@@ -136,6 +136,8 @@ A field parameter swaps the fields bound to a visual (for example, choosing betw
 
 There is no documented hard limit, but the usability limit is around 20 on a single page before buttons crowd the canvas. Group bookmarks in the pane by purpose and consider splitting views across pages once you cross that threshold.
 
+The underlying documentation for this feature is [Microsoft Bookmarks in Power BI](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks).
+
 ## Related Reading
 
 - /tutorials/bookmarks-navigation-power-bi/

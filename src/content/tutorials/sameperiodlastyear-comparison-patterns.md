@@ -1,6 +1,6 @@
 ---
 title: "SAMEPERIODLASTYEAR and Date Comparison Patterns in DAX"
-description: "Year-over-year comparison is the most common business question in reporting. SAMEPERIODLASTYEAR is the simplest function for it, but it's just the start. This guide covers YoY, MoM, QoQ, and the custom comparison patterns for fiscal calendars and non-standard periods."
+description: "YoY, MoM and QoQ with SAMEPERIODLASTYEAR and DATEADD, plus the comparison patterns for fiscal years and non-standard periods."
 pubDate: 2026-07-20
 category: "time-intelligence"
 difficulty: "Intermediate"
@@ -13,7 +13,7 @@ featured: false
 
 ## Prerequisites
 
-Same as all time intelligence: a proper date table, marked as a date table, with a relationship to your fact table. No exceptions.
+Same as all time intelligence: a proper date table, marked as a date table, with a relationship to your fact table. No exceptions. Microsoft documents every case in the [DATE reference](https://learn.microsoft.com/en-us/dax/date-function-dax).
 
 ## Pattern 1: Year-over-year (YoY)
 
@@ -55,7 +55,7 @@ RETURN
     DIVIDE(Current - PriorMonth, PriorMonth, 0)
 ```
 
-`DATEADD` is the general-purpose date shifter. `DATEADD(Date[Date], -1, MONTH)` shifts back one month; `DATEADD(Date[Date], -1, YEAR)` shifts back one year (equivalent to `SAMEPERIODLASTYEAR`).
+`DATEADD` is the general-purpose date shifter. `DATEADD(Date[Date], -1, MONTH)` shifts back one month; `DATEADD(Date[Date], -1, YEAR)` shifts back one year (equivalent to `SAMEPERIODLASTYEAR`). Refer to the [DATEADD reference](https://learn.microsoft.com/en-us/dax/dateadd-function-dax) for edge cases.
 
 **Why use `DATEADD` over `SAMEPERIODLASTYEAR`:** `DATEADD` supports any interval (day, month, quarter, year) and any offset. `SAMEPERIODLASTYEAR` is specifically for one year back. Use `DATEADD` when you need flexibility.
 

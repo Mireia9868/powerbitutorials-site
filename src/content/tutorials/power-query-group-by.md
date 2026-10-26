@@ -1,6 +1,6 @@
 ---
 title: "Power Query Group By: Aggregate Data Without Writing Formulas"
-description: "Group By in Power Query lets you summarize rows by category — count, sum, average, min, max — using a visual interface. Learn the UI, advanced grouping with multiple columns, the M code behind it, and the mistakes that produce wrong totals."
+description: "Summarise rows by category: count, sum, average, min, max. Multiple columns, the M code it produces, and why totals come out wrong."
 pubDate: 2026-07-26
 category: "power-query"
 difficulty: "Beginner"
@@ -212,3 +212,6 @@ Then use those columns in the Group By dialog. For more date-based transformatio
 - Create columns to group by with conditional logic: [Power Query conditional columns](/tutorials/power-query-conditional-columns/)
 - Transform data before grouping: [Power Query common transformations](/tutorials/power-query-common-transformations/)
 - Compare with merging data instead of grouping: [Merge vs append queries](/tutorials/merge-vs-append-queries/)
+
+For the full specification, see [Microsoft Group by](https://learn.microsoft.com/en-us/power-query/group-by).
+

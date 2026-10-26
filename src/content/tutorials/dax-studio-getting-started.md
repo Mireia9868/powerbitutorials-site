@@ -65,6 +65,8 @@ A: Yes, with an XMLA endpoint enabled on Premium/Premium Per User. Desktop conne
 **Q: What is the difference from Performance Analyzer?**
 A: Performance Analyzer lives inside Power BI and times whole visuals. DAX Studio times individual queries and shows the SE/FE split.
 
+DAX Studio itself is free and open source; its documentation lives at [daxstudio.org](https://daxstudio.org/).
+
 ## Related Reading
 
 - [Power BI DAX Optimization](/tutorials/power-bi-dax-optimization/)

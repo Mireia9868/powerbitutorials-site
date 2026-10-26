@@ -1,6 +1,6 @@
 ---
 title: "Power BI Drill Through: Jump from Summary to Detail in One Click"
-description: "Drill through lets users click a data point and jump to a detailed report page filtered to that specific context. This guide covers setup, filter passthrough, cross-report drill through, and the design patterns that make drill-through reports intuitive."
+description: "Drill through takes a click and lands on a detail page filtered to that context. Setup, filter passthrough, cross-report, and design rules."
 pubDate: 2026-07-23
 category: "visualization"
 difficulty: "Intermediate"
@@ -209,6 +209,8 @@ Yes, but right-clicking isn't available on mobile. Use button-driven drill throu
 - Read the [dashboard design principles](/tutorials/power-bi-dashboard-design-principles) guide to lay out your summary and detail pages effectively
 - See the [tooltips guide](/tutorials/power-bi-tooltips-page-reports) for another way to show contextual detail without leaving the page
 - Check the [sales dashboard tutorial](/tutorials/power-bi-sales-dashboard-tutorial) for an end-to-end walkthrough that includes drill-through pages
+
+For the full specification, see [Microsoft Drill through in Power BI](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-drillthrough).
 
 ## Related Reading
 

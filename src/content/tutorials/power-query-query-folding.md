@@ -1,6 +1,6 @@
 ---
 title: "Power Query Query Folding: How and Why It Matters"
-description: "Query folding is the process where Power Query translates the steps you build in the editor into a single query statement that the source system executes on its own engine."
+description: "Folding turns editor steps into one query the source runs itself. Why a single step can silently break it, and how to check."
 pubDate: 2026-10-02
 category: power-query
 tags: ["performance", "query folding"]
@@ -184,6 +184,8 @@ It hurts folding, because it forces the table into local memory and cuts the que
 - [Power BI DAX Optimization](/tutorials/power-bi-dax-optimization/)
 - [DAX Optimization Techniques](/tutorials/dax-optimization-techniques/)
 - [Using Performance Analyzer in Power BI](/tutorials/power-bi-performance-analyzer/)
+The underlying documentation for this feature is [Microsoft Query folding](https://learn.microsoft.com/en-us/power-query/query-folding-basics).
+
 ## Related Reading
 
 - [DirectQuery vs Import Mode in Power BI](/tutorials/directquery-vs-import-mode/)

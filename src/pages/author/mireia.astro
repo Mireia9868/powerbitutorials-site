@@ -1,34 +1,80 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE_URL } from "../../consts";
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/author/mireia/#person`,
+  name: "Mireia",
+  url: `${SITE_URL}/author/mireia/`,
+  jobTitle: "Power BI author and model builder",
+  description:
+    "Author and maintainer of powerbitutorials.com, writing about Power BI, DAX and Power Query.",
+  knowsAbout: ["Power BI", "DAX", "Power Query", "Data modeling", "Business intelligence"],
+  worksFor: { "@id": `${SITE_URL}/#organization` },
+};
 ---
 
 <BaseLayout
   title="Mireia — Author"
-  description="Mireia，powerbitutorials.com 主理人，专注用真实场景讲清 Power BI、DAX 与 Power Query。"
+  description="Mireia writes and maintains every tutorial on powerbitutorials.com — Power BI, DAX, Power Query and data modeling."
   article={true}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+
   <article class="about-page">
     <div class="content-width">
       <span class="page-eyebrow">Author</span>
       <h1>Mireia</h1>
 
+      <p class="lede">
+        Author and maintainer of powerbitutorials.com. Every tutorial on this site is written and
+        reviewed by the same person.
+      </p>
+
       <div class="author-card">
         <div class="author-avatar" aria-hidden="true">M</div>
         <div>
-          <h3>powerbitutorials.com 主理人</h3>
-          <p>
-            把实战中验证过的 Power BI、DAX 与 Power Query 模式整理成可复现的教程。
-          </p>
+          <h3>Power BI author &amp; model builder</h3>
+          <p>Writes about the parts of Power BI that take the longest to get right.</p>
         </div>
       </div>
 
+      <h2>What I write about</h2>
       <p>
-        Mireia 写的每篇教程都基于真实数据集与场景，目标是让你不仅能照做，还能理解背后的机制（筛选上下文、上下文转换、星型建模等），从而自己解决业务里的计算问题。
+        The articles here concentrate on the mechanisms underneath the clicks: how filter context
+        and context transition actually work, why a star schema makes DAX shorter, and which Power
+        Query steps quietly break query folding. Those are the places where copying a formula from
+        a forum answer stops working as soon as your model changes shape.
+      </p>
+
+      <h2>How I work</h2>
+      <ul>
+        <li>
+          Every DAX and Power Query snippet is run against a sample model in Power BI Desktop before
+          it is published. If it does not return the stated result, it does not ship.
+        </li>
+        <li>
+          Version-dependent behaviour is stated explicitly and linked to the Microsoft documentation
+          so you can check it against your own build.
+        </li>
+        <li>
+          When a feature is renamed, deprecated or superseded, the article is revised and its review
+          date is updated rather than left to drift.
+        </li>
+      </ul>
+
+      <h2>Corrections and topic requests</h2>
+      <p>
+        If a formula fails on your model, or a step assumes something you don't have, that is a bug
+        in the article — <a href="/contact">send it over</a> and it gets fixed. Topic requests are
+        read too; the queue is driven by what readers keep getting stuck on.
       </p>
 
       <div class="about-cta">
-        <a href="/tutorials" class="btn btn-primary">浏览 Mireia 的教程</a>
-        <a href="/contact" class="btn btn-secondary">联系我</a>
+        <a href="/tutorials" class="btn btn-primary">Browse all tutorials</a>
+        <a href="/contact" class="btn btn-secondary">Contact</a>
       </div>
     </div>
   </article>
@@ -46,6 +92,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     margin-bottom: 12px;
   }
   .about-page h1 { font-size: 2.4rem; margin-bottom: 20px; }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--c-text-muted);
+    margin-bottom: 40px;
+    border-left: 3px solid var(--c-accent);
+    padding-left: 20px;
+  }
+  .about-page h2 { margin-top: 2.5em; }
+  .about-page ul { padding-left: 1.4em; }
+  .about-page li { margin-bottom: 0.7em; }
   .author-card {
     display: flex;
     gap: 18px;

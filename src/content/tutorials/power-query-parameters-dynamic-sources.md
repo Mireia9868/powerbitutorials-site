@@ -1,6 +1,6 @@
 ---
 title: "Power Query Parameters: Build Dynamic, Reusable Data Sources"
-description: "Parameters let you control Power Query behavior without editing the M code — swap environments, change date ranges, or toggle between production and test data with a dropdown. This guide covers creating parameters, using them in queries, and the pattern for environment switching."
+description: "Swap environments, date ranges or test data from a dropdown instead of editing M code. How to create parameters and pass them in."
 pubDate: 2026-07-18
 category: "power-query"
 difficulty: "Intermediate"
@@ -126,6 +126,8 @@ Parameters are resolved at query refresh time, not at query execution time. This
 ## Summary
 
 Parameters externalize values that vary by environment or reporting period. Use them for server names, file paths, date ranges, and environment switching. Avoid parameterizing table names or per-user values. When published to the Power BI Service, parameters let a single dataset serve multiple environments — a powerful pattern for managing dev/test/prod lifecycles.
+
+For the full specification, see [Microsoft Query parameters](https://learn.microsoft.com/en-us/power-query/power-query-query-parameters).
 
 ## Related Reading
 

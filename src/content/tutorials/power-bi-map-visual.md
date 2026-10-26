@@ -147,6 +147,8 @@ Three usual causes: the TopoJSON file has no `properties` key, the values in you
 
 Yes, but they can be slow, because geocoding and polygon lookups add latency on top of the query round-trip. If your map is sluggish under DirectQuery, consider importing just the geographic dimension table while leaving the fact table in DirectQuery. The trade-offs are covered in our DirectQuery vs Import mode guide.
 
+For the official documentation behind this topic, see [Microsoft Map visuals](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-map-tips-and-tricks).
+
 ## Related Reading
 
 - [Power BI Dashboard Design Principles](/tutorials/power-bi-dashboard-design-principles/)

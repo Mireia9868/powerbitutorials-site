@@ -175,6 +175,8 @@ Every time you add a new table or column, and before promoting a model from Desk
 
 Yes, on key columns that are already integers or on columns used for fine-grained slicing where the business genuinely needs every value. The problem is high-cardinality *text*, not high cardinality itself.
 
+Microsoft documents this feature in [its Reduce model size reference](https://learn.microsoft.com/en-us/power-bi/guidance/import-modeling-data-reduction).
+
 ## Related Reading
 
 - /tutorials/data-modeling-star-schema/

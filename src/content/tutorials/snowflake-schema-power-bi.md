@@ -97,7 +97,7 @@ CALCULATE(
 )
 ```
 
-If `DimProduct` already carried `CategoryName`, the same result is a plain visual-level filter with no measure needed. That is the trade: snowflaking pushes complexity into DAX and relationships; flattening pushes it into Power Query, once, at load time. The `CALCULATE` mechanics that make propagation work are worth reviewing in `/tutorials/calculate-function/` and `/tutorials/filter-context-row-context-explained/`.
+If `DimProduct` already carried `CategoryName`, the same result is a plain visual-level filter with no measure needed. That is the trade: snowflaking pushes complexity into DAX and relationships; flattening pushes it into Power Query, once, at load time. The `CALCULATE` mechanics that make propagation work are worth reviewing in `/tutorials/calculate-function/` and `/tutorials/filter-context-row-context-explained/`. Refer to the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax) for edge cases.
 
 A subtle accuracy point: relationship chains require *unbroken* many-to-one, single-direction paths from fact to the farthest dimension. If any hop is bidirectional or many-to-many, filter propagation can produce unexpected results, and you may need to rethink the model rather than patch it with DAX.
 

@@ -81,7 +81,7 @@ Product Category =
 RELATED ( Products[Category] )
 ```
 
-`EARLIER` is more subtle. It does not mean "the previous row" or "the outer loop" in any generic sense. It requires a **nested row context** — two row contexts stacked, with `EARLIER` referring to the outer one.
+`EARLIER` is more subtle. It does not mean "the previous row" or "the outer loop" in any generic sense. It requires a **nested row context** — two row contexts stacked, with `EARLIER` referring to the outer one. Refer to the [EARLIER reference](https://learn.microsoft.com/en-us/dax/earlier-function-dax) for edge cases.
 
 A classic pattern is ranking customers by sales inside a calculated column:
 

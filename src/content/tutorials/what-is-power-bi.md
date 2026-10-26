@@ -151,6 +151,8 @@ Excel is a grid you compute in; Power BI is a model you query. Excel works well 
 
 A star schema arranges tables into fact tables (measurable events like sales) and dimension tables (descriptive attributes like customer, product, date). Relationships run one-to-many from dimension to fact. This layout makes DAX measures simpler and faster, avoids ambiguous filter paths, and is the shape the VertiPaq engine is optimized for. Most modeling problems trace back to skipping it.
 
+For the official documentation behind this topic, see [Microsoft Visual types in Power BI](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a).
+
 ## Related Reading
 
 - [Power BI Common Mistakes Beginners Make](/tutorials/power-bi-common-mistakes-beginners/)

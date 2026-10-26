@@ -1,6 +1,6 @@
 ---
 title: "Incremental Refresh in Power BI: Setup and Gotchas"
-description: "Incremental refresh splits a large fact table into two logical halves: the part that never changes (historical partitions) and the part that can change (the current, hot window)."
+description: "Incremental refresh splits a fact table into history and a hot window. How partitions are created, and the limits that change the design."
 pubDate: 2026-10-11
 category: data-modeling
 tags: ["refresh", "performance"]
@@ -136,6 +136,8 @@ It does not. Partitioning is an Import-mode concept. A table in DirectQuery mode
 ### Q: Do I need to refresh the whole model after changing the policy?
 
 Yes, run one full refresh per affected table after editing the stored or refresh window. Changing the window rewrites the partition boundaries, and Power BI does not backfill newly covered partitions automatically. The first refresh after a policy change is typically much longer than subsequent ones.
+
+Behaviour described here follows [Microsoft's Incremental refresh documentation](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview).
 
 ## Related Reading
 

@@ -69,6 +69,8 @@ A: Yes, with "Edit interactions" → the slicer can filter a second slicer, but 
 **Q: Why do my synced slicers not match?**
 A: They were added as separate visuals. Sync copies *values*, not the visual — rebuild one and sync it rather than copying.
 
+Behaviour described here follows [Microsoft's Slicers in Power BI documentation](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-slicers).
+
 ## Related Reading
 
 - [Bookmarks Navigation](/tutorials/bookmarks-navigation-power-bi/)

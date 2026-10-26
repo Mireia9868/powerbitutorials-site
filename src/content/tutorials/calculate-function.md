@@ -1,6 +1,6 @@
 ---
 title: "CALCULATE: The Most Important DAX Function Explained"
-description: "CALCULATE is the only function that can modify filter context. Master its syntax, evaluation order, and three real-world patterns that unlock every advanced DAX formula."
+description: "CALCULATE is the only function that changes filter context. Syntax, evaluation order and the three patterns behind advanced DAX."
 pubDate: 2026-06-22
 updatedDate: 2026-07-20
 category: "dax"
@@ -10,7 +10,7 @@ author: Mireia
 featured: true
 ---
 
-If DAX has a "boss function," it's `CALCULATE`. Every advanced pattern — time intelligence, percentage-of-total, cohort analysis, rolling averages — depends on it. This guide explains why `CALCULATE` is special, how to use it correctly, and the subtle behaviors that cause 90% of intermediate DAX bugs.
+If DAX has a "boss function," it's `CALCULATE`. Every advanced pattern — time intelligence, percentage-of-total, cohort analysis, rolling averages — depends on it. This guide explains why `CALCULATE` is special, how to use it correctly, and the subtle behaviors that cause 90% of intermediate DAX bugs. Microsoft documents every case in the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax).
 
 ## Why CALCULATE matters
 
@@ -72,7 +72,7 @@ DIVIDE(
 )
 ```
 
-`ALL(Product[Category])` removes any filter on the `Category` column. So when the visual filters to "Electronics," `[Grand Total Revenue]` still returns the all-category total — exactly what the denominator needs.
+`ALL(Product[Category])` removes any filter on the `Category` column. So when the visual filters to "Electronics," `[Grand Total Revenue]` still returns the all-category total — exactly what the denominator needs. Refer to the [ALL reference](https://learn.microsoft.com/en-us/dax/all-function-dax) for edge cases.
 
 > **Use the right ALL variant:**
 > - `ALL(Table[Column])` — removes filter on one column

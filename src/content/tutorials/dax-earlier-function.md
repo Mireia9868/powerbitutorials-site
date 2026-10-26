@@ -1,6 +1,6 @@
 ---
 title: "DAX EARLIER Explained: Reference the Previous Row in a Nested Row Context"
-description: "EARLIER in DAX lets you reach a parent row context from inside a nested iteration. Learn what it does, when you actually need it, and the modern alternatives."
+description: "EARLIER reaches a parent row context from inside a nested iteration. When you still need it, and the cleaner alternatives to use instead."
 pubDate: 2026-09-23
 category: "dax"
 difficulty: "Advanced"
@@ -10,7 +10,7 @@ featured: false
 draft: false
 ---
 
-If you have spent more than a week writing DAX, you have hit it: a calculated column that needs the "current" value of a row **and** a value from the same table one level up. That is exactly what `EARLIER` is for — and exactly why most beginners find it confusing. This guide explains what `EARLIER` actually references, shows a worked example, and then shows the patterns that make you not need it at all.
+If you have spent more than a week writing DAX, you have hit it: a calculated column that needs the "current" value of a row **and** a value from the same table one level up. That is exactly what `EARLIER` is for — and exactly why most beginners find it confusing. This guide explains what `EARLIER` actually references, shows a worked example, and then shows the patterns that make you not need it at all. Microsoft's [EARLIER reference](https://learn.microsoft.com/en-us/dax/earlier-function-dax) covers the full syntax.
 
 ## What EARLIER really does
 
@@ -46,7 +46,7 @@ Here is what happens step by step:
 1. The calculated column creates a row context for each `Sales` row.
 2. `FILTER` iterates `Sales` again, creating a **second** row context.
 3. Inside `FILTER`, `EARLIER ( Sales[Product] )` pulls the product of the *outer* (column) row, so the filter keeps only rows of the same product.
-4. `RANKX` then ranks only within that subset.
+4. `RANKX` then ranks only within that subset. Microsoft's [FILTER reference](https://learn.microsoft.com/en-us/dax/filter-function-dax) covers the full syntax.
 
 Without `EARLIER`, the inner `Sales[Product]` would refer to the row `FILTER` is currently scanning — which is always equal to itself, so the filter would never narrow correctly.
 

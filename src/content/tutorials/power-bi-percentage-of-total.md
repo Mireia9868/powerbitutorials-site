@@ -1,6 +1,6 @@
 ---
 title: "Percentage of Total in Power BI: Three DAX Patterns and When to Use Each"
-description: "Calculate % of total in Power BI with ALL, ALLEXCEPT, and a ratio measure. Learn which pattern respects slicers and which ignores them, with copy-paste DAX."
+description: "Percent of total with ALL, ALLEXCEPT or a ratio measure: which pattern respects slicers, which ignores them, and when each is correct."
 pubDate: 2026-09-23
 category: "dax"
 difficulty: "Beginner"
@@ -22,7 +22,7 @@ DIVIDE (
 )
 ```
 
-`ALL ( 'Product' )` removes the product filter, so the denominator is the grand total across **all** products, even if a slicer hides some. Use this for "share of everything".
+`ALL ( 'Product' )` removes the product filter, so the denominator is the grand total across **all** products, even if a slicer hides some. Use this for "share of everything". See the [ALL reference](https://learn.microsoft.com/en-us/dax/all-function-dax) for the complete rules.
 
 ## Pattern 2: ALLEXCEPT — share within the current group (respects slicers)
 

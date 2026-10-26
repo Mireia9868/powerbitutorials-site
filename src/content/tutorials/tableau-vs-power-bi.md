@@ -62,7 +62,7 @@ One hidden cost: DAX and M skills are common in the market because the toolset i
 
 ## Step 3: Write the Same Measure in Both Tools
 
-The clearest way to feel the difference is to build one non-trivial metric in each. Take year-to-date sales that only includes products that existed in the previous year.
+The clearest way to feel the difference is to build one non-trivial metric in each. Take year-to-date sales that only includes products that existed in the previous year. Microsoft documents every case in the [YEAR reference](https://learn.microsoft.com/en-us/dax/year-function-dax).
 
 In Power BI this is a model-context problem, solved with filter context:
 

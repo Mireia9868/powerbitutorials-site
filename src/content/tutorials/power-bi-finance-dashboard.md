@@ -181,6 +181,8 @@ It is not wrong, it is undefined. `DIVIDE` returns blank when the denominator is
 
 Roughly ten to twelve, with the KPI strip counting as one band. The constraint is cognitive, not technical. If a reader has to scroll to compare last month's revenue to this month's, the layout is doing the wrong job. Move supporting detail to drill-through or a secondary page.
 
+For the full specification, see [Microsoft Dashboards in the Power BI service](https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboards).
+
 ## Related Reading
 
 - [Dashboard Design Principles](/tutorials/power-bi-dashboard-design-principles/)

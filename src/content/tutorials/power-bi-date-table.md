@@ -12,11 +12,11 @@ draft: false
 
 A date table is the backbone of any Power BI model that needs time intelligence. Without one, functions like `TOTALYTD`, `SAMEPERIODLASTYEAR`, and `DATEADD` either fail outright or produce results that look plausible but are subtly wrong. The good news is that building one takes a few minutes, and Power BI gives you three solid options depending on your data source and how much control you want.
 
-This tutorial walks through all three methods: the built-in `CALENDAR`/`CALENDARAUTO` DAX approach, a Power Query (M) approach, and Auto Date/Time for quick prototyping. It also covers how to mark the table as a date table, and the mistakes that cause time intelligence measures to return blank values.
+This tutorial walks through all three methods: the built-in `CALENDAR`/`CALENDARAUTO` DAX approach, a Power Query (M) approach, and Auto Date/Time for quick prototyping. It also covers how to mark the table as a date table, and the mistakes that cause time intelligence measures to return blank values. Microsoft documents every case in the [DATE reference](https://learn.microsoft.com/en-us/dax/date-function-dax).
 
 ## Why you need a dedicated date table
 
-A fact table typically stores a transaction date. That column has thousands of duplicate values and gaps on days with no sales. When you drag it into a visual, Power BI creates an implicit hierarchy (Year > Quarter > Month > Day), but that hierarchy has no rows for missing dates. Any measure that needs a continuous timeline, such as a running total or a year-over-year comparison, will break.
+A fact table typically stores a transaction date. That column has thousands of duplicate values and gaps on days with no sales. When you drag it into a visual, Power BI creates an implicit hierarchy (Year > Quarter > Month > Day), but that hierarchy has no rows for missing dates. Any measure that needs a continuous timeline, such as a running total or a year-over-year comparison, will break. Microsoft documents every case in the [YEAR reference](https://learn.microsoft.com/en-us/dax/year-function-dax).
 
 A proper date table solves this by holding exactly one row per day, with no gaps, spanning a range that covers every fact date plus some buffer for comparison periods. It also lets you add columns Power BI can't derive on the fly: fiscal periods, working-day flags, custom month sort order, relative date offsets.
 

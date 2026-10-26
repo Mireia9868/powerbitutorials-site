@@ -1,6 +1,6 @@
 ---
 title: "Power BI Row-Level Security: Control Who Sees What Data"
-description: "Row-Level Security (RLS) filters data at the row level based on the user viewing the report. This guide covers static RLS, dynamic RLS with USERNAME(), deployment to the Power BI Service, and the design patterns for multi-tenant security models."
+description: "Static and dynamic RLS with USERNAME(), deployment to the service, and the model patterns that scale to multi-tenant reports."
 pubDate: 2026-07-23
 category: "data-modeling"
 difficulty: "Intermediate"
@@ -127,7 +127,7 @@ For users who should see everything (executives, admins), add a special row to t
 | carol@company.com | North |
 | carol@company.com | South |
 
-The filter `[Email] = USERPRINCIPALNAME()` on the security table naturally returns all of Carol's region rows, and the relationship propagates all of them.
+The filter `[Email] = USERPRINCIPALNAME()` on the security table naturally returns all of Carol's region rows, and the relationship propagates all of them. Microsoft documents every case in the [ALL reference](https://learn.microsoft.com/en-us/dax/all-function-dax).
 
 ## USERNAME() vs USERPRINCIPALNAME()
 

@@ -1,6 +1,6 @@
 ---
 title: "Append Queries in Power Query: Combine Files Easily"
-description: "Appending queries stacks rows on top of each other. If you have a January sales table and a February sales table with the same columns, appending produces one table with both months."
+description: "Appending stacks tables with the same shape: a January table and a February table become one. Column matching and failure modes."
 pubDate: 2026-10-12
 category: power-query
 tags: ["power query", "append"]
@@ -150,6 +150,8 @@ Use **Get Data > Folder**. Power Query reads the directory, applies a transforma
 ### Q: Why does my appended table have fewer rows than expected?
 
 A filter inside one of the source queries is likely removing rows, or a source failed to load entirely. Compare the row count of each source query with the combined result and check that every expected table is present in the append list.
+
+Behaviour described here follows [Microsoft's Append queries documentation](https://learn.microsoft.com/en-us/power-query/append-queries).
 
 ## Related Reading
 

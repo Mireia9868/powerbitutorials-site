@@ -39,6 +39,16 @@ const tutorials = (await getCollection("tutorials", ({ slug, data }) => !data.dr
     </div>
   </div>
 
+  {category.intro && category.intro.length > 0 && (
+    <section class="category-intro">
+      <div class="container">
+        <div class="category-intro__body">
+          {category.intro.map((para) => <p>{para}</p>)}
+        </div>
+      </div>
+    </section>
+  )}
+
   <div class="container tutorials-layout">
     <Sidebar />
 
@@ -59,6 +69,17 @@ const tutorials = (await getCollection("tutorials", ({ slug, data }) => !data.dr
 </BaseLayout>
 
 <style>
+  .category-intro {
+    padding: 28px 0 8px;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .category-intro__body {
+    max-width: 760px;
+    font-size: 0.98rem;
+    line-height: 1.72;
+    color: var(--c-text-muted);
+  }
+  .category-intro__body p { margin: 0 0 14px; }
   .page-header {
     padding: 40px 0 32px;
     border-bottom: 1px solid var(--c-border);

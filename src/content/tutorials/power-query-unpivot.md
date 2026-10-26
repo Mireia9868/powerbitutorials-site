@@ -1,6 +1,6 @@
 ---
 title: "Unpivot in Power Query: Turn a Wide Table into a Long Table the Right Way"
-description: "Unpivot Columns in Power Query converts month-by-column reports into a tidy long format Power BI can model. Learn the exact steps, the pitfalls, and how to keep one column fixed."
+description: "Month-by-column reports become a tidy long table in three clicks. The exact steps, the column to keep fixed, and the usual pitfall."
 pubDate: 2026-09-23
 category: "power-query"
 difficulty: "Beginner"
@@ -89,6 +89,8 @@ A: Add a sort column (1,2,3) or convert to a real date with `Date.FromText`, the
 
 **Q: Unpivot makes my table huge — is that bad?**
 A: Long format is how columnar engines (VertiPaq) compress best. It is usually smaller on disk than it looks.
+
+The underlying documentation for this feature is [Microsoft Unpivot columns](https://learn.microsoft.com/en-us/power-query/unpivot-column).
 
 ## Related Reading
 

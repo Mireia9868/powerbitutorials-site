@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Power Query: Clean and Shape Data in Power BI"
-description: "Power Query is the ETL engine behind Power BI. Learn to connect, transform, and shape data with a no-code interface plus a peek at the M language underneath."
+description: "Connect, transform and shape data with the no-code editor, plus a look at the M code it writes behind every click."
 pubDate: 2026-06-29
 updatedDate: 2026-07-20
 category: "power-query"
@@ -173,3 +173,6 @@ Yes — both are supported as transformations. Use them for statistical analysis
 ## What's next
 
 Power Query handles the "shape your data" phase. Once data lands in the model, the next step is designing relationships and the star schema — see [Star Schema Data Modeling](/tutorials/data-modeling-star-schema) for the deep dive. Pair a clean Power Query pipeline with a well-designed model and DAX becomes dramatically easier to write. For more advanced transformations, see our [Power Query common transformations guide](/tutorials/power-query-common-transformations).
+
+Microsoft documents this feature in [its Power Query documentation reference](https://learn.microsoft.com/en-us/power-query/power-query-what-is-power-query).
+

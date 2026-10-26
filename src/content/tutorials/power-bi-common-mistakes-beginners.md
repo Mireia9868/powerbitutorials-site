@@ -1,6 +1,6 @@
 ---
 title: "10 Common Power BI Mistakes Beginners Make (And How to Fix Them)"
-description: "Every Power BI beginner makes the same mistakes. This guide covers the 10 most common errors — from data types to DAX context to dashboard design — with exact fixes you can apply today."
+description: "Ten errors nearly every beginner makes: data types, DAX context, dashboard layout. The fix for each, and why it happens."
 pubDate: 2026-07-20
 category: "dax"
 difficulty: "Beginner"
@@ -175,3 +175,5 @@ Understanding filter context (mistake #7). Once you internalize how filter conte
 - Read the [star schema guide](/tutorials/data-modeling-star-schema) to structure your model correctly
 - Check the [DAX troubleshooting guide](/tutorials/dax-troubleshooting-guide) when formulas return wrong numbers
 - See the [performance optimization guide](/tutorials/power-bi-performance-optimization) when reports are slow
+
+Microsoft's overview of the evaluation engine behind these behaviours is in the [DAX overview](https://learn.microsoft.com/en-us/dax/dax-overview).

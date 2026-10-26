@@ -1,6 +1,6 @@
 ---
 title: "DAX RANKX: Rank Data in Power BI with Complete Control"
-description: "RANKX is the DAX function for ranking rows by any measure or expression. This guide covers the syntax, the four ranking patterns every analyst needs, ties handling, and the common mistakes that produce wrong results."
+description: "RANKX ranks rows by any measure, but it is easy to get wrong. Syntax, four ranking patterns, ties handling and the usual mistakes."
 pubDate: 2026-07-23
 category: "dax"
 difficulty: "Intermediate"
@@ -54,7 +54,7 @@ RANKX(
 
 **Why ALLSELECTED and not ALL?**
 
-`ALL(Product[Product Name])` removes all filters from the product column — including slicers. If a user filters to a specific category, the ranking would still consider all products from all categories. `ALLSELECTED` preserves the slicer context.
+`ALL(Product[Product Name])` removes all filters from the product column — including slicers. If a user filters to a specific category, the ranking would still consider all products from all categories. `ALLSELECTED` preserves the slicer context. Microsoft's [ALL reference](https://learn.microsoft.com/en-us/dax/all-function-dax) covers the full syntax.
 
 ```dax
 // WRONG — ignores category slicer, ranks across everything
@@ -182,7 +182,7 @@ Wrong Rank = RANKX(VALUES(Product[Product Name]), [Total Revenue])
 
 // Correct — ALLSELECTED returns all visible products
 Correct Rank = RANKX(ALLSELECTED(Product[Product Name]), [Total Revenue])
-```
+```. See the [ALLSELECTED reference](https://learn.microsoft.com/en-us/dax/allselected-function-dax) for the complete rules.
 
 ### 4. Blank values in ranking
 

@@ -1,6 +1,6 @@
 ---
 title: "Power BI Visual Calculations: The Complete Guide (2026 GA)"
-description: "Visual Calculations went GA in May 2026. Learn how RUNNINGSUM, MOVINGAVERAGE, PREVIOUS, and other visual-level functions replace dozens of measures — with real Contoso examples and copy-paste code."
+description: "RUNNINGSUM, MOVINGAVERAGE and PREVIOUS run at the visual level, replacing dozens of measures. What they can and cannot do."
 pubDate: 2026-08-01
 category: "dax"
 difficulty: "Intermediate"
@@ -194,6 +194,8 @@ Yes, but they work the same way as in measures — they capture a value at evalu
 - Master [CALCULATE](/tutorials/calculate-function/) to understand the filter context that visual calculations sidestep
 - Learn [field parameters](/tutorials/power-bi-field-parameters/) for dynamic measure switching alongside visual calculations
 - Read our [DAX time intelligence guide](/tutorials/dax-time-intelligence-ytd-qtd-mtd/) for traditional YTD/QTD/MTD patterns — then see how visual calculations simplify some of those same scenarios
+
+Visual calculations extend the DAX language described in the [Microsoft DAX overview](https://learn.microsoft.com/en-us/dax/dax-overview).
 
 ## Related Reading
 

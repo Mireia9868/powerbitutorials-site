@@ -1,6 +1,6 @@
 ---
 title: "Power Query Conditional Columns: Build If-Then-Else Logic Without Code"
-description: "Conditional columns let you create new columns based on if-then-else logic using a visual interface — no M code required. This guide covers the UI, nested conditions, the M code underneath, and the patterns for categorizing, flagging, and bucketing data."
+description: "If-then-else without writing M. The dialog, nested conditions, the code it generates, and patterns for flagging and bucketing."
 pubDate: 2026-07-23
 updatedDate: 2026-10-12
 category: "power-query"
@@ -287,3 +287,6 @@ Use `if [Discount] = null then 0 else [Discount]`, or the shorter coalesce form 
 - Read the [10 common Power Query transformations](/tutorials/power-query-common-transformations) guide for more cleanup patterns
 - See [merge vs. append queries](/tutorials/merge-vs-append-queries) to combine data from multiple sources
 - Check the [getting started with Power Query](/tutorials/power-query-getting-started) guide if you're new to the editor
+
+Behaviour described here follows [Microsoft's Add a conditional column documentation](https://learn.microsoft.com/en-us/power-query/add-conditional-column).
+

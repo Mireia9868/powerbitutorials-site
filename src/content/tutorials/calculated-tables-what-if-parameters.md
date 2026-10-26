@@ -1,6 +1,6 @@
 ---
 title: "Calculated Tables and What-If Parameters in Power BI: Dynamic Modeling Tools"
-description: "Calculated tables let you build tables with DAX instead of loading them from a source. What-if parameters turn static assumptions into interactive slicers. This guide covers both features, the syntax, and five practical patterns — from date tables to scenario analysis."
+description: "Build tables with DAX instead of a source, and turn static assumptions into What-if slicers. Five patterns, from date tables to scenarios."
 pubDate: 2026-07-16
 category: "data-modeling"
 difficulty: "Intermediate"
@@ -34,7 +34,7 @@ The result is a table that lives in your model like any other. It refreshes when
 
 ### Pattern 1: Date tables
 
-The most common calculated table. A DAX-generated date table guarantees a complete, gap-free date range and the columns you need for time intelligence.
+The most common calculated table. A DAX-generated date table guarantees a complete, gap-free date range and the columns you need for time intelligence. Refer to the [DATE reference](https://learn.microsoft.com/en-us/dax/date-function-dax) for edge cases.
 
 ```dax
 Date = 

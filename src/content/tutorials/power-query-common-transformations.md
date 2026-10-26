@@ -1,6 +1,6 @@
 ---
 title: "10 Common Power Query Transformations Every Analyst Should Know"
-description: "Power Query has hundreds of functions, but a small set covers the vast majority of real-world cleanup tasks. This guide walks through ten transformations that handle messy exports, inconsistent naming, and malformed data — the daily reality of every data analyst."
+description: "Ten Power Query steps that handle the messy exports analysts actually get: inconsistent names, merged headers, malformed dates."
 pubDate: 2026-07-19
 category: "power-query"
 difficulty: "Beginner"
@@ -209,3 +209,6 @@ in
 ## Summary
 
 These ten transformations — promote headers, set types, remove columns, filter, split, merge, replace, unpivot, group, and custom columns — cover the daily reality of data cleanup. Master them and most ETL tasks become a sequence of these steps. The Power Query UI generates the M for you; understanding the M lets you debug, optimize, and build transformations the UI doesn't offer.
+
+For the official documentation behind this topic, see [Microsoft Power Query interface](https://learn.microsoft.com/en-us/power-query/power-query-ui).
+
