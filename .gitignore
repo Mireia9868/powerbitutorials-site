@@ -41,3 +41,6 @@ review-*.md
 # python cache
 scripts/__pycache__/
 __pycache__/
+
+# SEO autopilot output
+reports/

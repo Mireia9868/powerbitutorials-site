@@ -1,0 +1,205 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Free Time Intelligence Starter Pack"
+  description="A marked date table and 12 time-intelligence measures for Power BI, with the three bugs that make TOTALYTD return the wrong number."
+>
+  <article class="lp">
+    <div class="content-width">
+
+      <span class="page-eyebrow">Free download</span>
+      <h1>The 12 time-intelligence measures every Power BI model needs</h1>
+
+      <p class="lede">
+        Built for the models where <code>TOTALYTD</code> returns a number that
+        looks right and isn't.
+      </p>
+
+      <ul class="bullets">
+        <li>
+          <strong>A date table script with fiscal-year support.</strong>
+          One Power Query file. Set the start month, mark the table, done.
+        </li>
+        <li>
+          <strong>12 measures, commented.</strong>
+          YTD, QTD, MTD, YoY, MoM, rolling 3M and 12M, variance to target, share
+          of total — each one explains the trap it is avoiding.
+        </li>
+        <li>
+          <strong>The three bugs that produce wrong numbers silently.</strong>
+          Fiscal-year <code>TOTALYTD</code>, <code>PREVIOUSMONTH</code> vs
+          <code>DATEADD</code>, and <code>ALL()</code> where you meant
+          <code>ALLSELECTED()</code>.
+        </li>
+      </ul>
+
+      <!-- TODO: replace the img src with a real screenshot of the measure list.
+           A visible preview lifts the conversion rate more than any copy change. -->
+      <figure class="preview">
+        <img
+          src="/images/time-intelligence-pack-preview.png"
+          alt="The 12 measures listed in the Power BI field list, grouped in a _Measures table"
+          loading="lazy"
+          width="1200"
+          height="675"
+        />
+        <figcaption>All twelve measures live in one <code>_Measures</code> table.</figcaption>
+      </figure>
+
+      <section class="signup">
+        <h2>Get the pack</h2>
+        <p class="signup-sub">One email with the download link. Then one email a week about a Power BI problem worth fixing.</p>
+
+        <!-- TODO: replace YOUR_FORM_ID with the Kit (ConvertKit) form id.
+             Kit → Grow → Landing pages & forms → Embed → copy the form action. -->
+        <form
+          class="signup-form"
+          action="https://app.kit.com/forms/YOUR_FORM_ID/subscriptions"
+          method="post"
+          data-sv-form
+        >
+          <label class="sr-only" for="email">Email address</label>
+          <input
+            id="email"
+            type="email"
+            name="email_address"
+            placeholder="you@company.com"
+            autocomplete="email"
+            required
+          />
+          <button type="submit">Send me the pack</button>
+        </form>
+
+        <p class="fineprint">
+          No spam. Unsubscribe in one click. I don't sell or share your address.
+        </p>
+      </section>
+
+      <section class="who">
+        <h2>Who made this</h2>
+        <p>
+          Mireia, who writes the Power BI tutorials at
+          <a href="/tutorials/">powerbitutorials.com</a>. Every measure in this
+          pack is one I use in real models, and every warning in the README is
+          a bug I have shipped at least once.
+        </p>
+        <p>
+          If a measure misbehaves on your model,
+          <a href="/contact">tell me</a> — corrections go into the next version
+          and everyone who downloaded gets the update.
+        </p>
+      </section>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .lp { padding: 56px 0 96px; }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--c-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .lp h1 {
+    font-size: 2.3rem;
+    line-height: 1.22;
+    margin-bottom: 18px;
+    max-width: 22ch;
+  }
+  .lede {
+    font-size: 1.12rem;
+    color: var(--c-text-muted);
+    border-left: 3px solid var(--c-accent);
+    padding-left: 18px;
+    margin-bottom: 34px;
+    max-width: 60ch;
+  }
+  .bullets { list-style: none; padding: 0; margin: 0 0 40px; max-width: 68ch; }
+  .bullets li {
+    padding: 16px 0 16px 30px;
+    border-bottom: 1px solid var(--c-border);
+    position: relative;
+    color: var(--c-text-muted);
+    line-height: 1.65;
+  }
+  .bullets li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--c-accent);
+    font-weight: 700;
+  }
+  .bullets strong { color: var(--c-text); }
+  .preview { margin: 0 0 44px; }
+  .preview img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    display: block;
+  }
+  .preview figcaption {
+    font-size: 0.85rem;
+    color: var(--c-text-dim);
+    margin-top: 10px;
+  }
+  .signup {
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-bottom: 44px;
+  }
+  .signup h2 { margin: 0 0 8px; font-size: 1.35rem; }
+  .signup-sub { color: var(--c-text-muted); margin: 0 0 20px; font-size: 0.95rem; }
+  .signup-form { display: flex; gap: 10px; flex-wrap: wrap; }
+  .signup-form input {
+    flex: 1 1 260px;
+    padding: 12px 14px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    background: var(--c-bg);
+    color: var(--c-text);
+  }
+  .signup-form button {
+    padding: 12px 24px;
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .signup-form button:hover { background: var(--c-accent-hover); }
+  .fineprint {
+    font-size: 0.82rem;
+    color: var(--c-text-dim);
+    margin: 14px 0 0;
+  }
+  .who { max-width: 68ch; }
+  .who h2 { font-size: 1.25rem; margin-bottom: 12px; }
+  .who p { color: var(--c-text-muted); line-height: 1.7; }
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  @media (max-width: 640px) {
+    .lp h1 { font-size: 1.8rem; }
+    .signup { padding: 24px 20px; }
+  }
+</style>
