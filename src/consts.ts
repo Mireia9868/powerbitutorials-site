@@ -87,15 +87,16 @@ export const DIFFICULTY_LEVELS = ["Beginner", "Intermediate", "Advanced"];
 // AdSense 当前未启用（空值则不渲染任何 AdSense 广告脚本）；此前因站点被 AdSense 标记为低价值内容而暂停，恢复前需先解决内容合规问题
 export const ADSENSE_CLIENT = "";
 
-// 邮件订阅 —— 只有一个配置点，迁到 MailerLite 时只改这里
+// 邮件订阅 —— 唯一的配置点
 // ---------------------------------------------------------------------------
-// 现状：Buttondown 免费档（100 订阅，无 Automation）。
-// 迁移到 MailerLite（免费档 1000 订阅，自带 welcome automation）时：
-//   1. MailerLite → Forms → Embedded form → 复制 action URL
-//   2. 把 action 换成 https://assets.mailerlite.com/jsonp/<ACCOUNT>/forms/<FORM>/subscribe
-//   3. 把 fieldName 改成 "fields[email]"
-//   4. 在 MailerLite → Automation 建 "新订阅者 → 发欢迎邮件"，邮件里放下载链接
-// 表单只需要 email 一个字段，多一个字段少一半转化。
+// 现状：Buttondown 免费档（100 订阅，无 Automation，Automation 要 +$29/月）。
+// 2026-10 评估过 MailerLite：免费档已取消（Power $22.5/月、Comfort $10.8/月），
+// 迁移不划算。结论是 100 订阅以内保持 Buttondown + 每周手动群发一封。
+// 落地页的下载链接由前端直接放出（不依赖 welcome email），所以没有 automation
+// 也不影响交付。
+//
+// 真要换服务商时只改下面两个字段（action + fieldName 必须一起改，
+// 例如 MailerLite 是 "fields[email]"，只改 action 会静默收不到订阅者）。
 export const NEWSLETTER = {
   provider: "buttondown" as "buttondown" | "mailerlite",
   action: "https://buttondown.com/api/emails/embed-subscribe/mireia",
