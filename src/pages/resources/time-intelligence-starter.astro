@@ -52,25 +52,28 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <h2>Get the pack</h2>
         <p class="signup-sub">One email with the download link. Then one email a week about a Power BI problem worth fixing.</p>
 
-        <!-- TODO: replace YOUR_FORM_ID with the Kit (ConvertKit) form id.
-             Kit → Grow → Landing pages & forms → Embed → copy the form action. -->
+        <!-- Buttondown — 与侧边栏 (Sidebar.astro) 同一个账号，不另开工具。
+             tag 参数用于把「下载免费包」的人和普通订阅者分开，
+             以后发产品邮件只发这个 tag。 -->
         <form
           class="signup-form"
-          action="https://app.kit.com/forms/YOUR_FORM_ID/subscriptions"
+          action="https://buttondown.com/api/emails/embed-subscribe/mireia"
           method="post"
-          data-sv-form
+          target="buttondown-frame"
         >
+          <input type="hidden" name="tag" value="time-intelligence-pack" />
           <label class="sr-only" for="email">Email address</label>
           <input
             id="email"
             type="email"
-            name="email_address"
+            name="email"
             placeholder="you@company.com"
             autocomplete="email"
             required
           />
           <button type="submit">Send me the pack</button>
         </form>
+        <iframe name="buttondown-frame" style="display:none" title="subscription confirmation"></iframe>
 
         <p class="fineprint">
           No spam. Unsubscribe in one click. I don't sell or share your address.
