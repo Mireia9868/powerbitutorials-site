@@ -1,6 +1,6 @@
 ---
-title: "Power BI Drill Through: Jump from Summary to Detail in One Click"
-description: "Drill through takes a click and lands on a detail page filtered to that context. Setup, filter passthrough, cross-report, and design rules."
+title: "Power BI Drill Through: How to Set Up Fields and Filters"
+description: "Set up drill through in Power BI: which fields to add, how filter passthrough works, cross-report drilling, and why the menu sometimes is not there."
 pubDate: 2026-07-23
 category: "visualization"
 difficulty: "Intermediate"
@@ -25,7 +25,32 @@ When the user right-clicks a data point on the source page and selects "Drill th
 
 **Key principle:** drill through passes filters, not clicks. The target page receives the filter context from the source visual and applies it automatically. You don't write any DAX to make this work — you configure it in the field well.
 
-## Setting up a basic drill through
+## What are drill-through fields?
+
+When you turn on drill through for a page, Power BI asks you to drop fields into a
+box labelled **Add drill-through fields here**. Those fields are the entire
+mechanism: they decide what a reader is allowed to drill on, and they become the
+filter that gets applied to the target page.
+
+Three things about that box are worth knowing before you fill it.
+
+**Put dimensions in it, not measures.** The field list on the target page is built
+from these entries, and a measure has no distinct values to filter by. Dragging
+`Total Sales` in produces a field that does nothing.
+
+**One field is usually right.** With `Product` in the box, right-clicking a bar in
+a category chart offers "Drill through → Product". With `Product` and `Region`
+both in, the reader drills on whichever they right-clicked, and the target page
+filters by that value only — the other field stays available but unused, which
+confuses people who expect both to apply.
+
+**If the Drill through menu never appears**, check these three in order: the target
+page has at least one drill-through field, the page is not hidden, and the visual
+you are right-clicking is one that supports it. Matrix and table visuals work;
+cards and single-value KPI visuals do not, because there is no data point to carry
+the context.
+
+## How to set up drill through in Power BI
 
 ### Step 1: Create the target page
 

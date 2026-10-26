@@ -1,6 +1,6 @@
 ---
-title: "Power Query Conditional Columns: Build If-Then-Else Logic Without Code"
-description: "If-then-else without writing M. The dialog, nested conditions, the code it generates, and patterns for flagging and bucketing."
+title: "Power Query Conditional Columns: If Statement Logic for a New Column"
+description: "Add a new column with an if statement in Power Query, without writing M. The dialog, nested conditions, generated code, and bucketing patterns."
 pubDate: 2026-07-23
 updatedDate: 2026-10-12
 category: "power-query"
