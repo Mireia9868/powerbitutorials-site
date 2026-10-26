@@ -31,7 +31,7 @@ import { NEWSLETTER } from "../consts";
 
   <div class="sidebar-section sidebar-cta">
     <h3 class="sidebar-title">Newsletter</h3>
-    <p id="newsletter-desc">Get one practical DAX pattern in your inbox every week.</p>
+    <p id="newsletter-desc">One practical DAX pattern, every Monday.</p>
     <form
       class="newsletter-form"
       action={NEWSLETTER.action}
@@ -152,7 +152,7 @@ import { NEWSLETTER } from "../consts";
     frame.addEventListener("load", function () {
       if (!submitting) return;
       submitting = false;
-      status.textContent = "Almost there! Check your inbox to confirm your subscription.";
+      status.textContent = "Almost there — confirm in your inbox. First issue lands Monday.";
       status.style.color = "var(--c-accent-dark)";
       form.reset();
       form.querySelector("button").disabled = false;
