@@ -174,6 +174,11 @@ const allTutorials = (await getCollection("tutorials", ({ slug, data }) => !data
   const noResults = document.getElementById("no-results");
   let activeCat = "all";
 
+  // form 是 GET /tutorials/?q=...，但页面从来不读这个参数 ——
+  // 用户提交后搜索框是空的、显示全部教程，等于搜索失效。这里补上。
+  const initialQuery = (new URLSearchParams(location.search).get("q") || "").trim();
+  if (initialQuery && search) search.value = initialQuery;
+
   function applyFilters() {
     const q = (search?.value || "").trim().toLowerCase();
     let visible = 0;
@@ -190,9 +195,33 @@ const allTutorials = (await getCollection("tutorials", ({ slug, data }) => !data
       if (show) visible++;
     });
     if (noResults) noResults.hidden = visible > 0;
+    reportSearch(q, visible);
+    return visible;
+  }
+
+  // 上报给 BaseLayout 里的监听器，最终变成 GA4 事件。
+  // 防抖：逐字符输入不应该产生逐字符事件。
+  let reportTimer: number | null = null;
+  let lastReported = "";
+  function reportSearch(query: string, results: number, immediate = false) {
+    if (!query || query.length < 2) return;      // 单字符噪音太大
+    const fire = () => {
+      if (query === lastReported) return;
+      lastReported = query;
+      document.dispatchEvent(new CustomEvent("search:results", {
+        detail: { query, results }
+      }));
+    };
+    if (immediate) { fire(); return; }
+    if (reportTimer !== null) window.clearTimeout(reportTimer);
+    reportTimer = window.setTimeout(fire, 800);
   }
 
   search?.addEventListener("input", applyFilters);
+  if (initialQuery) {
+    const n = applyFilters();
+    reportSearch(initialQuery.toLowerCase(), n, true);
+  }
   chips.forEach((chip) => {
     chip.addEventListener("click", () => {
       chips.forEach((c) => c.classList.remove("active"));

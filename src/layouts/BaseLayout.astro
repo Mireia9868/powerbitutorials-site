@@ -224,5 +224,74 @@ const websiteJsonLd = isHomepage ? {
     </main>
     <Footer />
     <CookieConsent />
+
+    <!-- 行为事件：出站点击 + 滚动深度
+         全部走 consentGranted()，未同意时不发送；gtag 未加载时静默跳过。
+         出站点击是联盟收入的唯一可信来源 —— 没有它就无法回答
+         「哪篇文章真的带来了收入」。 -->
+    <script is:inline>
+      (function () {
+        var CONSENT_KEY = 'cookie-consent-v1';
+        function granted() {
+          try { return localStorage.getItem(CONSENT_KEY) === 'accepted'; } catch (e) { return false; }
+        }
+        function send(name, params) {
+          if (!granted()) return;
+          if (typeof window.gtag !== 'function') return;
+          window.gtag('event', name, params || {});
+        }
+
+        // ---- 出站点击 ----
+        document.addEventListener('click', function (e) {
+          var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+          if (!a) return;
+          var url;
+          try { url = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+          if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+          if (url.hostname === location.hostname) return;
+
+          var params = {
+            link_domain: url.hostname,
+            link_url: url.href,
+            source_path: location.pathname
+          };
+          // 联盟链接额外标记：<a href="..." data-affiliate="datacamp">
+          if (a.dataset && a.dataset.affiliate) params.affiliate = a.dataset.affiliate;
+          send(params.affiliate ? 'affiliate_click' : 'outbound_click', params);
+        }, true);
+
+        // ---- 滚动深度：25 / 50 / 75 / 100，每个只发一次 ----
+        var marks = [25, 50, 75, 100], fired = {}, ticking = false;
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(function () {
+            var doc = document.documentElement;
+            var scrollable = doc.scrollHeight - window.innerHeight;
+            var pct = scrollable <= 0 ? 100 : Math.round((window.scrollY / scrollable) * 100);
+            for (var i = 0; i < marks.length; i++) {
+              var m = marks[i];
+              if (pct >= m && !fired[m]) {
+                fired[m] = true;
+                send('scroll_depth', { percent: m, source_path: location.pathname });
+              }
+            }
+            ticking = false;
+          });
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        // ---- 搜索：把 query 和结果数一起记下来 ----
+        // 零结果查询是最便宜的选题来源，现在完全丢失了。
+        document.addEventListener('search:results', function (e) {
+          var d = e.detail || {};
+          send(d.results > 0 ? 'site_search' : 'site_search_no_results', {
+            query: d.query,
+            results: d.results
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
