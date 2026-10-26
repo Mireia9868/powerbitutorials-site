@@ -163,3 +163,4 @@ That almost always means the date column used in the visual comes from the fact 
 - [Power BI Mom and YoY DAX Template](/tutorials/power-bi-mom-yoy-dax-template/)
 - [DirectQuery vs Import Mode](/tutorials/directquery-vs-import-mode/)
 - [Power BI Common Mistakes for Beginners](/tutorials/power-bi-common-mistakes-beginners/)
+- [PREVIOUSMONTH vs DATEADD: Why They Disagree on the 31st](/tutorials/previousmonth-vs-dateadd/)

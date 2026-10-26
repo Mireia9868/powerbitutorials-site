@@ -273,3 +273,7 @@ Before moving on, make sure you can:
 - [ ] Choose between `ALL`, `ALLSELECTED`, and `REMOVEFILTERS` for a given scenario
 
 If yes, you've crossed the threshold from DAX beginner to intermediate. The next milestone is mastering time intelligence — which, as you've seen, is mostly `CALCULATE` with date-shifted filter arguments. See our [Time Intelligence Patterns](/tutorials/time-intelligence) guide and [DAX troubleshooting](/tutorials/dax-troubleshooting-guide) for common error fixes.
+
+## Related Reading
+
+- [PREVIOUSMONTH vs DATEADD: Why They Disagree on the 31st](/tutorials/previousmonth-vs-dateadd/)

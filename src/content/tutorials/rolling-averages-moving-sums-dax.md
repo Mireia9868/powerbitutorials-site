@@ -141,3 +141,6 @@ Rolling averages smooth daily noise; moving sums provide a rolling window total;
 
 Behaviour described here follows [Microsoft's Time intelligence functions documentation](https://learn.microsoft.com/en-us/dax/time-intelligence-functions-dax).
 
+## Related Reading
+
+- [PREVIOUSMONTH vs DATEADD: Why They Disagree on the 31st](/tutorials/previousmonth-vs-dateadd/)

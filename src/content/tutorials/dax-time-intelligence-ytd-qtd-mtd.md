@@ -313,3 +313,7 @@ Time intelligence pairs naturally with these advanced topics:
 - [DAX Variables: Write Cleaner and Faster Measures](/tutorials/dax-variables-guide/) — Variables make time intelligence measures like YoY Growth readable
 - [Power BI Star Schema: The Data Model That Scales](/tutorials/data-modeling-star-schema/) — A proper Date table is the centerpiece of a star schema
 - [DAX SWITCH: Cleaner Conditional Logic](/tutorials/dax-switch-function/) — Build dynamic measure selectors for YTD/QTD/MTD switching
+
+## Related Reading
+
+- [PREVIOUSMONTH vs DATEADD: Why They Disagree on the 31st](/tutorials/previousmonth-vs-dateadd/)

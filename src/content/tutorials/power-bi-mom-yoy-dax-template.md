@@ -97,3 +97,4 @@ Microsoft documents this feature in [its Time intelligence functions reference](
 - [Time Intelligence Overview](/tutorials/time-intelligence/)
 - [DAX CALCULATE Function](/tutorials/calculate-function/)
 - [Data Modeling Star Schema](/tutorials/data-modeling-star-schema/)
+- [PREVIOUSMONTH vs DATEADD: Why They Disagree on the 31st](/tutorials/previousmonth-vs-dateadd/)

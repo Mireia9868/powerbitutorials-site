@@ -199,3 +199,7 @@ This ensures both periods have the same number of days, making the comparison fa
 ## Summary
 
 `SAMEPERIODLASTYEAR` is the simplest YoY function; `DATEADD` is the flexible general-purpose shifter. Use `DATESYTD` with a year-end parameter for fiscal calendars. For custom comparisons, use explicit date filters with variables. Handle partial periods by filtering the prior period to the same number of days. And always guard against division by zero with `DIVIDE(numerator, denominator, 0)`.
+
+## Related Reading
+
+- [PREVIOUSMONTH vs DATEADD: Why They Disagree on the 31st](/tutorials/previousmonth-vs-dateadd/)
