@@ -4,8 +4,7 @@ import CategoryIcon from "./CategoryIcon.astro";
 
 const pathname = Astro.url.pathname;
 const activeCat = CATEGORIES.find((c) => pathname.includes(`/category/${c.slug}`))?.slug;
-// Buttondown username — change this if your Buttondown newsletter username differs
-const BUTTONDOWN_USER = "mireia";
+import { NEWSLETTER } from "../consts";
 ---
 
 <aside class="sidebar" aria-label="Categories">
@@ -35,16 +34,16 @@ const BUTTONDOWN_USER = "mireia";
     <p id="newsletter-desc">Get one practical DAX pattern in your inbox every week.</p>
     <form
       class="newsletter-form"
-      action={`https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USER}`}
+      action={NEWSLETTER.action}
       method="post"
-      target="buttondown-frame"
+      target={NEWSLETTER.iframeName}
     >
-      <input type="email" name="email" placeholder="you@company.com" aria-label="Email" required />
+      <input type="email" name={NEWSLETTER.fieldName} placeholder="you@company.com" aria-label="Email" required />
       <input type="hidden" name="embed" value="1" />
       <button type="submit">Subscribe</button>
     </form>
     <p id="newsletter-status" class="newsletter-status"></p>
-    <iframe name="buttondown-frame" title="Newsletter response" style="display:none"></iframe>
+    <iframe name={NEWSLETTER.iframeName} title="Newsletter response" style="display:none"></iframe>
   </div>
 </aside>
 
@@ -141,11 +140,11 @@ const BUTTONDOWN_USER = "mireia";
   }
 </style>
 
-<script is:inline define:vars={{ BUTTONDOWN_USER }}>
+<script is:inline define:vars={{ iframeName: NEWSLETTER.iframeName }}>
   (function () {
     const form = document.querySelector(".newsletter-form");
     const status = document.getElementById("newsletter-status");
-    const frame = document.querySelector('iframe[name="buttondown-frame"]');
+    const frame = document.querySelector('iframe[name="' + iframeName + '"]');
     let submitting = false;
 
     if (!form || !status || !frame) return;

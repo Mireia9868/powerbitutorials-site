@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { NEWSLETTER } from "../../consts";
 ---
 
 <BaseLayout
@@ -59,22 +60,22 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <form
           class="signup-form"
           id="pack-form"
-          action="https://buttondown.com/api/emails/embed-subscribe/mireia"
+          action={NEWSLETTER.action}
           method="post"
-          target="buttondown-frame"
+          target={NEWSLETTER.iframeName}
         >
           <label class="sr-only" for="email">Email address</label>
           <input
             id="email"
             type="email"
-            name="email"
+            name={NEWSLETTER.fieldName}
             placeholder="you@company.com"
             autocomplete="email"
             required
           />
           <button type="submit">Send me the pack</button>
         </form>
-        <iframe name="buttondown-frame" style="display:none" title="subscription"></iframe>
+        <iframe name={NEWSLETTER.iframeName} style="display:none" title="subscription"></iframe>
 
         <div class="reveal" id="pack-reveal" hidden>
           <p class="reveal-title">Your download is ready</p>
