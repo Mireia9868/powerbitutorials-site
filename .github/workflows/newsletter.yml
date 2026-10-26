@@ -1,0 +1,85 @@
+name: Weekly newsletter
+
+# 每周一 09:00 (UTC+8) = 01:00 UTC
+# 默认只建草稿；确认内容没问题后，把仓库变量 NEWSLETTER_AUTOSEND 设为 true，
+# 才会真正发送。第一次务必先手动触发一次草稿，看一眼预览。
+on:
+  schedule:
+    - cron: "0 1 * * 1"
+  workflow_dispatch:
+    inputs:
+      send:
+        description: "真的发送（不勾选只建草稿）"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: newsletter
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Check secret
+        env:
+          HAS_KEY: ${{ secrets.BUTTONDOWN_API_KEY != '' }}
+        run: |
+          echo "BUTTONDOWN_API_KEY present: $HAS_KEY"
+          if [ "$HAS_KEY" != "true" ]; then
+            echo "::error::BUTTONDOWN_API_KEY 未配置。Buttondown → Settings → API keys，存到仓库 Secrets。"
+            exit 1
+          fi
+
+      - name: Queue
+        run: python scripts/send_newsletter.py --list
+
+      - name: Send or draft
+        id: run
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+          # true 时定时任务也真发；默认 false 只建草稿
+          AUTOSEND: ${{ vars.NEWSLETTER_AUTOSEND }}
+          INPUT_SEND: ${{ inputs.send }}
+        run: |
+          if [ "$INPUT_SEND" = "true" ] || [ "$AUTOSEND" = "true" ]; then
+            echo "mode=send" >> "$GITHUB_OUTPUT"
+            python scripts/send_newsletter.py --send
+          else
+            echo "mode=draft" >> "$GITHUB_OUTPUT"
+            python scripts/send_newsletter.py
+          fi
+
+      - name: Archive sent issue
+        if: steps.run.outputs.mode == 'send'
+        run: |
+          git config user.email "bot@powerbitutorials.com"
+          git config user.name "Newsletter Bot"
+          git add newsletters/
+          if git diff --cached --quiet; then
+            echo "::warning::发送成功但没有文件被归档 —— 检查 newsletters/ 是否为空"
+          else
+            git commit -m "newsletter: archive issue $(date -u +%F)"
+            git push
+          fi
+
+      - name: Note
+        run: |
+          if [ "${{ steps.run.outputs.mode }}" = "draft" ]; then
+            echo "### 草稿已创建" >> "$GITHUB_STEP_SUMMARY"
+            echo "去 Buttondown 后台看预览。确认无误后，手动触发本 workflow 并勾选 send。" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### 已发送" >> "$GITHUB_STEP_SUMMARY"
+          fi
