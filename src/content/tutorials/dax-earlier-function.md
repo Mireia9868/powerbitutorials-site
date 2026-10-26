@@ -101,7 +101,7 @@ This reads top to bottom and avoids both `EARLIER` and manual `FILTER` subsets.
 
 ## Performance note
 
-`EARLIER` wrapped in `FILTER ( FullTable, ... )` forces a row-by-row scan of the whole table for **every** row — it is one of the slower patterns in DAX. On a large table, prefer the window function or a pre-grouped summary table. See [power-bi-dax-optimization](/tutorials/power-bi-dax-optimization/) and [power-bi-performance-analyzer-guide](/tutorials/power-bi-performance-analyzer-guide/) for measuring it.
+`EARLIER` wrapped in `FILTER ( FullTable, ... )` forces a row-by-row scan of the whole table for **every** row — it is one of the slower patterns in DAX. On a large table, prefer the window function or a pre-grouped summary table. See [power-bi-dax-optimization](/tutorials/power-bi-dax-optimization/) and [power-bi-performance-analyzer-guide](/tutorials/power-bi-performance-analyzer/) for measuring it.
 
 ## FAQ
 

@@ -209,3 +209,7 @@ Yes, but right-clicking isn't available on mobile. Use button-driven drill throu
 - Read the [dashboard design principles](/tutorials/power-bi-dashboard-design-principles) guide to lay out your summary and detail pages effectively
 - See the [tooltips guide](/tutorials/power-bi-tooltips-page-reports) for another way to show contextual detail without leaving the page
 - Check the [sales dashboard tutorial](/tutorials/power-bi-sales-dashboard-tutorial) for an end-to-end walkthrough that includes drill-through pages
+
+## Related Reading
+
+- [Power BI Map Visuals: Choosing the Right One](/tutorials/power-bi-map-visual/)

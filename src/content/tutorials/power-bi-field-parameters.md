@@ -194,3 +194,9 @@ Minimally. The parameter itself adds no query overhead — it simply tells the v
 - Build measures that work well in Field Parameters: [CALCULATE function](/tutorials/calculate-function/)
 - Design report pages that leverage dynamic switching: [Dashboard design principles](/tutorials/power-bi-dashboard-design-principles/)
 - Add interactivity layers with drill-through: [Power BI drill through](/tutorials/power-bi-drill-through/)
+
+## Related Reading
+
+- [Power BI Map Visuals: Choosing the Right One](/tutorials/power-bi-map-visual/)
+
+- [Power BI Matrix Visual: Best Practices and Tips](/tutorials/power-bi-matrix-visual/)

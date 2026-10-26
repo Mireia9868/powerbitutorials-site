@@ -220,3 +220,9 @@ See our [performance optimization guide](/tutorials/power-bi-performance-optimiz
 A clean star schema makes everything downstream easier: DAX, time intelligence, performance tuning, even security (row-level security is much simpler on dimension tables). Once your model is solid, revisit [DAX Basics](/tutorials/dax-basics) and [CALCULATE](/tutorials/calculate-function) — the formulas will feel dramatically more natural.
 
 For more on relationships and filtering, see our [relationships guide](/tutorials/relationships-one-to-many-many-to-many) and [bidirectional filtering guide](/tutorials/bidirectional-filtering-guide).
+
+## Related Reading
+
+- [Incremental Refresh in Power BI: Setup and Gotchas](/tutorials/power-bi-incremental-refresh/)
+
+- [VertiPaq Analyzer: Optimize Your Power BI Data Model](/tutorials/vertipaq-optimizer-power-bi/)

@@ -156,3 +156,5 @@ Yes, but they can be slow, because geocoding and polygon lookups add latency on 
 - [Conditional Formatting in Power BI Charts](/tutorials/conditional-formatting-charts-power-bi/)
 - [DirectQuery vs Import Mode](/tutorials/directquery-vs-import-mode/)
 - [DAX Basics](/tutorials/dax-basics/)
+
+- [Power BI Matrix Visual: Best Practices and Tips](/tutorials/power-bi-matrix-visual/)

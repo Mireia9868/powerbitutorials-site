@@ -154,9 +154,11 @@ Copy the visual with `Ctrl+C` and `Ctrl+V`, then paste it onto the target page. 
 
 - [Conditional formatting in Power BI: the complete guide](/tutorials/conditional-formatting-power-bi/)
 - [Conditional formatting based on a measure](/tutorials/conditional-formatting-based-on-measure/)
-- [Bar chart conditional formatting](/tutorials/bar-chart-conditional-formatting/)
+- [Bar chart conditional formatting](/tutorials/conditional-formatting-charts-power-bi/)
 - [Conditional formatting for charts](/tutorials/conditional-formatting-charts-power-bi/)
-- [Copy conditional formatting in Power BI](/tutorials/copy-conditional-formatting-power-bi/)
+- [Copy conditional formatting in Power BI](/tutorials/copy-conditional-formatting/)
 - [DAX SWITCH function](/tutorials/dax-switch-function/)
-- [DAX variables best practices](/tutorials/dax-variables-best-practices/)
+- [DAX variables best practices](/tutorials/dax-variables-guide/)
 - [Power BI dashboard design principles](/tutorials/power-bi-dashboard-design-principles/)
+
+- [Power BI Conflicting Metrics Error: Causes and Fixes](/tutorials/power-bi-conflicting-metrics/)

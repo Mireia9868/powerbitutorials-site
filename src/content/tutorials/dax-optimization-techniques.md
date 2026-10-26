@@ -195,9 +195,9 @@ Run the measure's DAX in DAX Studio with Server Timings enabled. If storage engi
 ## Related Reading
 
 - [DAX Variables Guide](/tutorials/dax-variables-guide/)
-- [DAX Variables Best Practices](/tutorials/dax-variables-best-practices/)
+- [DAX Variables Best Practices](/tutorials/dax-variables-guide/)
 - [Power BI DAX Optimization](/tutorials/power-bi-dax-optimization/)
-- [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer-guide/)
+- [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer/)
 - [Power BI Performance Optimization](/tutorials/power-bi-performance-optimization/)
 - [DAX EARLIER Function](/tutorials/dax-earlier-function/)
 - [Filter Context vs Row Context Explained](/tutorials/filter-context-row-context-explained/)

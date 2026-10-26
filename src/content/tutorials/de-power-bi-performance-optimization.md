@@ -80,3 +80,9 @@ Das kostenlose Tool **VertiPaq Analyzer** zeigt die Spalten mit der schlechteste
 - [Bedingte Formatierung in Power BI](/tutorials/conditional-formatting-power-bi/) — die englische Anleitung zu Visual-Features.
 - [Star-Schema in Power BI](/tutorials/data-modeling-star-schema/) — die Grundlage schneller Modelle.
 - [DAX-Optimierung in Power BI](/tutorials/power-bi-dax-optimization/) — Measures beschleunigen.
+
+## Related Reading
+
+- [Incremental Refresh in Power BI: Setup and Gotchas](/tutorials/power-bi-incremental-refresh/)
+
+- [VertiPaq Analyzer: Optimize Your Power BI Data Model](/tutorials/vertipaq-optimizer-power-bi/)

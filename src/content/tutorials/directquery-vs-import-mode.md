@@ -200,3 +200,10 @@ For most business reports, 8 times per day (every 3 hours) is sufficient. For op
 - Understand relationships that cross storage modes: [One-to-many and many-to-many](/tutorials/relationships-one-to-many-many-to-many/)
 - Optimize your model for fast queries: [Power BI performance optimization](/tutorials/power-bi-performance-optimization/)
 - Secure your model: [Power BI Row-Level Security](/tutorials/power-bi-row-level-security/)
+
+## Related Reading
+
+- [Incremental Refresh in Power BI: Setup and Gotchas](/tutorials/power-bi-incremental-refresh/)
+
+- [VertiPaq Analyzer: Optimize Your Power BI Data Model](/tutorials/vertipaq-optimizer-power-bi/)
+- [Power BI Service vs Desktop: What Runs Where](/tutorials/power-bi-service-vs-desktop/)

@@ -109,3 +109,9 @@ Users click "Last Year" and the slicer (and all visuals) update instantly — wi
 ## Summary
 
 Bookmarks capture report state — filters, visibility, selections — and buttons let users navigate between states. Use them for tabbed navigation, drill-through stories, self-guided tours, and preset filter buttons. Keep bookmark counts low (3–7 per page), name them clearly, and style buttons to look interactive. The result is a report that guides users through a narrative rather than dumping data on a page.
+
+## Related Reading
+
+- [Power BI Slicers: Sync, Hierarchy, and Bookmark-Driven Filtering](/tutorials/power-bi-slicers-best-practices/)
+
+- [Power BI Bookmarks: Build Interactive Reports](/tutorials/power-bi-bookmarks/)

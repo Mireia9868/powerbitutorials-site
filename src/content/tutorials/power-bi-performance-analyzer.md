@@ -139,10 +139,10 @@ Under 200 ms for a warm cache is comfortable. 200–500 ms usually indicates roo
 - [Power Query Query Folding](/tutorials/power-query-query-folding/)
 ## Related Reading
 
-- [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer-guide/)
+- [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer/)
 - [Power BI performance optimization](/tutorials/power-bi-performance-optimization/)
 - [DAX optimization techniques](/tutorials/dax-optimization-techniques/)
-- [DAX variables best practices](/tutorials/dax-variables-best-practices/)
+- [DAX variables best practices](/tutorials/dax-variables-guide/)
 - [Filter context and row context explained](/tutorials/filter-context-row-context-explained/)
 - [DirectQuery vs Import mode](/tutorials/directquery-vs-import-mode/)
 - [Star schema data modeling](/tutorials/data-modeling-star-schema/)

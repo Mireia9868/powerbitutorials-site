@@ -93,5 +93,5 @@ A: Yes — use `DATESYTD` with a `FiscalYearEndDate` argument, or build a fiscal
 - [DAX Time Intelligence YTD/QTD/MTD](/tutorials/dax-time-intelligence-ytd-qtd-mtd/)
 - [Rolling Averages and Moving Sums](/tutorials/rolling-averages-moving-sums-dax/)
 - [Time Intelligence Overview](/tutorials/time-intelligence/)
-- [DAX CALCULATE Function](/tutorials/dax-calculate-function/)
+- [DAX CALCULATE Function](/tutorials/calculate-function/)
 - [Data Modeling Star Schema](/tutorials/data-modeling-star-schema/)

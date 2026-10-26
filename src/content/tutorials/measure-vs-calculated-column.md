@@ -173,7 +173,7 @@ No. Measures are better for anything context-sensitive, but they cannot appear o
 - [Filter Context vs Row Context Explained](/tutorials/filter-context-row-context-explained/)
 - [The CALCULATE Function](/tutorials/calculate-function/)
 - [DAX EARLIER Function](/tutorials/dax-earlier-function/)
-- [DAX Variables Best Practices](/tutorials/dax-variables-best-practices/)
+- [DAX Variables Best Practices](/tutorials/dax-variables-guide/)
 - [Star Schema Data Modeling](/tutorials/data-modeling-star-schema/)
 - [Common Mistakes Beginners Make in Power BI](/tutorials/power-bi-common-mistakes-beginners/)
 - [Percentage of Total in Power BI](/tutorials/power-bi-percentage-of-total/)

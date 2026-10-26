@@ -160,22 +160,22 @@ There is no documented hard limit, but the format pane becomes unwieldy past a h
 
 - [Conditional Formatting in Power BI: The Complete Guide](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting for Charts in Power BI](/tutorials/conditional-formatting-charts-power-bi/)
-- [How to Copy Conditional Formatting in Power BI](/tutorials/copy-conditional-formatting-power-bi/)
+- [How to Copy Conditional Formatting in Power BI](/tutorials/copy-conditional-formatting/)
 - [DAX SWITCH Function](/tutorials/dax-switch-function/)
 - [Filter Context vs Row Context Explained](/tutorials/filter-context-row-context-explained/)
-- [DAX Variables Best Practices](/tutorials/dax-variables-best-practices/)
+- [DAX Variables Best Practices](/tutorials/dax-variables-guide/)
 - [DAX RANKX Function](/tutorials/dax-rankx-function/)
-- [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer-guide/)
+- [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer/)
 - [DAX Troubleshooting Guide](/tutorials/dax-troubleshooting-guide/)
 <!-- CF-CLUSTER-NAV -->
 ## More conditional formatting guides
 
-- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-complete-guide/)
+- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
 - [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
-- [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting-power-bi/)
-- [Gauge Conditional Formatting](/tutorials/gauge-conditional-formatting/)
-- [Bar Chart Conditional Formatting](/tutorials/bar-chart-conditional-formatting/)
+- [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting/)
+- [Gauge Conditional Formatting](/tutorials/conditional-formatting-charts-power-bi/)
+- [Bar Chart Conditional Formatting](/tutorials/conditional-formatting-charts-power-bi/)
 - [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
 

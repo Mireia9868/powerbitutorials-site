@@ -154,3 +154,9 @@ Both are correct. The `CALCULATE` version is easier to read and lets the engine 
 ## Summary
 
 Use `SUM` for simple column totals. Use `SUMX` when you need row-by-row math, conditional aggregation, or multi-table expressions. Don't use `SUMX` as a default — it adds complexity without benefit when `SUM` suffices. When in doubt, start with `SUM` and switch to `SUMX` only if the expression requires row context.
+
+## Related Reading
+
+- [Power BI Visual Calculations: The Complete Guide (2026 GA)](/tutorials/power-bi-visual-calculations/)
+
+- [DAX User-Defined Functions (UDF): Reusable Logic Without Calculation Groups](/tutorials/dax-user-defined-functions/)

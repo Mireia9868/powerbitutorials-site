@@ -309,7 +309,7 @@ Standard time intelligence functions assume calendar months. For 4-4-5 fiscal ca
 
 Time intelligence pairs naturally with these advanced topics:
 
-- [DAX CALCULATE: The Function That Controls Everything](/tutorials/dax-calculate-function/) — Every time intelligence function uses `CALCULATE` internally
+- [DAX CALCULATE: The Function That Controls Everything](/tutorials/calculate-function/) — Every time intelligence function uses `CALCULATE` internally
 - [DAX Variables: Write Cleaner and Faster Measures](/tutorials/dax-variables-guide/) — Variables make time intelligence measures like YoY Growth readable
-- [Power BI Star Schema: The Data Model That Scales](/tutorials/power-bi-star-schema/) — A proper Date table is the centerpiece of a star schema
+- [Power BI Star Schema: The Data Model That Scales](/tutorials/data-modeling-star-schema/) — A proper Date table is the centerpiece of a star schema
 - [DAX SWITCH: Cleaner Conditional Logic](/tutorials/dax-switch-function/) — Build dynamic measure selectors for YTD/QTD/MTD switching

@@ -169,7 +169,7 @@ Because they are different calculations. The grand total recomputes the ratio us
 
 ## Related Reading
 
-- [Conditional Formatting Complete Guide](/tutorials/conditional-formatting-complete-guide/)
+- [Conditional Formatting Complete Guide](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
 - [Conditional Formatting Charts in Power BI](/tutorials/conditional-formatting-charts-power-bi/)
 - [Filter Context vs Row Context Explained](/tutorials/filter-context-row-context-explained/)
@@ -178,3 +178,5 @@ Because they are different calculations. The grand total recomputes the ratio us
 - [Data Modeling: Star Schema](/tutorials/data-modeling-star-schema/)
 - [DAX Optimization Techniques](/tutorials/dax-optimization-techniques/)
 - [Power BI Dashboard Design Principles](/tutorials/power-bi-dashboard-design-principles/)
+
+- [Power BI Map Visuals: Choosing the Right One](/tutorials/power-bi-map-visual/)

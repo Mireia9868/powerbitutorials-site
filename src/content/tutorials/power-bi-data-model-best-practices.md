@@ -185,4 +185,6 @@ Open the Model view, then use the external tool DAX Studio to run VertiPaq Analy
 - [Power BI Date Table](/tutorials/power-bi-date-table/)
 - [DirectQuery vs Import Mode](/tutorials/directquery-vs-import-mode/)
 - [DAX Optimization Techniques](/tutorials/dax-optimization-techniques/)
-- [DAX Variables Best Practices](/tutorials/dax-variables-best-practices/)
+- [DAX Variables Best Practices](/tutorials/dax-variables-guide/)
+
+- [Snowflake Schema vs Star Schema in Power BI](/tutorials/snowflake-schema-power-bi/)

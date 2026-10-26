@@ -189,3 +189,7 @@ Under 3 seconds for the first visual, under 8 seconds for a full page. If you're
 - Master [bookmarks and navigation](/tutorials/bookmarks-navigation-power-bi) for multi-page reports
 - Use [conditional formatting](/tutorials/conditional-formatting-power-bi) to highlight exceptions
 - See our [performance guide](/tutorials/power-bi-performance-optimization) to keep dashboards fast
+
+## Related Reading
+
+- [Build a Finance Dashboard in Power BI](/tutorials/power-bi-finance-dashboard/)

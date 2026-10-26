@@ -330,7 +330,7 @@ Use PascalCase (e.g., `CurrentSales`, `PriorYearRevenue`) or camelCase (e.g., `c
 
 Variables are most powerful when combined with `CALCULATE` and iterators. Explore these related tutorials:
 
-- [DAX CALCULATE: The Function That Controls Everything](/tutorials/dax-calculate-function/) — The partner to variables: `CALCULATE` modifies filter context, variables capture it
+- [DAX CALCULATE: The Function That Controls Everything](/tutorials/calculate-function/) — The partner to variables: `CALCULATE` modifies filter context, variables capture it
 - [DAX RANKX: Rank Data in Power BI](/tutorials/dax-rankx-function/) — Ranking patterns that benefit from variables for readability
 - [DAX SWITCH: Cleaner Conditional Logic](/tutorials/dax-switch-function/) — Combine `SWITCH` with variables for dynamic, readable measures
 - [DAX Troubleshooting Guide](/tutorials/dax-troubleshooting-guide/) — Debug techniques that rely on variables for isolating issues

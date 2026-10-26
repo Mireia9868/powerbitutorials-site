@@ -23,7 +23,7 @@ In Power BI Desktop, go to **View → Performance Analyzer → Start recording**
 - **Visual display** — time spent rendering the chart
 - **Network** — time fetching data from the source
 
-If the DAX query time dominates, optimize your measures or model. If visual display dominates, reduce the number of visuals or simplify them. If network dominates, check your data source connection. For a step-by-step walkthrough, see our [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer-guide/).
+If the DAX query time dominates, optimize your measures or model. If visual display dominates, reduce the number of visuals or simplify them. If network dominates, check your data source connection. For a step-by-step walkthrough, see our [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer/).
 
 ### Step 2: Check model size
 
@@ -227,7 +227,7 @@ Volume exposes bad patterns. `FILTER(ALL(...))`, nested iterators, and unmarked 
 
 ## What's next
 
-Performance optimization is iterative. Start with the quick wins (remove columns, reduce visuals), then tackle DAX patterns, then model structure. For a focused DAX tuning reference, see our [DAX optimization guide](/tutorials/power-bi-dax-optimization/). To find what's actually slow in your report, start with the [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer-guide/). For model design, revisit the [star schema guide](/tutorials/data-modeling-star-schema).
+Performance optimization is iterative. Start with the quick wins (remove columns, reduce visuals), then tackle DAX patterns, then model structure. For a focused DAX tuning reference, see our [DAX optimization guide](/tutorials/power-bi-dax-optimization/). To find what's actually slow in your report, start with the [Performance Analyzer guide](/tutorials/power-bi-performance-analyzer/). For model design, revisit the [star schema guide](/tutorials/data-modeling-star-schema).
 <!-- PERF-CLUSTER-NAV -->
 ## More performance optimization guides
 
@@ -235,3 +235,9 @@ Performance optimization is iterative. Start with the quick wins (remove columns
 - [DAX Optimization Techniques](/tutorials/dax-optimization-techniques/)
 - [Power Query Query Folding](/tutorials/power-query-query-folding/)
 - [Using Performance Analyzer in Power BI](/tutorials/power-bi-performance-analyzer/)
+
+## Related Reading
+
+- [Power BI Dataflows Explained (vs Datasets)](/tutorials/power-bi-dataflows/)
+
+- [Power BI Data Model Best Practices](/tutorials/power-bi-data-model-best-practices/)

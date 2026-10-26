@@ -161,3 +161,6 @@ A filter inside one of the source queries is likely removing rows, or a source f
 - [Measure vs Calculated Column](/tutorials/measure-vs-calculated-column/)
 - [Filter Context and Row Context Explained](/tutorials/filter-context-row-context-explained/)
 - [DAX Basics](/tutorials/dax-basics/)
+
+- [Unpivot in Power Query: Turn a Wide Table into a Long Table the Right Way](/tutorials/power-query-unpivot/)
+- [Merge Queries in Power Query (VLOOKUP Equivalent)](/tutorials/power-query-merge-queries/)

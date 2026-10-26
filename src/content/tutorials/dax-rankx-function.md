@@ -276,5 +276,5 @@ Three common causes: (1) ranking over a fact table instead of a dimension, (2) t
 
 - Learn [filter context vs. row context](/tutorials/filter-context-row-context-explained) to understand why ALLSELECTED is necessary for correct ranking
 - Read the [CALCULATE guide](/tutorials/calculate-function) to master filter modification, which controls what RANKX sees
-- See the [DAX variables guide](/tutorials/dax-variables-best-practices) for cleaner ranking measures using VAR
+- See the [DAX variables guide](/tutorials/dax-variables-guide) for cleaner ranking measures using VAR
 - Check the [performance optimization guide](/tutorials/power-bi-performance-optimization) if your ranking measures are slow

@@ -153,5 +153,8 @@ They frequently do, and it is workable if you split responsibilities clearly. Us
 - [Filter Context vs Row Context Explained](/tutorials/filter-context-row-context-explained/)
 - [Power BI Dashboard Design Principles](/tutorials/power-bi-dashboard-design-principles/)
 - [Power BI Common Mistakes Beginners Make](/tutorials/power-bi-common-mistakes-beginners/)
-- [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer-guide/)
+- [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer/)
 - [DAX Time Intelligence: YTD, QTD, MTD](/tutorials/dax-time-intelligence-ytd-qtd-mtd/)
+
+- [Power BI Slicers: Sync, Hierarchy, and Bookmark-Driven Filtering](/tutorials/power-bi-slicers-best-practices/)
+- [Power BI Bookmarks: Build Interactive Reports](/tutorials/power-bi-bookmarks/)

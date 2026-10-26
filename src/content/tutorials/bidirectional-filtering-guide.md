@@ -121,3 +121,7 @@ This applies bidirectional filtering only for this measure. The relationship sta
 ## Summary
 
 Bidirectional filtering is a tool, not a default. Use it for bridge tables in many-to-many scenarios, where it's the standard pattern. Avoid it for fact-to-fact relationships unless no alternative exists — prefer DAX with `CROSSFILTER` for targeted bidirectional behavior. Never enable bidirectional filtering without tracing the filter paths and testing performance. The safest model is single-direction everywhere, with bidirectional applied surgically only where needed.
+
+## Related Reading
+
+- [Incremental Refresh in Power BI: Setup and Gotchas](/tutorials/power-bi-incremental-refresh/)

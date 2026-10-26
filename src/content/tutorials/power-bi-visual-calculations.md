@@ -191,6 +191,10 @@ Yes, but they work the same way as in measures — they capture a value at evalu
 
 ## What's Next
 
-- Master [CALCULATE](/tutorials/dax-calculate-function/) to understand the filter context that visual calculations sidestep
+- Master [CALCULATE](/tutorials/calculate-function/) to understand the filter context that visual calculations sidestep
 - Learn [field parameters](/tutorials/power-bi-field-parameters/) for dynamic measure switching alongside visual calculations
 - Read our [DAX time intelligence guide](/tutorials/dax-time-intelligence-ytd-qtd-mtd/) for traditional YTD/QTD/MTD patterns — then see how visual calculations simplify some of those same scenarios
+
+## Related Reading
+
+- [DAX User-Defined Functions (UDF): Reusable Logic Without Calculation Groups](/tutorials/dax-user-defined-functions/)

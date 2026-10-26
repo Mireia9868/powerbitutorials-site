@@ -69,7 +69,7 @@ Useful when the role table is not physically related, or you want a measure to r
 | Many roles, business users self-serve | Separate alias tables (Option 2) |
 | Cross-filter between roles without relationships | TREATAS (Option 3) |
 
-For a clean star schema, prefer Option 1 or 2 and avoid putting multiple date roles in the same slicer. See [power-bi-star-schema](/tutorials/power-bi-star-schema/) for the surrounding model design.
+For a clean star schema, prefer Option 1 or 2 and avoid putting multiple date roles in the same slicer. See [power-bi-star-schema](/tutorials/data-modeling-star-schema/) for the surrounding model design.
 
 ## FAQ
 
@@ -85,8 +85,12 @@ A: Yes — right-click it → Mark as Date Table. This enables proper time intel
 ## Related Reading
 
 - [Relationships: One-to-Many and Many-to-Many](/tutorials/relationships-one-to-many-many-to-many/)
-- [Power BI Star Schema](/tutorials/power-bi-star-schema/)
+- [Power BI Star Schema](/tutorials/data-modeling-star-schema/)
 - [Data Modeling Star Schema](/tutorials/data-modeling-star-schema/)
 - [Bidirectional Filtering Guide](/tutorials/bidirectional-filtering-guide/)
 - [DAX Time Intelligence YTD/QTD/MTD](/tutorials/dax-time-intelligence-ytd-qtd-mtd/)
 - [Time Intelligence Overview](/tutorials/time-intelligence/)
+
+- [Power BI Dataflows Explained (vs Datasets)](/tutorials/power-bi-dataflows/)
+- [Power BI Data Model Best Practices](/tutorials/power-bi-data-model-best-practices/)
+- [Snowflake Schema vs Star Schema in Power BI](/tutorials/snowflake-schema-power-bi/)

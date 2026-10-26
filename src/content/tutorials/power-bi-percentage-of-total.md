@@ -78,9 +78,12 @@ A: Yes — the pattern flows through matrix groups; each level computes against 
 
 ## Related Reading
 
-- [DAX CALCULATE Function](/tutorials/dax-calculate-function/)
+- [DAX CALCULATE Function](/tutorials/calculate-function/)
 - [SUMX vs SUM Iterators](/tutorials/sumx-vs-sum-iterators/)
 - [Filter Context vs Row Context](/tutorials/filter-context-row-context-explained/)
 - [DAX RANKX Function](/tutorials/dax-rankx-function/)
 - [Sales Dashboard Tutorial](/tutorials/power-bi-sales-dashboard-tutorial/)
 - [Data Modeling Star Schema](/tutorials/data-modeling-star-schema/)
+
+- [Power BI Visual Calculations: The Complete Guide (2026 GA)](/tutorials/power-bi-visual-calculations/)
+- [DAX User-Defined Functions (UDF): Reusable Logic Without Calculation Groups](/tutorials/dax-user-defined-functions/)

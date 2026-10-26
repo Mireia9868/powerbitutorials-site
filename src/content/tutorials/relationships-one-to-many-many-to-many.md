@@ -152,3 +152,9 @@ One-to-many is the default and the safest relationship type. Many-to-many is som
 - [Role-Playing Dimensions in Power BI](/tutorials/role-playing-dimensions/) — handling multiple date relationships with `USERELATIONSHIP`.
 - [Bidirectional Filtering in Power BI](/tutorials/bidirectional-filtering-guide/) — when (and when not) to open filter flow both ways.
 
+## Related Reading
+
+- [Power BI Dataflows Explained (vs Datasets)](/tutorials/power-bi-dataflows/)
+
+- [Power BI Data Model Best Practices](/tutorials/power-bi-data-model-best-practices/)
+- [Snowflake Schema vs Star Schema in Power BI](/tutorials/snowflake-schema-power-bi/)

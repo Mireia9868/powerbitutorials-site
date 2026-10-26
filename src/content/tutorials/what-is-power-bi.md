@@ -161,3 +161,6 @@ A star schema arranges tables into fact tables (measurable events like sales) an
 - [Measure vs Calculated Column](/tutorials/measure-vs-calculated-column/)
 - [Power BI Dashboard Design Principles](/tutorials/power-bi-dashboard-design-principles/)
 - [Filter Context and Row Context Explained](/tutorials/filter-context-row-context-explained/)
+
+- [Power BI Slicers: Sync, Hierarchy, and Bookmark-Driven Filtering](/tutorials/power-bi-slicers-best-practices/)
+- [Tableau vs Power BI: Which Should You Choose in 2026](/tutorials/tableau-vs-power-bi/)

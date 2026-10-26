@@ -173,3 +173,5 @@ Store the workbook in OneDrive or SharePoint, connect with the web connector, an
 - [Filter Context and Row Context Explained](/tutorials/filter-context-row-context-explained/)
 - [DAX Time Intelligence: YTD, QTD, MTD](/tutorials/dax-time-intelligence-ytd-qtd-mtd/)
 - [Power BI Performance Optimization](/tutorials/power-bi-performance-optimization/)
+
+- [Import and Transform Excel Data with Power Query](/tutorials/power-query-from-excel/)

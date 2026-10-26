@@ -46,7 +46,7 @@ A measure is fast when the Physical Plan shows few `Scan_Vertipaq` calls and the
 
 The **Server Timings** tab breaks a query into Storage Engine (SE) vs Formula Engine (FE) time. The golden rule: push work to the SE. If FE time dominates, your DAX is doing row-by-row logic that should be a variable or a calculated column.
 
-This pairs directly with [power-bi-performance-analyzer-guide](/tutorials/power-bi-performance-analyzer-guide/) inside Power BI — DAX Studio gives the deeper view.
+This pairs directly with [power-bi-performance-analyzer-guide](/tutorials/power-bi-performance-analyzer/) inside Power BI — DAX Studio gives the deeper view.
 
 ## When to reach for it
 
@@ -68,7 +68,7 @@ A: Performance Analyzer lives inside Power BI and times whole visuals. DAX Studi
 ## Related Reading
 
 - [Power BI DAX Optimization](/tutorials/power-bi-dax-optimization/)
-- [Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer-guide/)
+- [Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer/)
 - [DAX Troubleshooting Guide](/tutorials/dax-troubleshooting-guide/)
 - [DAX Basics](/tutorials/dax-basics/)
 - [Filter Context vs Row Context](/tutorials/filter-context-row-context-explained/)

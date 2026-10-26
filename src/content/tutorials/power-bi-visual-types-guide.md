@@ -133,3 +133,14 @@ A good report follows a visual hierarchy: top-level summary, supporting detail, 
 ## Summary
 
 Most reports need only five visual types: bar, line, card, matrix, and map. Choose based on the question — trends use lines, comparisons use bars, single numbers use cards, cross-tabs use matrices, geography uses maps. Structure reports in layers: summary at the top, trends in the middle, detail at the bottom. Keep pages to 4–7 visuals, use color intentionally, and always provide context with titles and filter indicators.
+
+## Related Reading
+
+- [Power BI Matrix Visual: Best Practices and Tips](/tutorials/power-bi-matrix-visual/)
+
+- [Power BI Slicers: Sync, Hierarchy, and Bookmark-Driven Filtering](/tutorials/power-bi-slicers-best-practices/)
+- [Tableau vs Power BI: Which Should You Choose in 2026](/tutorials/tableau-vs-power-bi/)
+- [Power BI Bookmarks: Build Interactive Reports](/tutorials/power-bi-bookmarks/)
+- [Build a Finance Dashboard in Power BI](/tutorials/power-bi-finance-dashboard/)
+- [Power BI Conflicting Metrics Error: Causes and Fixes](/tutorials/power-bi-conflicting-metrics/)
+- [What Is Power BI? A Complete Beginner Overview](/tutorials/what-is-power-bi/)

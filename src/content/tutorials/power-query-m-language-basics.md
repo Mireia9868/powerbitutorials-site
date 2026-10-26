@@ -160,3 +160,7 @@ SafeConvert = Table.AddColumn(Source, "ParsedQty", each try Number.From([Qty]) o
 ## Summary
 
 M is built on three structures (tables, records, lists) and one pattern (`let ... in`). Functions are the core abstraction, and `each` is the standard way to write row-level logic. Master these fundamentals and the Advanced Editor stops being intimidating — it becomes the most powerful part of Power Query.
+
+## Related Reading
+
+- [Append Queries in Power Query: Combine Files Easily](/tutorials/power-query-append-queries/)

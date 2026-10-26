@@ -229,7 +229,11 @@ FUNCTION GrossMargin = (revenue : NUMERIC, cost : NUMERIC) =>
 
 ## What's Next
 
-- Brush up on [CALCULATE](/tutorials/dax-calculate-function/) — UDFs don't replace filter context modification, they complement it
+- Brush up on [CALCULATE](/tutorials/calculate-function/) — UDFs don't replace filter context modification, they complement it
 - Learn [DAX variables](/tutorials/dax-variables-guide/) — they work inside UDF bodies and make complex functions readable
 - Read about [field parameters](/tutorials/power-bi-field-parameters/) for another approach to dynamic measure logic (complementary, not competing with UDFs)
 - Check the [DAX troubleshooting guide](/tutorials/dax-troubleshooting-guide/) when your UDF returns unexpected results — the same debugging principles apply
+
+## Related Reading
+
+- [Power BI Visual Calculations: The Complete Guide (2026 GA)](/tutorials/power-bi-visual-calculations/)

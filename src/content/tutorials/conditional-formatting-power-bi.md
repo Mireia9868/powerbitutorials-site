@@ -268,7 +268,7 @@ Red/green is the most common formatting choice and the most common accessibility
 ## FAQ
 
 **Can I copy conditional formatting from one visual to another?**
-There's no native "copy formatting" button between unrelated visuals, but you can reuse the same color measure across every visual, which achieves the same result. For report-level consistency, a JSON theme applied in the report settings carries color rules across visuals. See our guide on [copying conditional formatting](/tutorials/copy-conditional-formatting-power-bi/).
+There's no native "copy formatting" button between unrelated visuals, but you can reuse the same color measure across every visual, which achieves the same result. For report-level consistency, a JSON theme applied in the report settings carries color rules across visuals. See our guide on [copying conditional formatting](/tutorials/copy-conditional-formatting/).
 
 **Does conditional formatting slow down my report?**
 Field-value formatting that relies on a heavy measure adds DAX evaluation per cell, so yes, it can — but only noticeably on very large matrices. Keep color measures simple (SWITCH + DIVIDE, no iterators) and you'll be fine.
@@ -281,18 +281,21 @@ Partially. Charts use "Data colors" conditional formatting rather than cell rule
 
 ## What's next
 
-- [How to Copy Conditional Formatting in Power BI](/tutorials/copy-conditional-formatting-power-bi/) — reuse color rules across visuals and reports without rebuilding them.
+- [How to Copy Conditional Formatting in Power BI](/tutorials/copy-conditional-formatting/) — reuse color rules across visuals and reports without rebuilding them.
 - [Conditional Formatting for Charts, Bar Charts & Gauges](/tutorials/conditional-formatting-charts-power-bi/) — apply color logic to visual elements, not just matrix cells.
 - [The DAX SWITCH Function Explained](/tutorials/dax-switch-function/) — the backbone of most color measures in this guide.
 <!-- CF-CLUSTER-NAV -->
 ## More conditional formatting guides
 
-- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-complete-guide/)
+- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
 - [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
-- [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting-power-bi/)
-- [Gauge Conditional Formatting](/tutorials/gauge-conditional-formatting/)
-- [Bar Chart Conditional Formatting](/tutorials/bar-chart-conditional-formatting/)
+- [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting/)
+- [Gauge Conditional Formatting](/tutorials/conditional-formatting-charts-power-bi/)
+- [Bar Chart Conditional Formatting](/tutorials/conditional-formatting-charts-power-bi/)
 - [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
 
+## Related Reading
+
+- [Power BI Matrix Visual: Best Practices and Tips](/tutorials/power-bi-matrix-visual/)

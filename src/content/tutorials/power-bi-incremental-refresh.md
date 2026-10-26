@@ -147,3 +147,5 @@ Yes, run one full refresh per affected table after editing the stored or refresh
 - [Filter Context and Row Context Explained](/tutorials/filter-context-row-context-explained/)
 - [Power BI Common Mistakes for Beginners](/tutorials/power-bi-common-mistakes-beginners/)
 - [DAX Time Intelligence: YTD, QTD, MTD](/tutorials/dax-time-intelligence-ytd-qtd-mtd/)
+
+- [VertiPaq Analyzer: Optimize Your Power BI Data Model](/tutorials/vertipaq-optimizer-power-bi/)

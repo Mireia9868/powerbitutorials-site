@@ -126,3 +126,9 @@ Parameters are resolved at query refresh time, not at query execution time. This
 ## Summary
 
 Parameters externalize values that vary by environment or reporting period. Use them for server names, file paths, date ranges, and environment switching. Avoid parameterizing table names or per-user values. When published to the Power BI Service, parameters let a single dataset serve multiple environments — a powerful pattern for managing dev/test/prod lifecycles.
+
+## Related Reading
+
+- [Import and Transform Excel Data with Power Query](/tutorials/power-query-from-excel/)
+
+- [Append Queries in Power Query: Combine Files Easily](/tutorials/power-query-append-queries/)

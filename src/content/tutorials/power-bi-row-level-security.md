@@ -244,3 +244,10 @@ Yes. Users with "Admin" or "Member" access to the workspace can view the report 
 - Read the [bidirectional filtering guide](/tutorials/bidirectional-filtering-guide) to understand why bidirectional relationships can break RLS
 - See the [performance optimization guide](/tutorials/power-bi-performance-optimization) if RLS filters are slowing down your reports
 - Check the [one-to-many vs many-to-many relationships](/tutorials/relationships-one-to-many-many-to-many) guide for designing security table relationships
+
+## Related Reading
+
+- [Power BI Dataflows Explained (vs Datasets)](/tutorials/power-bi-dataflows/)
+
+- [Power BI Data Model Best Practices](/tutorials/power-bi-data-model-best-practices/)
+- [Snowflake Schema vs Star Schema in Power BI](/tutorials/snowflake-schema-power-bi/)

@@ -111,3 +111,12 @@ Use tooltips for context the user wants without leaving the page. Use drill-thro
 ## Summary
 
 Default tooltips show values; custom tooltip pages show context. Use them for trend-on-hover, composition breakdowns, and benchmark comparisons. Keep tooltip pages small (3–5 visuals), fast (simple measures), and focused (one question per tooltip). Match the tooltip's filter context to the source visual's grouping, and remember that tooltips don't work on touch devices — don't hide critical information behind a hover.
+
+## Related Reading
+
+- [Power BI Map Visuals: Choosing the Right One](/tutorials/power-bi-map-visual/)
+
+- [Tableau vs Power BI: Which Should You Choose in 2026](/tutorials/tableau-vs-power-bi/)
+- [Build a Finance Dashboard in Power BI](/tutorials/power-bi-finance-dashboard/)
+- [Power BI Conflicting Metrics Error: Causes and Fixes](/tutorials/power-bi-conflicting-metrics/)
+- [What Is Power BI? A Complete Beginner Overview](/tutorials/what-is-power-bi/)

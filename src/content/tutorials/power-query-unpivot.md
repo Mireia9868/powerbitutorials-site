@@ -98,3 +98,7 @@ A: Long format is how columnar engines (VertiPaq) compress best. It is usually s
 - [Merge vs Append Queries](/tutorials/merge-vs-append-queries/)
 - [Power Query M Language Basics](/tutorials/power-query-m-language-basics/)
 - [Time Intelligence Overview](/tutorials/time-intelligence/)
+
+- [Merge Queries in Power Query (VLOOKUP Equivalent)](/tutorials/power-query-merge-queries/)
+- [Import and Transform Excel Data with Power Query](/tutorials/power-query-from-excel/)
+- [Append Queries in Power Query: Combine Files Easily](/tutorials/power-query-append-queries/)

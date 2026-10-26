@@ -133,3 +133,9 @@ Load `Orders` and `Customers` as separate tables. In the Power BI model view, cr
 ## Summary
 
 Merge adds columns (join). Append adds rows (union). Use merge for lookups and enrichment — but prefer relationships in the model when possible. Use append to combine similarly structured tables, like monthly exports or regional files. Match column names before appending, and use integer keys for faster merges.
+
+## Related Reading
+
+- [Merge Queries in Power Query (VLOOKUP Equivalent)](/tutorials/power-query-merge-queries/)
+
+- [Append Queries in Power Query: Combine Files Easily](/tutorials/power-query-append-queries/)

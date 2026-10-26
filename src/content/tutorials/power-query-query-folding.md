@@ -188,9 +188,11 @@ It hurts folding, because it forces the table into local memory and cuts the que
 
 - [DirectQuery vs Import Mode in Power BI](/tutorials/directquery-vs-import-mode/)
 - [Merge vs Append in Power Query](/tutorials/merge-vs-append-queries/)
-- [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer-guide/)
+- [Power BI Performance Analyzer Guide](/tutorials/power-bi-performance-analyzer/)
 - [Power BI Performance Optimization](/tutorials/power-bi-performance-optimization/)
 - [Power BI DAX Optimization](/tutorials/power-bi-dax-optimization/)
 - [Calculated Tables and What-If Parameters](/tutorials/calculated-tables-what-if-parameters/)
 - [Star Schema Data Modeling](/tutorials/data-modeling-star-schema/)
 - [Power BI Common Mistakes for Beginners](/tutorials/power-bi-common-mistakes-beginners/)
+
+- [Unpivot in Power Query: Turn a Wide Table into a Long Table the Right Way](/tutorials/power-query-unpivot/)

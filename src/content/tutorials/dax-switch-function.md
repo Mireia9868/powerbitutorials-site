@@ -244,7 +244,7 @@ Yes. SWITCH evaluates the expression once, then checks each value in order. When
 
 **Q: Can I nest SWITCH inside another SWITCH?**
 
-Yes, but it is usually a sign that you should restructure your logic. Consider using a separate calculated column or a mapping table instead. If you must nest, store the inner SWITCH result in a variable first using `VAR` for readability — see our [DAX variables best practices](/tutorials/dax-variables-best-practices/) guide.
+Yes, but it is usually a sign that you should restructure your logic. Consider using a separate calculated column or a mapping table instead. If you must nest, store the inner SWITCH result in a variable first using `VAR` for readability — see our [DAX variables best practices](/tutorials/dax-variables-guide/) guide.
 
 **Q: Is SWITCH faster than nested IF in DAX?**
 

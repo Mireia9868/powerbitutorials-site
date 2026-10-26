@@ -77,3 +77,8 @@ A: They were added as separate visuals. Sync copies *values*, not the visual —
 - [Drill Through](/tutorials/power-bi-drill-through/)
 - [Tooltips, Page, and Report](/tutorials/power-bi-tooltips-page-reports/)
 - [Dashboard Design Principles](/tutorials/power-bi-dashboard-design-principles/)
+
+- [Tableau vs Power BI: Which Should You Choose in 2026](/tutorials/tableau-vs-power-bi/)
+- [Power BI Bookmarks: Build Interactive Reports](/tutorials/power-bi-bookmarks/)
+- [Power BI Conflicting Metrics Error: Causes and Fixes](/tutorials/power-bi-conflicting-metrics/)
+- [What Is Power BI? A Complete Beginner Overview](/tutorials/what-is-power-bi/)

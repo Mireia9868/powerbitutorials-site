@@ -179,7 +179,7 @@ Yes, on key columns that are already integers or on columns used for fine-graine
 
 - /tutorials/data-modeling-star-schema/
 - /tutorials/dax-optimization-techniques/
-- /tutorials/power-bi-performance-analyzer-guide/
+- /tutorials/power-bi-performance-analyzer/
 - /tutorials/power-bi-performance-optimization/
 - /tutorials/directquery-vs-import-mode/
 - /tutorials/bidirectional-filtering-guide/

@@ -267,3 +267,9 @@ The workflow is the same. The specific transformations change, but the structure
 - Master [star schema modeling](/tutorials/data-modeling-star-schema) for clean models
 - Study [dashboard design principles](/tutorials/power-bi-dashboard-design-principles) for better visuals
 - Check the [performance guide](/tutorials/power-bi-performance-optimization) when reports slow down
+
+## Related Reading
+
+- [Build a Finance Dashboard in Power BI](/tutorials/power-bi-finance-dashboard/)
+
+- [What Is Power BI? A Complete Beginner Overview](/tutorials/what-is-power-bi/)

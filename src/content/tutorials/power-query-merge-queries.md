@@ -184,3 +184,6 @@ Yes, on the next refresh. The merge is baked into the query's M code, so pressin
 - [The DAX EARLIER Function](/tutorials/dax-earlier-function/)
 - [Power BI Common Mistakes for Beginners](/tutorials/power-bi-common-mistakes-beginners/)
 - [Power BI Excel Integration](/tutorials/power-bi-excel-integration/)
+
+- [Unpivot in Power Query: Turn a Wide Table into a Long Table the Right Way](/tutorials/power-query-unpivot/)
+- [Import and Transform Excel Data with Power Query](/tutorials/power-query-from-excel/)

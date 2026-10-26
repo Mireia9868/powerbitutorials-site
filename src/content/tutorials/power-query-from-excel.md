@@ -148,3 +148,6 @@ The engine is the same M language, and the transformation steps behave identical
 - [DAX Basics: A Beginner's Guide](/tutorials/dax-basics/)
 - [Filter Context vs Row Context Explained](/tutorials/filter-context-row-context-explained/)
 - [DAX EARLIER Function: When and Why It Exists](/tutorials/dax-earlier-function/)
+
+- [Unpivot in Power Query: Turn a Wide Table into a Long Table the Right Way](/tutorials/power-query-unpivot/)
+- [Merge Queries in Power Query (VLOOKUP Equivalent)](/tutorials/power-query-merge-queries/)

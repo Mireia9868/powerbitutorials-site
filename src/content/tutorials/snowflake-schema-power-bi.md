@@ -125,7 +125,7 @@ Rarely in Power BI. VertiPaq compresses repeated low-cardinality text very effic
 
 ### Q: Will flattening a dimension break my existing DAX measures?
 
-It depends on what the measures reference. Measures that sum a fact column keep working, because the fact-to-dimension relationship is unchanged. Measures that reference a specific dimension table name or column will break if that table no longer exists, so you must retarget them to the flattened column. Adopt a consistent naming convention and use variables (`/tutorials/dax-variables-best-practices/`) so refactors touch fewer formulas.
+It depends on what the measures reference. Measures that sum a fact column keep working, because the fact-to-dimension relationship is unchanged. Measures that reference a specific dimension table name or column will break if that table no longer exists, so you must retarget them to the flattened column. Adopt a consistent naming convention and use variables (`/tutorials/dax-variables-guide/`) so refactors touch fewer formulas.
 
 ### Q: When is snowflaking actually the right call in Power BI?
 
@@ -140,4 +140,4 @@ When a dimension is genuinely shared across multiple facts, when you are in Dire
 - /tutorials/directquery-vs-import-mode/
 - /tutorials/dax-optimization-techniques/
 - /tutorials/calculate-function/
-- /tutorials/power-bi-performance-analyzer-guide/
+- /tutorials/power-bi-performance-analyzer/
