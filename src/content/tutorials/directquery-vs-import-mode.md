@@ -1,6 +1,6 @@
 ---
-title: "DirectQuery vs Import Mode: Choosing the Right Power BI Storage Mode"
-description: "Import caches data in memory; DirectQuery queries the source per visual. When each wins, how Dual mode works, and the trade-offs."
+title: "Import vs DirectQuery vs Dual vs Direct Lake: Choosing a Storage Mode"
+description: "Four storage modes, one decision. When Import, DirectQuery, Dual or Direct Lake is right, with a matrix covering speed, cost and freshness."
 pubDate: 2026-07-26
 category: "data-modeling"
 difficulty: "Advanced"
@@ -12,7 +12,7 @@ Every Power BI dataset uses a storage mode that determines how data is retrieved
 
 This guide covers the three storage modes, the decision criteria for choosing between them, how to configure hybrid models, and the common mistakes that turn a fast report into a slow one.
 
-## The Three Storage Modes
+## The Four Storage Modes
 
 ### Import Mode
 
@@ -70,17 +70,54 @@ Dual Mode stores a table in memory (like Import) but can also fall back to Direc
 
 **Primary use case:** Dimension tables in a star schema where fact tables use DirectQuery. Setting dimension tables to Dual allows them to participate in both Import and DirectQuery relationships without breaking the model. See our [star schema guide](/tutorials/data-modeling-star-schema/) for dimension/fact table patterns.
 
+### Direct Lake
+
+Direct Lake is the storage mode that arrived with Microsoft Fabric. It reads Delta tables straight from OneLake — no import, and no SQL round-trip to a source database the way DirectQuery does. It is the only mode that gives Import-like speed without a scheduled refresh.
+
+**How it works:**
+1. Your data already sits in OneLake as Delta Parquet, usually in a Lakehouse or Warehouse
+2. A semantic model points at those tables
+3. On first query, Power BI loads the referenced columns into memory — Fabric calls this *framing*
+4. Queries then run against that in-memory data until new Delta commits invalidate it
+
+**Pros:**
+- Query speed close to Import, with no refresh schedule to maintain
+- No second copy of the data, so nothing to keep in sync
+- No per-visual SQL load on a source system
+- New rows appear as soon as the Delta table is updated
+
+**Cons:**
+- Requires Fabric capacity. It is not available on Power BI Pro alone, so this is a procurement decision, not a modelling one
+- The data has to be in OneLake as Delta already — it is not a connector
+- Some DAX cannot be answered from the framed columns and either falls back to DirectQuery (if fallback is configured) or fails outright
+- Governance surface differs from Import: column-level security and some lineage features behave differently
+
+**When to use:** You are on Fabric, the data lands in OneLake, and you want Import-level speed without owning a refresh pipeline.
+
 ## Decision Matrix
 
-| Criterion | Import | DirectQuery | Dual |
-|-----------|--------|-------------|------|
-| Query speed | ⚡ Fastest | 🐌 Depends on source | ⚡ Fast for bridging |
-| Data freshness | Stale until refresh | Real-time | Mixed |
-| Max data size | Memory-limited | Source-limited | Memory-limited |
-| DAX support | Full | Partial | Full |
-| Source DB load | Low (only at refresh) | High (every query) | Medium |
-| Setup complexity | Low | Medium | High |
-| Best for | Most reports | Real-time / very large | Hybrid models |
+| Criterion | Import | DirectQuery | Dual | Direct Lake |
+|-----------|--------|-------------|------|------------|
+| Query speed | ⚡ Fastest | 🐌 Depends on source | ⚡ Fast for bridging | ⚡ Near-Import |
+| Data freshness | Stale until refresh | Real-time | Mixed | As fresh as the Delta table |
+| Max data size | Memory-limited | Source-limited | Memory-limited | Capacity-limited |
+| DAX support | Full | Partial | Full | Partial (fallback) |
+| Source DB load | Low (at refresh only) | High (every query) | Medium | None |
+| Prerequisite | Nothing extra | Gateway for on-prem | A hybrid model | Fabric capacity + OneLake |
+| Setup complexity | Low | Medium | High | Low, if already on Fabric |
+| Best for | Most reports | Real-time / very large | Hybrid models | Fabric-native models |
+
+## Three things the matrix doesn't show about Direct Lake
+
+The table above compares modes by what they promise. Direct Lake has three behaviours that are easier to hit in practice than the documentation implies:
+
+**Fallback is silent until you measure it.** If a DAX query cannot be served from the framed columns, the model either falls back to DirectQuery or returns an error, depending on the setting. Silent fallback means a report can be fast in testing and slow in production, because a single measure triggered a path that the preview metrics never exercised. Check Server Timings and look for DirectQuery activity on a Direct Lake model — if it is there, something is falling back.
+
+**Framing is not a refresh, but it costs something.** The first query after new Delta commits loads the referenced columns again. For a model reading a table that is rewritten frequently, that cost lands on whoever opens the report first. Microsoft's
+[Direct Lake overview](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)
+describes the framing rules; in practice, watch the first query after a pipeline run, not the average.
+
+**Capacity is the real gate.** Direct Lake requires Fabric capacity. If you are deciding between Import and DirectQuery today on a Pro licence, this mode is not on the table yet — adding it to a comparison table is fine, planning around it before the capacity exists is not.
 
 ## Configuring a Hybrid Model
 
@@ -185,6 +222,14 @@ It depends entirely on the source database. SQL Server can handle hundreds of co
 **Q: Does DirectQuery work with Excel files or CSV sources?**
 
 No. DirectQuery requires a supported database source (SQL Server, Snowflake, Oracle, PostgreSQL, etc.). File-based sources like Excel, CSV, and SharePoint lists only support Import Mode.
+
+**Q: Can I use Direct Lake without Fabric capacity?**
+
+No. Direct Lake is a Fabric feature; a Power BI Pro licence alone cannot host a Direct Lake semantic model. If you are not on Fabric, Import and DirectQuery remain the only two choices, with Dual as a hybrid tool.
+
+**Q: Does Direct Lake replace Import Mode?**
+
+Not yet, and not for everyone. It removes the refresh schedule and the duplicate copy, which is most of why people choose Import. But it also requires your data to already live in OneLake as Delta, and some DAX triggers a fallback. For a model built on an on-premises SQL Server with no Fabric capacity, Import is still the correct answer.
 
 **Q: Can I use Row-Level Security with DirectQuery?**
 

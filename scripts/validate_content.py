@@ -60,7 +60,9 @@ AUTHORITATIVE_DOMAINS = (
 # 一次 ![Figure 1: ...](placeholder) 就能让整站构建失败（2026-09-29 实际发生）。
 IMG_RE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)(?:\s+[\"'][^\"']*[\"'])?\)")
 CITE_RE = re.compile(r"\]\((https?://[^)\s]+)\)")
-FAQ_RE = re.compile(r"^###\s+Q[:：]", re.M)
+# 两种写法都算：### Q:（可锚定标题）和 **Q:**（粗体段落）。
+# 站内两种格式并存（26 篇 / 13 篇），只认一种会把已有的 FAQ 误报成 0 组。
+FAQ_RE = re.compile(r"^(?:###\s+Q[:：]|\*\*Q[:：])", re.M)
 WORD_RE = re.compile(r"\b[A-Za-z0-9][A-Za-z0-9'\-]*\b")
 
 
