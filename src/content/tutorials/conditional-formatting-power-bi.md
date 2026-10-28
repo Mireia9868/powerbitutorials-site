@@ -1,6 +1,6 @@
 ---
-title: "Conditional Formatting in Power BI: A Complete Guide (Based on Measure, Formula & Text)"
-description: "Background colour, font colour, data bars and icons: every conditional formatting type, driven by a measure, formula or text field."
+title: "Conditional Formatting in Power BI: Measure, Rule or Field"
+description: "Pick the right driver: a measure, a rule, or a field. Covers background colour, data bars, icons, and the DAX that makes them dynamic."
 pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Beginner"

@@ -1,6 +1,6 @@
 ---
-title: "DAX SWITCH: Cleaner Conditional Logic Than Nested IFs"
-description: "SWITCH replaces nested IFs with readable conditional logic. Four patterns, and the mistakes that make it silently return blank."
+title: "DAX SWITCH: Syntax, 4 Patterns, and Why It Returns Blank"
+description: "SWITCH replaces nested IFs with readable logic. Four patterns, the order-of-evaluation rule, and the mistakes that make it return blank."
 pubDate: 2026-07-26
 category: "dax"
 difficulty: "Intermediate"
