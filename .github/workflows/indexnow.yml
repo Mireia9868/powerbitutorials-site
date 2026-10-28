@@ -1,0 +1,61 @@
+name: IndexNow (Bing / Yandex)
+
+# 每次 push 到 main 后，把最近改动过的文章推给 IndexNow。
+# 为什么只做 Bing：这个站实际流量来自 Bing（872 用户 / 28 天）而不是 Google（17），
+# Bing 的收录速度直接决定新文章的见效时间。Google 不参与 IndexNow，不受影响。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      all:
+        description: "全量推送（首次启用时用一次，之后不要常跑）"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: true
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Wait for the key file to be live
+        # IndexNow 会先去抓 key 文件校验所有权。Cloudflare 部署通常 30–60 秒，
+        # 轮询比固定 sleep 稳，也避免部署慢时白推一次（422）。
+        run: |
+          KEY=pbt2026indexnow7f3a9c2e5b8d1a4f6c0e3b7d
+          URL="https://powerbitutorials.com/${KEY}.txt"
+          for i in $(seq 1 18); do
+            if curl -sf --max-time 10 "$URL" | grep -q "$KEY"; then
+              echo "key file live after $((i*10))s"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::key 文件 3 分钟内未上线，IndexNow 校验会失败"
+          exit 1
+
+      - name: Push URLs
+        run: |
+          if [ "${{ inputs.all }}" = "true" ]; then
+            echo "全量模式"
+            python scripts/indexnow.py --all
+          else
+            echo "增量模式：最近 3 天发布或更新的文章"
+            python scripts/indexnow.py --days 3
+          fi
