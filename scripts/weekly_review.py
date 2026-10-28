@@ -170,6 +170,58 @@ def daterange(days):
     start = end - datetime.timedelta(days=days - 1)
     return start.isoformat(), end.isoformat()
 
+def sitemap_health():
+    """检查线上 sitemap 的健康状况。
+
+    为什么单独查：Bing 的 sitemap 抓取会停滞。实测 2026-07-26 之后三个月
+    没有再抓过，URLs discovered 卡在 41 条（实际 86 条）。这种情况在 Bing
+    后台只显示 "Success + 旧日期"，不报错，很容易一直发现不了。
+    这里每周确认三件事：条数对不对、有没有混进 noindex、抽样是否 200。
+    """
+    import gzip, urllib.request
+    url = f"{SITE_URL}sitemap.xml"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; sitemap-check)"})
+        with urllib.request.urlopen(req, timeout=25) as r:
+            raw = r.read()
+            if r.headers.get("Content-Encoding") == "gzip":
+                raw = gzip.decompress(raw)
+        xml = raw.decode("utf-8", "replace")
+    except Exception as e:
+        return {"error": str(e)}
+
+    locs = re.findall(r"<loc>([^<]+)</loc>", xml)
+    lastmods = re.findall(r"<lastmod>([^<]+)</lastmod>", xml)
+    de_urls = [u for u in locs if "/tutorials/de-" in u]
+
+    # 抽样 10 条，看是否都是 200（sitemap 里出现 404/noindex 是明确的实现错误）
+    sample = locs[:10]
+    bad = []
+    for u in sample:
+        try:
+            rq = urllib.request.Request(u, method="HEAD",
+                                        headers={"User-Agent": "Mozilla/5.0 (compatible; sitemap-check)"})
+            with urllib.request.urlopen(rq, timeout=12) as r:
+                if r.status != 200:
+                    bad.append((u, r.status))
+        except Exception as e:
+            bad.append((u, getattr(e, "code", "ERR")))
+
+    recent = 0
+    cutoff = datetime.date.today() - datetime.timedelta(days=14)
+    for m in lastmods:
+        try:
+            if datetime.date.fromisoformat(m[:10]) >= cutoff:
+                recent += 1
+        except ValueError:
+            pass
+
+    tut = [u for u in locs
+           if "/tutorials/" in u and u.rstrip("/") != f"{SITE_URL}tutorials"]
+    return {"count": len(locs), "tut": len(tut), "de": len(de_urls), "bad": bad,
+            "recent": recent, "sampled": len(sample)}
+
+
 def main():
     alerts = []
     info = []
@@ -307,6 +359,33 @@ def main():
     A("")
 
     # 总结与下一步
+    # ---- Sitemap 健康 ----
+    A(f"## 四.5、Sitemap 健康")
+    sh = sitemap_health()
+    if "error" in sh:
+        A(f"- ⚠️ 拉取 sitemap 失败：{sh['error']}")
+        alerts.append(f"[sitemap] 拉取失败：{sh['error']}")
+    else:
+        local = len(list((REPO_ROOT / "src" / "content" / "tutorials").glob("*.md")))
+        local_en = local - 3  # 三篇德语已 noindex
+        A(f"- sitemap 总条数：**{sh['count']}**（教程 {sh['tut']} + 类目 6 + 静态页 7）")
+        A(f"- 教程 URL {sh['tut']} 条 vs 本地英文文章 {local_en} 篇")
+        A(f"- 14 天内更新过的 URL：{sh['recent']} 条")
+        bad_n = len(sh["bad"])
+        A(f"- 抽查 {sh['sampled']} 条：{'全部 200' if not bad_n else f'异常 {bad_n} 条'}")
+        for u, code in sh["bad"][:5]:
+            A(f"  - {u} -> {code}")
+            alerts.append(f"[sitemap] {u} 返回 {code}")
+        if sh["de"]:
+            A(f"- ⚠️ sitemap 里有 {sh['de']} 条 de- 开头的 URL（这些是 noindex，不该出现）")
+            alerts.append(f"[sitemap] 混入 {sh['de']} 条 noindex 的德语 URL")
+        if abs(sh["tut"] - local_en) > 2:
+            A(f"- ⚠️ 教程 URL 数与本地英文文章数不符，检查 sitemap 生成逻辑")
+            alerts.append(f"[sitemap] 教程 URL {sh['tut']} 与本地英文 {local_en} 不符")
+    A("- **Bing 后台需人工对照**：Sitemaps → URLs discovered 是否接近上面的条数。")
+    A("  实测 2026-07-26 后 Bing 三个月未重新抓取，卡在 41 条。若长期不涨，手动 Submit sitemap + 跑 `indexnow.py --all`。")
+    A("")
+
     A(f"## 五、结论与下一步")
     if alerts:
         A(f"- 🚨 告警 {len(alerts)} 条：")
