@@ -1,5 +1,5 @@
 ---
-title: "Percentage of Total in Power BI: Three DAX Patterns and When to Use Each"
+title: "Percentage of Total in Power BI: Three DAX Patterns"
 description: "Percent of total with ALL, ALLEXCEPT or a ratio measure: which pattern respects slicers, which ignores them, and when each is correct."
 pubDate: 2026-09-23
 category: "dax"

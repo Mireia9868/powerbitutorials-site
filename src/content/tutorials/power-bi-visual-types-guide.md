@@ -1,5 +1,5 @@
 ---
-title: "Power BI Visual Types: A Practical Guide to Choosing the Right Chart"
+title: "Power BI Visual Types: Choose the Right Chart"
 description: "Bar, line, card, matrix, map and scatter: when each is the right choice, the mistakes that make them unreadable, and how to order them."
 pubDate: 2026-07-18
 category: "visualization"

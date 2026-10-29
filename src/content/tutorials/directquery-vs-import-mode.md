@@ -1,5 +1,5 @@
 ---
-title: "Import vs DirectQuery vs Dual vs Direct Lake: Choosing a Storage Mode"
+title: "Import vs DirectQuery vs Dual vs Direct Lake"
 description: "Four storage modes, one decision. When Import, DirectQuery, Dual or Direct Lake is right, with a matrix covering speed, cost and freshness."
 pubDate: 2026-07-26
 updatedDate: 2026-10-28

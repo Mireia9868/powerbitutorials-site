@@ -1,5 +1,5 @@
 ---
-title: "DAX Studio Getting Started: What It Does and How to Connect to Power BI"
+title: "DAX Studio Getting Started: Connect to Power BI"
 description: "DAX Studio is the free tool for writing, tracing, and tuning DAX. Learn how to connect to a Power BI model, read a query plan, and find slow measures."
 pubDate: 2026-09-23
 category: "dax"

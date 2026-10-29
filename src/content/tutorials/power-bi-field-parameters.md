@@ -1,5 +1,5 @@
 ---
-title: "Power BI Field Parameters: Let Users Swap Metrics and Dimensions"
+title: "Power BI Field Parameters: Swap Metrics at Runtime"
 description: "Field parameters let one visual switch between measures or dimensions at runtime. Setup, slicer wiring, and the limitations nobody mentions."
 pubDate: 2026-07-26
 category: "visualization"

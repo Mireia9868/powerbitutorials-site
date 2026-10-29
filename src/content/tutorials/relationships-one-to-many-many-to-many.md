@@ -1,5 +1,5 @@
 ---
-title: "One-to-Many vs Many-to-Many Relationships in Power BI: A Practical Guide"
+title: "One-to-Many vs Many-to-Many Relationships in Power BI"
 description: "Cardinality decides how filters travel. One-to-many is the safe default; many-to-many is sometimes needed but costs clarity and speed."
 pubDate: 2026-07-11
 updatedDate: 2026-10-12

@@ -1,5 +1,5 @@
 ---
-title: "Power BI DAX Optimization: 10 Patterns That Actually Speed Up Measures"
+title: "Power BI DAX Optimization: 10 Patterns That Work"
 description: "Most slow reports are slow because of DAX. Ten patterns that fix the common cases, with Server Timings readings to prove it worked."
 pubDate: 2026-08-28
 category: "dax"

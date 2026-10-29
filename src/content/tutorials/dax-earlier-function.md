@@ -1,5 +1,5 @@
 ---
-title: "DAX EARLIER Explained: Reference the Previous Row in a Nested Row Context"
+title: "DAX EARLIER Explained: Previous Row in a Nested Context"
 description: "EARLIER reaches a parent row context from inside a nested iteration. When you still need it, and the cleaner alternatives to use instead."
 pubDate: 2026-09-23
 category: "dax"

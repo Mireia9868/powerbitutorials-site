@@ -1,5 +1,5 @@
 ---
-title: "Time Intelligence in DAX: YTD, YoY, and Rolling Patterns That Work"
+title: "Time Intelligence in DAX: YTD, YoY, Rolling Windows"
 description: "Calendar table setup, YTD/QTD/MTD, year-over-year and rolling averages: the four patterns that cover most business reporting."
 pubDate: 2026-07-06
 category: "time-intelligence"

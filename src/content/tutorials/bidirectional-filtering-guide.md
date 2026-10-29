@@ -1,5 +1,5 @@
 ---
-title: "Bidirectional Filtering in Power BI: When It Helps and When It Hurts"
+title: "Bidirectional Filtering in Power BI: When to Use It"
 description: "Bidirectional filtering solves some models cleanly and breaks others. The three valid cases, the ambiguity it creates, and the warning signs."
 pubDate: 2026-07-13
 category: "data-modeling"

@@ -1,5 +1,5 @@
 ---
-title: "10 Common Power BI Mistakes Beginners Make (And How to Fix Them)"
+title: "10 Power BI Mistakes Beginners Make (And the Fixes)"
 description: "Ten errors nearly every beginner makes: data types, DAX context, dashboard layout. The fix for each, and why it happens."
 pubDate: 2026-07-20
 category: "dax"

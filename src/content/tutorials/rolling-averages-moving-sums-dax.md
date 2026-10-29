@@ -1,5 +1,5 @@
 ---
-title: "Rolling Averages and Moving Sums in DAX: Smooth Out the Noise"
+title: "Rolling Averages and Moving Sums in DAX"
 description: "A 7-day rolling average, a 30-day moving sum, and the DAX window functions that generalise to any window you need."
 pubDate: 2026-07-19
 category: "time-intelligence"

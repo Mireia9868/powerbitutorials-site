@@ -1,5 +1,5 @@
 ---
-title: "Month-over-Month and Year-over-Year DAX: A Copy-Paste Template"
+title: "MoM and YoY in DAX: A Copy-Paste Template"
 description: "Stop rewriting time comparisons. Use this copy-paste DAX template for MoM, YoY, MoM %, and YoY % that works with any marked Date table."
 pubDate: 2026-09-23
 category: "time-intelligence"

@@ -1,5 +1,5 @@
 ---
-title: "Power BI Slicers: Sync, Hierarchy, and Bookmark-Driven Filtering"
+title: "Power BI Slicers: Sync, Hierarchy and Filtering"
 description: "Slicers look simple but a messy set destroys a report. Learn sync slicers across pages, build hierarchy slicers, and drive filters with bookmarks."
 pubDate: 2026-09-23
 category: "visualization"

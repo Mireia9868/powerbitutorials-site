@@ -1,5 +1,5 @@
 ---
-title: "DAX User-Defined Functions (UDF): Reusable Logic Without Calculation Groups"
+title: "DAX UDFs: Reusable Logic Without Calculation Groups"
 description: "DAX UDFs are GA as of June 2026. Package tax, currency and margin logic once with the FUNCTION keyword, then reuse it anywhere."
 pubDate: 2026-08-03
 category: "dax"

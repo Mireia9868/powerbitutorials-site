@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Power Query: Clean and Shape Data in Power BI"
+title: "Getting Started with Power Query in Power BI"
 description: "Connect, transform and shape data with the no-code editor, plus a look at the M code it writes behind every click."
 pubDate: 2026-06-29
 updatedDate: 2026-07-20

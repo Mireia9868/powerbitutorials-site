@@ -1,5 +1,5 @@
 ---
-title: "Power Query Group By: Aggregate Data Without Writing Formulas"
+title: "Power Query Group By: Aggregate Without Formulas"
 description: "Summarise rows by category: count, sum, average, min, max. Multiple columns, the M code it produces, and why totals come out wrong."
 pubDate: 2026-07-26
 category: "power-query"

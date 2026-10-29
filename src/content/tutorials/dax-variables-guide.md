@@ -1,5 +1,5 @@
 ---
-title: "DAX Variables (VAR/RETURN): Write Cleaner and Faster Measures"
+title: "DAX Variables (VAR/RETURN): Cleaner Measures"
 description: "VAR makes long measures readable, stops repeated evaluation and removes a class of context-transition bugs. Scope rules and patterns."
 pubDate: 2026-07-28
 category: "dax"

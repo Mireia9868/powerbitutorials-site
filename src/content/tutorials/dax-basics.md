@@ -1,5 +1,5 @@
 ---
-title: "DAX Basics: The Beginner's Guide to Data Analysis Expressions"
+title: "DAX Basics: What It Is and How It Works"
 description: "What DAX is, why measures and calculated columns are not interchangeable, and the five formulas to write on your first day."
 pubDate: 2026-06-15
 updatedDate: 2026-07-20

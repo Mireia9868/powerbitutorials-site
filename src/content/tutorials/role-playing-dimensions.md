@@ -1,5 +1,5 @@
 ---
-title: "Role-Playing Dimensions in Power BI: One Date Table, Multiple Relationships"
+title: "Role-Playing Dimensions in Power BI: One Date Table"
 description: "One date table, three roles: order, ship, due. The three ways to model role-playing dimensions without breaking relationships."
 pubDate: 2026-09-23
 category: "data-modeling"

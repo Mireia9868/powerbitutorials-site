@@ -1,5 +1,5 @@
 ---
-title: "SUMX vs SUM in DAX: When Iterators Matter and When They Don't"
+title: "SUMX vs SUM in DAX: When Iterators Matter"
 description: "SUM reads a column; SUMX evaluates a row expression. When the difference changes your totals, and when SUMX is the only correct choice."
 pubDate: 2026-07-14
 category: "dax"

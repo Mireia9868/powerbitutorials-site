@@ -1,5 +1,5 @@
 ---
-title: "Power Query Conditional Columns: If Statement Logic for a New Column"
+title: "Power Query: Add a Column With an If Statement"
 description: "Add a new column with an if statement in Power Query, without writing M. The dialog, nested conditions, generated code, and bucketing patterns."
 pubDate: 2026-07-23
 updatedDate: 2026-10-12

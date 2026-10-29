@@ -1,5 +1,5 @@
 ---
-title: "Power BI Dashboard Design: 12 Principles for Clear, Actionable Reports"
+title: "Power BI Dashboard Design: 12 Principles That Work"
 description: "Twelve principles for dashboards people actually act on: layout, colour, density, and the interactions that guide rather than distract."
 pubDate: 2026-07-20
 category: "visualization"

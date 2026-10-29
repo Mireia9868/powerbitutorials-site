@@ -1,5 +1,5 @@
 ---
-title: "Power BI Performance Optimization: A Complete Guide to Faster Reports and DAX"
+title: "Power BI Performance Optimization: Reports and DAX"
 description: "Find the bottleneck before optimising: Performance Analyzer, then DAX, then the model. A diagnosis order that saves hours of guessing."
 pubDate: 2026-07-20
 category: "data-modeling"

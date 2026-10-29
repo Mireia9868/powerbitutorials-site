@@ -1,5 +1,5 @@
 ---
-title: "Unpivot in Power Query: Turn a Wide Table into a Long Table the Right Way"
+title: "Unpivot in Power Query: Wide to Long, Correctly"
 description: "Month-by-column reports become a tidy long table in three clicks. The exact steps, the column to keep fixed, and the usual pitfall."
 pubDate: 2026-09-23
 category: "power-query"

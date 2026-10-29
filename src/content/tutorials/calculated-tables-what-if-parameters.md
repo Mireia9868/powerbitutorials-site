@@ -1,5 +1,5 @@
 ---
-title: "Calculated Tables and What-If Parameters in Power BI: Dynamic Modeling Tools"
+title: "Calculated Tables and What-If Parameters in Power BI"
 description: "Build tables with DAX instead of a source, and turn static assumptions into What-if slicers. Five patterns, from date tables to scenarios."
 pubDate: 2026-07-16
 category: "data-modeling"

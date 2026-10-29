@@ -1,5 +1,5 @@
 ---
-title: "Merge vs Append Queries in Power Query: Which One Do You Need?"
+title: "Merge vs Append in Power Query: Which One?"
 description: "Merge is a join that adds columns. Append is a union that stacks rows. The difference, the join types, and which one costs more to refresh."
 pubDate: 2026-07-17
 category: "power-query"

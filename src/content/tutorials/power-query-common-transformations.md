@@ -1,5 +1,5 @@
 ---
-title: "10 Common Power Query Transformations Every Analyst Should Know"
+title: "10 Power Query Transformations Every Analyst Needs"
 description: "Ten Power Query steps that handle the messy exports analysts actually get: inconsistent names, merged headers, malformed dates."
 pubDate: 2026-07-19
 category: "power-query"

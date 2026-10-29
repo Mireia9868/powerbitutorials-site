@@ -1,5 +1,5 @@
 ---
-title: "Star Schema Data Modeling: The Foundation of Fast Power BI Reports"
+title: "Star Schema Data Modeling: Fast Power BI Reports"
 description: "Fact vs dimension tables, relationship cardinality, and why bidirectional filters usually make a model slower instead of better."
 pubDate: 2026-07-13
 updatedDate: 2026-07-20

@@ -1,5 +1,5 @@
 ---
-title: "Bookmarks and Navigation in Power BI: Build Interactive Report Tours"
+title: "Power BI Bookmarks: Build Interactive Report Tours"
 description: "Bookmarks capture filters, selections and sort order. Four patterns for turning a static report page into tabbed, guided navigation."
 pubDate: 2026-07-19
 category: "visualization"
