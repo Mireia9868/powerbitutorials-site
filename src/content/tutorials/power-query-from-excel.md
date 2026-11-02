@@ -1,6 +1,6 @@
 ---
 title: "Import and Transform Excel Data with Power Query"
-description: "Excel remains the most common starting point for Power BI projects."
+description: "Excel is where most Power BI projects start. How to import workbooks, fix merged headers and bad types, and build a refresh that survives a file move."
 pubDate: 2026-10-07
 category: power-query
 tags: ["excel", "power query"]

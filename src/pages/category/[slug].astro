@@ -21,7 +21,7 @@ const tutorials = (await getCollection("tutorials", ({ slug, data }) => !data.dr
 
 <BaseLayout
   title={category.label}
-  description={`${category.description} ${tutorials.length} tutorials available.`}
+  description={category.metaDescription || category.description}
 >
   <div class="page-header">
     <div class="container">

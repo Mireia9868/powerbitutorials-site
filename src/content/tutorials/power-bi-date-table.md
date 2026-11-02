@@ -1,6 +1,6 @@
 ---
 title: "Create a Date Table in Power BI (3 Methods)"
-description: "A date table is the backbone of any Power BI model that needs time intelligence."
+description: "A date table is the backbone of time intelligence. Three ways to build one, the columns that matter, and the marking step people forget that breaks YTD."
 pubDate: 2026-10-08
 category: time-intelligence
 tags: ["date table", "time intelligence"]

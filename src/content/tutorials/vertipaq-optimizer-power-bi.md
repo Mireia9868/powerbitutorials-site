@@ -1,6 +1,6 @@
 ---
 title: "VertiPaq Analyzer: Optimize Your Power BI Data Model"
-description: "Every Power BI Import model is stored in the VertiPaq engine, a columnar, in-memory database."
+description: "Every Import model lives in the VertiPaq engine. How to read VertiPaq Analyzer, spot oversized columns, and decide what to fix first in the model."
 pubDate: 2026-10-03
 category: data-modeling
 tags: ["performance", "data model"]

@@ -20,6 +20,8 @@ export const CATEGORIES = [
   {
     slug: "dax",
     label: "DAX Formulas",
+    metaDescription:
+      "DAX tutorials for filter context, CALCULATE, iterators and time intelligence. Every pattern comes with the evaluation rule it depends on and a worked example.",
     description: "Master the Data Analysis Expressions language.",
     intro: [
       "DAX is where a Power BI report stops being a reshuffled spreadsheet and starts producing numbers you could not get any other way: year-to-date revenue that respects a slicer, share of total that ignores one, ranking that recalculates at whatever granularity the visual asks for. Almost all of it runs through two ideas — filter context, and the row-by-row evaluation that iterators perform — and almost all DAX bugs come from losing track of which one is in play.",
@@ -30,6 +32,8 @@ export const CATEGORIES = [
   {
     slug: "power-query",
     label: "Power Query",
+    metaDescription:
+      "Power Query tutorials for cleaning, merging and reshaping data. Query folding, M code, and the ten transformations analysts rebuild every single week.",
     description: "ETL and data preparation in Power BI.",
     intro: [
       "Power Query is the part of Power BI that runs before any DAX does: connecting to a source, fixing the column types, unpivoting the month columns, merging in the lookup table. Every click in the editor writes M code, and that code is what actually executes — on refresh, against the source, possibly on a schedule you are not watching.",
@@ -40,6 +44,8 @@ export const CATEGORIES = [
   {
     slug: "data-modeling",
     label: "Data Modeling",
+    metaDescription:
+      "Data modelling for Power BI: star schema, relationship cardinality, many-to-many, aggregations, and the reason bidirectional filters quietly cost you speed.",
     description: "Star schema, relationships, and model design.",
     intro: [
       "The model is the part of Power BI that is hardest to change later and easiest to get wrong early. A star schema — fact tables of events, dimension tables that describe them, one-to-many relationships flowing downhill — is not a style preference. It is the shape that lets the VertiPaq engine compress well and lets DAX measures stay short enough to read.",
@@ -50,6 +56,8 @@ export const CATEGORIES = [
   {
     slug: "visualization",
     label: "Visualization",
+    metaDescription:
+      "Power BI report design: choosing the right visual, conditional formatting, drill through, bookmarks, tooltips, and layouts that stay readable at a glance.",
     description: "Build interactive reports and dashboards.",
     intro: [
       "Report design in Power BI is mostly a decision about what to leave out. A page has room for roughly one question; a visual has room for roughly one comparison. Most reports that feel hard to read are not badly styled — they are answering four questions at once with six charts that each try to answer all of them.",
@@ -60,6 +68,8 @@ export const CATEGORIES = [
   {
     slug: "time-intelligence",
     label: "Time Intelligence",
+    metaDescription:
+      "Time intelligence in DAX: marking a date table, YTD and QTD, year-over-year, rolling windows, and the fiscal-year traps that fail without an error.",
     description: "Date-based calculations and YTD/MTD patterns.",
     intro: [
       "Year-to-date, month-over-month, rolling twelve weeks — this is most of what business reporting actually asks for, and it is also where DAX fails most quietly. The functions are short. The reason they return the wrong number is almost never the function itself: it is the date table underneath.",
@@ -70,6 +80,8 @@ export const CATEGORIES = [
   {
     slug: "service",
     label: "Power BI Service",
+    metaDescription:
+      "Power BI Service: publishing, scheduled refresh and gateway setup, row-level security, dataflows, and the capacity decisions that come before all of it.",
     description: "Workspaces, gateways, deployment, and administration.",
     intro: [
       "Everything up to this point happens on one machine, in Desktop. The service is where a report becomes something other people depend on: scheduled refresh through a gateway, row-level security that decides who sees which rows, workspaces that separate build from publish, and capacity that determines whether the thing stays fast at 9am on a Monday.",
