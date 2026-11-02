@@ -1,0 +1,275 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Power BI Licence Calculator"
+  description="Work out what Power BI actually costs for your team: Pro at $14, Premium Per User at $24, or a mix. Enter headcount and see the yearly total."
+>
+  <article class="calc">
+    <div class="content-width">
+      <span class="page-eyebrow">Tool</span>
+      <h1>What will Power BI cost your team?</h1>
+      <p class="lede">
+        Enter how many people build reports and how many only read them. The
+        calculator works out Pro, Premium Per User, and the mix most teams
+        actually end up on.
+      </p>
+
+      <section class="inputs">
+        <div class="field">
+          <label for="creators">People who build and publish reports</label>
+          <input id="creators" type="number" min="0" max="5000" value="3" inputmode="numeric" />
+          <p class="hint">Authors, analysts, anyone opening Power BI Desktop.</p>
+        </div>
+        <div class="field">
+          <label for="viewers">People who only view reports</label>
+          <input id="viewers" type="number" min="0" max="20000" value="17" inputmode="numeric" />
+          <p class="hint">Sales, ops, managers reading dashboards in the browser.</p>
+        </div>
+        <div class="field field-check">
+          <label>
+            <input id="premium" type="checkbox" />
+            <span>We need Premium features</span>
+          </label>
+          <p class="hint">
+            Models over 1 GB, more than 8 refreshes a day, deployment pipelines,
+            or AI features.
+          </p>
+        </div>
+      </section>
+
+      <section class="results" aria-live="polite">
+        <table>
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Per user / month</th>
+              <th>Monthly</th>
+              <th>Yearly</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <p class="verdict" id="verdict"></p>
+        <p class="checked">US list prices, checked 2 November 2026. Confirm in the Microsoft 365 admin centre before budgeting.</p>
+      </section>
+
+      <section class="notes">
+        <h2>How the numbers work</h2>
+        <p>
+          <strong>Power BI Free can't view shared reports.</strong> This is the
+          part people miss. A Free account can open Power BI Desktop and build
+          something locally, but the moment a report is published to the
+          service, every viewer needs a licence — Pro, PPU, or a Fabric
+          capacity. There is no "just share the link" option outside a
+          capacity.
+        </p>
+        <p>
+          <strong>Pro is the default.</strong> At $14 per user per month it
+          covers publishing, sharing, scheduled refresh and row-level security.
+          Most teams under a few hundred people never need anything else.
+        </p>
+        <p>
+          <strong>PPU is for the two or three people who hit the ceiling.</strong>
+          It includes everything in Pro plus larger models, more frequent
+          refreshes and the premium-only features. Buying it for the whole team
+          is usually waste.
+        </p>
+        <p>
+          <strong>Fabric capacity is a different purchase.</strong> A capacity
+          (F64 and up) lets Free users view reports, but it is billed monthly at
+          a level that only pays off past roughly 300 users. The exact price
+          varies by region and SKU, so this calculator doesn't guess at it —
+          get a quote from Microsoft or a partner before going down that road.
+        </p>
+      </section>
+
+      <section class="faq">
+        <h2>FAQ</h2>
+
+        <h3>Q: Why does the calculator ask for two headcounts?</h3>
+        <p>
+          Because the two groups can sit on different licences. Only people who
+          publish need PPU when premium features are required; viewers can stay
+          on Pro. Asking for one total hides that saving, which is usually the
+          single biggest line item.
+        </p>
+
+        <h3>Q: Do viewers need Pro if the report is in a Premium workspace?</h3>
+        <p>
+          Not if the workspace is backed by a Fabric capacity (F64 or above).
+          In that case Free users can view. That is the only scenario where Free
+          works for viewers, and it is why large organisations buy capacity
+          instead of licences.
+        </p>
+
+        <h3>Q: Are these list prices?</h3>
+        <p>
+          Yes — US list prices, checked against Microsoft's Power BI pricing
+          page on 2 November 2026. Enterprise agreements, non-profit and
+          education pricing all differ. Always confirm in the Microsoft 365 admin
+          centre before committing to a budget.
+        </p>
+
+        <h3>Q: What about Power BI Embedded or Report Server?</h3>
+        <p>
+          Embedded is for putting reports inside your own application and is
+          priced per capacity, not per user — out of scope here. Report Server
+          is an on-premises product with its own licensing. Neither maps cleanly
+          onto the Pro/PPU decision above.
+        </p>
+      </section>
+
+      <p class="source">
+        Prices from Microsoft's
+        <a href="https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing" target="_blank" rel="noopener">Power BI pricing page</a>,
+        checked 2 November 2026. Not affiliated with Microsoft.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  // 价格核对日期：2026-11-02，来源为 Microsoft 官方 Power BI 定价页。
+  // 改价时只改这里，并在页面上更新时间。
+  const PRICE = { pro: 14, ppu: 24 };
+  const BUILD = new Date("2026-11-02");
+
+  const $ = (id: string) => document.getElementById(id) as HTMLInputElement | null;
+  const money = (n: number) =>
+    n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+
+  function render() {
+    const creators = Math.max(0, parseInt($("creators")?.value || "0", 10) || 0);
+    const viewers = Math.max(0, parseInt($("viewers")?.value || "0", 10) || 0);
+    const premium = !!$("premium")?.checked;
+    const total = creators + viewers;
+    const rows = document.getElementById("rows");
+    const verdict = document.getElementById("verdict");
+    if (!rows || !verdict) return;
+
+    if (total === 0) {
+      rows.innerHTML = `<tr><td colspan="4" class="empty">Enter at least one person.</td></tr>`;
+      verdict.textContent = "";
+      return;
+    }
+
+    const options = [
+      {
+        name: "All Pro",
+        per: PRICE.pro,
+        seats: total,
+        note: "Cheapest unless you need premium features.",
+      },
+      {
+        name: "All Premium Per User",
+        per: PRICE.ppu,
+        seats: total,
+        note: premium ? "Premium for everyone — rarely necessary." : "You didn't tick premium, so this is overspending.",
+      },
+      {
+        name: "Mixed: PPU for builders, Pro for viewers",
+        per: null,
+        seats: null,
+        note: "Builders get premium features, viewers pay Pro rates.",
+        monthly: creators * PRICE.ppu + viewers * PRICE.pro,
+      },
+    ];
+
+    rows.innerHTML = options
+      .map((o) => {
+        const monthly = o.monthly ?? (o.per as number) * (o.seats as number);
+        const yearly = monthly * 12;
+        const perLabel = o.per ? `$${o.per}` : "mixed";
+        return `<tr>
+          <td><strong>${o.name}</strong><br><span class="row-note">${o.note}</span></td>
+          <td>${perLabel}</td>
+          <td>${money(monthly)}</td>
+          <td>${money(yearly)}</td>
+        </tr>`;
+      })
+      .join("");
+
+    const mixed = creators * PRICE.ppu + viewers * PRICE.pro;
+    const allPro = total * PRICE.pro;
+    const allPpu = total * PRICE.ppu;
+
+    // 勾了 Premium 之后「全 Pro」根本用不了，不该参与比价 ——
+    // 否则计算器会推荐一个满足不了需求的方案。
+    const candidates = premium ? [allPpu, mixed] : [allPro, allPpu, mixed];
+    const cheapest = Math.min(...candidates);
+
+    if (!premium && cheapest === allPro) {
+      verdict.innerHTML = `<strong>All Pro is cheapest</strong> at ${money(allPro * 12)} a year. Nothing you described needs a premium licence.`;
+    } else if (cheapest === mixed) {
+      verdict.innerHTML = `<strong>Mixed licensing saves you ${money((allPro - mixed) * 12)} a year</strong> ` +
+        `compared with putting everyone on Pro: put the ${creators} builder${creators === 1 ? "" : "s"} on PPU and keep ${viewers} viewer${viewers === 1 ? "" : "s"} on Pro.`;
+    } else {
+      verdict.innerHTML = `<strong>All Premium Per User</strong> at ${money(PRICE.ppu * total * 12)} a year.`;
+    }
+  }
+
+  ["creators", "viewers"].forEach((id) => $(id)?.addEventListener("input", render));
+  $("premium")?.addEventListener("change", render);
+  render();
+</script>
+
+<style>
+  .calc { padding: 56px 0 96px; }
+  .page-eyebrow {
+    display: inline-block; font-size: 0.8rem; font-weight: 600;
+    color: var(--c-accent); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .calc h1 { font-size: 2.2rem; line-height: 1.25; margin-bottom: 18px; max-width: 24ch; }
+  .lede {
+    font-size: 1.1rem; color: var(--c-text-muted);
+    border-left: 3px solid var(--c-accent); padding-left: 18px;
+    margin-bottom: 40px; max-width: 62ch;
+  }
+  .inputs { display: grid; gap: 22px; max-width: 560px; margin-bottom: 40px; }
+  .field label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.95rem; }
+  .field input[type="number"] {
+    width: 100%; padding: 11px 14px; font-size: 1rem;
+    border: 1px solid var(--c-border-strong); border-radius: var(--radius);
+    background: var(--c-bg); color: var(--c-text);
+  }
+  .field-check label { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+  .field-check input { width: 18px; height: 18px; }
+  .hint { font-size: 0.84rem; color: var(--c-text-dim); margin: 6px 0 0; }
+  .results {
+    border: 1px solid var(--c-border); border-radius: var(--radius-lg);
+    overflow: hidden; margin-bottom: 44px;
+  }
+  .results table { width: 100%; border-collapse: collapse; }
+  .results th {
+    text-align: left; font-size: 0.8rem; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--c-text-dim); font-weight: 600;
+    padding: 14px 16px; background: var(--c-bg-soft);
+    border-bottom: 1px solid var(--c-border);
+  }
+  .results td { padding: 16px; border-bottom: 1px solid var(--c-border); vertical-align: top; }
+  .results tr:last-child td { border-bottom: none; }
+  .row-note { font-size: 0.82rem; color: var(--c-text-dim); }
+  .empty { color: var(--c-text-dim); text-align: center; }
+  .verdict {
+    margin: 0; padding: 18px 16px; background: var(--c-bg-soft);
+    border-top: 1px solid var(--c-border); font-size: 0.95rem; line-height: 1.6;
+  }
+  .checked { font-size: 0.78rem; color: var(--c-text-dim); margin: 10px 16px 14px; }
+  .notes { max-width: 68ch; margin-bottom: 44px; }
+  .notes h2, .faq h2 { font-size: 1.35rem; margin: 0 0 16px; }
+  .notes p { color: var(--c-text-muted); line-height: 1.72; margin: 0 0 16px; }
+  .faq { max-width: 68ch; margin-bottom: 40px; }
+  .faq h3 { font-size: 1rem; margin: 24px 0 8px; }
+  .faq p { color: var(--c-text-muted); line-height: 1.7; margin: 0; }
+  .source { font-size: 0.82rem; color: var(--c-text-dim); max-width: 68ch; }
+  @media (max-width: 640px) {
+    .calc h1 { font-size: 1.7rem; }
+    .results table, .results thead, .results tbody, .results tr, .results td, .results th { display: block; }
+    .results th { display: none; }
+    .results td { padding: 10px 16px; }
+    .results tr { padding: 10px 0; border-bottom: 1px solid var(--c-border); }
+  }
+</style>

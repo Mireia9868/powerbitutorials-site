@@ -13,6 +13,7 @@ export async function GET({ site }) {
     { loc: "/tutorials/", priority: "0.9", changefreq: "weekly" },
     { loc: "/about/", priority: "0.5", changefreq: "monthly" },
     { loc: "/author/mireia/", priority: "0.5", changefreq: "monthly" },
+    { loc: "/tools/license-calculator/", priority: "0.7", changefreq: "monthly" },
     { loc: "/contact/", priority: "0.5", changefreq: "monthly" },
     { loc: "/privacy/", priority: "0.3", changefreq: "yearly" },
     { loc: "/terms/", priority: "0.3", changefreq: "yearly" },
