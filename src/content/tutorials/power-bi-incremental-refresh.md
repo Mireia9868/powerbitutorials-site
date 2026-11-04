@@ -2,6 +2,7 @@
 title: "Incremental Refresh in Power BI: Setup and Gotchas"
 description: "Incremental refresh splits a fact table into history and a hot window. How partitions are created, and the limits that change the design."
 pubDate: 2026-10-11
+updatedDate: 2026-11-04
 category: data-modeling
 tags: ["refresh", "performance"]
 difficulty: Advanced
@@ -18,7 +19,7 @@ The upside is measurable. Full refreshes scale linearly with total data volume. 
 
 Three things make this work: a `RangeStart` and `RangeEnd` filter in Power Query, a stored policy defining how far back to keep and refresh, and a source table that supports efficient filtering by date. Miss any one and the refresh either fails or silently reloads everything, which is the most common complaint about the feature.
 
-Incremental refresh is only available in Power BI Premium, Premium Per User, Fabric capacities, and Power BI Embedded. On shared (Pro) capacity the policy UI stays visible but publishing drops the partition definitions and you get a single full partition.
+Incremental refresh is only available in Power BI Premium, Premium Per User, Fabric capacities, and Power BI Embedded. On shared (Pro) capacity the policy UI stays visible but publishing drops the partition definitions and you get a single full partition. That licensing jump is the real cost of the feature — the [licence calculator](/tools/license-calculator/) shows what it adds for your team size.
 
 ## Step 1: Prepare the Source Table
 

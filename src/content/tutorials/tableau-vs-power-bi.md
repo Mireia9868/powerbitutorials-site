@@ -2,6 +2,7 @@
 title: "Tableau vs Power BI: Which Should You Choose in 2026"
 description: "Tableau and Power BI have been compared since Power BI shipped its first desktop version, and the comparison has changed shape several times."
 pubDate: 2026-10-07
+updatedDate: 2026-11-04
 category: visualization
 tags: ["comparison", "tableau"]
 difficulty: Beginner
@@ -56,7 +57,7 @@ Power BI pricing is famously easy to underestimate because the free desktop vers
 - Power BI Pro is required for each user who consumes or authors in the Service.
 - Fabric capacity (F-SKUs) replaces Premium and is billed continuously, not per user.
 
-Tableau's model is comparable but the entry cost per creator is higher, and Tableau's viewer licences are typically more expensive than Power BI Pro at scale. Run the math at real headcount, not at pilot headcount. A 20-user pilot and a 2,000-user deployment land in very different places.
+Tableau's model is comparable but the entry cost per creator is higher, and Tableau's viewer licences are typically more expensive than Power BI Pro at scale. Run the math at real headcount, not at pilot headcount. A 20-user pilot and a 2,000-user deployment land in very different places. The [Power BI licence calculator](/tools/license-calculator/) works out the Power BI side at whatever headcount you are actually planning for.
 
 One hidden cost: DAX and M skills are common in the market because the toolset is broad. Tableau specialists are fewer and tend to cost more per hour, both for hiring and for contractors.
 
