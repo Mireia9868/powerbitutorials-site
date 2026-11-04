@@ -255,3 +255,4 @@ The underlying documentation for this feature is [Microsoft DirectQuery in Power
 
 - [VertiPaq Analyzer: Optimize Your Power BI Data Model](/tutorials/vertipaq-optimizer-power-bi/)
 - [Power BI Service vs Desktop: What Runs Where](/tutorials/power-bi-service-vs-desktop/)
+- [Power BI Licensing: Free vs Pro vs PPU vs Fabric](/tutorials/power-bi-licensing-explained/)

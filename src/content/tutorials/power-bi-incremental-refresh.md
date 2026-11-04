@@ -152,3 +152,4 @@ Behaviour described here follows [Microsoft's Incremental refresh documentation]
 - [DAX Time Intelligence: YTD, QTD, MTD](/tutorials/dax-time-intelligence-ytd-qtd-mtd/)
 
 - [VertiPaq Analyzer: Optimize Your Power BI Data Model](/tutorials/vertipaq-optimizer-power-bi/)
+- [Power BI Licensing: Free vs Pro vs PPU vs Fabric](/tutorials/power-bi-licensing-explained/)

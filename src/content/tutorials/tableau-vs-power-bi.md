@@ -159,3 +159,4 @@ They frequently do, and it is workable if you split responsibilities clearly. Us
 
 - [Power BI Slicers: Sync, Hierarchy, and Bookmark-Driven Filtering](/tutorials/power-bi-slicers-best-practices/)
 - [Power BI Bookmarks: Build Interactive Reports](/tutorials/power-bi-bookmarks/)
+- [Power BI Licensing: Free vs Pro vs PPU vs Fabric](/tutorials/power-bi-licensing-explained/)

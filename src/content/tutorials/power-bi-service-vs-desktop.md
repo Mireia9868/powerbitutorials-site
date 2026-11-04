@@ -148,3 +148,4 @@ For the official documentation behind this topic, see [Microsoft Power BI servic
 - [/tutorials/power-bi-dashboard-design-principles/](/tutorials/power-bi-dashboard-design-principles/)
 - [/tutorials/power-bi-drill-through/](/tutorials/power-bi-drill-through/)
 - [/tutorials/calculated-tables-what-if-parameters/](/tutorials/calculated-tables-what-if-parameters/)
+- [Power BI Licensing: Free vs Pro vs PPU vs Fabric](/tutorials/power-bi-licensing-explained/)
