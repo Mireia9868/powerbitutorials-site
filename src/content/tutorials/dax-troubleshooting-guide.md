@@ -300,3 +300,7 @@ Three indicators: (1) it returns correct results in all filter contexts, (2) it'
 - Read the [CALCULATE guide](/tutorials/calculate-function) to understand filter modification
 - See the [performance optimization guide](/tutorials/power-bi-performance-optimization) for DAX that's not just correct, but fast
 - Check the [10 common beginner mistakes](/tutorials/power-bi-common-mistakes-beginners) to avoid these errors in the first place
+
+## Related Reading
+
+- [Fix: A Circular Dependency Was Detected](/tutorials/dax-circular-dependency-fix/)

@@ -160,3 +160,4 @@ Use `SUM` for simple column totals. Use `SUMX` when you need row-by-row math, co
 - [Power BI Visual Calculations: The Complete Guide (2026 GA)](/tutorials/power-bi-visual-calculations/)
 
 - [DAX User-Defined Functions (UDF): Reusable Logic Without Calculation Groups](/tutorials/dax-user-defined-functions/)
+- [SUMMARIZE vs SUMMARIZECOLUMNS vs GROUPBY](/tutorials/summarize-vs-summarizecolumns/)

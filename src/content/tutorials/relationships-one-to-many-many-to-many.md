@@ -160,3 +160,4 @@ For the official documentation behind this topic, see [Microsoft Relationships i
 
 - [Power BI Data Model Best Practices](/tutorials/power-bi-data-model-best-practices/)
 - [Snowflake Schema vs Star Schema in Power BI](/tutorials/snowflake-schema-power-bi/)
+- [Fix: A Circular Dependency Was Detected](/tutorials/dax-circular-dependency-fix/)

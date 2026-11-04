@@ -247,3 +247,7 @@ Now the denominator ignores the category filter and returns the grand total, giv
 Filter context determines *which rows are visible*. Row context determines *which row you're on*. Measures have filter context; calculated columns and iterators have row context. `CALCULATE` is the bridge — it can modify filter context and trigger context transition. Once you internalize these two contexts, most DAX "bugs" become predictable.
 
 For more on `CALCULATE` and filter context manipulation, see our [CALCULATE guide](/tutorials/calculate-function). For common DAX errors and their fixes, see the [DAX troubleshooting guide](/tutorials/dax-troubleshooting-guide).
+
+## Related Reading
+
+- [Fix: A Circular Dependency Was Detected](/tutorials/dax-circular-dependency-fix/)

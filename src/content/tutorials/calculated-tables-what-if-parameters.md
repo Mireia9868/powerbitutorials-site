@@ -174,3 +174,7 @@ Calculated tables are computed at refresh time, not at query time. This means:
 ## Summary
 
 Calculated tables are DAX-generated structures that live in your model. Use them for date tables, disconnected filter tables, role-playing dimensions, and pre-aggregated summaries. What-if parameters are a specialized calculated table that drives scenario analysis via slicers. Both refresh when the dataset refreshes — keep their ranges dynamic with `MIN`/`MAX` to avoid stale data.
+
+## Related Reading
+
+- [SUMMARIZE vs SUMMARIZECOLUMNS vs GROUPBY](/tutorials/summarize-vs-summarizecolumns/)

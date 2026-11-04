@@ -334,3 +334,7 @@ Variables are most powerful when combined with `CALCULATE` and iterators. Explor
 - [DAX RANKX: Rank Data in Power BI](/tutorials/dax-rankx-function/) — Ranking patterns that benefit from variables for readability
 - [DAX SWITCH: Cleaner Conditional Logic](/tutorials/dax-switch-function/) — Combine `SWITCH` with variables for dynamic, readable measures
 - [DAX Troubleshooting Guide](/tutorials/dax-troubleshooting-guide/) — Debug techniques that rely on variables for isolating issues
+
+## Related Reading
+
+- [SUMMARIZE vs SUMMARIZECOLUMNS vs GROUPBY](/tutorials/summarize-vs-summarizecolumns/)

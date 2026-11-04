@@ -208,3 +208,7 @@ Yes, but verify every formula. AI tools frequently produce DAX that "looks right
 You now have the mental model: measures compute in filter context, calculated columns compute in row context, and iterators let you do row-level math before aggregating. The next leap is learning how to *modify* the filter context — which is exactly what `CALCULATE` does.
 
 Continue with [CALCULATE: The Most Important DAX Function](/tutorials/calculate-function) and [Time Intelligence Patterns](/tutorials/time-intelligence) to round out your foundation. If you hit a wall, our [DAX troubleshooting guide](/tutorials/dax-troubleshooting-guide) walks through the most common errors and their fixes.
+
+## Related Reading
+
+- [SUMMARIZE vs SUMMARIZECOLUMNS vs GROUPBY](/tutorials/summarize-vs-summarizecolumns/)
