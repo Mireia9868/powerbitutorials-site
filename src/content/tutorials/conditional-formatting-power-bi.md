@@ -287,8 +287,6 @@ Partially. Charts use "Data colors" conditional formatting rather than cell rule
 <!-- CF-CLUSTER-NAV -->
 ## More conditional formatting guides
 
-- [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-power-bi/)
-- [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
 - [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
 - [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting/)

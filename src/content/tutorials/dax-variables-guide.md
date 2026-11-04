@@ -338,3 +338,4 @@ Variables are most powerful when combined with `CALCULATE` and iterators. Explor
 ## Related Reading
 
 - [SUMMARIZE vs SUMMARIZECOLUMNS vs GROUPBY](/tutorials/summarize-vs-summarizecolumns/)
+- [Calculation Groups: One Slicer for Every Time Grain](/tutorials/calculation-groups-power-bi/)

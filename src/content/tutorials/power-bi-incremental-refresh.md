@@ -153,3 +153,4 @@ Behaviour described here follows [Microsoft's Incremental refresh documentation]
 
 - [VertiPaq Analyzer: Optimize Your Power BI Data Model](/tutorials/vertipaq-optimizer-power-bi/)
 - [Power BI Licensing: Free vs Pro vs PPU vs Fabric](/tutorials/power-bi-licensing-explained/)
+- [Scheduled Refresh Failed: Seven Causes and the Fix](/tutorials/scheduled-refresh-failed-gateway/)

@@ -331,7 +331,6 @@ Cards don't support data colors conditional formatting the way charts do — but
 - [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
-- [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
 - [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting/)
 - [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
 - [KPI Visual Conditional Formatting](/tutorials/kpi-conditional-formatting/)

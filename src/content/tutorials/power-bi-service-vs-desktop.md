@@ -149,3 +149,4 @@ For the official documentation behind this topic, see [Microsoft Power BI servic
 - [/tutorials/power-bi-drill-through/](/tutorials/power-bi-drill-through/)
 - [/tutorials/calculated-tables-what-if-parameters/](/tutorials/calculated-tables-what-if-parameters/)
 - [Power BI Licensing: Free vs Pro vs PPU vs Fabric](/tutorials/power-bi-licensing-explained/)
+- [Scheduled Refresh Failed: Seven Causes and the Fix](/tutorials/scheduled-refresh-failed-gateway/)

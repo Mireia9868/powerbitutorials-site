@@ -183,3 +183,4 @@ Microsoft documents this feature in [its Dataflows reference](https://learn.micr
 - [Power BI Date Table](/tutorials/power-bi-date-table/)
 - [DAX Time Intelligence: YTD, QTD, MTD](/tutorials/dax-time-intelligence-ytd-qtd-mtd/)
 - [Power BI Licensing: Free vs Pro vs PPU vs Fabric](/tutorials/power-bi-licensing-explained/)
+- [Scheduled Refresh Failed: Seven Causes and the Fix](/tutorials/scheduled-refresh-failed-gateway/)

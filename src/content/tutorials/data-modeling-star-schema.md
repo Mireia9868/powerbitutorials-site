@@ -226,3 +226,4 @@ For more on relationships and filtering, see our [relationships guide](/tutorial
 - [Incremental Refresh in Power BI: Setup and Gotchas](/tutorials/power-bi-incremental-refresh/)
 
 - [VertiPaq Analyzer: Optimize Your Power BI Data Model](/tutorials/vertipaq-optimizer-power-bi/)
+- [Calculation Groups: One Slicer for Every Time Grain](/tutorials/calculation-groups-power-bi/)

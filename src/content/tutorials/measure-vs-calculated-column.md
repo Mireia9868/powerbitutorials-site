@@ -178,3 +178,4 @@ No. Measures are better for anything context-sensitive, but they cannot appear o
 - [Common Mistakes Beginners Make in Power BI](/tutorials/power-bi-common-mistakes-beginners/)
 - [Percentage of Total in Power BI](/tutorials/power-bi-percentage-of-total/)
 - [Fix: A Circular Dependency Was Detected](/tutorials/dax-circular-dependency-fix/)
+- [Calculation Groups: One Slicer for Every Time Grain](/tutorials/calculation-groups-power-bi/)

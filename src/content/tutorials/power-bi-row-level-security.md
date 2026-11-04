@@ -252,3 +252,4 @@ Yes. Users with "Admin" or "Member" access to the workspace can view the report 
 - [Power BI Data Model Best Practices](/tutorials/power-bi-data-model-best-practices/)
 - [Snowflake Schema vs Star Schema in Power BI](/tutorials/snowflake-schema-power-bi/)
 - [Power BI Licensing: Free vs Pro vs PPU vs Fabric](/tutorials/power-bi-licensing-explained/)
+- [Scheduled Refresh Failed: Seven Causes and the Fix](/tutorials/scheduled-refresh-failed-gateway/)

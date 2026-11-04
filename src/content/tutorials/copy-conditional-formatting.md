@@ -158,7 +158,6 @@ Behaviour described here follows [Microsoft's Conditional formatting in Power BI
 - [Conditional formatting based on a measure](/tutorials/conditional-formatting-based-on-measure/)
 - [Bar chart conditional formatting](/tutorials/conditional-formatting-charts-power-bi/)
 - [Conditional formatting for charts](/tutorials/conditional-formatting-charts-power-bi/)
-- [Copy conditional formatting in Power BI](/tutorials/copy-conditional-formatting/)
 - [DAX SWITCH function](/tutorials/dax-switch-function/)
 - [DAX variables best practices](/tutorials/dax-variables-guide/)
 - [Power BI dashboard design principles](/tutorials/power-bi-dashboard-design-principles/)

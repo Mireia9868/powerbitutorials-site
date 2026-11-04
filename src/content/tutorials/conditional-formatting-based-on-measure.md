@@ -172,7 +172,6 @@ There is no documented hard limit, but the format pane becomes unwieldy past a h
 
 - [Power BI Conditional Formatting: The Complete Guide](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting in Power BI](/tutorials/conditional-formatting-power-bi/)
-- [Conditional Formatting Based on a Measure](/tutorials/conditional-formatting-based-on-measure/)
 - [Conditional Formatting for Charts](/tutorials/conditional-formatting-charts-power-bi/)
 - [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting/)
 - [Gauge Conditional Formatting](/tutorials/conditional-formatting-charts-power-bi/)

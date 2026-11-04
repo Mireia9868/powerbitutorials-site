@@ -174,3 +174,4 @@ Distinct from the rolling 12-month *average* — MAT sums; rolling 12M averages.
 With these five patterns you can answer nearly every "vs. last year" question. The remaining 5% — fiscal calendars, 4-4-5 retail calendars, week-based time intelligence — requires custom date tables and the `DATEADD` approach rather than built-in functions. We'll cover those in the advanced guide.
 
 Pair these time intelligence measures with a well-designed star schema (see [Star Schema Data Modeling](/tutorials/data-modeling-star-schema)) and your reports will be both fast and easy to maintain.
+- [Calculation Groups: One Slicer for Every Time Grain](/tutorials/calculation-groups-power-bi/)

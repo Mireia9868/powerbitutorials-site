@@ -172,5 +172,3 @@ For the full specification, see [Microsoft Conditional formatting in Power BI](h
 - [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting/)
 - [Gauge Conditional Formatting](/tutorials/conditional-formatting-charts-power-bi/)
 - [Bar Chart Conditional Formatting](/tutorials/conditional-formatting-charts-power-bi/)
-- [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
-
