@@ -1,0 +1,58 @@
+name: Weekly SEO brief
+
+# 每周一生成「这周该动哪三件事」。
+# 不依赖任何外部 API，所以它永远能跑；GSC 的快赢词由 seo_autopilot 单独补。
+
+on:
+  schedule:
+    # 周一 10:00 Asia/Taipei = 02:00 UTC
+    - cron: "0 2 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install deps (only needed for the optional GSC step)
+        run: pip install -q google-api-python-client google-auth
+
+      - name: Content brief
+        run: |
+          python scripts/weekly_seo_brief.py --md /tmp/brief.md
+          cat /tmp/brief.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: SEO quick wins (needs service account, optional)
+        continue-on-error: true
+        env:
+          GSC_SA_JSON: ${{ secrets.GSC_SA_JSON }}
+        run: |
+          if [ -z "$GSC_SA_JSON" ]; then
+            echo "::notice::未配置 GSC_SA_JSON，跳过快赢词分析"
+            exit 0
+          fi
+          echo "$GSC_SA_JSON" > gsc-ga4-service-account.json
+          python scripts/seo_autopilot.py --days 28 || true
+          REPORT=$(ls -t reports/seo-actions-*.md 2>/dev/null | head -1)
+          if [ -n "$REPORT" ]; then
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "## 附：GSC 快赢词" >> "$GITHUB_STEP_SUMMARY"
+            sed -n '/## 一、快赢/,/## 二/p' "$REPORT" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          rm -f gsc-ga4-service-account.json
+
+      - name: Fail if hard problems exist
+        # 死链和孤儿页会持续泄漏权重，不该只是「报告里提一句」。
+        run: |
+          if grep -qE '^- 指向不存在页面的链接|^- 零入链文章' /tmp/brief.md; then
+            echo "::warning::存在死链或孤儿页，本周必须处理"
+          fi
