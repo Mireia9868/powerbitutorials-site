@@ -2,6 +2,7 @@
 title: "SAMEPERIODLASTYEAR and Date Comparison Patterns in DAX"
 description: "YoY, MoM and QoQ with SAMEPERIODLASTYEAR and DATEADD, plus the comparison patterns for fiscal years and non-standard periods."
 pubDate: 2026-07-20
+updatedDate: 2026-11-10
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["dax", "sameperiodlastyear", "yoy", "mom", "date-comparison", "time-intelligence"]
@@ -199,6 +200,8 @@ This ensures both periods have the same number of days, making the comparison fa
 ## Summary
 
 `SAMEPERIODLASTYEAR` is the simplest YoY function; `DATEADD` is the flexible general-purpose shifter. Use `DATESYTD` with a year-end parameter for fiscal calendars. For custom comparisons, use explicit date filters with variables. Handle partial periods by filtering the prior period to the same number of days. And always guard against division by zero with `DIVIDE(numerator, denominator, 0)`.
+
+The comparison patterns on this page are in the [Time Intelligence Starter Pack](/resources/time-intelligence-starter/) as copy-paste measures.
 
 ## Related Reading
 

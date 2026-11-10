@@ -2,6 +2,7 @@
 title: "MoM and YoY in DAX: A Copy-Paste Template"
 description: "Stop rewriting time comparisons. Use this copy-paste DAX template for MoM, YoY, MoM %, and YoY % that works with any marked Date table."
 pubDate: 2026-09-23
+updatedDate: 2026-11-10
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["power bi", "time intelligence", "month over month", "year over year", "dax template"]
@@ -88,6 +89,8 @@ A: Usually the date table doesn't span a full extra year, or the relationship is
 A: Yes — use `DATESYTD` with a `FiscalYearEndDate` argument, or build a fiscal date table. Standard `SAMEPERIODLASTYEAR` follows the calendar.
 
 Microsoft documents this feature in [its Time intelligence functions reference](https://learn.microsoft.com/en-us/dax/time-intelligence-functions-dax).
+
+This template, plus the date table it assumes, is packaged in the [Time Intelligence Starter Pack](/resources/time-intelligence-starter/).
 
 ## Related Reading
 

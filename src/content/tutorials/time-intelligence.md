@@ -2,6 +2,7 @@
 title: "Time Intelligence in DAX: YTD, YoY, Rolling Windows"
 description: "Calendar table setup, YTD/QTD/MTD, year-over-year and rolling averages: the four patterns that cover most business reporting."
 pubDate: 2026-07-06
+updatedDate: 2026-11-10
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["dax", "time-intelligence", "ytd", "yoy", "calendar-table"]
@@ -175,3 +176,5 @@ With these five patterns you can answer nearly every "vs. last year" question. T
 
 Pair these time intelligence measures with a well-designed star schema (see [Star Schema Data Modeling](/tutorials/data-modeling-star-schema)) and your reports will be both fast and easy to maintain.
 - [Calculation Groups: One Slicer for Every Time Grain](/tutorials/calculation-groups-power-bi/)
+
+If you want the finished date table and all twelve measures rather than building them from scratch, they are in the [Time Intelligence Starter Pack](/resources/time-intelligence-starter/).

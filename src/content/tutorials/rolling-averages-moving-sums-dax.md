@@ -2,6 +2,7 @@
 title: "Rolling Averages and Moving Sums in DAX"
 description: "A 7-day rolling average, a 30-day moving sum, and the DAX window functions that generalise to any window you need."
 pubDate: 2026-07-19
+updatedDate: 2026-11-10
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["dax", "rolling-average", "moving-sum", "window-functions", "time-intelligence"]
@@ -140,6 +141,8 @@ Rolling calculations over large date ranges can be slow because they re-evaluate
 Rolling averages smooth daily noise; moving sums provide a rolling window total; cumulative totals accumulate from period start. Use `DATESINPERIOD` for "last N days/months" patterns and `WINDOW` for centered or asymmetric windows. Average over `VALUES(Date[Date])` to get the per-day average, not the total divided by N. And always use a proper date table — without one, all time intelligence functions return wrong results silently.
 
 Behaviour described here follows [Microsoft's Time intelligence functions documentation](https://learn.microsoft.com/en-us/dax/time-intelligence-functions-dax).
+
+The rolling window measures here ship in the [Time Intelligence Starter Pack](/resources/time-intelligence-starter/), together with the calendar table they need.
 
 ## Related Reading
 

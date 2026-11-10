@@ -2,6 +2,7 @@
 title: "Create a Date Table in Power BI (3 Methods)"
 description: "A date table is the backbone of time intelligence. Three ways to build one, the columns that matter, and the marking step people forget that breaks YTD."
 pubDate: 2026-10-08
+updatedDate: 2026-11-10
 category: time-intelligence
 tags: ["date table", "time intelligence"]
 difficulty: Beginner
@@ -152,6 +153,8 @@ You don't need separate date columns. Add extra columns to the single date table
 ### Q: Why does my time intelligence measure return the same value for every row?
 
 That almost always means the date column used in the visual comes from the fact table rather than from the marked date table. Swap it for `Date[Date]` or a hierarchy column built from the date table.
+
+Building this by hand? The [Time Intelligence Starter Pack](/resources/time-intelligence-starter/) has the date table script and the twelve measures that run on it — free, no account.
 
 ## Related Reading
 

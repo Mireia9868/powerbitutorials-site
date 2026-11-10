@@ -2,6 +2,7 @@
 title: "PREVIOUSMONTH vs DATEADD in DAX: Why They Disagree on the 31st"
 description: "Both look like 'last month' but return different date sets on the 31st. When each is correct, and how to check which one your model needs."
 pubDate: 2026-10-26
+updatedDate: 2026-11-10
 category: time-intelligence
 tags: ["time-intelligence", "dax", "dateadd", "previousmonth", "month-over-month"]
 difficulty: Intermediate
@@ -156,6 +157,8 @@ table is too short or not marked.
 Not reliably. Both are calendar-based. For a July-to-June fiscal year, build the
 comparison window explicitly against your date table's fiscal columns rather than
 relying on the function name.
+
+Both functions, and the eleven other time-intelligence measures that trip people up, are in the [Time Intelligence Starter Pack](/resources/time-intelligence-starter/).
 
 ## Related Reading
 

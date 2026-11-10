@@ -2,6 +2,7 @@
 title: "DAX Time Intelligence: YTD, QTD, and MTD Complete Guide"
 description: "TOTALYTD, DATEADD and SAMEPERIODLASTYEAR only work with a proper calendar table. The setup, the syntax, and five errors that break YTD."
 pubDate: 2026-07-28
+updatedDate: 2026-11-10
 category: "time-intelligence"
 difficulty: "Intermediate"
 tags: ["time-intelligence", "dax", "ytd", "dateadd", "calendar"]
@@ -313,6 +314,8 @@ Time intelligence pairs naturally with these advanced topics:
 - [DAX Variables: Write Cleaner and Faster Measures](/tutorials/dax-variables-guide/) — Variables make time intelligence measures like YoY Growth readable
 - [Power BI Star Schema: The Data Model That Scales](/tutorials/data-modeling-star-schema/) — A proper Date table is the centerpiece of a star schema
 - [DAX SWITCH: Cleaner Conditional Logic](/tutorials/dax-switch-function/) — Build dynamic measure selectors for YTD/QTD/MTD switching
+
+All twelve measures in this pattern, plus the date table they depend on, are in the [Time Intelligence Starter Pack](/resources/time-intelligence-starter/) — free download.
 
 ## Related Reading
 
