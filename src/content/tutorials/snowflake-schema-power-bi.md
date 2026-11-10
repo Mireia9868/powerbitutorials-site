@@ -1,6 +1,6 @@
 ---
 title: "Snowflake Schema vs Star Schema in Power BI"
-description: "Snowflake schema vs star schema in Power BI: when normalising dimensions helps, when it hurts VertiPaq compression, and how to flatten one safely."
+description: "Snowflake schema vs star schema in Power BI: when normalising dimensions genuinely helps, when it hurts VertiPaq compression, and how to flatten one safely."
 pubDate: 2026-10-04
 category: data-modeling
 tags: ["data modeling", "schema"]

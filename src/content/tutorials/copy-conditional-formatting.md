@@ -1,6 +1,6 @@
 ---
 title: "Copy Conditional Formatting Between Visuals in Power BI"
-description: "Conditional formatting is stored per visual, per field, per property. How to copy it between visuals, and why the Format Painter often lets you down."
+description: "Conditional formatting is stored per visual, per field, per property. How to copy it between visuals, and why the Format Painter so often lets you down."
 pubDate: 2026-09-30
 category: visualization
 tags: ["conditional formatting", "tips"]
