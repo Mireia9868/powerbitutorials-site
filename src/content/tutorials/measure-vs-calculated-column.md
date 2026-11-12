@@ -1,6 +1,6 @@
 ---
 title: "Measure vs Calculated Column in Power BI"
-description: "The first real decision you make in a Power BI model is where a calculation belongs."
+description: "Measure or calculated column in Power BI? Compare how each is stored, evaluated and filtered, with a side-by-side table and rules for where each belongs."
 pubDate: 2026-10-09
 category: dax
 tags: ["dax", "data modeling"]

@@ -1,6 +1,6 @@
 ---
 title: "Power BI Map Visuals: Choosing the Right One"
-description: "Power BI ships with several map visuals, and they are not interchangeable."
+description: "Compare Power BI's map, filled map, shape map and Azure Maps visuals, and learn which fits your data, why choropleths mislead, and how to avoid blank tiles."
 pubDate: 2026-10-13
 category: visualization
 tags: ["maps", "visualization"]

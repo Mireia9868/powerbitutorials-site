@@ -8,8 +8,6 @@ tags: ["dax", "variables", "var", "performance"]
 author: Mireia
 ---
 
-# DAX Variables (VAR/RETURN): Write Cleaner and Faster Measures
-
 The `VAR` / `RETURN` pattern in DAX is one of those features that seems simple — declare a variable, use it later — but has a disproportionate impact on measure quality. Variables make your code more readable, prevent the engine from recalculating the same expression multiple times, and eliminate a class of bugs where filter context changes unexpectedly between steps.
 
 If you're writing measures that nest more than two function calls, you should probably be using variables.

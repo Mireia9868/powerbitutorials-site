@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Power Query in Power BI"
-description: "Connect, transform and shape data with the no-code editor, plus a look at the M code it writes behind every click."
+description: "New to Power Query? This beginner guide covers the editor, applied steps, common transformations, and why query folding matters for refresh performance."
 pubDate: 2026-06-29
 updatedDate: 2026-07-20
 category: "power-query"

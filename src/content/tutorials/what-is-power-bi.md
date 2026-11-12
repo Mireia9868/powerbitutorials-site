@@ -1,6 +1,6 @@
 ---
 title: "What Is Power BI? A Complete Beginner Overview"
-description: "Power BI is Microsoft's business intelligence platform for turning raw data into interactive reports and dashboards."
+description: "What is Power BI? An overview of its three parts - Power Query for data prep, the data model, and report design - with a first report built from a spreadsheet."
 pubDate: 2026-10-14
 category: visualization
 tags: ["fundamentals"]

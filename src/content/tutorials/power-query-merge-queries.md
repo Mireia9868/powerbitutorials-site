@@ -1,6 +1,6 @@
 ---
 title: "Merge Queries in Power Query (VLOOKUP Equivalent)"
-description: "Merging queries in Power Query is the closest thing Excel users get to a familiar friend: VLOOKUP."
+description: "Merge queries in Power Query as a VLOOKUP replacement. Prepare both tables, pick the join kind, expand columns, and handle unmatched rows in a worked example."
 pubDate: 2026-10-12
 category: power-query
 tags: ["power query", "merge"]

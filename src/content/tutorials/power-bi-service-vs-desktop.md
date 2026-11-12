@@ -1,6 +1,6 @@
 ---
 title: "Power BI Service vs Desktop: What's the Difference"
-description: "Power BI is two products with one name. Power BI Desktop is a free Windows application you install to build reports."
+description: "Power BI Desktop builds reports; the Service hosts, shares and refreshes them. Compare licensing, gateways, workspaces, and what moves when you publish."
 pubDate: 2026-10-08
 updatedDate: 2026-11-04
 category: service

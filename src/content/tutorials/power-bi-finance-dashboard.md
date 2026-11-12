@@ -1,6 +1,6 @@
 ---
 title: "Build a Finance Dashboard in Power BI"
-description: "Finance reporting has a shape that generic dashboards ignore."
+description: "Build a finance dashboard in Power BI: model the data, write base measures with DIVIDE and variables, then add a budget vs actual variance view with DAX."
 pubDate: 2026-10-05
 category: visualization
 tags: ["dashboard", "finance"]

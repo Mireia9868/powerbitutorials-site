@@ -9,8 +9,6 @@ tags: ["time-intelligence", "dax", "ytd", "dateadd", "calendar"]
 author: Mireia
 ---
 
-# DAX Time Intelligence: YTD, QTD, and MTD Complete Guide
-
 Year-to-date, quarter-to-date, month-to-date, and year-over-year comparisons are the bread and butter of business reporting. Yet they're also among the most frequently broken DAX calculations — not because the functions are complex, but because the prerequisites (a proper Date table) are often missing or misconfigured. Microsoft documents every case in the [DATE reference](https://learn.microsoft.com/en-us/dax/date-function-dax).
 
 This guide covers the five core time intelligence functions, the Date table requirements, and the mistakes that produce silently wrong numbers.

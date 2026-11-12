@@ -1,6 +1,6 @@
 ---
 title: "Line Chart Conditional Formatting in Power BI"
-description: "A line chart in Power BI is built from a category axis, a value axis, and one or more series."
+description: "Conditional formatting on a Power BI line chart changes series colours, not the whole line. Learn the prerequisites, rule types, and which element to format."
 pubDate: 2026-09-29
 category: visualization
 tags: ["conditional formatting", "line chart"]

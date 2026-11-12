@@ -1,6 +1,6 @@
 ---
 title: "DAX Optimization Techniques to Speed Up Power BI"
-description: "DAX speed is decided by what VertiPaq and the formula engine do at query time, not by how clever the formula looks."
+description: "Speed up slow DAX measures: replace row-by-row iterators, avoid context transitions, use variables, and read the query plan to find the real bottleneck."
 pubDate: 2026-10-02
 category: dax
 tags: ["performance", "dax"]

@@ -1,6 +1,6 @@
 ---
 title: "Rolling Averages and Moving Sums in DAX"
-description: "A 7-day rolling average, a 30-day moving sum, and the DAX window functions that generalise to any window you need."
+description: "Calculate rolling averages and moving sums in DAX with DATESINPERIOD, AVERAGEX and a proper date table, plus 7-day and 30-day patterns and common filter traps."
 pubDate: 2026-07-19
 updatedDate: 2026-11-10
 category: "time-intelligence"

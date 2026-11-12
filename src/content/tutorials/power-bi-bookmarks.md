@@ -1,6 +1,6 @@
 ---
 title: "Power BI Bookmarks: Build Interactive Reports"
-description: "A Power BI bookmark captures the state of a report page at a point in time."
+description: "A Power BI bookmark stores visual visibility, slicer filters and sort order. Build a sales view switcher and drive a measure from a bookmark, step by step."
 pubDate: 2026-10-10
 category: visualization
 tags: ["bookmarks", "interactivity"]
