@@ -1,0 +1,162 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "DAX Formatter & Linter",
+  url: "https://powerbitutorials.com/tools/dax-audit/",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description:
+    "Free browser-based DAX formatter and linter for Power BI. Formats measures and flags common performance and correctness traps.",
+};
+---
+
+<BaseLayout
+  title="DAX Formatter & Linter"
+  description="Paste any DAX measure to format it and review the patterns that slow reports down: repeated measures, FILTER over ALL, COUNTROWS(FILTER()), bare division. Runs in your browser."
+>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/tools/tool.css" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline src="/tools/dax.js"></script>
+  </Fragment>
+
+  <div class="tool-page">
+    <div class="wrap">
+
+      <section class="hero">
+        <span class="eyebrow">Free tool · no signup</span>
+        <h1>Format your DAX — and find what is slowing it down.</h1>
+        <p>
+          Paste a measure. You get clean formatting plus a review of the patterns
+          that quietly cost performance: the same measure evaluated five times,
+          <code>SUMX</code> wrapped around <code>FILTER</code>, division that
+          breaks on zero, hard-coded dates. The code is parsed in this tab and
+          never uploaded.
+        </p>
+      </section>
+
+      <section class="layout" aria-label="DAX formatter and linter">
+
+        <div class="panel">
+          <div class="panel-head">
+            <span>Your DAX</span>
+            <span class="spacer"></span>
+            <button class="btn btn-ghost" id="sample-btn" type="button">Load example</button>
+            <button class="btn btn-ghost" id="clear-btn" type="button">Clear</button>
+          </div>
+          <div class="panel-body">
+            <textarea
+              class="code-input"
+              id="dax-input"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="off"
+              aria-label="DAX code to format and check"
+              placeholder="Paste a DAX measure, or a full EVALUATE query…"></textarea>
+            <div class="stats" id="stats"></div>
+            <p class="note">
+              Shortcut: <kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>Enter</kbd> to run.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel">
+            <div class="panel-head">
+              <span>Formatted</span>
+              <span class="spacer"></span>
+              <button class="btn" id="copy-btn" type="button">Copy</button>
+            </div>
+            <div class="panel-body">
+              <pre class="code-output empty" id="dax-output">// Your formatted DAX will appear here</pre>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top:18px">
+            <div class="panel-head">
+              <span>Checks</span>
+              <span class="spacer"></span>
+              <span class="summary" id="summary">Waiting for input</span>
+            </div>
+            <div class="panel-body" id="issues"></div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="cta">
+        <div>
+          <h3>Want the checks turned into working measures?</h3>
+          <p>
+            The free Time Intelligence Starter Pack ships a marked date table and
+            twelve measures that already avoid every trap this tool flags.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="/resources/time-intelligence-starter/">Get the pack →</a>
+      </section>
+
+      <section>
+        <h2 class="faq-title">How the check works</h2>
+        <p class="faq-intro">
+          The tool tokenises DAX — strings, comments and quoted table names
+          included — then applies rules that can be decided from the syntax
+          alone. It is deliberately conservative: when the intent depends on
+          runtime data, it stays silent instead of guessing.
+        </p>
+
+        <details class="faq">
+          <summary>What does it check for?</summary>
+          <p>
+            Repeated evaluation of the same measure, nested CALCULATE, IFERROR
+            around aggregates, SUMX/AVERAGEX over FILTER, COUNTROWS(FILTER(...)),
+            bare division without DIVIDE, EARLIER, SUMMARIZE used to add columns,
+            hard-coded DATE() literals, FILTER(ALL(...)), AND()/OR() functions,
+            and deep nesting.
+          </p>
+        </details>
+        <details class="faq">
+          <summary>Is my DAX uploaded anywhere?</summary>
+          <p>
+            No. The formatter and every rule are plain JavaScript running in this
+            tab, with no backend call and no account. You can turn off your
+            network and reload the page to confirm. The site itself uses
+            cookie-consent based analytics for page traffic — your formula is not
+            part of that.
+          </p>
+        </details>
+        <details class="faq">
+          <summary>Does a clean result mean my measure is correct?</summary>
+          <p>
+            No. These are syntactic heuristics, not a semantic analyser. A measure
+            can pass every rule and still return the wrong number. Treat the
+            output as a second pair of eyes, not as a test suite.
+          </p>
+        </details>
+        <details class="faq">
+          <summary>Why not just use DAX Formatter?</summary>
+          <p>
+            DAX Formatter, by SQLBI, is excellent at formatting and is the
+            industry standard — use it if that is all you need. This tool adds a
+            review layer aimed at learning: every issue links back to the
+            tutorial that explains the pattern.
+          </p>
+        </details>
+      </section>
+
+    </div>
+  </div>
+
+  <script is:inline src="/tools/dax-audit.js"></script>
+</BaseLayout>
+
+<style>
+  .faq-title { font-size: 1.3rem; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .faq-intro {
+    color: var(--t-text-muted); font-size: 0.94rem; margin: 0 0 8px;
+    max-width: 760px; line-height: 1.7;
+  }
+</style>

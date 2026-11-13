@@ -232,6 +232,9 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     )}
 
     <!-- Fonts: use system stack for performance -->
+
+    <!-- Per-page head additions (tool pages load their stylesheet here) -->
+    <slot name="head" />
   </head>
   <body>
     <a href="#main-content" class="visually-hidden">Skip to content</a>
