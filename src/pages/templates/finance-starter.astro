@@ -1,0 +1,377 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { NEWSLETTER } from "../../consts";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Finance Starter Pack for Power BI",
+  description:
+    "A ready-to-use P&L model for Power BI: star schema, 46 audited DAX measures, four report pages, budget vs actual, and sample data you can regenerate.",
+  brand: { "@type": "Brand", name: "Power BI Tutorials" },
+  offers: {
+    "@type": "Offer",
+    price: "39",
+    priceCurrency: "USD",
+    availability: "https://schema.org/PreOrder",
+    url: "https://powerbitutorials.com/templates/finance-starter/",
+  },
+};
+---
+
+<BaseLayout
+  title="Finance Starter Pack for Power BI"
+  description="A ready-to-use P&L model for Power BI: star schema, 46 audited DAX measures, four report pages, budget vs actual, and sample data you can regenerate. Early access."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <article class="product">
+    <div class="content-width">
+
+      <span class="page-eyebrow">Template · Early access</span>
+      <h1>A P&amp;L report you can open — and actually change.</h1>
+      <p class="lede">
+        Star schema, 46 audited measures, four finished pages, and 1,728 rows of
+        sample data that make the numbers add up. Built the way a finance model
+        should be, not the way a screenshot pack is.
+      </p>
+
+      <section class="signup" id="early-access">
+        <form
+          class="signup-form"
+          id="waitlist-form"
+          action={NEWSLETTER.action}
+          method="post"
+          target={NEWSLETTER.iframeName}
+        >
+          <label class="visually-hidden" for="email">Email address</label>
+          <input
+            id="email"
+            type="email"
+            name={NEWSLETTER.fieldName}
+            placeholder="you@company.com"
+            autocomplete="email"
+            required
+          />
+          <button type="submit">Join the early-access list</button>
+        </form>
+        <iframe name={NEWSLETTER.iframeName} style="display:none" title="subscription"></iframe>
+
+        <p class="micro">
+          $39 at launch · early access gets 30% off · PBIX + PBIT + source files ·
+          one email when it ships, nothing else
+        </p>
+
+        <div class="reveal" id="waitlist-reveal" hidden>
+          <p class="reveal-title">You’re on the list</p>
+          <p class="reveal-note">
+            I’ll email you the moment the pack is ready, with the early-access
+            code. If you don’t hear from me in two weeks, reply to that email and
+            I’ll tell you exactly where it stands.
+          </p>
+        </div>
+
+        <p class="fineprint">
+          No spam. Unsubscribe in one click. I don’t sell or share your address.
+        </p>
+      </section>
+
+      <section class="block">
+        <h2>Most finance templates break the moment you slice them.</h2>
+        <p>
+          Templates sold online are usually a PBIX with a nice screenshot and
+          three problems underneath: signs are backwards, so gross profit is
+          negative; the budget page stops working when someone touches a slicer;
+          months sort alphabetically and nobody notices until March.
+        </p>
+        <p>
+          Each of those is cheap to avoid at design time and expensive to fix
+          after you have handed the report to a CFO.
+        </p>
+
+        <div class="claims">
+          <div class="claim">
+            <span class="claim-mark">±</span>
+            <h3>Signs that survive review</h3>
+            <p>Revenue and cost are both stored positive. Gross profit is subtraction, not guesswork.</p>
+          </div>
+          <div class="claim">
+            <span class="claim-mark">⇄</span>
+            <h3>Budget that doesn’t argue with slicers</h3>
+            <p>Variance measures switch scenario with <code>REMOVEFILTERS</code>, so the page stays correct.</p>
+          </div>
+          <div class="claim">
+            <span class="claim-mark">▤</span>
+            <h3>Months that sort</h3>
+            <p>Sort-by-column is set in the model, not left to whatever the visual decides.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>What you get</h2>
+        <ul class="includes">
+          <li>
+            <strong>The model.</strong> One fact table, five dimensions, one
+            marked date table. Every relationship one-to-many, single direction.
+          </li>
+          <li>
+            <strong>46 measures</strong> in four display folders: core P&amp;L,
+            time intelligence, budget and variance, helpers. Commented, not
+            cryptic.
+          </li>
+          <li>
+            <strong>Four report pages</strong> — Executive Summary, P&amp;L
+            Statement, Variance Analysis, Cost Centre Detail — with layout
+            dimensions and field bindings documented.
+          </li>
+          <li>
+            <strong>Data and theme.</strong> 1,728 rows with a fixed seed, a
+            script to regenerate or resize them, and a theme JSON so the pack
+            looks like one product.
+          </li>
+          <li>
+            <strong>Documentation.</strong> Model spec, page-by-page build guide,
+            and the self-check list that catches the mistakes people actually
+            make.
+          </li>
+        </ul>
+      </section>
+
+      <section class="block">
+        <h2>Check it before you buy</h2>
+        <p>
+          Every number in the documentation matches the file. With all filters
+          cleared, the sample model returns:
+        </p>
+        <table class="figures">
+          <thead>
+            <tr><th>Line</th><th>Amount</th><th>% of revenue</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Revenue</td><td>29,126,563</td><td>100.0%</td></tr>
+            <tr><td>COGS</td><td>5,901,187</td><td>20.3%</td></tr>
+            <tr><td>Gross profit</td><td>23,225,376</td><td>79.7%</td></tr>
+            <tr><td>Operating expenses</td><td>13,800,428</td><td>47.4%</td></tr>
+            <tr><td>EBITDA</td><td>9,424,948</td><td>32.4%</td></tr>
+            <tr><td>Net profit</td><td>8,327,138</td><td>28.6%</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">
+          These are the first item on the self-check list, not a claim in a
+          screenshot. The data is synthetic — no real company, no real customers.
+        </p>
+      </section>
+
+      <section class="block two-col">
+        <div>
+          <h2>It’s for you if</h2>
+          <ul class="plain">
+            <li>you’ve been asked for “a proper P&amp;L” and have two days</li>
+            <li>you deliver client reports and need a credible starting model</li>
+            <li>you’re moving a monthly pack out of Excel</li>
+          </ul>
+        </div>
+        <div>
+          <h2>It’s not for you if</h2>
+          <ul class="plain">
+            <li>you need a balance sheet or cash flow statement</li>
+            <li>you need daily journal-level detail</li>
+            <li>you need multi-currency consolidation</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>One price, two licences</h2>
+        <div class="pricing">
+          <div class="price-card">
+            <h3>Personal</h3>
+            <p class="amount">$39</p>
+            <p>Use it in your own reports. Modify anything. Keep it.</p>
+          </div>
+          <div class="price-card">
+            <h3>Commercial</h3>
+            <p class="amount">$89</p>
+            <p>Include it in paid client deliverables. Still no reselling the template.</p>
+          </div>
+        </div>
+        <p class="caption">
+          One-time payment · lifetime use of this version · 12 months of bug
+          fixes · PBIX and PBIT included. Prices in USD; digital delivery.
+        </p>
+      </section>
+
+      <section class="block faq">
+        <h2>Questions</h2>
+
+        <h3>Do I need Power BI Desktop?</h3>
+        <p>
+          Yes — the free Windows app — or the Power BI Service in a browser. No
+          paid add-ons and no custom visuals.
+        </p>
+
+        <h3>Can I use my own data?</h3>
+        <p>
+          Yes. Use the <code>.pbit</code> version and swap the CSVs for your
+          source, keeping the field names and the sign convention from the model
+          spec.
+        </p>
+
+        <h3>Why is there no balance sheet?</h3>
+        <p>
+          Because it needs different sign handling and opening/closing logic.
+          Bolting it onto a P&amp;L model makes both halves worse. If the pack
+          sells, that is the next one.
+        </p>
+
+        <h3>Will it work with my chart of accounts?</h3>
+        <p>
+          Yes. Accounts live in <code>DimAccount</code>; the measures only depend
+          on the six values in <code>L1</code>, so renaming the rest is safe.
+        </p>
+
+        <h3>When does it ship?</h3>
+        <p>
+          When the sample model passes the self-check list — the same list
+          published in the docs. The early-access list gets one email on launch
+          day, nothing before that.
+        </p>
+      </section>
+
+      <section class="closing">
+        <h2>Start from a model that already works.</h2>
+        <p>Two days of modelling, or one afternoon of adjusting. Your call.</p>
+        <a class="btn" href="#early-access">Join the early-access list</a>
+      </section>
+
+    </div>
+  </article>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById("waitlist-form");
+      var reveal = document.getElementById("waitlist-reveal");
+      if (!form || !reveal) return;
+      form.addEventListener("submit", function () {
+        setTimeout(function () {
+          reveal.hidden = false;
+          reveal.scrollIntoView({ behavior: "smooth", block: "center" });
+          if (window.gtag) {
+            window.gtag("event", "waitlist_signup", { product: "finance_starter" });
+          }
+        }, 900);
+      });
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .product { padding: 56px 0 88px; }
+  .page-eyebrow {
+    display: inline-block; font-size: 0.8rem; font-weight: 600;
+    color: var(--c-accent-dark); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .product h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 18px; max-width: 26ch; }
+  .lede {
+    font-size: 1.1rem; color: var(--c-text-muted);
+    border-left: 3px solid var(--c-accent); padding-left: 18px;
+    margin-bottom: 32px; max-width: 62ch;
+  }
+
+  .signup { margin-bottom: 48px; max-width: 620px; }
+  .signup-form { display: flex; gap: 8px; }
+  .signup-form input {
+    flex: 1; padding: 12px 14px; font-size: 0.98rem; font-family: inherit;
+    border: 1px solid var(--c-border-strong); border-radius: var(--radius);
+    background: var(--c-bg); color: var(--c-text);
+  }
+  .signup-form input:focus { outline: 2px solid var(--c-accent); outline-offset: -1px; }
+  .signup-form button {
+    padding: 12px 20px; border: none; border-radius: var(--radius);
+    background: var(--c-accent); color: var(--c-accent-text);
+    font-size: 0.95rem; font-weight: 700; font-family: inherit; cursor: pointer;
+    white-space: nowrap;
+  }
+  .signup-form button:hover { background: var(--c-accent-hover); }
+  .micro { font-size: 0.82rem; color: var(--c-text-dim); margin: 10px 0 0; }
+  .reveal {
+    margin-top: 16px; padding: 16px 18px;
+    border: 1px solid var(--c-accent-border); background: var(--c-accent-soft);
+    border-radius: var(--radius);
+  }
+  .reveal-title { margin: 0 0 6px; font-weight: 700; }
+  .reveal-note { margin: 0; font-size: 0.9rem; color: var(--c-text-muted); }
+  .fineprint { font-size: 0.78rem; color: var(--c-text-dim); margin: 10px 0 0; }
+
+  .block { margin-bottom: 48px; max-width: 76ch; }
+  .block h2 { font-size: 1.35rem; margin: 0 0 14px; letter-spacing: -0.01em; }
+  .block p { color: var(--c-text-muted); line-height: 1.72; margin: 0 0 14px; }
+
+  .claims { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
+  .claim {
+    border: 1px solid var(--c-border); border-radius: var(--radius-lg);
+    padding: 16px; background: var(--c-bg-soft);
+  }
+  .claim-mark {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 7px;
+    background: var(--c-accent); color: var(--c-accent-text);
+    font-weight: 800; margin-bottom: 10px;
+  }
+  .claim h3 { font-size: 0.95rem; margin: 0 0 6px; }
+  .claim p { font-size: 0.85rem; margin: 0; line-height: 1.55; }
+
+  .includes { list-style: none; padding: 0; margin: 0; }
+  .includes li {
+    padding: 12px 0; border-bottom: 1px solid var(--c-border);
+    font-size: 0.94rem; color: var(--c-text-muted); line-height: 1.65;
+  }
+  .includes li:last-child { border-bottom: none; }
+  .includes strong { color: var(--c-text); }
+
+  .figures { width: 100%; border-collapse: collapse; margin: 8px 0 10px; font-size: 0.92rem; }
+  .figures th {
+    text-align: left; font-size: 0.76rem; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--c-text-dim);
+    padding: 8px 10px; border-bottom: 1px solid var(--c-border);
+  }
+  .figures td { padding: 9px 10px; border-bottom: 1px solid var(--c-border); }
+  .figures td:nth-child(2), .figures td:nth-child(3) { text-align: right; font-variant-numeric: tabular-nums; }
+  .caption { font-size: 0.82rem; color: var(--c-text-dim); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: none; }
+  .plain { padding-left: 18px; margin: 0; color: var(--c-text-muted); font-size: 0.92rem; line-height: 1.8; }
+
+  .pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; max-width: 560px; }
+  .price-card {
+    border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: 18px;
+  }
+  .price-card h3 { margin: 0 0 6px; font-size: 1rem; }
+  .price-card .amount { font-size: 1.7rem; font-weight: 800; color: var(--c-text); margin: 0 0 6px; }
+  .price-card p { margin: 0; font-size: 0.86rem; }
+
+  .faq h3 { font-size: 1rem; margin: 22px 0 6px; }
+  .faq p { margin: 0; }
+
+  .closing {
+    border-top: 1px solid var(--c-border); padding-top: 28px; margin-top: 8px;
+  }
+  .closing h2 { font-size: 1.5rem; margin: 0 0 8px; }
+  .closing p { color: var(--c-text-muted); margin: 0 0 18px; }
+  .btn {
+    display: inline-block; padding: 12px 22px; border-radius: var(--radius);
+    background: var(--c-accent); color: var(--c-accent-text);
+    font-weight: 700; text-decoration: none;
+  }
+  .btn:hover { background: var(--c-accent-hover); text-decoration: none; }
+
+  @media (max-width: 760px) {
+    .claims, .two-col, .pricing { grid-template-columns: 1fr; }
+    .signup-form { flex-direction: column; }
+    .product h1 { font-size: 1.75rem; }
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Power BI Templates"
+  description="Ready-to-use Power BI templates with a documented model underneath: a P&L starter pack, and more being built. One-time purchase, PBIX and PBIT included."
+>
+  <article class="templates">
+    <div class="content-width">
+      <span class="page-eyebrow">Templates</span>
+      <h1>Models you can open, read, and change.</h1>
+      <p class="lede">
+        Every template here ships with the model specification, the measure
+        library, and a build guide — because a PBIX without those is a
+        screenshot you can't maintain.
+      </p>
+
+      <a class="template-card" href="/templates/finance-starter/">
+        <span class="tag">Early access</span>
+        <h2>Finance Starter Pack</h2>
+        <p>
+          A P&amp;L model for Power BI: star schema, 46 audited DAX measures,
+          four report pages, and budget vs actual that survives a slicer.
+        </p>
+        <span class="meta">$39 personal · $89 commercial · PBIX + PBIT</span>
+        <span class="arrow">See what's inside →</span>
+      </a>
+
+      <section class="note">
+        <h2>Why so few?</h2>
+        <p>
+          Because a template is a model, not a colour scheme. Each one takes
+          about two weeks to build and a day to document, and shipping it
+          without the documentation is how the market ended up full of
+          dashboards that break on the first slice.
+        </p>
+        <p>
+          The next one is a balance sheet and cash flow pack, built on the same
+          dimensions. It only exists if this one sells.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .templates { padding: 56px 0 88px; }
+  .page-eyebrow {
+    display: inline-block; font-size: 0.8rem; font-weight: 600;
+    color: var(--c-accent-dark); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .templates h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 18px; max-width: 24ch; }
+  .lede {
+    font-size: 1.08rem; color: var(--c-text-muted);
+    border-left: 3px solid var(--c-accent); padding-left: 18px;
+    margin-bottom: 40px; max-width: 62ch;
+  }
+  .template-card {
+    display: block; border: 1px solid var(--c-border); border-radius: var(--radius-lg);
+    padding: 24px; color: inherit; text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+    margin-bottom: 44px;
+  }
+  .template-card:hover {
+    border-color: var(--c-accent-border); transform: translateY(-2px); text-decoration: none;
+  }
+  .tag {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--c-accent-dark);
+  }
+  .template-card h2 { font-size: 1.25rem; margin: 8px 0 8px; }
+  .template-card p { color: var(--c-text-muted); font-size: 0.95rem; line-height: 1.65; margin: 0 0 10px; max-width: 62ch; }
+  .meta { display: block; font-size: 0.78rem; color: var(--c-text-dim); margin-bottom: 10px; }
+  .arrow { font-size: 0.88rem; font-weight: 700; color: var(--c-accent-dark); }
+  .note { max-width: 68ch; }
+  .note h2 { font-size: 1.3rem; margin: 0 0 12px; }
+  .note p { color: var(--c-text-muted); line-height: 1.72; margin: 0 0 14px; }
+  @media (max-width: 760px) { .templates h1 { font-size: 1.75rem; } }
+</style>
