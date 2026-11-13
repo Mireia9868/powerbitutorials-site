@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const tools = [
+  {
+    href: "/tools/dax-audit/",
+    title: "DAX Formatter & Linter",
+    tag: "Write better measures",
+    body: "Paste a measure and get clean formatting plus a review of the patterns that quietly cost performance — repeated measures, FILTER over ALL, division that breaks on zero, hard-coded dates.",
+    meta: "Runs in your browser · no signup",
+  },
+  {
+    href: "/tools/date-table/",
+    title: "Date Table Generator",
+    tag: "Fix time intelligence",
+    body: "A contiguous date table in DAX or Power Query, with a real sort column for every month label, ISO week numbers, and fiscal year handled properly. Includes the mark-as-date-table checklist.",
+    meta: "DAX + M output · free",
+  },
+  {
+    href: "/tools/license-calculator/",
+    title: "Power BI Licence Calculator",
+    tag: "Budget it",
+    body: "Pro, Premium Per User, or the mix most teams end up on. Enter how many people build reports and how many only read them, and see the yearly total.",
+    meta: "US list prices · updated Nov 2026",
+  },
+];
+---
+
+<BaseLayout
+  title="Free Power BI Tools"
+  description="Three free browser-based tools for Power BI: a DAX formatter and linter, a date table generator for DAX and Power Query, and a Pro vs PPU licence calculator. No signup, nothing uploaded."
+>
+  <article class="tools-hub">
+    <div class="container">
+      <span class="page-eyebrow">Tools</span>
+      <h1>Free tools for the parts that waste your afternoon</h1>
+      <p class="lede">
+        Small, single-purpose utilities that run in the browser. No account, no
+        upload, no “start your free trial”. Each one exists because writing the
+        same thing by hand for the tenth time is not a good use of an analyst.
+      </p>
+
+      <div class="tool-grid">
+        {tools.map((tool) => (
+          <a class="tool-card" href={tool.href}>
+            <span class="tool-tag">{tool.tag}</span>
+            <h2>{tool.title}</h2>
+            <p>{tool.body}</p>
+            <span class="tool-meta">{tool.meta}</span>
+            <span class="tool-arrow">Open tool →</span>
+          </a>
+        ))}
+      </div>
+
+      <section class="hub-note">
+        <h2>Why so few?</h2>
+        <p>
+          Because a tool that tries to do everything ends up being a worse
+          version of Power BI Desktop. These three cover the gaps where the
+          desktop app gives you no help at all: formatting a formula you pasted
+          from somewhere, building a date table that survives time intelligence,
+          and working out what the licences will actually cost.
+        </p>
+        <p>
+          Everything runs client-side. The DAX you paste is never sent to a
+          server — you can open the page, disconnect from the network, and it
+          still works.
+        </p>
+      </section>
+
+      <p class="hub-next">
+        Want the reasoning behind the checks rather than just the output?
+        <a href="/tutorials/dax-basics/">Start with the DAX basics guide</a>, or
+        read <a href="/tutorials/dax-troubleshooting-guide/">the fifteen DAX
+        errors that look cryptic</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .tools-hub { padding: 56px 0 88px; }
+  .page-eyebrow {
+    display: inline-block; font-size: 0.8rem; font-weight: 600;
+    color: var(--c-accent-dark); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .tools-hub h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 18px; max-width: 24ch; }
+  .lede {
+    font-size: 1.08rem; color: var(--c-text-muted);
+    border-left: 3px solid var(--c-accent); padding-left: 18px;
+    margin-bottom: 40px; max-width: 66ch;
+  }
+  .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 44px; }
+  .tool-card {
+    display: flex; flex-direction: column; gap: 8px;
+    border: 1px solid var(--c-border); border-radius: var(--radius-lg);
+    padding: 22px 20px; color: inherit; text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .tool-card:hover {
+    border-color: var(--c-accent-border);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -16px #00000033;
+    text-decoration: none;
+  }
+  .tool-tag {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--c-accent-dark);
+  }
+  .tool-card h2 { font-size: 1.15rem; margin: 0; letter-spacing: -0.01em; }
+  .tool-card p { margin: 0; font-size: 0.92rem; line-height: 1.6; color: var(--c-text-muted); flex: 1; }
+  .tool-meta { font-size: 0.74rem; color: var(--c-text-dim); }
+  .tool-arrow { font-size: 0.86rem; font-weight: 700; color: var(--c-accent-dark); }
+  .hub-note { max-width: 68ch; margin-bottom: 36px; }
+  .hub-note h2 { font-size: 1.3rem; margin: 0 0 12px; }
+  .hub-note p { color: var(--c-text-muted); line-height: 1.72; margin: 0 0 14px; }
+  .hub-next { font-size: 0.95rem; color: var(--c-text-muted); max-width: 68ch; }
+  @media (max-width: 900px) {
+    .tool-grid { grid-template-columns: 1fr; }
+    .tools-hub h1 { font-size: 1.8rem; }
+  }
+</style>

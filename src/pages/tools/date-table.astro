@@ -1,0 +1,209 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Power BI Date Table Generator",
+  url: "https://powerbitutorials.com/tools/date-table/",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description:
+    "Generates a Power BI date table in DAX or Power Query M with fiscal year, ISO week and sortable month columns.",
+};
+---
+
+<BaseLayout
+  title="Date Table Generator"
+  description="Generate a complete, contiguous date table for Power BI in DAX or Power Query M. Fiscal year, ISO week numbers, sortable month columns and the mark-as-date-table checklist."
+>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/tools/tool.css" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="tool-page">
+    <div class="wrap">
+
+      <section class="hero">
+        <span class="eyebrow">Free tool · no signup</span>
+        <h1>A date table that actually works.</h1>
+        <p>
+          Contiguous dates, no gaps, a real sort column for every month label,
+          ISO week numbers, and fiscal year handled properly. Pick your range and
+          copy the DAX or the Power Query code.
+        </p>
+      </section>
+
+      <section class="layout">
+
+        <div class="panel">
+          <div class="panel-head"><span>Settings</span></div>
+          <div class="panel-body">
+            <div class="field-grid">
+              <div class="field">
+                <label for="start-year">First year</label>
+                <input type="number" id="start-year" value="2023" min="1900" max="2100" step="1" />
+              </div>
+              <div class="field">
+                <label for="end-year">Last year</label>
+                <input type="number" id="end-year" value="2026" min="1900" max="2100" step="1" />
+                <span class="hint">Always expands to 1 Jan – 31 Dec.</span>
+              </div>
+              <div class="field">
+                <label for="week-start">Week starts on</label>
+                <select id="week-start">
+                  <option value="monday" selected>Monday</option>
+                  <option value="sunday">Sunday</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="fiscal-start">Fiscal year starts in</label>
+                <select id="fiscal-start">
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4" selected>April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+              </div>
+              <div class="field wide" id="fiscal-naming-field">
+                <label for="fiscal-naming">Fiscal year is named by</label>
+                <select id="fiscal-naming">
+                  <option value="end" selected>Its ending year (FY2024 = Apr 2023 – Mar 2024)</option>
+                  <option value="start">Its starting year (FY2023 = Apr 2023 – Mar 2024)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="checks">
+              <label><input type="checkbox" id="iso-week" checked /> ISO week numbers</label>
+              <label><input type="checkbox" id="fiscal-cols" checked /> Fiscal year &amp; quarter</label>
+              <label><input type="checkbox" id="current-flags" /> “Is current” flags</label>
+            </div>
+            <p class="note" id="range-note"></p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <span>Generated code</span>
+            <span class="spacer"></span>
+            <div class="tabs" role="tablist">
+              <button class="tab" role="tab" aria-selected="true" data-target="dax" type="button">DAX</button>
+              <button class="tab" role="tab" aria-selected="false" data-target="m" type="button">Power Query</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <pre class="code-output wrap" id="dax-out"></pre>
+            <pre class="code-output wrap" id="m-out" style="display:none"></pre>
+            <div class="toolbar" style="margin-top:10px">
+              <button class="btn" id="copy-dax" type="button">Copy DAX</button>
+              <button class="btn" id="copy-m" type="button">Copy Power Query</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section>
+        <h2 class="steps-title">After you paste it</h2>
+        <ol class="steps">
+          <li>
+            <strong>Mark it as a date table.</strong> Table tools →
+            <em>Mark as date table</em> → choose the <code>Date</code> column.
+            Time intelligence will not behave without this.
+          </li>
+          <li>
+            <strong>Set the sort columns.</strong> Select <code>Month</code> →
+            <em>Sort by column</em> → <code>Month Number</code>. Same for
+            <code>Year Month</code> → <code>Year Month Sort</code>, and
+            <code>Month Short</code> → <code>Month Number</code>.
+          </li>
+          <li>
+            <strong>Hide the raw keys.</strong> Hide <code>Month Number</code>,
+            <code>Year Month Sort</code>, <code>Quarter Number</code> and
+            <code>Fiscal Month Number</code> from the report view.
+          </li>
+          <li>
+            <strong>Relate it.</strong> Create a one-to-many relationship from
+            <code>DimDate[Date]</code> to every fact table’s date column.
+          </li>
+          <li>
+            <strong>Never filter it.</strong> Filtering or slicing the date table
+            itself breaks time intelligence. Slice the fact table instead.
+          </li>
+        </ol>
+      </section>
+
+      <section class="cta">
+        <div>
+          <h3>The date table is step one.</h3>
+          <p>
+            The free Time Intelligence Starter Pack adds twelve measures on top of
+            it — YTD, QTD, YoY, rolling windows — each one explaining the trap it
+            avoids.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="/resources/time-intelligence-starter/">Get the pack →</a>
+      </section>
+
+      <section>
+        <details class="faq">
+          <summary>DAX table or Power Query table — which should I use?</summary>
+          <p>
+            Power Query if the table is large, if you want it to refresh with the
+            rest of the model, or if you need to join holidays and working-day
+            flags later. DAX if you want zero extra queries and the model is already
+            small. Both produce the same structure here, so switching later costs
+            nothing.
+          </p>
+        </details>
+        <details class="faq">
+          <summary>Why is the range always whole years?</summary>
+          <p>
+            Partial years create gaps at the edges and make <code>DATEADD</code> /
+            <code>SAMEPERIODLASTYEAR</code> behave inconsistently. A whole-year
+            range costs a few hundred rows and removes a whole class of bugs.
+          </p>
+        </details>
+        <details class="faq">
+          <summary>Why do month names sort alphabetically in my visuals?</summary>
+          <p>
+            Because a text column sorts by text. Set <em>Sort by column</em> on
+            <code>Month</code> to <code>Month Number</code>, and on
+            <code>Year Month</code> to <code>Year Month Sort</code>. The generator
+            already includes both columns for exactly this reason.
+          </p>
+        </details>
+        <details class="faq">
+          <summary>Does Power BI’s automatic date table do the same thing?</summary>
+          <p>
+            It creates hidden tables per date column, which works well enough to
+            hide the problem until you add a second fact table or a fiscal
+            calendar. An explicit table you control is the version that survives
+            those changes — and it is the only one you can mark and relate
+            deliberately.
+          </p>
+        </details>
+      </section>
+
+    </div>
+  </div>
+
+  <script is:inline src="/tools/date-table.js"></script>
+</BaseLayout>
+
+<style>
+  .steps-title { font-size: 1.3rem; letter-spacing: -0.01em; margin: 0 0 12px; }
+  .steps { font-size: 0.94rem; color: var(--t-text-muted); max-width: 760px; line-height: 1.75; }
+  .steps li { margin-bottom: 8px; }
+</style>
