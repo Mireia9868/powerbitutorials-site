@@ -1,6 +1,6 @@
 ---
-title: "Power Query M: Functions, Tables and Records"
-description: "M is functional, not a spreadsheet formula. Its three core data structures, how functions compose, and why the editor stops being scary."
+title: "Power Query M Language: Tables, Records & Functions"
+description: "M is a functional language, not a spreadsheet formula. See how tables, records and lists fit together, how let expressions compose, and how to read M code."
 pubDate: 2026-07-16
 category: "power-query"
 difficulty: "Beginner"

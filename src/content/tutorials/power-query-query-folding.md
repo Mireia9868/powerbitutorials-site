@@ -1,6 +1,6 @@
 ---
-title: "Power Query Query Folding: How and Why It Matters"
-description: "Folding turns editor steps into one query the source runs itself. Why a single step can silently break it, and how to check."
+title: "Query Folding in Power BI: What Breaks It & How to Check"
+description: "Folding turns applied steps into one query the source runs itself. See what breaks it, how to check with View Native Query, and which sources support it."
 pubDate: 2026-10-02
 category: power-query
 tags: ["performance", "query folding"]

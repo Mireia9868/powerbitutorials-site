@@ -1,6 +1,6 @@
 ---
-title: "Power BI and Excel Integration: The Complete Guide"
-description: "Excel assembles and argues over the data; Power BI models and distributes it. How the two hand off without duplicating work."
+title: "How to Integrate Power BI with Excel: 4 Working Setups"
+description: "Four ways Excel and Power BI work together: shared Power Query logic, Analyze in Excel, CSV export, and PivotTables on a dataset. Plus the write-back limits."
 pubDate: 2026-10-06
 category: power-query
 tags: ["excel", "integration"]

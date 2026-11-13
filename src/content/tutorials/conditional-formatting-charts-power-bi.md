@@ -1,6 +1,6 @@
 ---
-title: "Conditional Formatting for Charts and Gauges in Power BI"
-description: "Charts use Data colors, not cell rules. Colour bar, column and gauge visuals by value, rule or measure, with dynamic targets and KPI logic."
+title: "Conditional Formatting for Power BI Charts & Gauges"
+description: "Charts use Data colors, not cell rules. Colour a bar, column, line or gauge by value, rule or measure, add a dynamic target, and keep KPI colours consistent."
 pubDate: 2026-08-28
 updatedDate: 2026-09-24
 category: "visualization"
