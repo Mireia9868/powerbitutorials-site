@@ -13,6 +13,8 @@ export interface Props {
   article?: boolean;
   publishedTime?: Date;
   noindex?: boolean;
+  /** <html lang> 覆盖：德语页要传 "de"，否则屏幕阅读器和搜索引擎都会按英文处理 */
+  lang?: string;
 }
 
 const {
@@ -22,6 +24,7 @@ const {
   article = false,
   publishedTime,
   noindex = false,
+  lang = SITE_LANG,
 } = Astro.props;
 
 // 品牌后缀只在加完之后仍然不超过 62 字符时才加。
@@ -71,7 +74,7 @@ const websiteJsonLd = isHomepage ? {
 ---
 
 <!doctype html>
-<html lang={SITE_LANG}>
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

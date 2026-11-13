@@ -1,7 +1,8 @@
 ---
-import { NAV_LINKS, SITE_TITLE } from "../consts";
+import { NAV_LINKS, SITE_TITLE, LANGUAGE_LINKS } from "../consts";
 
 const pathname = Astro.url.pathname;
+const currentLang = pathname.startsWith("/de") ? "de" : "en";
 const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
@@ -24,6 +25,30 @@ const isActive = (href: string) =>
         ))}
       </ul>
     </nav>
+
+    <div class="lang-switch">
+      <details>
+        <summary aria-label="Change language">
+          <span aria-hidden="true">{(LANGUAGE_LINKS.find((l) => l.code === currentLang) || LANGUAGE_LINKS[0]).short}</span>
+          <span class="caret" aria-hidden="true">▾</span>
+        </summary>
+        <ul>
+          {LANGUAGE_LINKS.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                hreflang={l.code}
+                lang={l.code}
+                aria-current={l.code === currentLang ? "true" : undefined}
+                class={l.code === currentLang ? "active" : ""}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </div>
 
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
       <span></span><span></span><span></span>
@@ -69,6 +94,8 @@ const isActive = (href: string) =>
     font-weight: 800;
   }
   .logo-accent { color: var(--c-accent-dark); }
+  .header-inner { gap: 10px; }
+  .main-nav { margin-left: auto; }
   .main-nav ul {
     display: flex;
     gap: 4px;
@@ -94,6 +121,52 @@ const isActive = (href: string) =>
     color: var(--c-accent-dark);
     background: var(--c-accent-soft);
   }
+  .lang-switch {
+    position: relative;
+    margin-left: 6px;
+  }
+  .lang-switch details { position: relative; }
+  .lang-switch summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--c-text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+  .lang-switch summary::-webkit-details-marker { display: none; }
+  .lang-switch summary:hover { color: var(--c-text); background: var(--c-bg-elevated); }
+  .lang-switch .caret { font-size: 0.7rem; opacity: 0.7; }
+  .lang-switch ul {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    min-width: 140px;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 28px -12px #00000033;
+    z-index: 120;
+  }
+  .lang-switch ul a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: var(--c-text-muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .lang-switch ul a:hover { background: var(--c-bg-elevated); color: var(--c-text); text-decoration: none; }
+  .lang-switch ul a.active { background: var(--c-accent-soft); color: var(--c-accent-dark); font-weight: 600; }
+
   .nav-toggle {
     display: none;
     flex-direction: column;
@@ -124,7 +197,9 @@ const isActive = (href: string) =>
       transition: transform 0.25s ease;
     }
     .main-nav.open { transform: translateY(0); }
-    .main-nav ul {
+    .header-inner { gap: 10px; }
+  .main-nav { margin-left: auto; }
+  .main-nav ul {
       flex-direction: column;
       gap: 0;
     }
@@ -134,6 +209,18 @@ const isActive = (href: string) =>
 </style>
 
 <script>
+  // 点击语言菜单外部时收起
+  document.addEventListener("click", (e) => {
+    document.querySelectorAll(".lang-switch details[open]").forEach((d) => {
+      if (!d.contains(e.target as Node)) d.removeAttribute("open");
+    });
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".lang-switch details[open]").forEach((d) => d.removeAttribute("open"));
+    }
+  });
+
   const toggle = document.getElementById("nav-toggle");
   const nav = document.querySelector(".main-nav");
   toggle?.addEventListener("click", () => {

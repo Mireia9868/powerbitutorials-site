@@ -11,9 +11,15 @@ export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/tutorials/", label: "Tutorials" },
   { href: "/tools/", label: "Tools" },
-  { href: "/de/", label: "Deutsch" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
+];
+
+// 语言
+// 德语区目前是 noindex 的半成品；切换器先放出来，等 de 内容到 15 篇再进 sitemap。
+export const LANGUAGE_LINKS = [
+  { code: "en", label: "English", short: "EN", href: "/" },
+  { code: "de", label: "Deutsch", short: "DE", href: "/de/" },
 ];
 
 // 教程分类 (与 content collection schema 的 category 对应)
