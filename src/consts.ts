@@ -104,7 +104,7 @@ export const DIFFICULTY_LEVELS = ["Beginner", "Intermediate", "Advanced"];
 // AdSense — Publisher ID
 // 格式: ca-pub-XXXXXXXXXXXXXXXX，留空则不渲染广告脚本
 // AdSense 当前未启用（空值则不渲染任何 AdSense 广告脚本）；此前因站点被 AdSense 标记为低价值内容而暂停，恢复前需先解决内容合规问题
-export const ADSENSE_CLIENT = "";
+export const ADSENSE_CLIENT = "ca-pub-2269516311541291";
 
 // 邮件订阅 —— 唯一的配置点
 // ---------------------------------------------------------------------------
