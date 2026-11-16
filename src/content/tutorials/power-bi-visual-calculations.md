@@ -1,6 +1,6 @@
 ---
 title: "Power BI Visual Calculations: The Complete Guide (2026 GA)"
-description: "RUNNINGSUM, MOVINGAVERAGE and PREVIOUS run at the visual level, replacing dozens of measures. What they can and cannot do."
+description: "RUNNINGSUM, MOVINGAVERAGE and PREVIOUS run at the visual level, replacing many measures. What they can do, where they break, and when to use a measure."
 pubDate: 2026-08-01
 category: "dax"
 difficulty: "Intermediate"

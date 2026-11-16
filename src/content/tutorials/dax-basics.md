@@ -1,6 +1,6 @@
 ---
 title: "DAX Basics: What It Is and How It Works"
-description: "What DAX is, why measures and calculated columns are not interchangeable, and the five formulas to write on your first day."
+description: "What DAX is, why measures and calculated columns are not interchangeable, and the five formulas to write on your first day, with the rules behind each."
 pubDate: 2026-06-15
 updatedDate: 2026-07-20
 category: "dax"

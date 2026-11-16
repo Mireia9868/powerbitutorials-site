@@ -27,14 +27,16 @@ const {
   lang = SITE_LANG,
 } = Astro.props;
 
-// 品牌后缀只在加完之后仍然不超过 62 字符时才加。
-// Bing 的 Site Scan 报了 59 个页面 "Title too long" —— 根源是这里无条件追加
-// 21 字符，导致 74/76 篇文章都超长。品牌名不是搜索词，挤掉关键词不划算。
+// 品牌后缀只在加完之后仍然不超过 60 字符时才加。
+// 2026-10：Bing Site Scan 报 59 页 "Title too long"，根源是无条件追加 21 字符。
+// 2026-11-16：报告降到 28 页，但线上仍有 5 页标题是 61-62 字符；把上限从 62 收到 60，
+// 这几页自动去掉品牌后缀。品牌名不是搜索词，挤掉关键词不划算。
+// `npm run check:seo` 会在本地拦下任何超过 60 字符的最终标题。
 const BRAND_SUFFIX = " — Power BI Tutorials";
 const withSuffix = title ? `${title}${BRAND_SUFFIX}` : "";
 const pageTitle = !title
   ? SITE_TITLE
-  : (withSuffix.length <= 62 ? withSuffix : title);
+  : (withSuffix.length <= 60 ? withSuffix : title);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 const isHomepage = Astro.url.pathname === "/";

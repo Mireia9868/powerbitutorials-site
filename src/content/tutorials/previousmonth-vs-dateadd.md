@@ -1,5 +1,5 @@
 ---
-title: "PREVIOUSMONTH vs DATEADD in DAX: Why They Disagree on the 31st"
+title: "PREVIOUSMONTH vs DATEADD: Why They Disagree on the 31st"
 description: "Both look like 'last month' but return different date sets on the 31st. When each is correct, and how to check which one your model needs."
 pubDate: 2026-10-26
 updatedDate: 2026-11-10

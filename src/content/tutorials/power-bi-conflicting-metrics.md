@@ -1,6 +1,6 @@
 ---
 title: "Power BI Conflicting Metrics Error: Causes and Fixes"
-description: "Why Power BI refuses to render a visual with conflicting metrics, the four usual causes, and the step-by-step fix for each."
+description: "Why Power BI refuses to render a visual with conflicting metrics: four usual causes, step-by-step fixes for each, and how to prevent it in a new model."
 pubDate: 2026-10-15
 updatedDate: 2026-10-15
 category: "visualization"
