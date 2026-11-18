@@ -287,7 +287,10 @@ const I_WF_FROM = String.raw`          KEY=pbt2026indexnow7f3a9c2e5b8d1a4f6c0e3b
 const I_WF_TO = String.raw`          # key 从 src/consts.ts 读，这里不再另存一份
           KEY=$(python scripts/indexnow.py --print-key)
 `;
-replaceOnce(".github/workflows/indexnow.yml", I_WF_FROM, I_WF_TO);
+// .github/workflows/indexnow.yml is NOT patched here on purpose: a push that
+// creates or updates a file under .github/workflows/ needs the "workflows"
+// permission, which GITHUB_TOKEN does not have — the push would be rejected
+// after the guard already passed. That one line is changed by hand instead.
 
 // ---------------------------------------------------------------------------
 // 5. Every redirect target was written without a trailing slash. astro.config
