@@ -34,9 +34,13 @@ const {
 // `npm run check:seo` 会在本地拦下任何超过 60 字符的最终标题。
 const BRAND_SUFFIX = " — Power BI Tutorials";
 const withSuffix = title ? `${title}${BRAND_SUFFIX}` : "";
+// 2026-11: cap lowered from 60 to 55. 60 is "not over the limit", 55 is
+// "not truncated" — desktop SERP cuts around 580px. 22 pages measured >= 55
+// final characters, 5 of them exactly 60.
+const MAX_FINAL_TITLE = 55;
 const pageTitle = !title
   ? SITE_TITLE
-  : (withSuffix.length <= 60 ? withSuffix : title);
+  : (withSuffix.length <= MAX_FINAL_TITLE ? withSuffix : title);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 const isHomepage = Astro.url.pathname === "/";
