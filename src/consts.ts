@@ -185,8 +185,10 @@ export const PRODUCTS: Product[] = [
     kind: "Template",
     price: 39,
     landing: "/templates/finance-starter/",
-    checkoutUrl: "https://www.creem.io/product/prod_2LHa27X5bFbdUZA4F3KiWe",
-    ctaLabel: "Get the pack — $39",
+    // Finance Pack 的交付文件（5 个 CSV / 46 条度量 / theme.json / 模型规格）尚未做出来。
+    // 留空以保持「通知我」，等文件上传到 Creem 后再填链接并改 ctaLabel。
+    checkoutUrl: "",
+    ctaLabel: "See what is inside",
     blurb:
       "Star schema, 46 audited DAX measures and four finished P&L pages. Opens in Power BI Desktop and the numbers reconcile.",
     categories: ["data-modeling", "dax", "time-intelligence"],
