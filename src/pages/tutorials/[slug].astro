@@ -3,6 +3,8 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AdSlot from "../../components/AdSlot.astro";
 import TutorialCard from "../../components/TutorialCard.astro";
+import NewsletterSignup from "../../components/NewsletterSignup.astro";
+import RelatedProduct from "../../components/RelatedProduct.astro";
 import { CATEGORIES, SITE_URL } from "../../consts";
 
 export async function getStaticPaths() {
@@ -54,6 +56,41 @@ const updatedStr = tutorial.data.updatedDate?.toLocaleDateString("en-US", {
 const diffClass = tutorial.data.difficulty.toLowerCase();
 
 const tutorialUrl = new URL(`/tutorials/${tutorial.slug}`, Astro.site).href;
+
+// FAQPage schema: 58 articles already contain a "## FAQ" section but it was
+// never emitted as structured data. Note: Google tightened FAQ rich results
+// in 2023-08, so treat this as semantic markup rather than a CTR lever.
+function extractFaq(body: string): { q: string; a: string }[] {
+  const parts = body.split(/^##\s+FAQ\s*$/m);
+  if (parts.length < 2) return [];
+  const section = parts[1].split(/^##\s+/m)[0];
+  const items: { q: string; a: string }[] = [];
+  const re = /\*\*(.+?)\*\*\s*\n+([\s\S]*?)(?=\n\*\*|\n##|$)/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(section))) {
+    const q = m[1].trim();
+    const a = m[2]
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (q.endsWith("?") && a.length > 40) items.push({ q, a });
+  }
+  return items;
+}
+
+const faqItems = extractFaq(tutorial.body);
+const faqJsonLd = faqItems.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    }
+  : null;
+
 
 // JSON-LD: TechArticle (SEO + AdSense E-E-A-T)
 const jsonLd = {
@@ -124,6 +161,7 @@ const breadcrumbJsonLd = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+  {faqJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
 
   <article class="tutorial-article">
     <div class="tutorial-layout">
@@ -210,6 +248,10 @@ const breadcrumbJsonLd = {
             ))}
           </div>
         )}
+
+        <RelatedProduct category={tutorial.data.category} tags={tutorial.data.tags} />
+
+        <NewsletterSignup />
 
         <AdSlot label="Bottom of Article Ad" />
 
