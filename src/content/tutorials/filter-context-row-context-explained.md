@@ -1,5 +1,5 @@
 ---
-title: "Filter Context vs Row Context in DAX: The Core Mental Model"
+title: "Filter Context vs Row Context in DAX, Explained"
 description: "Two evaluation contexts govern every DAX result. How they differ, how they interact, and the mental model that predicts a formula's output."
 pubDate: 2026-07-12
 updatedDate: 2026-07-20

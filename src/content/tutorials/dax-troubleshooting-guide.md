@@ -1,5 +1,5 @@
 ---
-title: "DAX Troubleshooting Guide: Fix the 15 Most Common Errors"
+title: "DAX Troubleshooting Guide: 15 Errors and Fixes"
 description: "Fifteen DAX errors that look cryptic, from blank results to wrong totals to circular dependencies, with the exact fix for each."
 pubDate: 2026-07-20
 category: "dax"

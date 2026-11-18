@@ -1,30 +1,44 @@
 # AdSense low-value-content remediation — consolidate duplicate tutorials (301)
+#
+# Every target carries its trailing slash. astro.config.mjs sets
+# trailingSlash: "always", so a target written as /tutorials/foo answers
+# /tutorials/foo -> 308 -> /tutorials/foo/, i.e. two hops before the page
+# renders. The old .html rule pointed at the no-slash form, which stacked a
+# third hop on top. One hop is enough.
+#
 # P1 首批 3 对
-/tutorials/power-bi-drillthrough /tutorials/power-bi-drill-through 301
+/tutorials/power-bi-drillthrough /tutorials/power-bi-drill-through/ 301
 /tutorials/power-bi-drillthrough/ /tutorials/power-bi-drill-through/ 301
-/tutorials/dax-calculate-function /tutorials/calculate-function 301
+/tutorials/dax-calculate-function /tutorials/calculate-function/ 301
 /tutorials/dax-calculate-function/ /tutorials/calculate-function/ 301
-/tutorials/power-bi-sales-dashboard /tutorials/power-bi-sales-dashboard-tutorial 301
+/tutorials/power-bi-sales-dashboard /tutorials/power-bi-sales-dashboard-tutorial/ 301
 /tutorials/power-bi-sales-dashboard/ /tutorials/power-bi-sales-dashboard-tutorial/ 301
 # P1 余下集群（8 对）
-/tutorials/conditional-formatting-complete-guide /tutorials/conditional-formatting-power-bi 301
+/tutorials/conditional-formatting-complete-guide /tutorials/conditional-formatting-power-bi/ 301
 /tutorials/conditional-formatting-complete-guide/ /tutorials/conditional-formatting-power-bi/ 301
-/tutorials/copy-conditional-formatting-power-bi /tutorials/copy-conditional-formatting 301
+/tutorials/copy-conditional-formatting-power-bi /tutorials/copy-conditional-formatting/ 301
 /tutorials/copy-conditional-formatting-power-bi/ /tutorials/copy-conditional-formatting/ 301
-/tutorials/dax-variables-var /tutorials/dax-variables-guide 301
+/tutorials/dax-variables-var /tutorials/dax-variables-guide/ 301
 /tutorials/dax-variables-var/ /tutorials/dax-variables-guide/ 301
-/tutorials/dax-variables-best-practices /tutorials/dax-variables-guide 301
+/tutorials/dax-variables-best-practices /tutorials/dax-variables-guide/ 301
 /tutorials/dax-variables-best-practices/ /tutorials/dax-variables-guide/ 301
-/tutorials/star-schema-power-bi /tutorials/data-modeling-star-schema 301
+/tutorials/star-schema-power-bi /tutorials/data-modeling-star-schema/ 301
 /tutorials/star-schema-power-bi/ /tutorials/data-modeling-star-schema/ 301
-/tutorials/power-bi-star-schema /tutorials/data-modeling-star-schema 301
+/tutorials/power-bi-star-schema /tutorials/data-modeling-star-schema/ 301
 /tutorials/power-bi-star-schema/ /tutorials/data-modeling-star-schema/ 301
-/tutorials/power-bi-performance-analyzer-guide /tutorials/power-bi-performance-analyzer 301
+/tutorials/power-bi-performance-analyzer-guide /tutorials/power-bi-performance-analyzer/ 301
 /tutorials/power-bi-performance-analyzer-guide/ /tutorials/power-bi-performance-analyzer/ 301
-/tutorials/what-is-dax-power-bi /tutorials/dax-basics 301
+/tutorials/what-is-dax-power-bi /tutorials/dax-basics/ 301
 /tutorials/what-is-dax-power-bi/ /tutorials/dax-basics/ 301
 # P1 图表 4 篇（轻合并：bar+gauge 并入 charts 入口，line+kpi 保留独立）
-/tutorials/bar-chart-conditional-formatting /tutorials/conditional-formatting-charts-power-bi 301
+/tutorials/bar-chart-conditional-formatting /tutorials/conditional-formatting-charts-power-bi/ 301
 /tutorials/bar-chart-conditional-formatting/ /tutorials/conditional-formatting-charts-power-bi/ 301
-/tutorials/gauge-conditional-formatting /tutorials/conditional-formatting-charts-power-bi 301
+/tutorials/gauge-conditional-formatting /tutorials/conditional-formatting-charts-power-bi/ 301
 /tutorials/gauge-conditional-formatting/ /tutorials/conditional-formatting-charts-power-bi/ 301
+
+# 2026-11 GA4 cleanup: legacy URLs still receiving traffic but returning 404
+/tutorials/dax-storage-vs-formula-engine /tutorials/power-bi-performance-optimization/ 301
+/tutorials/dax-storage-vs-formula-engine/ /tutorials/power-bi-performance-optimization/ 301
+/tutorials/copy-conditional-formatting.html /tutorials/copy-conditional-formatting/ 301
+/privacy-policy /privacy/ 301
+/privacy-policy/ /privacy/ 301

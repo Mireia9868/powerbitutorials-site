@@ -31,12 +31,18 @@ const {
 // 2026-10：Bing Site Scan 报 59 页 "Title too long"，根源是无条件追加 21 字符。
 // 2026-11-16：报告降到 28 页，但线上仍有 5 页标题是 61-62 字符；把上限从 62 收到 60，
 // 这几页自动去掉品牌后缀。品牌名不是搜索词，挤掉关键词不划算。
-// `npm run check:seo` 会在本地拦下任何超过 60 字符的最终标题。
+// `npm run check:seo` 会在本地拦下任何超过 55 字符的最终标题。
 const BRAND_SUFFIX = " — Power BI Tutorials";
 const withSuffix = title ? `${title}${BRAND_SUFFIX}` : "";
+// 2026-11: cap lowered from 60 to 55. 60 is "not over the limit", 55 is
+// "not truncated" — desktop SERP cuts around 580px. Lowering the cap only
+// drops the 19-character brand suffix from titles of 37-55 characters; a
+// source title that is itself over 55 still renders over 55, so those get
+// rewritten rather than shortened. check-seo-meta.mjs enforces the same 55.
+const MAX_FINAL_TITLE = 55;
 const pageTitle = !title
   ? SITE_TITLE
-  : (withSuffix.length <= 60 ? withSuffix : title);
+  : (withSuffix.length <= MAX_FINAL_TITLE ? withSuffix : title);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 const isHomepage = Astro.url.pathname === "/";

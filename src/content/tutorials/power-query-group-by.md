@@ -1,5 +1,5 @@
 ---
-title: "Power Query Group By: Count, Sum & All Rows Without Formulas"
+title: "Power Query Group By: Count, Sum and All Rows"
 description: "Group rows by one or more columns without writing a formula: count, sum, average, min, max and All Rows. See the generated M and why totals look wrong."
 pubDate: 2026-07-26
 category: "power-query"

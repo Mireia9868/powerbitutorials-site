@@ -1,5 +1,5 @@
 ---
-title: "Power BI Visual Calculations: The Complete Guide (2026 GA)"
+title: "Power BI Visual Calculations: 2026 Complete Guide"
 description: "RUNNINGSUM, MOVINGAVERAGE and PREVIOUS run at the visual level, replacing many measures. What they can do, where they break, and when to use a measure."
 pubDate: 2026-08-01
 category: "dax"

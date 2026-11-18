@@ -1,5 +1,5 @@
 ---
-title: "Power BI Tooltips: From Basic Hover to Full Page Reports"
+title: "Power BI Tooltips: Hover Reports to Full Pages"
 description: "A default tooltip shows one value. A report page tooltip shows a mini-report on hover. How to build both, and three places they pay off."
 pubDate: 2026-07-20
 category: "visualization"

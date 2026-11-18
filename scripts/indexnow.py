@@ -14,8 +14,10 @@ Google 不参与，所以这不会影响 Google 的抓取节奏。
   python scripts/indexnow.py --url https://powerbitutorials.com/tutorials/x/
 
 注意：
-  · key 文件必须能从公网访问：https://powerbitutorials.com/<key>.txt
-    它在 public/ 下，构建后会出现在站点根目录。
+  · key 只在 src/consts.ts 的 INDEXNOW_KEY 里维护，文件名必须与它一致：
+    public/<KEY>.txt，构建后出现在站点根目录，公网地址
+    https://powerbitutorials.com/<KEY>.txt
+    --print-key 会打印当前值，workflow 用它拼校验地址，不再另存一份。
   · 只推新增或实质更新的 URL。全量反复推送会被引擎当噪音。
 """
 import argparse
@@ -31,7 +33,21 @@ REPO = Path(__file__).resolve().parent.parent
 CONTENT = REPO / "src" / "content" / "tutorials"
 SITE = "https://powerbitutorials.com"
 HOST = "powerbitutorials.com"
-KEY = "pbt2026indexnow7f3a9c2e5b8d1a4f6c0e3b7d"
+CONSTS = REPO / "src" / "consts.ts"
+
+
+def indexnow_key() -> str:
+    """key 只在 src/consts.ts 里维护一份。
+
+    脚本、workflow、前端各存一份的话，改一处忘一处就会变成
+    「key 文件能访问、请求里的 key 对不上」这种最难查的 403。
+    """
+    text = CONSTS.read_text(encoding="utf-8")
+    m = re.search(r'INDEXNOW_KEY\s*=\s*"([^"]*)"', text)
+    if not m or not m.group(1):
+        sys.exit("[x] src/consts.ts 里 INDEXNOW_KEY 为空，IndexNow 无法使用")
+    return m.group(1)
+
 ENDPOINT = "https://api.indexnow.org/indexnow"
 
 
@@ -66,10 +82,11 @@ def push(urls):
     if not urls:
         print("[i] 没有符合条件的 URL，跳过")
         return 0
+    key = indexnow_key()
     payload = {
         "host": HOST,
-        "key": KEY,
-        "keyLocation": f"{SITE}/{KEY}.txt",
+        "key": key,
+        "keyLocation": f"{SITE}/{key}.txt",
         "urlList": urls,
     }
     req = urllib.request.Request(
@@ -104,7 +121,16 @@ def main():
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--url", action="append", default=[])
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument(
+        "--print-key",
+        action="store_true",
+        help="打印 src/consts.ts 里的 INDEXNOW_KEY（workflow 用它校验 key 文件）",
+    )
     args = ap.parse_args()
+
+    if args.print_key:
+        print(indexnow_key())
+        return 0
 
     if args.url:
         urls = args.url

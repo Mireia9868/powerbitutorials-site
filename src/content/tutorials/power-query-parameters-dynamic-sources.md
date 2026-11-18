@@ -1,5 +1,5 @@
 ---
-title: "Power Query Parameters: Build Dynamic, Reusable Data Sources"
+title: "Power Query Parameters: Dynamic Data Sources"
 description: "Swap environments, date ranges or test data from a dropdown instead of editing M code. How to create parameters and pass them in."
 pubDate: 2026-07-18
 category: "power-query"
