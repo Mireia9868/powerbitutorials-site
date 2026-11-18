@@ -28,3 +28,10 @@
 /tutorials/bar-chart-conditional-formatting/ /tutorials/conditional-formatting-charts-power-bi/ 301
 /tutorials/gauge-conditional-formatting /tutorials/conditional-formatting-charts-power-bi 301
 /tutorials/gauge-conditional-formatting/ /tutorials/conditional-formatting-charts-power-bi/ 301
+
+# 2026-11 GA4 cleanup: legacy URLs still receiving traffic but returning 404
+/tutorials/dax-storage-vs-formula-engine /tutorials/power-bi-performance-optimization 301
+/tutorials/dax-storage-vs-formula-engine/ /tutorials/power-bi-performance-optimization/ 301
+/tutorials/copy-conditional-formatting.html /tutorials/copy-conditional-formatting 301
+/privacy-policy /privacy 301
+/privacy-policy/ /privacy/ 301
