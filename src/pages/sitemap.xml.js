@@ -15,6 +15,7 @@ export async function GET({ site }) {
     { loc: "/author/mireia/", priority: "0.5", changefreq: "monthly" },
     { loc: "/templates/", priority: "0.8", changefreq: "monthly" },
     { loc: "/templates/finance-starter/", priority: "0.9", changefreq: "monthly" },
+    { loc: "/resources/time-intelligence-starter/", priority: "0.9", changefreq: "monthly" },
     { loc: "/tools/", priority: "0.8", changefreq: "monthly" },
     { loc: "/tools/license-calculator/", priority: "0.7", changefreq: "monthly" },
     { loc: "/tools/dax-audit/", priority: "0.8", changefreq: "monthly" },
