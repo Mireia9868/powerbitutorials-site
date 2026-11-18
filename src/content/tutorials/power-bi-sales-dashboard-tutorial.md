@@ -1,5 +1,5 @@
 ---
-title: "Build a Sales Dashboard in Power BI: End-to-End Tutorial"
+title: "Build a Sales Dashboard in Power BI, End to End"
 description: "One project, end to end: import data, clean it in Power Query, model a star schema, write the measures, then design the dashboard and check the totals."
 pubDate: 2026-07-20
 category: "visualization"

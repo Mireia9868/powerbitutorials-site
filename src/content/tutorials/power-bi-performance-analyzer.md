@@ -1,5 +1,5 @@
 ---
-title: "Using Performance Analyzer to Find Slow Visuals in Power BI"
+title: "Performance Analyzer: Find Slow Visuals in Power BI"
 description: "Performance Analyzer is a pane inside Power BI Desktop that records what happens when a report page or a single visual renders."
 pubDate: 2026-10-03
 category: visualization

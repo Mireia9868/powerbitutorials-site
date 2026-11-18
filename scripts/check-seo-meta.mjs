@@ -4,13 +4,14 @@
  * Run: npm run check:seo
  *
  * Bing Webmaster Tools Site Scan flags these three issues page by page:
- *   - "Title too long"                -> final <title> > 60 chars (brand suffix included)
+ *   - "Title too long"                -> final <title> > 55 chars (brand suffix included)
  *   - "Meta description too short/long" -> outside 120-160 chars
  *   - "There are multiple <h1> tags"   -> >1 <h1> rendered on a page
  *
- * The writing target is title <=60 and description 130-155. These bounds are
- * slightly wider so the guard only fails on real regressions, not on a
- * five-character difference. Exits 1 on any violation.
+ * 60 is the hard limit; 55 is "not truncated" (desktop SERP cuts around
+ * 580px). The bound matches BaseLayout.MAX_FINAL_TITLE exactly, so this guard
+ * and the rendered <title> cannot drift apart. Description bounds are
+ * 120-160. Exits 1 on any violation.
  *
  * Dynamic pages (index.astro, tutorials/[slug].astro, category/[slug].astro)
  * pass their metadata as expressions. They are listed as skipped — their
@@ -126,4 +127,4 @@ if (violations.length) {
   for (const v of violations) console.log('  x ' + v);
   process.exit(1);
 }
-console.log('\nPASS — title <=60, description 120-160, no duplicate H1.');
+console.log('\nPASS — title <=55, description 120-160, no duplicate H1.');

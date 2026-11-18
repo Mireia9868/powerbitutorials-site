@@ -1,5 +1,5 @@
 ---
-title: "Power BI Drill Through: How to Set Up Fields and Filters"
+title: "Power BI Drill Through: Fields and Filters"
 description: "Set up drill through in Power BI: which fields to add, how filter passthrough works, cross-report drilling, and why the menu sometimes is not there."
 pubDate: 2026-07-23
 category: "visualization"

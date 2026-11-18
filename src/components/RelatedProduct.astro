@@ -18,9 +18,9 @@ const scored = PRODUCTS
   .sort((a, b) => b.score - a.score);
 
 const pick = scored[0]?.product;
-if (!pick) return null;
 ---
 
+{pick && (
 <aside class="rp-card">
   <div class="rp-body">
     <span class="rp-eyebrow">{pick.kind}</span>
@@ -31,6 +31,7 @@ if (!pick) return null;
     {pick.ctaLabel}
   </a>
 </aside>
+)}
 
 <script is:inline>
   document.addEventListener("click", function (e) {

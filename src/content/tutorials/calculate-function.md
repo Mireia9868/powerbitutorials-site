@@ -1,5 +1,5 @@
 ---
-title: "CALCULATE in Power BI: Syntax, Filter Context & 3 Patterns"
+title: "CALCULATE in Power BI: Syntax and Filter Context"
 description: "CALCULATE is the only DAX function that changes filter context. Follow its evaluation order, then apply three reusable patterns with formulas you can copy."
 pubDate: 2026-06-22
 updatedDate: 2026-07-20
