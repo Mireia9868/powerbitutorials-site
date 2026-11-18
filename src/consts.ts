@@ -149,6 +149,8 @@ export const SOCIAL_LINKS = {
 
 // ── 产品目录 ─────────────────────────────────────────────────────────
 // checkoutUrl 留空时，产品页显示「通知我」而非「购买」；填入 Creem 产品链接后自动切换为购买按钮。
+// 注意：Creem 账户当前处于 Test mode（未获批实时收款），下面的链接指向测试结账页。
+// 账户通过审核后需把这两个链接换成 Live mode 的产品链接。
 // categories 对应 src/content/config.ts 的 category 枚举，用于教程页自动匹配产品推荐。
 export type Product = {
   slug: string;
@@ -170,7 +172,7 @@ export const PRODUCTS: Product[] = [
     kind: "Measure pack",
     price: 29,
     landing: "/resources/time-intelligence-starter/",
-    checkoutUrl: "",
+    checkoutUrl: "https://www.creem.io/product/prod_6MWF9mi2WTSuvxlnNxSgwZ",
     ctaLabel: "Get the pack — $29",
     blurb:
       "A marked date table with fiscal-year support, 12 commented DAX measures, and the three bugs that make YTD return a plausible wrong number.",
@@ -183,8 +185,8 @@ export const PRODUCTS: Product[] = [
     kind: "Template",
     price: 39,
     landing: "/templates/finance-starter/",
-    checkoutUrl: "",
-    ctaLabel: "See what is inside",
+    checkoutUrl: "https://www.creem.io/product/prod_2LHa27X5bFbdUZA4F3KiWe",
+    ctaLabel: "Get the pack — $39",
     blurb:
       "Star schema, 46 audited DAX measures and four finished P&L pages. Opens in Power BI Desktop and the numbers reconcile.",
     categories: ["data-modeling", "dax", "time-intelligence"],
