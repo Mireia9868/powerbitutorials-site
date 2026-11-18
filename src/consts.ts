@@ -138,7 +138,7 @@ export const BING_SITE_VERIFICATION = "BA7D467EF6C750786111FDAD24C13442";
 // 格式: G-XXXXXXXXXX，留空则不渲染 GA4 脚本
 export const GA4_MEASUREMENT_ID = "G-GMYRVPSEHX";
 
-export const INDEXNOW_KEY = "";
+export const INDEXNOW_KEY = "pbt2026indexnow7f3a9c2e5b8d1a4f6c0e3b7d";
 
 // 社交 (可选)
 export const SOCIAL_LINKS = {
@@ -146,3 +146,48 @@ export const SOCIAL_LINKS = {
   twitter: "",
   rss: "/rss.xml",
 };
+
+// ── 产品目录 ─────────────────────────────────────────────────────────
+// checkoutUrl 留空时，产品页显示「通知我」而非「购买」；填入 Creem 产品链接后自动切换为购买按钮。
+// categories 对应 src/content/config.ts 的 category 枚举，用于教程页自动匹配产品推荐。
+export type Product = {
+  slug: string;
+  name: string;
+  kind: string;
+  price: number;
+  landing: string;
+  checkoutUrl: string;
+  ctaLabel: string;
+  blurb: string;
+  categories: string[];
+  tags: string[];
+};
+
+export const PRODUCTS: Product[] = [
+  {
+    slug: "time-intelligence-starter",
+    name: "Time Intelligence Starter Pack",
+    kind: "Measure pack",
+    price: 29,
+    landing: "/resources/time-intelligence-starter/",
+    checkoutUrl: "",
+    ctaLabel: "Get the pack — $29",
+    blurb:
+      "A marked date table with fiscal-year support, 12 commented DAX measures, and the three bugs that make YTD return a plausible wrong number.",
+    categories: ["time-intelligence", "dax"],
+    tags: ["date-table", "ytd", "yoy", "mtd", "fiscal-year", "sameperiodlastyear"],
+  },
+  {
+    slug: "finance-starter",
+    name: "Finance Starter Pack",
+    kind: "Template",
+    price: 39,
+    landing: "/templates/finance-starter/",
+    checkoutUrl: "",
+    ctaLabel: "See what is inside",
+    blurb:
+      "Star schema, 46 audited DAX measures and four finished P&L pages. Opens in Power BI Desktop and the numbers reconcile.",
+    categories: ["data-modeling", "dax", "time-intelligence"],
+    tags: ["finance", "p-and-l", "budget", "star-schema", "measures"],
+  },
+];
