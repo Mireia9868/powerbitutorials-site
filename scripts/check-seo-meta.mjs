@@ -22,7 +22,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BRAND_SUFFIX = ' — Power BI Tutorials';
-const MAX_TITLE = 60;
+const MAX_TITLE = 55; // matches BaseLayout.MAX_FINAL_TITLE
 const MIN_DESC = 120;
 const MAX_DESC = 160;
 
