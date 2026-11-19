@@ -12,6 +12,12 @@ featured: true
 
 If DAX has a "boss function," it's `CALCULATE`. Every advanced pattern — time intelligence, percentage-of-total, cohort analysis, rolling averages — depends on it. This guide explains why `CALCULATE` is special, how to use it correctly, and the subtle behaviors that cause 90% of intermediate DAX bugs. Microsoft documents every case in the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax).
 
+![Power BI formula bar showing the Paid Revenue measure, CALCULATE with a Status = Paid filter](/images/tutorials/calculate-function/01-measure-formula-bar.png)
+
+![Matrix visual with the Total Sales, Paid Revenue and Revenue SUMX by region](/images/tutorials/calculate-function/02-result-matrix.png)
+
+![Performance Analyzer timing the matrix visual in Power BI Desktop](/images/tutorials/calculate-function/03-performance-analyzer.png)
+
 ## Why CALCULATE matters
 
 DAX measures evaluate inside a **filter context** — the set of rows visible based on slicers, visual interactions, and model relationships. Most of the time that's exactly what you want. But sometimes you need to *override* or *extend* that context:

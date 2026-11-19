@@ -11,6 +11,12 @@ featured: false
 
 `SUM` and `SUMX` look almost identical, but they solve different problems. Pick the wrong one and your totals will be wrong — silently wrong, with no error message. This guide covers when to use each and the three scenarios where only an iterator works.
 
+![Power BI formula bar showing the Revenue SUMX measure, SUMX over Units times UnitPrice](/images/tutorials/sumx-vs-sum-iterators/01-measure-formula-bar.png)
+
+![Matrix visual with the Total Sales, Paid Revenue and Revenue SUMX by region](/images/tutorials/sumx-vs-sum-iterators/02-result-matrix.png)
+
+![Performance Analyzer timing the matrix visual in Power BI Desktop](/images/tutorials/sumx-vs-sum-iterators/03-performance-analyzer.png)
+
 ## The one-sentence difference
 
 - **`SUM(Column)`** adds up all the values in a single column.

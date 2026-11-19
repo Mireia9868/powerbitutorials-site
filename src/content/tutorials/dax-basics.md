@@ -12,6 +12,12 @@ featured: true
 
 If you've built a Power BI report and hit the wall where drag-and-drop visuals aren't enough, you've met the moment where DAX becomes essential. This guide covers the foundations every analyst needs before moving to advanced patterns — including the mistakes that trip up most beginners and a real scenario you can follow along with.
 
+![Power BI formula bar showing the Total Sales measure, SUM(Sales[Revenue])](/images/tutorials/dax-basics/01-measure-formula-bar.png)
+
+![Matrix visual with the Total Sales by region compared with Paid Revenue and Revenue SUMX](/images/tutorials/dax-basics/02-result-matrix.png)
+
+![Performance Analyzer timing the matrix visual in Power BI Desktop](/images/tutorials/dax-basics/03-performance-analyzer.png)
+
 ## What is DAX?
 
 DAX (Data Analysis Expressions) is the formula language behind Power BI, Power Pivot for Excel, and Analysis Services Tabular models. It looks similar to Excel formulas, but behaves very differently because it operates over **tables and columns** rather than cells.
