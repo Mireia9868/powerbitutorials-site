@@ -45,6 +45,8 @@ CALCULATE(
 - `expression` — the DAX formula to evaluate (usually a measure or aggregation).
 - `filterN` — optional filter arguments that modify the context before the expression runs.
 
+The three modifiers that change how those filters behave — `KEEPFILTERS`, `REMOVEFILTERS` and `ALLSELECTED` — are easy to confuse. The [DAX function reference](/tools/dax-functions/) lists them together with their exact syntax, so you can check the argument order before you paste.
+
 The evaluation order is critical and trips up most learners:
 
 1. The filter context from the visual is captured.
@@ -281,6 +283,8 @@ Before moving on, make sure you can:
 If yes, you've crossed the threshold from DAX beginner to intermediate. The next milestone is mastering time intelligence — which, as you've seen, is mostly `CALCULATE` with date-shifted filter arguments. See our [Time Intelligence Patterns](/tutorials/time-intelligence) guide and [DAX troubleshooting](/tutorials/dax-troubleshooting-guide) for common error fixes.
 
 ## Related Reading
+
+- [DAX function reference: syntax and examples for 64 functions](/tools/dax-functions/)
 
 - [PREVIOUSMONTH vs DATEADD: Why They Disagree on the 31st](/tutorials/previousmonth-vs-dateadd/)
 - [SUMMARIZE vs SUMMARIZECOLUMNS vs GROUPBY](/tutorials/summarize-vs-summarizecolumns/)

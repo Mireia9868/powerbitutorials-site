@@ -120,6 +120,8 @@ This is the power of filter context: **one measure, infinite views**.
 
 If you learn only one function deeply, make it `CALCULATE` — it's the gateway to every advanced pattern. See our dedicated [CALCULATE guide](/tutorials/calculate-function) for the deep dive.
 
+Every function in that table — plus about fifty more — is listed in the [DAX function reference](/tools/dax-functions/), with the exact argument list, a one-line explanation of what it actually does, and an example you can paste into a measure.
+
 ## Three common beginner mistakes (and how to fix them)
 
 ### 1. Referencing a column where a measure is needed
@@ -216,5 +218,7 @@ You now have the mental model: measures compute in filter context, calculated co
 Continue with [CALCULATE: The Most Important DAX Function](/tutorials/calculate-function) and [Time Intelligence Patterns](/tutorials/time-intelligence) to round out your foundation. If you hit a wall, our [DAX troubleshooting guide](/tutorials/dax-troubleshooting-guide) walks through the most common errors and their fixes.
 
 ## Related Reading
+
+- [DAX function reference: syntax and examples for 64 functions](/tools/dax-functions/)
 
 - [SUMMARIZE vs SUMMARIZECOLUMNS vs GROUPBY](/tutorials/summarize-vs-summarizecolumns/)

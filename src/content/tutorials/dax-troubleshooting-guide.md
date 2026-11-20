@@ -231,6 +231,8 @@ ColB = Sales[BaseValue]
 
 Power Query runs before the DAX engine and is immune to circular dependencies.
 
+When an error message names a function you do not know, look it up in the [DAX function reference](/tools/dax-functions/) before guessing at the fix — each entry shows the exact argument list, and most of them link to the tutorial that covers the surrounding pattern.
+
 ### 14. "Function X has been used in a True/False expression that is used as a table filter expression"
 
 **Cause:** Using a measure inside `FILTER` without proper context.
