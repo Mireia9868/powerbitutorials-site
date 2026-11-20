@@ -1,0 +1,119 @@
+---
+/**
+ * 嵌入专用外壳：没有站点导航、没有分析脚本、没有广告，
+ * 只有工具本身 + 一条删不掉的署名链接。
+ */
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  description?: string;
+  /** 宿主域名，来自 ?ref=，只用于 UTM 归因 */
+  host?: string;
+  toolHref: string;
+  toolName: string;
+}
+
+const {
+  title,
+  description = "",
+  host = "unknown",
+  toolHref,
+  toolName,
+} = Astro.props;
+
+const safeHost = /^[a-z0-9.-]+$/i.test(host) ? host : "unknown";
+const utm = `?utm_source=embed&utm_medium=widget&utm_campaign=${encodeURIComponent(safeHost)}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="stylesheet" href="/tools/tool.css" />
+    <style>
+      html, body { margin: 0; }
+      body { background: #fff; }
+      .embed-shell {
+        padding: 14px 16px 0;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .embed-credit {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 14px 16px;
+        padding-top: 10px;
+        border-top: 1px solid var(--t-border);
+        font-size: 12px;
+        color: var(--t-text-muted);
+        text-decoration: none;
+        font-family: var(--t-font-sans);
+      }
+      .embed-credit:hover { color: var(--t-text); }
+      .embed-credit .mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        background: var(--t-accent);
+        color: #1a1a1a;
+        font-weight: 800;
+        font-size: 10px;
+      }
+      .embed-credit b { font-weight: 700; color: var(--t-text); }
+      .embed-credit .arrow { margin-left: auto; opacity: .7; }
+      @media (max-width: 480px) {
+        .embed-shell { padding: 10px 12px 0; }
+      }
+    </style>
+  </head>
+  <body class="tool-page">
+    <div class="embed-shell">
+      <slot />
+    </div>
+    <a class="embed-credit" href={`https://powerbitutorials.com${toolHref}${utm}`} data-tool-href={toolHref} target="_blank" rel="noopener">
+      <span class="mark" aria-hidden="true">P</span>
+      <span>{toolName} · by <b>Power BI Tutorials</b></span>
+      <span class="arrow" aria-hidden="true">↗</span>
+    </a>
+    <script is:inline>
+      (function () {
+        var params = new URLSearchParams(location.search);
+        var id = params.get("id") || "pbt-default";
+
+        // ?ref= 只能在客户端读（静态构建拿不到查询参数），
+        // 所以署名链接的归因参数在这里补上。
+        var ref = params.get("ref");
+        var credit = document.querySelector(".embed-credit");
+        if (ref && credit) {
+          var href = credit.getAttribute("data-tool-href") || "/tools/";
+          credit.href =
+            "https://powerbitutorials.com" + href +
+            "?utm_source=embed&utm_medium=widget&utm_campaign=" + encodeURIComponent(ref);
+        }
+        function post() {
+          try {
+            parent.postMessage(
+              { type: "pbt:resize", id: id, height: document.documentElement.scrollHeight },
+              "*"
+            );
+          } catch (e) { /* not embedded */ }
+        }
+        window.addEventListener("load", post);
+        if (typeof ResizeObserver !== "undefined") {
+          new ResizeObserver(post).observe(document.body);
+        } else {
+          setInterval(post, 800);
+        }
+      })();
+    </script>
+  </body>
+</html>

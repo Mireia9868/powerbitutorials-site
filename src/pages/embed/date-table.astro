@@ -1,0 +1,95 @@
+---
+import EmbedLayout from "../../layouts/EmbedLayout.astro";
+
+const host = Astro.url.searchParams.get("ref") || "unknown";
+---
+
+<EmbedLayout
+  title="Power BI date table generator"
+  description="Generate a contiguous date table for Power BI in DAX or Power Query."
+  host={host}
+  toolHref="/tools/date-table/"
+  toolName="Date table generator"
+>
+  <div class="embed-tool">
+    <div class="field-grid">
+      <div class="field">
+        <label for="start-year">First year</label>
+        <input type="number" id="start-year" value="2023" min="1900" max="2100" step="1" />
+      </div>
+      <div class="field">
+        <label for="end-year">Last year</label>
+        <input type="number" id="end-year" value="2026" min="1900" max="2100" step="1" />
+      </div>
+      <div class="field">
+        <label for="week-start">Week starts on</label>
+        <select id="week-start">
+          <option value="monday" selected>Monday</option>
+          <option value="sunday">Sunday</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fiscal-start">Fiscal year starts in</label>
+        <select id="fiscal-start">
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4" selected>April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+      </div>
+      <div class="field wide" id="fiscal-naming-field">
+        <label for="fiscal-naming">Fiscal year is named by</label>
+        <select id="fiscal-naming">
+          <option value="end" selected>Its ending year</option>
+          <option value="start">Its starting year</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="checks">
+      <label><input type="checkbox" id="iso-week" checked /> ISO week numbers</label>
+      <label><input type="checkbox" id="fiscal-cols" checked /> Fiscal year</label>
+      <label><input type="checkbox" id="current-flags" /> “Is current” flags</label>
+    </div>
+
+    <div class="embed-tabs">
+      <button class="tab" data-target="dax" aria-selected="true" type="button">DAX</button>
+      <button class="tab" data-target="m" aria-selected="false" type="button">Power Query</button>
+      <span class="range" id="range-note"></span>
+    </div>
+
+    <pre class="code-output wrap" id="dax-out"></pre>
+    <pre class="code-output wrap" id="m-out" style="display:none"></pre>
+
+    <div class="toolbar">
+      <button class="btn" id="copy-dax" type="button">Copy DAX</button>
+      <button class="btn" id="copy-m" type="button">Copy Power Query</button>
+    </div>
+  </div>
+
+  <script is:inline src="/tools/date-table.js"></script>
+</EmbedLayout>
+
+<style>
+  .embed-tool { font-family: var(--t-font-sans); }
+  .field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; }
+  .field.wide { grid-column: 1 / -1; }
+  .checks { margin: 12px 0 10px; gap: 12px; }
+  .embed-tabs {
+    display: flex; align-items: center; gap: 4px; margin: 6px 0 8px;
+  }
+  .embed-tabs .range { margin-left: auto; font-size: 11.5px; color: var(--t-text-dim); }
+  .toolbar { display: flex; gap: 8px; margin-top: 10px; }
+  pre.code-output { max-height: 340px; min-height: 220px; }
+  @media (max-width: 520px) {
+    .field-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -16,6 +16,7 @@ export async function GET({ site }) {
     { loc: "/templates/", priority: "0.8", changefreq: "monthly" },
     { loc: "/templates/finance-starter/", priority: "0.9", changefreq: "monthly" },
     { loc: "/tools/", priority: "0.8", changefreq: "monthly" },
+    { loc: "/tools/embed/", priority: "0.4", changefreq: "yearly" },
     { loc: "/tools/license-calculator/", priority: "0.7", changefreq: "monthly" },
     { loc: "/tools/dax-audit/", priority: "0.8", changefreq: "monthly" },
     { loc: "/tools/dax-functions/", priority: "0.9", changefreq: "monthly" },
