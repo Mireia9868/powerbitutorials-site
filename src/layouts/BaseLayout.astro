@@ -317,6 +317,18 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           });
         });
       })();
+
+      // ---- 嵌入的 widget 自适应高度 ----
+      // 工具页会 postMessage({type:'pbt:resize', id, height})，这里把 iframe 撑到内容高度，
+      // 避免文章里固定高度把生成出来的代码截断。
+      window.addEventListener('message', function (e) {
+        if (e.origin !== 'https://powerbitutorials.com') return;
+        if (!e.data || e.data.type !== 'pbt:resize') return;
+        var frame = document.querySelector('iframe[data-pbt="' + e.data.id + '"]');
+        if (!frame) return;
+        var h = parseInt(e.data.height, 10);
+        if (h > 120 && h < 2400) frame.style.height = h + 'px';
+      });
     </script>
   </body>
 </html>

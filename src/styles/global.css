@@ -259,3 +259,35 @@ hr {
   padding: 12px 14px; overflow-x: auto; font-size: 12px; line-height: 1.6; margin: 0 0 10px;
 }
 .embed-cta .embed-note { font-size: 0.82rem; color: var(--c-text-dim); margin: 0; }
+
+/* Inline tool embed inside articles. */
+.tool-embed {
+  margin: 28px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  background: var(--c-bg-soft);
+}
+.tool-embed p { margin: 0 0 8px; font-size: 0.94rem; }
+.tool-embed summary {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--c-text);
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  list-style: none;
+}
+.tool-embed summary:hover { border-color: var(--c-accent); }
+.tool-embed summary::-webkit-details-marker { display: none; }
+.tool-embed summary::after { content: " ↓"; }
+.tool-embed details[open] summary::after { content: " ↑"; }
+.tool-embed iframe { display: block; margin-top: 12px; background: #fff; }
+@media (max-width: 640px) {
+  .tool-embed { padding: 14px 14px; }
+}
