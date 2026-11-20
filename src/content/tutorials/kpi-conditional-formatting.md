@@ -129,6 +129,8 @@ The underlying documentation for this feature is [Microsoft Conditional formatti
 
 ## Related Reading
 
+- [Conditional formatting generator: build the colour rule as a DAX measure](/tools/conditional-format-generator/)
+
 - [Conditional formatting in Power BI: the complete overview](/tutorials/conditional-formatting-power-bi/)
 - [Conditional formatting based on a measure](/tutorials/conditional-formatting-based-on-measure/)
 - [Conditional formatting for charts](/tutorials/conditional-formatting-charts-power-bi/)

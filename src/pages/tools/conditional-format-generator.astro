@@ -1,0 +1,481 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const guides = [
+  {
+    href: "/tutorials/conditional-formatting-power-bi/",
+    title: "Conditional formatting in Power BI",
+    note: "The starting point: rules, colour scales, and why a 200-cell matrix needs them.",
+  },
+  {
+    href: "/tutorials/conditional-formatting-based-on-measure/",
+    title: "Format by a measure",
+    note: "When the colour has to come from a calculation rather than a fixed threshold.",
+  },
+  {
+    href: "/tutorials/conditional-formatting-charts-power-bi/",
+    title: "Formatting charts and visuals",
+    note: "Which chart properties accept formatting, and which silently ignore it.",
+  },
+  {
+    href: "/tutorials/line-chart-conditional-formatting/",
+    title: "Line charts",
+    note: "Colour a line above or below target without splitting it into two series.",
+  },
+  {
+    href: "/tutorials/kpi-conditional-formatting/",
+    title: "KPI visuals",
+    note: "The KPI card renders one value per row — formatting rules behave differently here.",
+  },
+  {
+    href: "/tutorials/copy-conditional-formatting/",
+    title: "Copying formatting between visuals",
+    note: "Formatting is stored per visual, per field. The fastest ways to repeat it.",
+  },
+];
+
+const patterns = [
+  {
+    name: "Profit and loss",
+    code: `Variance Colour =
+VAR _v = [Variance]
+RETURN
+    IF ( _v < 0, "#C0392B", "#1E7B4F" )`,
+    note: "Negative is red, positive is green. Works on any currency measure.",
+  },
+  {
+    name: "Traffic light",
+    code: `Margin Colour =
+SWITCH (
+    TRUE (),
+    [Margin %] < 0, "#C0392B",
+    [Margin %] < 0.15, "#E0A80C",
+    "#1E7B4F"
+)`,
+    note: "Three bands. The thresholds live in the measure, so they are version-controlled with the model.",
+  },
+  {
+    name: "Above or below target",
+    code: `Target Colour =
+VAR _gap = [Actual] - [Target]
+RETURN
+    SWITCH (
+        TRUE (),
+        _gap >= 0, "#1E7B4F",
+        _gap > -0.1 * [Target], "#E0A80C",
+        "#C0392B"
+    )`,
+    note: "Tolerance is relative to the target, not a fixed number — survives scale changes.",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Power BI Conditional Formatting Generator",
+  url: "https://powerbitutorials.com/tools/conditional-format-generator/",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description:
+    "Generate the DAX colour measure for Power BI conditional formatting from a few thresholds, with the steps to apply it.",
+};
+---
+
+<BaseLayout
+  title="Conditional Formatting Generator"
+  description="Build the DAX colour rule for Power BI conditional formatting in a few clicks: pick thresholds, pick colours, copy the measure. Includes the steps to apply it and the six guides that explain it."
+>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/tools/tool.css" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="tool-page">
+    <div class="wrap">
+
+      <section class="hero">
+        <span class="eyebrow">Free tool · no signup</span>
+        <h1>Colour rules without writing the SWITCH by hand.</h1>
+        <p>
+          Pick your thresholds and colours, get the DAX measure Power BI expects
+          for <em>Format by: Field value</em> — plus the three clicks that apply
+          it. The measure is the right way to do this: the rule travels with the
+          model instead of living inside one visual's format pane.
+        </p>
+      </section>
+
+      <section class="layout">
+
+        <div class="panel">
+          <div class="panel-head"><span>Rule</span></div>
+          <div class="panel-body">
+            <div class="field-grid">
+              <div class="field wide">
+                <label for="measure">Measure or expression</label>
+                <input type="text" id="measure" value="[Margin %]" spellcheck="false" />
+                <span class="hint">Whatever the visual plots — a measure like <code>[Margin %]</code> or an expression.</span>
+              </div>
+
+              <div class="field">
+                <label for="name">Measure name</label>
+                <input type="text" id="name" value="Margin Colour" spellcheck="false" />
+              </div>
+
+              <div class="field">
+                <label for="mode">Bands</label>
+                <select id="mode">
+                  <option value="2">2 — one threshold</option>
+                  <option value="3" selected>3 — two thresholds</option>
+                  <option value="4">4 — three thresholds</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="direction">Bad side</label>
+                <select id="direction">
+                  <option value="low" selected>Low values are bad</option>
+                  <option value="high">High values are bad</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="bands" id="bands"></div>
+
+            <div class="checks">
+              <label><input type="checkbox" id="as-var" checked /> Use a VAR for the value</label>
+              <label><input type="checkbox" id="with-blank" /> Return blank for missing values</label>
+            </div>
+
+            <p class="note">
+              Thresholds are numeric literals. For percentages write the decimal
+              (<code>0.15</code> = 15%).
+            </p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <span>Measure</span>
+            <span class="spacer"></span>
+            <button class="btn" id="copy-btn" type="button">Copy</button>
+          </div>
+          <div class="panel-body">
+            <pre class="code-output wrap" id="output"></pre>
+            <div class="toolbar" style="margin-top:10px">
+              <button class="btn" id="preset-pl" type="button">P&amp;L preset</button>
+              <button class="btn" id="preset-tl" type="button">Traffic light</button>
+            </div>
+            <ol class="steps">
+              <li>Modelling → New measure → paste.</li>
+              <li>Select the visual → Format → Cell elements → <em>fx</em>.</li>
+              <li>Format style: <strong>Field value</strong> · apply to: <strong>Background</strong> (or Font).</li>
+              <li>Field: the measure you just created.</li>
+            </ol>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="cta">
+        <div>
+          <h3>Check the measure before you paste it</h3>
+          <p>
+            The <a href="/tools/dax-audit/">DAX linter</a> catches the usual
+            mistakes in colour measures: division without DIVIDE, nested IFs that
+            should be SWITCH, and hard-coded thresholds that should be variables.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="/tools/dax-audit/">Open the linter →</a>
+      </section>
+
+      <section class="block">
+        <h2>Three rules that cover most reports</h2>
+        <p>
+          Conditional formatting is not a colour-picker problem, it is a
+          <em>semantics</em> problem: decide what “good” means once, encode it in a
+          measure, and every visual that shows that number inherits the rule.
+        </p>
+
+        {patterns.map((p) => (
+          <div class="pattern">
+            <h3>{p.name}</h3>
+            <pre><code>{p.code}</code></pre>
+            <p>{p.note}</p>
+          </div>
+        ))}
+      </section>
+
+      <section class="block">
+        <h2>Why a measure instead of the format pane</h2>
+        <p>
+          Rules set directly in the format pane live inside one visual. Copy the
+          visual and they come along; build a new one and they don't. Worse, the
+          threshold is invisible to anyone reading the model — the next analyst
+          has to open every visual to find out what “red” meant.
+        </p>
+        <p>
+          A measure moves that decision into the model where it can be reviewed,
+          tested and changed in one place. The trade-off is one extra measure per
+          rule, which is cheap.
+        </p>
+      </section>
+
+      <section class="block">
+        <h2>All the conditional formatting guides</h2>
+        <div class="guide-grid">
+          {guides.map((g) => (
+            <a class="guide" href={g.href}>
+              <h3>{g.title}</h3>
+              <p>{g.note}</p>
+              <span>Read →</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="block faq">
+        <h2>Questions</h2>
+        <h3>How do I do this on a table instead of a matrix?</h3>
+        <p>
+          Same flow. In a table the <em>Cell elements</em> pane is under
+          Format → Cell elements; the field value applies per row automatically.
+        </p>
+        <h3>Why does my rule affect the total row?</h3>
+        <p>
+          Because the measure evaluates for the total too. Usually you want that;
+          if not, wrap the measure in <code>IF ( ISFILTERED ( … ), …, BLANK () )</code>
+          so totals stay unformatted.
+        </p>
+        <h3>Can I use a hex colour from my theme?</h3>
+        <p>
+          Yes — any <code>#RRGGBB</code> string works. Keep the palette to three or
+          four colours; a rule that needs six colours is usually a chart.
+        </p>
+        <h3>Does this work in Power BI Service?</h3>
+        <p>
+          Yes. The rule is a model measure, so it renders the same in Desktop and
+          in the Service, including mobile.
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var COLORS = ["#C0392B", "#E0A80C", "#1E7B4F", "#1F3A5F"];
+
+      var els = {
+        measure: document.getElementById("measure"),
+        name: document.getElementById("name"),
+        mode: document.getElementById("mode"),
+        direction: document.getElementById("direction"),
+        asVar: document.getElementById("as-var"),
+        withBlank: document.getElementById("with-blank"),
+        bands: document.getElementById("bands"),
+        output: document.getElementById("output"),
+        copy: document.getElementById("copy-btn"),
+      };
+      if (!els.output) return;
+
+      function bandFields(n) {
+        var defaults = [0, 0.15, 0.3];
+        var html = "";
+        for (var i = 0; i < n; i++) {
+          html +=
+            '<div class="band-row">' +
+            "<label>Threshold " + (i + 1) + "</label>" +
+            '<input type="number" step="any" class="thr" value="' + defaults[i] + '">' +
+            '<input type="color" class="clr" value="' + COLORS[i] + '">' +
+            "</div>";
+        }
+        html +=
+          '<div class="band-row final">' +
+          "<label>Everything else</label>" +
+          '<span class="final-swatch" style="background:' + COLORS[n] + '"></span>' +
+          '<span class="final-label">' + COLORS[n] + "</span>" +
+          "</div>";
+        els.bands.innerHTML = html;
+      }
+
+      function indent(lines, spaces) {
+        var pad = new Array(spaces + 1).join(" ");
+        return lines.map(function (l) { return l === "" ? "" : pad + l; });
+      }
+
+      function build() {
+        var measure = (els.measure.value || "").trim() || "[Value]";
+        var name = (els.name.value || "").trim() || "Colour";
+        var lowBad = els.direction.value !== "high";
+        var useVar = els.asVar.checked;
+        var guardBlank = els.withBlank.checked;
+
+        var thrs = Array.prototype.map.call(els.bands.querySelectorAll(".thr"), function (el) {
+          return parseFloat(el.value);
+        });
+        var clrs = Array.prototype.map.call(els.bands.querySelectorAll(".clr"), function (el) {
+          return el.value.toUpperCase();
+        });
+        var finalColor = COLORS[clrs.length];
+        var lastEl = els.bands.querySelector(".final .final-label");
+        if (lastEl) finalColor = lastEl.textContent.trim();
+
+        // 高值有害时，只需要把阈值反过来；颜色顺序不变
+        if (!lowBad) thrs.reverse();
+
+        var value = useVar ? "_v" : measure;
+        var op = lowBad ? " < " : " > ";
+
+        var sw = ["SWITCH (", "    TRUE (),"];
+        thrs.forEach(function (t, i) {
+          sw.push("    " + value + op + t + ', "' + clrs[i] + '",');
+        });
+        sw.push('    "' + finalColor + '"');
+        sw.push(")");
+
+        var body = sw;
+        if (guardBlank) {
+          var inner = indent(sw, 8);
+          body = ["IF (", "    ISBLANK ( " + value + " ),", "    BLANK (),"].concat(inner, [")"]);
+        }
+
+        var lines = [name + " ="];
+        if (useVar) {
+          lines.push("VAR _v = " + measure);
+          lines.push("RETURN");
+          body = indent(body, 4);
+        }
+        lines = lines.concat(body);
+
+        els.output.textContent = lines.join("\n");
+      }
+
+      function copy() {
+        var text = els.output.textContent;
+        function done() {
+          els.copy.textContent = "Copied";
+          setTimeout(function () { els.copy.textContent = "Copy"; }, 1400);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } else fallback();
+        function fallback() {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); done(); } catch (e) {}
+          document.body.removeChild(ta);
+        }
+      }
+
+      els.mode.addEventListener("change", function () {
+        bandFields(parseInt(els.mode.value, 10) - 1);
+        build();
+      });
+      document.addEventListener("input", function (e) {
+        if (e.target && (e.target.classList.contains("thr") || e.target.classList.contains("clr"))) build();
+      });
+      ["measure", "name", "direction", "as-var", "with-blank"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.addEventListener("input", build);
+          el.addEventListener("change", build);
+        }
+      });
+      els.copy.addEventListener("click", copy);
+
+      document.getElementById("preset-pl").addEventListener("click", function () {
+        els.mode.value = "2";
+        bandFields(1);
+        els.direction.value = "low";
+        els.bands.querySelectorAll(".thr")[0].value = "0";
+        els.bands.querySelectorAll(".clr")[0].value = "#C0392B";
+        build();
+      });
+      document.getElementById("preset-tl").addEventListener("click", function () {
+        els.mode.value = "3";
+        bandFields(2);
+        els.direction.value = "low";
+        var thrs = els.bands.querySelectorAll(".thr");
+        var clrs = els.bands.querySelectorAll(".clr");
+        thrs[0].value = "0";
+        thrs[1].value = "0.15";
+        clrs[0].value = "#C0392B";
+        clrs[1].value = "#E0A80C";
+        build();
+      });
+
+      bandFields(2);
+      build();
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .hero { padding: 30px 0 18px; }
+  .eyebrow {
+    display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--t-accent-dark);
+    background: var(--t-accent-soft); border: 1px solid var(--t-accent-border);
+    padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .hero h1 { font-size: clamp(26px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.03em; margin: 0 0 10px; }
+  .hero p { margin: 0; color: var(--t-text-muted); max-width: 780px; font-size: 15.5px; }
+
+  .bands { margin: 14px 0 6px; display: flex; flex-direction: column; gap: 8px; }
+  /* 这些行是 JS 生成的，Astro 的作用域选择器命不中，必须用 :global */
+  :global(.band-row) {
+    display: grid; grid-template-columns: 100px minmax(0, 1fr) 44px;
+    align-items: center; gap: 10px;
+  }
+  :global(.band-row label) { font-size: 12.5px; font-weight: 700; color: var(--t-text-muted); }
+  :global(.band-row input[type="number"]) {
+    width: 100%; padding: 7px 9px; border: 1px solid var(--t-border);
+    border-radius: 7px; font-family: inherit; font-size: 13.5px;
+  }
+  :global(.band-row input[type="color"]) {
+    width: 44px; height: 32px; border: 1px solid var(--t-border); border-radius: 6px;
+    padding: 2px; background: #fff; cursor: pointer;
+  }
+  :global(.band-row.final) { grid-template-columns: 100px 44px 1fr; }
+  :global(.band-row.final .final-swatch) {
+    width: 44px; height: 32px; border-radius: 6px; border: 1px solid var(--t-border);
+  }
+  :global(.final-label) { font-family: var(--t-font-mono); font-size: 12px; color: var(--t-text-dim); }
+
+  .steps { margin: 14px 0 0; padding-left: 18px; font-size: 12.8px; color: var(--t-text-muted); line-height: 1.8; }
+  .steps li { margin-bottom: 2px; }
+
+  .block { margin: 34px 0; max-width: 820px; }
+  .block h2 { font-size: 1.3rem; margin: 0 0 12px; letter-spacing: -0.01em; }
+  .block p { color: var(--t-text-muted); line-height: 1.75; font-size: 14.5px; margin: 0 0 12px; }
+
+  .pattern { border: 1px solid var(--t-border); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+  .pattern h3 { margin: 0 0 8px; font-size: 0.98rem; }
+  .pattern pre {
+    margin: 0 0 8px; background: #252423; color: #e8e6e3; border-radius: 6px;
+    padding: 10px 12px; overflow-x: auto; font-family: var(--t-font-mono);
+    font-size: 12.5px; line-height: 1.6; white-space: pre-wrap; word-break: break-word;
+  }
+  .pattern p { margin: 0; font-size: 13px; }
+
+  .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .guide {
+    display: block; border: 1px solid var(--t-border); border-radius: 10px;
+    padding: 14px 16px; text-decoration: none; color: inherit;
+  }
+  .guide:hover { border-color: var(--t-accent-border); text-decoration: none; }
+  .guide h3 { margin: 0 0 6px; font-size: 0.95rem; }
+  .guide p { margin: 0 0 8px; font-size: 13px; color: var(--t-text-muted); line-height: 1.55; }
+  .guide span { font-size: 12.5px; font-weight: 700; color: var(--t-accent-dark); }
+
+  .faq h3 { font-size: 1rem; margin: 20px 0 6px; }
+  .faq p { margin: 0; }
+
+  @media (max-width: 760px) {
+    .guide-grid { grid-template-columns: 1fr; }
+    .band-row label { width: 88px; }
+  }
+</style>

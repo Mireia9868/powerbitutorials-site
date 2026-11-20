@@ -298,4 +298,6 @@ Microsoft documents this feature in [its Conditional formatting in Power BI refe
 
 ## Related Reading
 
+- [Conditional formatting generator: build the colour rule as a DAX measure](/tools/conditional-format-generator/)
+
 - [Power BI Matrix Visual: Best Practices and Tips](/tutorials/power-bi-matrix-visual/)

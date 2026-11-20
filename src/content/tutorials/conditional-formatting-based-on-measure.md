@@ -158,6 +158,8 @@ There is no documented hard limit, but the format pane becomes unwieldy past a h
 
 ## Related Reading
 
+- [Conditional formatting generator: build the colour rule as a DAX measure](/tools/conditional-format-generator/)
+
 - [Conditional Formatting in Power BI: The Complete Guide](/tutorials/conditional-formatting-power-bi/)
 - [Conditional Formatting for Charts in Power BI](/tutorials/conditional-formatting-charts-power-bi/)
 - [How to Copy Conditional Formatting in Power BI](/tutorials/copy-conditional-formatting/)
