@@ -1,0 +1,41 @@
+name: Tool accuracy tests
+
+# 5 个工具页的计算回归测试。任何改动 public/tools/*.js 或工具页脚本的 PR
+# 都必须先过这一关，防止「页面能打开但算错」这类静默故障上线。
+# 2026-11-20 建立：起因是 dax-audit 的 CJK 列名 bug（SUM(销售[金额]) 被格式化为
+# SUM(销售 [金额])）在线上跑了 5 天无人发现 —— 没有任何测试覆盖计算逻辑。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "public/tools/**"
+      - "src/pages/tools/**"
+      - "src/data/dax-functions.ts"
+      - "tests/**"
+      - "package.json"
+  pull_request:
+    paths:
+      - "public/tools/**"
+      - "src/pages/tools/**"
+      - "src/data/dax-functions.ts"
+      - "tests/**"
+      - "package.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run tool accuracy tests
+        run: npm test

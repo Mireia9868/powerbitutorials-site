@@ -203,7 +203,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     // 勾了 Premium 之后「全 Pro」根本用不了，不该参与比价 ——
     // 否则计算器会推荐一个满足不了需求的方案。
-    const candidates = premium ? [allPpu, mixed] : [allPro, allPpu, mixed];
+    // 边界：creators=0 时 mixed 与 allPro 完全相同（没有 builder 需要 PPU），
+    // 此时宣称 "Mixed saves you $0 ... 0 builders on PPU" 是误导，直接推荐 All PPU。
+    const mixedIsTrivial = creators === 0;
+    const candidates = premium
+      ? (mixedIsTrivial ? [allPpu] : [allPpu, mixed])
+      : [allPro, allPpu, mixed];
     const cheapest = Math.min(...candidates);
 
     if (!premium && cheapest === allPro) {
