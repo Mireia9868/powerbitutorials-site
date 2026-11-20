@@ -243,3 +243,19 @@ hr {
   pre { font-size: 0.8rem; padding: 1em 1.1em; }
   .article-content { font-size: 0.98rem; }
 }
+
+/* Embed call-to-action shared by the tool pages. */
+.embed-cta {
+  margin: 40px 0 8px;
+  padding: 22px 24px;
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  background: var(--c-surface);
+}
+.embed-cta h2 { font-size: 1.1rem; margin: 0 0 8px; }
+.embed-cta p { color: var(--c-text-muted); font-size: 0.92rem; line-height: 1.65; margin: 0 0 12px; }
+.embed-cta pre {
+  background: #252423; color: #e8e6e3; border-radius: 8px;
+  padding: 12px 14px; overflow-x: auto; font-size: 12px; line-height: 1.6; margin: 0 0 10px;
+}
+.embed-cta .embed-note { font-size: 0.82rem; color: var(--c-text-dim); margin: 0; }

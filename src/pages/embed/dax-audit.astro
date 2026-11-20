@@ -1,0 +1,75 @@
+---
+import EmbedLayout from "../../layouts/EmbedLayout.astro";
+
+const host = Astro.url.searchParams.get("ref") || "unknown";
+---
+
+<EmbedLayout
+  title="Power BI DAX formatter and linter"
+  description="Format a DAX measure and see the patterns that quietly cost performance. Runs in the browser."
+  host={host}
+  toolHref="/tools/dax-audit/"
+  toolName="DAX formatter &amp; linter"
+>
+  <div class="embed-tool">
+    <div class="layout" aria-label="DAX formatter and linter">
+      <div class="panel">
+        <div class="panel-head">
+          <span>Your DAX</span>
+          <span class="spacer"></span>
+          <button class="btn btn-ghost" id="sample-btn" type="button">Example</button>
+          <button class="btn btn-ghost" id="clear-btn" type="button">Clear</button>
+        </div>
+        <div class="panel-body">
+          <textarea
+            class="code-input"
+            id="dax-input"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            aria-label="DAX code to format and check"
+            placeholder="Paste a DAX measure…"></textarea>
+          <div class="stats" id="stats"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel">
+          <div class="panel-head">
+            <span>Formatted</span>
+            <span class="spacer"></span>
+            <button class="btn" id="copy-btn" type="button">Copy</button>
+          </div>
+          <div class="panel-body">
+            <pre class="code-output empty" id="dax-output">// Your formatted DAX will appear here</pre>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:14px">
+          <div class="panel-head">
+            <span>Checks</span>
+            <span class="spacer"></span>
+            <span class="summary" id="summary">Waiting for input</span>
+          </div>
+          <div class="panel-body" id="issues"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline src="/tools/dax.js"></script>
+  <script is:inline src="/tools/dax-audit.js"></script>
+</EmbedLayout>
+
+<style is:global>
+  .embed-tool .layout { gap: 14px; }
+  .embed-tool .panel-body { padding: 12px; }
+  .embed-tool .code-input { min-height: 210px; }
+  .embed-tool .layout > .panel:first-child { position: sticky; top: 8px; }
+  .embed-tool .code-output { min-height: 0; max-height: 180px; }
+  .embed-tool #issues { max-height: 240px; overflow-y: auto; }
+  @media (max-width: 720px) {
+    .embed-tool .layout { grid-template-columns: 1fr; }
+    .embed-tool .code-input { min-height: 150px; }
+  }
+</style>

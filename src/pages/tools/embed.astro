@@ -15,7 +15,6 @@ const tools = [
     width: 960,
     height: 660,
     note: "Two-column on desktop, stacks below 720px.",
-    soon: true,
   },
   {
     name: "DAX linter",
@@ -23,7 +22,6 @@ const tools = [
     width: 1000,
     height: 720,
     note: "Taller: the editor needs room. Best embedded on a page of its own.",
-    soon: true,
   },
 ];
 
@@ -79,9 +77,9 @@ const resizeSnippet = `<script>
           <h2>{t.name}</h2>
           <p class="tool-note">
             {t.note} Recommended height {t.height}px, max width {t.width}px.
-            {t.soon && " Not embeddable yet — the route is being built."}
+
           </p>
-          {!t.soon && <pre><code>{snippet(t)}</code></pre>}
+          <pre><code>{snippet(t)}</code></pre>
         </section>
       ))}
 

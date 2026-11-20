@@ -36,6 +36,21 @@ const utm = `?utm_source=embed&utm_medium=widget&utm_campaign=${encodeURICompone
     {description && <meta name="description" content={description} />}
     <link rel="stylesheet" href="/tools/tool.css" />
     <style>
+      /* 嵌入外壳永远是浅色：宿主的暗色模式不能把文字变成白底白字 */
+      :root { color-scheme: light; }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --c-bg: #ffffff;
+          --c-bg-soft: #f8f7f2;
+          --c-bg-elevated: #ffffff;
+          --c-border: #e5e3d8;
+          --c-border-strong: #cfccbf;
+          --c-text: #1a1a1a;
+          --c-text-muted: #4a4a4a;
+          --c-text-dim: #8a8a8a;
+          --c-accent-dark: #8a6d00;
+        }
+      }
       html, body { margin: 0; }
       body { background: #fff; }
       .embed-shell {
