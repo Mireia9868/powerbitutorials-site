@@ -18,6 +18,7 @@ export async function GET({ site }) {
     { loc: "/tools/", priority: "0.8", changefreq: "monthly" },
     { loc: "/tools/license-calculator/", priority: "0.7", changefreq: "monthly" },
     { loc: "/tools/dax-audit/", priority: "0.8", changefreq: "monthly" },
+    { loc: "/tools/dax-functions/", priority: "0.9", changefreq: "monthly" },
     { loc: "/tools/date-table/", priority: "0.8", changefreq: "monthly" },
     { loc: "/contact/", priority: "0.5", changefreq: "monthly" },
     { loc: "/privacy/", priority: "0.3", changefreq: "yearly" },

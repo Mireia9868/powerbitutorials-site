@@ -1,0 +1,265 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { DAX_FUNCTIONS, CATEGORIES, FUNCTION_COUNT } from "../../data/dax-functions";
+
+const grouped = CATEGORIES.map((cat) => ({
+  cat,
+  items: DAX_FUNCTIONS.filter((f) => f.category === cat),
+})).filter((g) => g.items.length > 0);
+
+const anchors = (name: string) => name.toLowerCase().replace(/\./g, "-");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "DAX Function Reference",
+  url: "https://powerbitutorials.com/tools/dax-functions/",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description:
+    "A searchable reference for the DAX functions that matter in Power BI: syntax, a one-line explanation and a working example for each.",
+};
+---
+
+<BaseLayout
+  title="DAX Function Reference"
+  description="Searchable DAX function reference for Power BI: syntax, what each function actually does, and a working example. Includes CALCULATE, SUMX, FILTER, time intelligence and more."
+>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/tools/tool.css" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="tool-page">
+    <div class="wrap">
+
+      <section class="hero">
+        <span class="eyebrow">Reference · {FUNCTION_COUNT} functions</span>
+        <h1>DAX functions, without the 40-minute video.</h1>
+        <p>
+          Every function that shows up in real Power BI models, with the syntax
+          you can copy, a one-line explanation of what it actually does, and an
+          example that runs. No signup, no video, no “let’s first understand
+          filter context” for the eighth time.
+        </p>
+      </section>
+
+      <section class="search-bar">
+        <label class="visually-hidden" for="fn-search">Search a DAX function</label>
+        <input
+          id="fn-search"
+          type="search"
+          placeholder="Search: calculate, sumx, datesytd, divide…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <span class="count" id="fn-count" aria-live="polite">{FUNCTION_COUNT} functions</span>
+      </section>
+
+      <nav class="jump" aria-label="Categories">
+        {grouped.map((g) => (
+          <a href={`#cat-${anchors(g.cat)}`}>{g.cat} <span>{g.items.length}</span></a>
+        ))}
+      </nav>
+
+      <div id="fn-list">
+        {grouped.map((g) => (
+          <section class="group" id={`cat-${anchors(g.cat)}`}>
+            <h2>{g.cat}</h2>
+            {g.items.map((f) => (
+              <article class="fn" id={anchors(f.name)} data-search={`${f.name} ${f.summary} ${f.category}`.toLowerCase()}>
+                <header>
+                  <h3>{f.name}</h3>
+                  <code>{f.syntax}</code>
+                </header>
+                <p>{f.summary}</p>
+                <pre><code>{f.example}</code></pre>
+                {f.href && <a class="more" href={f.href}>Read the tutorial →</a>}
+              </article>
+            ))}
+          </section>
+        ))}
+      </div>
+
+      <p class="empty" id="fn-empty" hidden>No function matches that. Try “calculate”, “sum”, “date” or “text”.</p>
+
+      <section class="cta">
+        <div>
+          <h3>Paste a measure and check it</h3>
+          <p>
+            The <a href="/tools/dax-audit/">DAX formatter and linter</a> formats
+            your code and flags the patterns that quietly cost performance —
+            including several of the traps described above.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="/tools/dax-audit/">Open the linter →</a>
+      </section>
+
+      <section class="prose">
+        <h2>What DAX actually is</h2>
+        <p>
+          DAX (Data Analysis Expressions) is the formula language behind Power BI,
+          Power Pivot and Analysis Services Tabular. It looks like Excel and
+          behaves nothing like it: formulas run over tables and columns, not
+          cells, and the result depends on a <em>filter context</em> that changes
+          with every slicer, row and visual.
+        </p>
+        <p>
+          Almost everything difficult about DAX comes from two ideas. Filter
+          context is the set of filters applied before your formula evaluates.
+          Row context is the “current row” that exists inside calculated columns
+          and iterator functions such as <code>SUMX</code> and <code>FILTER</code>.
+          <code>CALCULATE</code> exists to convert one into the other — which is
+          why it is both the most useful and the most misunderstood function in
+          the language.
+        </p>
+        <p>
+          If you are learning, read in this order: measures versus calculated
+          columns, then filter and row context, then <code>CALCULATE</code>, then
+          time intelligence. Tuning a formula before you understand context is
+          guesswork, and the guess usually makes the report slower.
+        </p>
+
+        <h2>Frequently asked</h2>
+
+        <h3>What is the difference between SUM and SUMX?</h3>
+        <p>
+          <code>SUM</code> adds a single column and cannot do maths across
+          columns. <code>SUMX</code> evaluates an expression for every row and
+          then adds the results, so it is required for things like quantity ×
+          price. <code>SUMX</code> is also the slower of the two when the
+          expression could have been a column.
+        </p>
+
+        <h3>Why does my measure return the same value on every row?</h3>
+        <p>
+          Because it is not referencing anything that changes per row — usually a
+          calculated column written as a measure, or a measure that filters with
+          <code>ALL</code> when you meant <code>ALLSELECTED</code>. Check whether
+          the formula references a column of the visual’s table; if it does not,
+          the value will not vary.
+        </p>
+
+        <h3>Is CALCULATE always slower?</h3>
+        <p>
+          No. <code>CALCULATE</code> is how you express almost anything useful.
+          The cost comes from what you filter with: a boolean expression on a
+          column is cheap, <code>FILTER</code> over a large table is not.
+        </p>
+
+        <h3>Do I need a date table for time intelligence?</h3>
+        <p>
+          Yes, and it must be marked as a date table. Power BI’s automatic date
+          tables work until you add a second fact table or a fiscal calendar, at
+          which point the numbers drift without an error. There is a free
+          <a href="/tools/date-table/">date table generator</a> here.
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var input = document.getElementById("fn-search");
+      var count = document.getElementById("fn-count");
+      var empty = document.getElementById("fn-empty");
+      var items = Array.prototype.slice.call(document.querySelectorAll(".fn"));
+      var groups = Array.prototype.slice.call(document.querySelectorAll(".group"));
+      if (!input) return;
+
+      function apply() {
+        var q = input.value.trim().toLowerCase();
+        var shown = 0;
+        items.forEach(function (el) {
+          var hit = !q || el.getAttribute("data-search").indexOf(q) !== -1;
+          el.hidden = !hit;
+          if (hit) shown++;
+        });
+        groups.forEach(function (g) {
+          var any = g.querySelectorAll(".fn:not([hidden])").length > 0;
+          g.hidden = !any;
+        });
+        count.textContent = q ? shown + " of " + items.length : items.length + " functions";
+        empty.hidden = shown !== 0;
+      }
+
+      input.addEventListener("input", apply);
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .hero { padding: 30px 0 18px; }
+  .eyebrow {
+    display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--t-accent-dark);
+    background: var(--t-accent-soft); border: 1px solid var(--t-accent-border);
+    padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .hero h1 { font-size: clamp(26px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.03em; margin: 0 0 10px; }
+  .hero p { margin: 0; color: var(--t-text-muted); max-width: 760px; font-size: 15.5px; }
+
+  .search-bar {
+    display: flex; align-items: center; gap: 12px; margin: 18px 0 12px;
+    border: 1px solid var(--t-border); border-radius: 10px; padding: 8px 14px;
+    background: #fff; max-width: 720px;
+  }
+  .search-bar input {
+    flex: 1; border: 0; outline: none; font-size: 15px; font-family: inherit;
+    background: transparent; color: var(--t-text); padding: 6px 0;
+  }
+  .count { font-size: 12px; color: var(--t-text-dim); white-space: nowrap; }
+
+  .jump { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+  .jump a {
+    font-size: 12.5px; font-weight: 600; padding: 5px 10px; border-radius: 999px;
+    border: 1px solid var(--t-border); color: var(--t-text-muted); text-decoration: none;
+  }
+  .jump a:hover { border-color: var(--t-accent-border); color: var(--t-text); text-decoration: none; }
+  .jump a span { color: var(--t-text-dim); font-weight: 500; }
+
+  .group { margin-bottom: 34px; }
+  .group h2 { font-size: 1.15rem; margin: 0 0 12px; letter-spacing: -0.01em; }
+
+  .fn {
+    border: 1px solid var(--t-border); border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 10px; background: #fff;
+  }
+  .fn header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .fn h3 { margin: 0; font-size: 1rem; font-family: var(--t-font-mono); letter-spacing: -0.01em; }
+  .fn header code {
+    font-family: var(--t-font-mono); font-size: 12.5px; color: var(--t-accent-dark);
+    background: var(--t-accent-soft); padding: 2px 8px; border-radius: 5px;
+  }
+  .fn p { margin: 0 0 10px; font-size: 14px; color: var(--t-text-muted); line-height: 1.65; }
+  .fn pre {
+    margin: 0; background: #252423; color: #e8e6e3; border-radius: 6px;
+    padding: 9px 12px; font-family: var(--t-font-mono); font-size: 12.5px;
+    overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+  }
+  .fn .more { display: inline-block; margin-top: 8px; font-size: 12.5px; font-weight: 600; color: var(--t-accent-dark); }
+
+  .empty { color: var(--t-text-dim); font-size: 14px; padding: 18px 0; }
+
+  .cta {
+    border: 1px solid var(--t-border); background: linear-gradient(180deg, #fffdf4, #fff);
+    border-radius: 12px; padding: 18px 20px; display: flex; gap: 16px;
+    align-items: center; flex-wrap: wrap; margin: 26px 0 34px;
+  }
+  .cta h3 { margin: 0 0 4px; font-size: 16px; }
+  .cta p { margin: 0; font-size: 13.5px; color: var(--t-text-muted); max-width: 560px; }
+  .cta .btn { margin-left: auto; }
+
+  .prose { max-width: 780px; }
+  .prose h2 { font-size: 1.3rem; margin: 30px 0 10px; letter-spacing: -0.01em; }
+  .prose h3 { font-size: 1rem; margin: 20px 0 6px; }
+  .prose p { color: var(--t-text-muted); line-height: 1.75; font-size: 14.5px; margin: 0 0 12px; }
+
+  @media (max-width: 760px) {
+    .fn header { gap: 6px; }
+    .fn header code { font-size: 11.5px; }
+    .cta .btn { margin-left: 0; }
+  }
+</style>
