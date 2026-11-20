@@ -12,6 +12,14 @@ const jsonLd = {
   description:
     "Generates a Power BI date table in DAX or Power Query M with fiscal year, ISO week and sortable month columns.",
 };
+const embedSnippet = `<iframe
+  src="https://powerbitutorials.com/embed/date-table/?ref=YOURSITE"
+  width="100%" height="640"
+  style="border:1px solid #e5e3d8;border-radius:10px;max-width:960px"
+  loading="lazy"
+  title="Power BI date table generator by Power BI Tutorials">
+</iframe>`;
+
 ---
 
 <BaseLayout
@@ -194,6 +202,23 @@ const jsonLd = {
             deliberately.
           </p>
         </details>
+      </section>
+
+      <section class="embed-cta">
+        <h2>Embed this tool</h2>
+        <p>
+          Free to embed on a course page, a blog post or an internal wiki. Keep
+          the attribution bar visible — it is the only thing we ask for. The
+          widget runs entirely in the visitor’s browser; nothing is sent to us.
+        </p>
+        <pre><code>{embedSnippet}</code></pre>
+        <p class="embed-note">
+          Replace <code>YOURSITE</code> with your domain so we can tell where
+          embeds come from. Height 640px fits the default layout; add the
+          <code>pbt:resize</code> listener from the
+          <a href="/tools/embed/">embed docs</a> if you want it to grow with the
+          content.
+        </p>
       </section>
 
     </div>

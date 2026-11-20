@@ -243,3 +243,91 @@ hr {
   pre { font-size: 0.8rem; padding: 1em 1.1em; }
   .article-content { font-size: 0.98rem; }
 }
+
+/* Embed call-to-action shared by the tool pages. */
+.embed-cta {
+  margin: 40px 0 8px;
+  padding: 22px 24px;
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  background: var(--c-surface);
+}
+.embed-cta h2 { font-size: 1.1rem; margin: 0 0 8px; }
+.embed-cta p { color: var(--c-text-muted); font-size: 0.92rem; line-height: 1.65; margin: 0 0 12px; }
+.embed-cta pre {
+  background: #252423; color: #e8e6e3; border-radius: 8px;
+  padding: 12px 14px; overflow-x: auto; font-size: 12px; line-height: 1.6; margin: 0 0 10px;
+}
+.embed-cta .embed-note { font-size: 0.82rem; color: var(--c-text-dim); margin: 0; }
+
+/* Inline tool embed inside articles. */
+.tool-embed {
+  margin: 28px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  background: var(--c-bg-soft);
+}
+.tool-embed p { margin: 0 0 8px; font-size: 0.94rem; }
+.tool-embed summary {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--c-text);
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  list-style: none;
+}
+.tool-embed summary:hover { border-color: var(--c-accent); }
+.tool-embed summary::-webkit-details-marker { display: none; }
+.tool-embed summary::after { content: " ↓"; }
+.tool-embed details[open] summary::after { content: " ↑"; }
+.tool-embed iframe { display: block; margin-top: 12px; background: #fff; }
+@media (max-width: 640px) {
+  .tool-embed { padding: 14px 14px; }
+}
+
+/* ── 文章正文配图 ─────────────────────────────────────────────────
+   markdown 里直接写的 ![alt](src) 会渲染成裸 <img>；需要图注的配图用
+   <figure><img …><figcaption>…</figcaption></figure>。
+   两者共用同一套边框/圆角，图注统一为小一号的次要色说明文字。 */
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  margin: 1.5em 0;
+}
+
+.article-content figure {
+  margin: 1.75em 0;
+}
+
+.article-content figure img {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+.article-content figcaption {
+  margin-top: 0.55em;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--c-text-dim);
+}
+
+.article-content figcaption code {
+  font-size: 0.95em;
+  padding: 0.08em 0.3em;
+  background: var(--c-bg-elevated);
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .article-content figcaption { font-size: 0.78rem; }
+}

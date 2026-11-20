@@ -3,7 +3,11 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AdSlot from "../../components/AdSlot.astro";
 import TutorialCard from "../../components/TutorialCard.astro";
-import { CATEGORIES, SITE_URL } from "../../consts";
+import { CATEGORIES, SITE_URL, ADSENSE_SLOTS } from "../../consts";
+import { isValidAdSlot } from "../../lib/ads";
+
+// 侧边栏广告位没配好就不渲染这一列，版面按两栏居中，不留空白沟。
+const showSidebarAd = isValidAdSlot(ADSENSE_SLOTS.sidebar);
 
 export async function getStaticPaths() {
   const tutorials = await getCollection("tutorials", ({ data }) => !data.draft);
@@ -126,7 +130,7 @@ const breadcrumbJsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
 
   <article class="tutorial-article">
-    <div class="tutorial-layout">
+    <div class={`tutorial-layout${showSidebarAd ? " has-ad" : ""}`}>
       <!-- Left: TOC -->
       <aside class="toc-sidebar" aria-label="Table of contents">
         <div class="toc-inner">
@@ -195,7 +199,7 @@ const breadcrumbJsonLd = {
           </div>
         </header>
 
-        <AdSlot label="Top of Article Ad" />
+        <AdSlot slot={ADSENSE_SLOTS.articleTop} label="Top of Article Ad" />
 
         <!-- Content -->
         <div class="article-content">
@@ -211,7 +215,7 @@ const breadcrumbJsonLd = {
           </div>
         )}
 
-        <AdSlot label="Bottom of Article Ad" />
+        <AdSlot slot={ADSENSE_SLOTS.articleBottom} label="Bottom of Article Ad" />
 
         <!-- Share -->
         <div class="share-row">
@@ -238,9 +242,11 @@ const breadcrumbJsonLd = {
       </div>
 
       <!-- Right: Ad sidebar -->
-      <aside class="ad-sidebar" aria-label="Sponsored">
-        <AdSlot label="Sidebar Ad" />
-      </aside>
+      {showSidebarAd && (
+        <aside class="ad-sidebar" aria-label="Sponsored">
+          <AdSlot slot={ADSENSE_SLOTS.sidebar} label="Sidebar Ad" />
+        </aside>
+      )}
     </div>
   </article>
 
@@ -261,11 +267,17 @@ const breadcrumbJsonLd = {
   .tutorial-article { padding: 32px 0 0; }
   .tutorial-layout {
     display: grid;
-    grid-template-columns: 200px minmax(0, 1fr) 200px;
+    /* 没有侧边栏广告时两栏居中，正文宽度保持在 ~720px，不拉成一条长行 */
+    grid-template-columns: 200px minmax(0, 720px);
+    justify-content: center;
     gap: 40px;
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 24px;
+  }
+  .tutorial-layout.has-ad {
+    grid-template-columns: 200px minmax(0, 1fr) 200px;
+    justify-content: stretch;
   }
 
   /* TOC */
@@ -376,10 +388,7 @@ const breadcrumbJsonLd = {
     border-top: none;
     padding-top: 0;
   }
-  .article-content :global(img) {
-    border: 1px solid var(--c-border);
-    margin: 1.5em 0;
-  }
+  /* 配图样式统一在 global.css 的 .article-content 上维护 */
   .article-content :global(blockquote) {
     margin: 1.5em 0;
   }
@@ -469,7 +478,8 @@ const breadcrumbJsonLd = {
   }
 
   @media (max-width: 1100px) {
-    .tutorial-layout { grid-template-columns: minmax(0, 1fr); }
+    .tutorial-layout,
+    .tutorial-layout.has-ad { grid-template-columns: minmax(0, 1fr); }
     .toc-sidebar, .ad-sidebar { display: none; }
     .related-grid { grid-template-columns: repeat(2, 1fr); }
   }

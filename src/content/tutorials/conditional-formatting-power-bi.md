@@ -159,6 +159,17 @@ RETURN
 
 Apply a three-color scale to this index with green at 2, yellow at 1, red at 0.
 
+<div class="tool-embed">
+  <p><strong>Skip the manual SWITCH.</strong> Pick your thresholds and colours; the generator writes the measure and shows the three clicks that apply it.</p>
+  <details>
+    <summary>Open the conditional formatting generator</summary>
+    <iframe data-pbt="pbt-default" src="https://powerbitutorials.com/embed/conditional-format-generator/?ref=powerbitutorials.com"
+      width="100%" height="660" loading="lazy"
+      style="border:1px solid #e5e3d8;border-radius:10px;max-width:960px"
+      title="Power BI conditional formatting generator"></iframe>
+  </details>
+</div>
+
 ## Conditional formatting based on a formula
 
 When you don't need a full DAX measure, the **Rules** option lets you build conditional formatting directly from the field value. This is the fastest route for one-off formatting and for non-numeric logic.
@@ -297,5 +308,7 @@ Partially. Charts use "Data colors" conditional formatting rather than cell rule
 Microsoft documents this feature in [its Conditional formatting in Power BI reference](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-conditional-table-formatting).
 
 ## Related Reading
+
+- [Conditional formatting generator: build the colour rule as a DAX measure](/tools/conditional-format-generator/)
 
 - [Power BI Matrix Visual: Best Practices and Tips](/tutorials/power-bi-matrix-visual/)

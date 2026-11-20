@@ -154,6 +154,8 @@ Behaviour described here follows [Microsoft's Conditional formatting in Power BI
 
 ## Related Reading
 
+- [Conditional formatting generator: build the colour rule as a DAX measure](/tools/conditional-format-generator/)
+
 - [Conditional formatting in Power BI: the complete guide](/tutorials/conditional-formatting-power-bi/)
 - [Conditional formatting based on a measure](/tutorials/conditional-formatting-based-on-measure/)
 - [Bar chart conditional formatting](/tutorials/conditional-formatting-charts-power-bi/)

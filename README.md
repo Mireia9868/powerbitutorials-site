@@ -201,8 +201,18 @@ Update `site` in `astro.config.mjs` and `SITE_URL` in `src/consts.ts` to your do
    ```
    google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
    ```
-4. (Optional) Create ad units in AdSense dashboard and set `slot` IDs in `<AdSlot />` components
-5. Redeploy — ads appear automatically (AdSlot renders placeholders until configured)
+4. Create ad units in the AdSense dashboard and put their 10-digit IDs in `src/consts.ts`:
+   ```ts
+   export const ADSENSE_SLOTS = {
+     articleTop: "1234567890",
+     articleBottom: "",
+     sidebar: "",
+   };
+   ```
+   Fill in one at a time. Any slot left empty (or set to the old `0000000000` placeholder) is not
+   rendered at all — no empty `<ins>`, no blank gap in the article — and the page falls back to the
+   two-column, centered layout when the sidebar slot is empty.
+5. Redeploy — ads appear in the configured positions.
 
 Ad slots are already placed in the tutorial detail template: top of article, bottom of article, sidebar. Adjust positions in `src/pages/tutorials/[slug].astro`.
 

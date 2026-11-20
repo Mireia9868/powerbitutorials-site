@@ -106,6 +106,14 @@ export const DIFFICULTY_LEVELS = ["Beginner", "Intermediate", "Advanced"];
 // AdSense 当前未启用（空值则不渲染任何 AdSense 广告脚本）；此前因站点被 AdSense 标记为低价值内容而暂停，恢复前需先解决内容合规问题
 export const ADSENSE_CLIENT = "ca-pub-2269516311541291";
 
+// AdSense — 广告单元 ID（10 位数字，AdSense 后台 → 广告 → 按广告单元 → 获取代码）
+// 留空就不渲染该位置的广告单元，页面也不会留下空白占位；拿到一个填一个，不必同时上线。
+export const ADSENSE_SLOTS = {
+  articleTop: "", // 文章正文上方
+  articleBottom: "", // 文章正文下方
+  sidebar: "", // 文章页侧边栏
+};
+
 // 邮件订阅 —— 唯一的配置点
 // ---------------------------------------------------------------------------
 // 现状：Buttondown 免费档（100 订阅，无 Automation，Automation 要 +$29/月）。
@@ -131,14 +139,14 @@ export const GOOGLE_SITE_VERIFICATION = "RhRJDyl7Kr3qeHJGS9OgURTXvuGgzgcbYkDk47W
 // 留空则不渲染 bing 验证 meta tag
 export const BING_SITE_VERIFICATION = "BA7D467EF6C750786111FDAD24C13442";
 
-// IndexNow 密钥 — 用于 Bing/Yandex 即时索引通知
-// 生成方式: 生成一个随机字符串，放到 public/indexnow-key.txt
-// 留空则不启用 IndexNow 自动提交
 // Google Analytics 4 — Measurement ID
 // 格式: G-XXXXXXXXXX，留空则不渲染 GA4 脚本
 export const GA4_MEASUREMENT_ID = "G-GMYRVPSEHX";
 
-export const INDEXNOW_KEY = "";
+// IndexNow 的密钥不在这里配置 —— 它只是一个放在 public/ 下的静态文件
+// （public/<key>.txt）加 scripts/indexnow.py 里的常量，构建产物里不需要任何代码。
+// 这里原来有一个恒为空的 INDEXNOW_KEY，没有任何地方引用，已删除，避免误以为
+// 填上它就会自动提交。
 
 // 社交 (可选)
 export const SOCIAL_LINKS = {

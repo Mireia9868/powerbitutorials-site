@@ -12,12 +12,6 @@ featured: true
 
 If you've built a Power BI report and hit the wall where drag-and-drop visuals aren't enough, you've met the moment where DAX becomes essential. This guide covers the foundations every analyst needs before moving to advanced patterns — including the mistakes that trip up most beginners and a real scenario you can follow along with.
 
-![Power BI formula bar showing the Total Sales measure, SUM(Sales[Revenue])](/images/tutorials/dax-basics/01-measure-formula-bar.png)
-
-![Matrix visual with the Total Sales by region compared with Paid Revenue and Revenue SUMX](/images/tutorials/dax-basics/02-result-matrix.png)
-
-![Performance Analyzer timing the matrix visual in Power BI Desktop](/images/tutorials/dax-basics/03-performance-analyzer.png)
-
 ## What is DAX?
 
 DAX (Data Analysis Expressions) is the formula language behind Power BI, Power Pivot for Excel, and Analysis Services Tabular models. It looks similar to Excel formulas, but behaves very differently because it operates over **tables and columns** rather than cells.
@@ -59,6 +53,11 @@ Let's walk through a realistic example. Assume a `Sales` table with columns `Rev
 ```dax
 Total Revenue = SUM(Sales[Revenue])
 ```
+
+<figure>
+  <img src="/images/tutorials/dax-basics/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the measure definition, with a matrix on the canvas evaluating it per region" loading="lazy" width="920" height="345" />
+  <figcaption>The measure lives in the formula bar, once. The matrix on the canvas evaluates it per region — one formula, a different number in every row, plus the grand total. (The sample file in this screenshot calls it <code>Total Sales</code>; it is the same <code>SUM(Sales[Revenue])</code> you just wrote.)</figcaption>
+</figure>
 
 **Total Quantity:**
 
@@ -119,6 +118,8 @@ This is the power of filter context: **one measure, infinite views**.
 | Error handling | `IFERROR`, `ISBLANK`, `COALESCE` | Graceful handling of missing data |
 
 If you learn only one function deeply, make it `CALCULATE` — it's the gateway to every advanced pattern. See our dedicated [CALCULATE guide](/tutorials/calculate-function) for the deep dive.
+
+Every function in that table — plus about fifty more — is listed in the [DAX function reference](/tools/dax-functions/), with the exact argument list, a one-line explanation of what it actually does, and an example you can paste into a measure.
 
 ## Three common beginner mistakes (and how to fix them)
 
@@ -186,6 +187,11 @@ The `_` prefix marks these as internal — delete them once the final measure wo
 
 4. **Test in a matrix, not a card.** A card shows one number with no context. A matrix grouped by a dimension lets you see if the measure works correctly per row and if the grand total matches.
 
+<figure>
+  <img src="/images/tutorials/dax-basics/02-result-matrix.png" alt="Matrix visual grouped by region showing Total Sales, Paid Revenue and Revenue SUMX with a total row" loading="lazy" width="920" height="345" />
+  <figcaption>Grouped by region, each row of the matrix is its own filter context and the <code>Total</code> row is the unfiltered value. If the total is right but one row is wrong, the bug is in the row-level logic — something a card would never show you.</figcaption>
+</figure>
+
 ## Performance tips for larger models
 
 - **Prefer measures over calculated columns** — measures compute on demand and don't bloat file size
@@ -216,5 +222,7 @@ You now have the mental model: measures compute in filter context, calculated co
 Continue with [CALCULATE: The Most Important DAX Function](/tutorials/calculate-function) and [Time Intelligence Patterns](/tutorials/time-intelligence) to round out your foundation. If you hit a wall, our [DAX troubleshooting guide](/tutorials/dax-troubleshooting-guide) walks through the most common errors and their fixes.
 
 ## Related Reading
+
+- [DAX function reference: syntax and examples for 64 functions](/tools/dax-functions/)
 
 - [SUMMARIZE vs SUMMARIZECOLUMNS vs GROUPBY](/tutorials/summarize-vs-summarizecolumns/)

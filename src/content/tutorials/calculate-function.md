@@ -12,12 +12,6 @@ featured: true
 
 If DAX has a "boss function," it's `CALCULATE`. Every advanced pattern — time intelligence, percentage-of-total, cohort analysis, rolling averages — depends on it. This guide explains why `CALCULATE` is special, how to use it correctly, and the subtle behaviors that cause 90% of intermediate DAX bugs. Microsoft documents every case in the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax).
 
-![Power BI formula bar showing the Paid Revenue measure, CALCULATE with a Status = Paid filter](/images/tutorials/calculate-function/01-measure-formula-bar.png)
-
-![Matrix visual with the Total Sales, Paid Revenue and Revenue SUMX by region](/images/tutorials/calculate-function/02-result-matrix.png)
-
-![Performance Analyzer timing the matrix visual in Power BI Desktop](/images/tutorials/calculate-function/03-performance-analyzer.png)
-
 ## Why CALCULATE matters
 
 DAX measures evaluate inside a **filter context** — the set of rows visible based on slicers, visual interactions, and model relationships. Most of the time that's exactly what you want. But sometimes you need to *override* or *extend* that context:
@@ -44,6 +38,8 @@ CALCULATE(
 
 - `expression` — the DAX formula to evaluate (usually a measure or aggregation).
 - `filterN` — optional filter arguments that modify the context before the expression runs.
+
+The three modifiers that change how those filters behave — `KEEPFILTERS`, `REMOVEFILTERS` and `ALLSELECTED` — are easy to confuse. The [DAX function reference](/tools/dax-functions/) lists them together with their exact syntax, so you can check the argument order before you paste.
 
 The evaluation order is critical and trips up most learners:
 
@@ -134,6 +130,11 @@ CALCULATE(
 ```
 
 Boolean filters like `Sales[Status] = "Paid"` are the simplest filter argument form. They work for a single column and a single value (or `IN` list). For more complex logic, use `FILTER`:
+
+<figure>
+  <img src="/images/tutorials/calculate-function/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the Paid Revenue measure built with CALCULATE and a Status = Paid filter" loading="lazy" width="920" height="345" />
+  <figcaption><code>CALCULATE</code> replaces the filter context on <code>Status</code> with <code>"Paid"</code>. Everything else the visual filters on — region, date, product — still applies, which is why the same measure returns a different number for each row of a matrix.</figcaption>
+</figure>
 
 ```dax
 High Value Paid Revenue =
@@ -257,6 +258,11 @@ RANKX(
 
 The `ALL(Region[RegionName])` in `RANKX` ensures the ranking considers every region, not just the filtered one. Without it, every region would rank #1 because it's the only one visible.
 
+<figure>
+  <img src="/images/tutorials/calculate-function/02-result-matrix.png" alt="Matrix visual by region comparing Total Sales, Paid Revenue and Revenue SUMX" loading="lazy" width="920" height="345" />
+  <figcaption>Three measures side by side in one matrix: the plain total, the <code>CALCULATE</code>-filtered <code>Paid Revenue</code>, and a <code>SUMX</code> iterator. Putting them in the same visual is the fastest way to see a filter mistake — if <code>Paid Revenue</code> equals <code>Total Sales</code> in any row, the filter argument is being ignored.</figcaption>
+</figure>
+
 ## Debugging CALCULATE
 
 When `CALCULATE` returns unexpected results:
@@ -281,6 +287,8 @@ Before moving on, make sure you can:
 If yes, you've crossed the threshold from DAX beginner to intermediate. The next milestone is mastering time intelligence — which, as you've seen, is mostly `CALCULATE` with date-shifted filter arguments. See our [Time Intelligence Patterns](/tutorials/time-intelligence) guide and [DAX troubleshooting](/tutorials/dax-troubleshooting-guide) for common error fixes.
 
 ## Related Reading
+
+- [DAX function reference: syntax and examples for 64 functions](/tools/dax-functions/)
 
 - [PREVIOUSMONTH vs DATEADD: Why They Disagree on the 31st](/tutorials/previousmonth-vs-dateadd/)
 - [SUMMARIZE vs SUMMARIZECOLUMNS vs GROUPBY](/tutorials/summarize-vs-summarizecolumns/)

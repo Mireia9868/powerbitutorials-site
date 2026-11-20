@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const tools = [
+  {
+    name: "Date table generator",
+    slug: "date-table",
+    width: 960,
+    height: 640,
+    note: "Form + generated DAX / Power Query. Works at any width down to 320px.",
+  },
+  {
+    name: "Conditional formatting generator",
+    slug: "conditional-format-generator",
+    width: 960,
+    height: 660,
+    note: "Two-column on desktop, stacks below 720px.",
+  },
+  {
+    name: "DAX linter",
+    slug: "dax-audit",
+    width: 1000,
+    height: 720,
+    note: "Taller: the editor needs room. Best embedded on a page of its own.",
+  },
+];
+
+function snippet(t: { slug: string; width: number; height: number }) {
+  return `<iframe
+  src="https://powerbitutorials.com/embed/${t.slug}/?ref=YOURSITE"
+  width="100%" height="${t.height}"
+  style="border:1px solid #e5e3d8;border-radius:10px;max-width:${t.width}px"
+  loading="lazy"
+  title="Power BI tool by Power BI Tutorials">
+</iframe>`;
+}
+
+const resizeSnippet = `<script>
+  window.addEventListener("message", function (e) {
+    if (e.origin !== "https://powerbitutorials.com") return;
+    if (!e.data || e.data.type !== "pbt:resize") return;
+    var frame = document.querySelector('iframe[data-pbt="' + e.data.id + '"]');
+    if (frame) frame.style.height = e.data.height + "px";
+  });
+</script>`;
+---
+
+<BaseLayout
+  title="Embed our tools"
+  description="Embed the Power BI date table generator, conditional formatting generator or DAX linter on your own page. Free, no tracking inside the widget, one attribution link."
+>
+  <article class="embed-page">
+    <div class="content-width">
+      <span class="page-eyebrow">Embed</span>
+      <h1>Put a working Power BI tool on your page.</h1>
+      <p class="lede">
+        Free to embed on a course page, a blog post or an internal wiki. The
+        widget runs entirely in the visitor’s browser — no data is sent to us, and
+        there is no tracking inside the frame.
+      </p>
+
+      <section class="rules">
+        <h2>The one rule</h2>
+        <p>
+          Keep the attribution bar at the bottom of the widget visible. It links
+          back here, and it is the only thing we ask for. It is rendered inside
+          the iframe, so it cannot be removed without removing the tool itself.
+        </p>
+        <p>
+          If you also want to link to us from your own page, we will not complain
+          — but it is not required.
+        </p>
+      </section>
+
+      {tools.map((t) => (
+        <section class="tool">
+          <h2>{t.name}</h2>
+          <p class="tool-note">
+            {t.note} Recommended height {t.height}px, max width {t.width}px.
+
+          </p>
+          <pre><code>{snippet(t)}</code></pre>
+        </section>
+      ))}
+
+      <section class="sizing">
+        <h2>Making it fit</h2>
+        <p>
+          Fixed heights are safe but can clip on narrow screens. If you want the
+          frame to grow with the content, give it an <code>id</code> in the URL and
+          add this listener to your page:
+        </p>
+        <pre><code>{resizeSnippet}</code></pre>
+        <p class="fine">
+          Replace <code>YOURSITE</code> and the <code>id</code> value with your own
+          domain. The <code>ref</code> parameter only drives attribution — it does
+          not change what the widget does.
+        </p>
+      </section>
+
+      <section class="privacy">
+        <h2>What the widget does and does not do</h2>
+        <ul>
+          <li>No cookies, no analytics, no ad code inside the frame.</li>
+          <li>Nothing you type is uploaded — the DAX and dates stay in the browser.</li>
+          <li>The only outbound request is the page itself and its static assets.</li>
+          <li>The embed URL is <code>noindex</code>, so it will not compete with your page in search.</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .embed-page { padding: 56px 0 88px; }
+  .page-eyebrow {
+    display: inline-block; font-size: 0.8rem; font-weight: 600;
+    color: var(--c-accent-dark); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .embed-page h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 18px; max-width: 26ch; }
+  .lede {
+    font-size: 1.08rem; color: var(--c-text-muted);
+    border-left: 3px solid var(--c-accent); padding-left: 18px;
+    margin-bottom: 36px;
+  }
+  .embed-page h2 { font-size: 1.25rem; margin: 32px 0 10px; }
+  .embed-page p { color: var(--c-text-muted); line-height: 1.72; margin: 0 0 12px; }
+  .embed-page pre {
+    background: #252423; color: #e8e6e3; border-radius: 8px;
+    padding: 14px 16px; overflow-x: auto; font-size: 12.5px; line-height: 1.6;
+    margin: 0 0 10px;
+  }
+  .tool { padding-top: 8px; border-top: 1px solid var(--c-border); margin-top: 28px; }
+  .tool-note { font-size: 0.9rem; }
+  .sizing, .privacy { margin-top: 32px; }
+  .fine { font-size: 0.85rem; color: var(--c-text-dim); }
+  ul { color: var(--c-text-muted); line-height: 1.8; font-size: 0.94rem; padding-left: 18px; }
+</style>

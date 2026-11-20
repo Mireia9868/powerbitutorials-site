@@ -194,7 +194,9 @@ VAR CurrentTarget = [Sales Target]
 VAR CurrentSales = [Total Sales]
 RETURN
     MAX ( CurrentTarget, CurrentSales ) * 1.25
-```. See the [MAX reference](https://learn.microsoft.com/en-us/dax/max-function-dax) for the complete rules.
+```
+
+See the [MAX reference](https://learn.microsoft.com/en-us/dax/max-function-dax) for the complete rules.
 
 The `Gauge Max` measure multiplies the larger of target or actual by 1.25. That produces a stable axis with visible headroom. A hard-coded maximum like 1000000 breaks the moment a region reports a different scale.
 
@@ -334,3 +336,8 @@ Cards don't support data colors conditional formatting the way charts do — but
 - [Copy Conditional Formatting Between Visuals](/tutorials/copy-conditional-formatting/)
 - [Line Chart Conditional Formatting](/tutorials/line-chart-conditional-formatting/)
 - [KPI Visual Conditional Formatting](/tutorials/kpi-conditional-formatting/)
+
+## Related Reading
+
+- [Conditional formatting generator: build the colour rule as a DAX measure](/tools/conditional-format-generator/)
+- [Conditional formatting in Power BI: the full guide](/tutorials/conditional-formatting-power-bi/)

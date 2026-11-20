@@ -28,7 +28,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 2
+          # 用 github.event.before 做比较基线，一次 push 里多个 commit 也能算全
+          fetch-depth: 0
 
       - uses: actions/setup-python@v6
         with:
@@ -51,11 +52,19 @@ jobs:
           exit 1
 
       - name: Push URLs
+        # 默认按 git diff 推「这次到底改了哪几篇」，而不是看 frontmatter 日期。
+        # 只看日期时，改标题 / 改描述 / 加内链都不会触发推送，78 篇文章曾因此
+        # 一篇都没提交过（Bing 后台报 "not submitted via IndexNow"）。
+        env:
+          BEFORE: ${{ github.event.before }}
         run: |
           if [ "${{ inputs.all }}" = "true" ]; then
             echo "全量模式"
             python scripts/indexnow.py --all
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            echo "增量模式：本次 push 改动过的文章"
+            python scripts/indexnow.py --changed --base "${BEFORE:-HEAD^}"
           else
-            echo "增量模式：最近 3 天发布或更新的文章"
+            echo "手动模式：最近 3 天发布或更新的文章"
             python scripts/indexnow.py --days 3
           fi

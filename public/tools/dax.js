@@ -18,11 +18,15 @@
 
   // ---------------------------------------------------------------- tokenize
 
+  // Identifier characters: keep the legacy Latin/Greek ranges for backwards
+  // compatibility, plus Unicode letters and numbers so non-ASCII table/column
+  // names (Chinese, Japanese, Cyrillic, accented Latin, ...) tokenize as one
+  // identifier instead of being split into stray characters.
   function isIdStart(c) {
-    return /[A-Za-z_\u00C0-\u024F\u0370-\u1FFF]/.test(c);
+    return /[A-Za-z_\u00C0-\u024F\u0370-\u1FFF]/.test(c) || /\p{L}/u.test(c);
   }
   function isIdPart(c) {
-    return /[A-Za-z0-9_\u00C0-\u024F\u0370-\u1FFF]/.test(c);
+    return /[A-Za-z0-9_\u00C0-\u024F\u0370-\u1FFF]/.test(c) || /[\p{L}\p{N}]/u.test(c);
   }
 
   function tokenize(src) {

@@ -1,5 +1,6 @@
 ---
 import { ADSENSE_CLIENT } from "../consts";
+import { isValidAdSlot } from "../lib/ads";
 
 export interface Props {
   slot?: string;
@@ -10,15 +11,16 @@ export interface Props {
 }
 
 const {
-  slot = "0000000000",
+  slot = "",
   format = "auto",
   responsive = true,
   style = "display:block",
   label = "Advertisement",
 } = Astro.props;
 
-// ADSENSE_CLIENT 为空时不渲染任何 AdSense 元素（含占位盒子）；当前未启用 AdSense
-const configured = Boolean(ADSENSE_CLIENT);
+// 只有 client 和真实广告位 ID 都配置好才渲染；否则整块不输出，
+// 避免空 <ins> 占着 min-height 在正文里留下一条空白。
+const configured = isValidAdSlot(slot);
 ---
 
 {configured && (

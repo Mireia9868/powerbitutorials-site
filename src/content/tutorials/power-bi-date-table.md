@@ -102,6 +102,21 @@ Rename the query `Date` and load it. Several advantages come with the M version:
 
 One thing to watch: `List.Dates` with a duration of one day produces the exact inclusive range. Getting that calculation wrong is the most common reason a Power Query date table has off-by-one issues at the end.
 
+<div class="tool-embed">
+  <p><strong>Don't want to type the DAX?</strong> The date table generator builds the same table — pick a range, toggle ISO weeks and fiscal year, then copy the DAX or the Power Query code.</p>
+  <details>
+    <summary>Open the generator</summary>
+    <iframe data-pbt="pbt-default" src="https://powerbitutorials.com/embed/date-table/?ref=powerbitutorials.com"
+      width="100%" height="640" loading="lazy"
+      style="border:1px solid #e5e3d8;border-radius:10px;max-width:960px"
+      title="Power BI date table generator"></iframe>
+  </details>
+  <p style="margin-top:10px;font-size:0.85rem;color:var(--c-text-dim)">
+    Prefer to understand the code first? The generator output uses the same
+    <code>CALENDAR</code> + <code>ADDCOLUMNS</code> pattern as Method 1.
+  </p>
+</div>
+
 ## Method 3: Auto Date/Time (prototyping only)
 
 Power BI has a hidden date table feature called **Auto Date/Time**. When it's on, every date column in the model gets an invisible date table generated behind the scenes, and the implicit hierarchy in your visuals actually works for time intelligence.

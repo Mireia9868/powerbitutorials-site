@@ -76,7 +76,9 @@ DIVIDE(
     SUMX(VALUES(Product[Category]), [Revenue]),
     SUMX(VALUES(Product[Category]), [Cost])
 )
-```. Microsoft documents every case in the [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax).
+```
+
+Microsoft documents every case in the [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax).
 
 ### 5. Percentage always shows 100%
 
@@ -231,6 +233,8 @@ ColB = Sales[BaseValue]
 
 Power Query runs before the DAX engine and is immune to circular dependencies.
 
+When an error message names a function you do not know, look it up in the [DAX function reference](/tools/dax-functions/) before guessing at the fix — each entry shows the exact argument list, and most of them link to the tutorial that covers the surrounding pattern.
+
 ### 14. "Function X has been used in a True/False expression that is used as a table filter expression"
 
 **Cause:** Using a measure inside `FILTER` without proper context.
@@ -243,7 +247,9 @@ CALCULATE([Rev], FILTER(Sales, [Total Revenue] > 100))
 
 // Fix — use VALUES to iterate over the column, not the fact table
 CALCULATE([Rev], FILTER(VALUES(Product[Category]), [Total Revenue] > 100))
-```. The [VALUES documentation](https://learn.microsoft.com/en-us/dax/values-function-dax) has the full specification.
+```
+
+The [VALUES documentation](https://learn.microsoft.com/en-us/dax/values-function-dax) has the full specification.
 
 ### 15. Wrong results from context transition inside iterators
 

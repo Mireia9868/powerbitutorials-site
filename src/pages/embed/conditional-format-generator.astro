@@ -1,0 +1,100 @@
+---
+import EmbedLayout from "../../layouts/EmbedLayout.astro";
+
+const host = Astro.url.searchParams.get("ref") || "unknown";
+---
+
+<EmbedLayout
+  title="Power BI conditional formatting generator"
+  description="Generate a DAX colour measure for conditional formatting in Power BI."
+  host={host}
+  toolHref="/tools/conditional-format-generator/"
+  toolName="Conditional formatting generator"
+>
+  <div class="embed-tool">
+    <div class="layout">
+      <div class="panel">
+        <div class="panel-head"><span>Rule</span></div>
+        <div class="panel-body">
+          <div class="field-grid">
+            <div class="field wide">
+              <label for="measure">Measure or expression</label>
+              <input type="text" id="measure" value="[Margin %]" spellcheck="false" />
+            </div>
+            <div class="field">
+              <label for="name">Measure name</label>
+              <input type="text" id="name" value="Margin Colour" spellcheck="false" />
+            </div>
+            <div class="field">
+              <label for="mode">Bands</label>
+              <select id="mode">
+                <option value="2">2 — one threshold</option>
+                <option value="3" selected>3 — two thresholds</option>
+                <option value="4">4 — three thresholds</option>
+              </select>
+            </div>
+            <div class="field wide">
+              <label for="direction">Bad side</label>
+              <select id="direction">
+                <option value="low" selected>Low values are bad</option>
+                <option value="high">High values are bad</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bands" id="bands"></div>
+
+          <div class="checks">
+            <label><input type="checkbox" id="as-var" checked /> Use a VAR</label>
+            <label><input type="checkbox" id="with-blank" /> Blank for missing</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <span>Measure</span>
+          <span class="spacer"></span>
+          <button class="btn" id="copy-btn" type="button">Copy</button>
+        </div>
+        <div class="panel-body">
+          <pre class="code-output wrap" id="output"></pre>
+          <div class="toolbar" style="margin-top:10px">
+            <button class="btn" id="preset-pl" type="button">P&amp;L preset</button>
+            <button class="btn" id="preset-tl" type="button">Traffic light</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline src="/tools/conditional-format-generator.js"></script>
+</EmbedLayout>
+
+<style is:global>
+  .embed-tool .layout { gap: 16px; padding: 4px 0 10px; }
+  .embed-tool .panel-body { padding: 14px; }
+  .embed-tool .bands { margin: 12px 0 6px; display: flex; flex-direction: column; gap: 8px; }
+  .embed-tool .band-row {
+    display: grid; grid-template-columns: 100px minmax(0, 1fr) 44px;
+    align-items: center; gap: 10px;
+  }
+  .embed-tool .band-row label { font-size: 12.5px; font-weight: 700; color: var(--t-text-muted); }
+  .embed-tool .band-row input[type="number"] {
+    width: 100%; padding: 7px 9px; border: 1px solid var(--t-border);
+    border-radius: 7px; font-family: inherit; font-size: 13.5px;
+  }
+  .embed-tool .band-row input[type="color"] {
+    width: 44px; height: 32px; border: 1px solid var(--t-border); border-radius: 6px;
+    padding: 2px; background: #fff; cursor: pointer;
+  }
+  .embed-tool .band-row.final { grid-template-columns: 100px 44px 1fr; }
+  .embed-tool .band-row.final .final-swatch {
+    width: 44px; height: 32px; border-radius: 6px; border: 1px solid var(--t-border);
+  }
+  .embed-tool .final-label { font-family: var(--t-font-mono); font-size: 12px; color: var(--t-text-dim); }
+  .embed-tool .code-output { max-height: 300px; }
+  @media (max-width: 720px) {
+    .embed-tool .layout { grid-template-columns: 1fr; }
+  }
+</style>

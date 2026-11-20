@@ -11,12 +11,6 @@ featured: false
 
 `SUM` and `SUMX` look almost identical, but they solve different problems. Pick the wrong one and your totals will be wrong — silently wrong, with no error message. This guide covers when to use each and the three scenarios where only an iterator works.
 
-![Power BI formula bar showing the Revenue SUMX measure, SUMX over Units times UnitPrice](/images/tutorials/sumx-vs-sum-iterators/01-measure-formula-bar.png)
-
-![Matrix visual with the Total Sales, Paid Revenue and Revenue SUMX by region](/images/tutorials/sumx-vs-sum-iterators/02-result-matrix.png)
-
-![Performance Analyzer timing the matrix visual in Power BI Desktop](/images/tutorials/sumx-vs-sum-iterators/03-performance-analyzer.png)
-
 ## The one-sentence difference
 
 - **`SUM(Column)`** adds up all the values in a single column.
@@ -24,6 +18,8 @@ featured: false
 
 `SUM` can't do row-by-row math. `SUMX` can.
 
+
+If you want the full argument list for the whole iterator family (`SUMX`, `AVERAGEX`, `MAXX`, `RANKX`, `CONCATENATEX`), the [DAX function reference](/tools/dax-functions/#cat-aggregation) collects them in one place.
 ## When SUM is enough
 
 If your calculation is "add up this column," use `SUM`. It's faster, simpler, and the intent is obvious.
@@ -49,9 +45,16 @@ Total Revenue = SUM(Sales[Quantity] * Sales[UnitPrice])
 
 // This works — SUMX evaluates the multiplication per row
 Total Revenue = SUMX(Sales, Sales[Quantity] * Sales[UnitPrice])
-```. Microsoft documents every case in the [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax).
+```
+
+Microsoft documents every case in the [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax).
 
 `SUMX` walks every row in the (filtered) `Sales` table, computes `Quantity * UnitPrice` for that row, stores it in memory, then sums all the stored values.
+
+<figure>
+  <img src="/images/tutorials/sumx-vs-sum-iterators/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing a Revenue SUMX measure that multiplies Quantity by UnitPrice row by row" loading="lazy" width="920" height="345" />
+  <figcaption>The whole point of <code>SUMX</code> in one line: the multiplication happens <em>inside</em> the iteration, so <code>Quantity * UnitPrice</code> is evaluated per row before anything is summed. Write the same expression outside an iterator and DAX has no row context to evaluate it in.</figcaption>
+</figure>
 
 ### 2. Conditional aggregation
 
@@ -97,6 +100,11 @@ Total Revenue = SUM(Sales[Revenue])           // preferred
 ```
 
 **Rule of thumb:** use `SUM` by default. Switch to `SUMX` only when the expression can't be precomputed into a column.
+
+<figure>
+  <img src="/images/tutorials/sumx-vs-sum-iterators/02-result-matrix.png" alt="Matrix by region where a SUMX measure and a plain SUM of the same column produce identical totals" loading="lazy" width="920" height="345" />
+  <figcaption><code>Revenue SUMX</code> and the plain <code>Total Sales</code> column agree in every row — as they must, because both sum the same pre-calculated revenue. That identical result is the tell: if <code>SUMX</code> adds nothing over <code>SUM</code>, you're paying for an iterator you don't need.</figcaption>
+</figure>
 
 ## The iterator family
 
