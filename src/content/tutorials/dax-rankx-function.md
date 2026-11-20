@@ -182,7 +182,9 @@ Wrong Rank = RANKX(VALUES(Product[Product Name]), [Total Revenue])
 
 // Correct — ALLSELECTED returns all visible products
 Correct Rank = RANKX(ALLSELECTED(Product[Product Name]), [Total Revenue])
-```. See the [ALLSELECTED reference](https://learn.microsoft.com/en-us/dax/allselected-function-dax) for the complete rules.
+```
+
+See the [ALLSELECTED reference](https://learn.microsoft.com/en-us/dax/allselected-function-dax) for the complete rules.
 
 ### 4. Blank values in ranking
 

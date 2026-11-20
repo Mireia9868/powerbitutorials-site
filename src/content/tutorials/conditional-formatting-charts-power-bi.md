@@ -194,7 +194,9 @@ VAR CurrentTarget = [Sales Target]
 VAR CurrentSales = [Total Sales]
 RETURN
     MAX ( CurrentTarget, CurrentSales ) * 1.25
-```. See the [MAX reference](https://learn.microsoft.com/en-us/dax/max-function-dax) for the complete rules.
+```
+
+See the [MAX reference](https://learn.microsoft.com/en-us/dax/max-function-dax) for the complete rules.
 
 The `Gauge Max` measure multiplies the larger of target or actual by 1.25. That produces a stable axis with visible headroom. A hard-coded maximum like 1000000 breaks the moment a region reports a different scale.
 

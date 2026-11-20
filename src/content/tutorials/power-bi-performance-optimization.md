@@ -132,7 +132,9 @@ SWITCH(
     [Rev] < 10000, "L",
     "XL"
 )
-```. The [SWITCH documentation](https://learn.microsoft.com/en-us/dax/switch-function-dax) has the full specification.
+```
+
+The [SWITCH documentation](https://learn.microsoft.com/en-us/dax/switch-function-dax) has the full specification.
 
 ### Use DIVIDE instead of /
 

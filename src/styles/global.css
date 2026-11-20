@@ -291,3 +291,43 @@ hr {
 @media (max-width: 640px) {
   .tool-embed { padding: 14px 14px; }
 }
+
+/* ── 文章正文配图 ─────────────────────────────────────────────────
+   markdown 里直接写的 ![alt](src) 会渲染成裸 <img>；需要图注的配图用
+   <figure><img …><figcaption>…</figcaption></figure>。
+   两者共用同一套边框/圆角，图注统一为小一号的次要色说明文字。 */
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  margin: 1.5em 0;
+}
+
+.article-content figure {
+  margin: 1.75em 0;
+}
+
+.article-content figure img {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+.article-content figcaption {
+  margin-top: 0.55em;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--c-text-dim);
+}
+
+.article-content figcaption code {
+  font-size: 0.95em;
+  padding: 0.08em 0.3em;
+  background: var(--c-bg-elevated);
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .article-content figcaption { font-size: 0.78rem; }
+}

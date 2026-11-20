@@ -199,7 +199,9 @@ DIVIDE(
     SUMX(VALUES(Product[Category]), [Revenue]),
     SUMX(VALUES(Product[Category]), [Cost])
 )
-```. Refer to the [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax) for edge cases.
+```
+
+Refer to the [SUMX reference](https://learn.microsoft.com/en-us/dax/sumx-function-dax) for edge cases.
 
 ## How to debug evaluation context
 
