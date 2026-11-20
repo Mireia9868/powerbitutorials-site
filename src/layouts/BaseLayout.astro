@@ -307,6 +307,20 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
 
+        // ---- 文章内嵌工具：谁点开了 ----
+        // 展开率是判断「文章里放 widget 值不值」的唯一直接信号。
+        var embeds = document.querySelectorAll('.tool-embed details');
+        for (var e = 0; e < embeds.length; e++) {
+          embeds[e].addEventListener('toggle', function (ev) {
+            var frame = ev.target.querySelector('iframe');
+            var m = frame && frame.src ? frame.src.match(/\/embed\/([a-z0-9-]+)\//) : null;
+            send(ev.target.open ? 'tool_embed_open' : 'tool_embed_close', {
+              tool: m ? m[1] : 'unknown',
+              source_path: location.pathname
+            });
+          });
+        }
+
         // ---- 搜索：把 query 和结果数一起记下来 ----
         // 零结果查询是最便宜的选题来源，现在完全丢失了。
         document.addEventListener('search:results', function (e) {
