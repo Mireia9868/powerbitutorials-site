@@ -135,7 +135,7 @@ CALCULATE(
 Boolean filters like `Sales[Status] = "Paid"` are the simplest filter argument form. They work for a single column and a single value (or `IN` list). For more complex logic, use `FILTER`:
 
 <figure>
-  <img src="/images/tutorials/calculate-function/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the Paid Revenue measure built with CALCULATE and a Status = Paid filter" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/calculate-function/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the Paid Revenue measure built with CALCULATE and a Status = Paid filter" loading="lazy" width="920" height="520" />
   <figcaption><code>CALCULATE</code> replaces the filter context on <code>Status</code> with <code>"Paid"</code>. Everything else the visual filters on — region, date, product — still applies, which is why the same measure returns a different number for each row of a matrix.</figcaption>
 </figure>
 
@@ -262,7 +262,7 @@ RANKX(
 The `ALL(Region[RegionName])` in `RANKX` ensures the ranking considers every region, not just the filtered one. Without it, every region would rank #1 because it's the only one visible.
 
 <figure>
-  <img src="/images/tutorials/calculate-function/02-result-matrix.png" alt="Matrix visual by region comparing Total Sales, Paid Revenue and Revenue SUMX" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/calculate-function/02-result-matrix.png" alt="Matrix visual by region comparing Total Sales, Paid Revenue and Revenue SUMX" loading="lazy" width="920" height="520" />
   <figcaption>Three measures side by side in one matrix: the plain total, the <code>CALCULATE</code>-filtered <code>Paid Revenue</code>, and a <code>SUMX</code> iterator. Putting them in the same visual is the fastest way to see a filter mistake — if <code>Paid Revenue</code> equals <code>Total Sales</code> in any row, the filter argument is being ignored.</figcaption>
 </figure>
 

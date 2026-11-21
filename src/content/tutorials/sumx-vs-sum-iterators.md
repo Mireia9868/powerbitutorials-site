@@ -105,7 +105,7 @@ Total Revenue = SUM(Sales[Revenue])           // preferred
 **Rule of thumb:** use `SUM` by default. Switch to `SUMX` only when the expression can't be precomputed into a column.
 
 <figure>
-  <img src="/images/tutorials/sumx-vs-sum-iterators/02-result-matrix.png" alt="Matrix by region where a SUMX measure and a plain SUM of the same column produce identical totals" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/sumx-vs-sum-iterators/02-result-matrix.png" alt="Matrix by region where a SUMX measure and a plain SUM of the same column produce identical totals" loading="lazy" width="920" height="520" />
   <figcaption><code>Revenue SUMX</code> and the plain <code>Total Sales</code> column agree in every row — as they must, because both sum the same pre-calculated revenue. That identical result is the tell: if <code>SUMX</code> adds nothing over <code>SUM</code>, you're paying for an iterator you don't need.</figcaption>
 </figure>
 

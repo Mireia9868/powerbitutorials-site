@@ -191,7 +191,7 @@ The `_` prefix marks these as internal — delete them once the final measure wo
 4. **Test in a matrix, not a card.** A card shows one number with no context. A matrix grouped by a dimension lets you see if the measure works correctly per row and if the grand total matches.
 
 <figure>
-  <img src="/images/tutorials/dax-basics/02-result-matrix.png" alt="Matrix visual grouped by region showing Total Sales, Paid Revenue and Revenue SUMX with a total row" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/dax-basics/02-result-matrix.png" alt="Matrix visual grouped by region showing Total Sales, Paid Revenue and Revenue SUMX with a total row" loading="lazy" width="920" height="520" />
   <figcaption>Grouped by region, each row of the matrix is its own filter context and the <code>Total</code> row is the unfiltered value. If the total is right but one row is wrong, the bug is in the row-level logic — something a card would never show you.</figcaption>
 </figure>
 
