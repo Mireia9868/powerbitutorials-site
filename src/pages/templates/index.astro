@@ -27,6 +27,40 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <span class="arrow">See what's inside →</span>
       </a>
 
+      <a class="template-card" href="/downloads/power-bi-sales-overview.pbix">
+        <span class="tag free">Free download</span>
+        <h2>Sales Overview</h2>
+        <p>
+          Three KPI cards, a region table and a region bar chart on one 1280×720
+          page. Built on the same <code>Sales</code> table and measure naming
+          used across this site, so the tutorials map straight onto it.
+        </p>
+        <span class="meta">PBIX · 1280×720 · fictional 2026 demo data · free for personal and commercial use</span>
+        <span class="arrow">Download the PBIX →</span>
+      </a>
+
+      <a class="template-card" href="/downloads/power-bi-monthly-revenue-trend.pbix">
+        <span class="tag free">Free download</span>
+        <h2>Monthly Revenue Trend</h2>
+        <p>
+          A twelve-month revenue line with three KPI cards and a region table —
+          the layout to copy when a request is simply "show me the trend".
+        </p>
+        <span class="meta">PBIX · 1280×720 · fictional 2026 demo data · free for personal and commercial use</span>
+        <span class="arrow">Download the PBIX →</span>
+      </a>
+
+      <section class="note">
+        <h2>Free vs paid</h2>
+        <p>
+          The free PBIX files above are complete, working reports — open them,
+          rename things, ship them inside your own work. The paid packs carry
+          what a PBIX alone cannot: the model specification, the measure
+          library with tests, and a build guide that keeps the file maintainable
+          after you change it.
+        </p>
+      </section>
+
       <section class="note">
         <h2>Why so few?</h2>
         <p>
@@ -66,6 +100,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .template-card:hover {
     border-color: var(--c-accent-border); transform: translateY(-2px); text-decoration: none;
   }
+  .tag.free { color: #157347; }
   .tag {
     font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--c-accent-dark);
