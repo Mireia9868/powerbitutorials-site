@@ -55,7 +55,7 @@ Microsoft documents every case in the [SUMX reference](https://learn.microsoft.c
 `SUMX` walks every row in the (filtered) `Sales` table, computes `Quantity * UnitPrice` for that row, stores it in memory, then sums all the stored values.
 
 <figure>
-  <img src="/images/tutorials/sumx-vs-sum-iterators/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing a Revenue SUMX measure that multiplies Quantity by UnitPrice row by row" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/sumx-vs-sum-iterators/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing a Revenue SUMX measure that multiplies Quantity by UnitPrice row by row" loading="lazy" width="920" height="554" />
   <figcaption>The whole point of <code>SUMX</code> in one line: the multiplication happens <em>inside</em> the iteration, so <code>Quantity * UnitPrice</code> is evaluated per row before anything is summed. Write the same expression outside an iterator and DAX has no row context to evaluate it in.</figcaption>
 </figure>
 

@@ -58,7 +58,7 @@ Total Revenue = SUM(Sales[Revenue])
 ```
 
 <figure>
-  <img src="/images/tutorials/dax-basics/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the measure definition, with a matrix on the canvas evaluating it per region" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/dax-basics/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the measure definition, with a matrix on the canvas evaluating it per region" loading="lazy" width="920" height="553" />
   <figcaption>The measure lives in the formula bar, once. The matrix on the canvas evaluates it per region — one formula, a different number in every row, plus the grand total. (The sample file in this screenshot calls it <code>Total Sales</code>; it is the same <code>SUM(Sales[Revenue])</code> you just wrote.)</figcaption>
 </figure>
 
