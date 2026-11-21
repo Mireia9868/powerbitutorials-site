@@ -84,7 +84,7 @@ For windows that don't fit the standard patterns (e.g., a 14-day window centered
 Centered 7-Day Avg =
 CALCULATE(
     AVERAGEX(VALUES(Date[Date]), [Total Revenue]),
-    WINDOW(-3, REL, 3, REL, ALL(Date[Date])
+    WINDOW(-3, REL, 3, REL, ALL(Date[Date]))
 )
 ```
 

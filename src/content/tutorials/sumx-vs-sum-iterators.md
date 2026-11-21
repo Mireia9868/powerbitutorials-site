@@ -11,6 +11,9 @@ featured: false
 
 `SUM` and `SUMX` look almost identical, but they solve different problems. Pick the wrong one and your totals will be wrong — silently wrong, with no error message. This guide covers when to use each and the three scenarios where only an iterator works.
 
+
+> **Sample model used in this article.** The DAX below assumes a typical sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. The free starter model we ship uses `Sales[Units]` instead of `Quantity` and has no `UnitCost` / `DiscountPct` columns — rename those references if you follow along with the downloadable file ([free templates](/templates/)).
+
 ## The one-sentence difference
 
 - **`SUM(Column)`** adds up all the values in a single column.

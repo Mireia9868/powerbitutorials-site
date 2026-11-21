@@ -12,6 +12,9 @@ featured: true
 
 If DAX has a "boss function," it's `CALCULATE`. Every advanced pattern — time intelligence, percentage-of-total, cohort analysis, rolling averages — depends on it. This guide explains why `CALCULATE` is special, how to use it correctly, and the subtle behaviors that cause 90% of intermediate DAX bugs. Microsoft documents every case in the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax).
 
+
+> **Sample model used in this article.** The DAX below assumes a typical sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. The free starter model we ship uses `Sales[Units]` instead of `Quantity` and has no `UnitCost` / `DiscountPct` columns — rename those references if you follow along with the downloadable file ([free templates](/templates/)).
+
 ## Why CALCULATE matters
 
 DAX measures evaluate inside a **filter context** — the set of rows visible based on slicers, visual interactions, and model relationships. Most of the time that's exactly what you want. But sometimes you need to *override* or *extend* that context:
