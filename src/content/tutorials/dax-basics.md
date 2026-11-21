@@ -13,7 +13,7 @@ featured: true
 If you've built a Power BI report and hit the wall where drag-and-drop visuals aren't enough, you've met the moment where DAX becomes essential. This guide covers the foundations every analyst needs before moving to advanced patterns — including the mistakes that trip up most beginners and a real scenario you can follow along with.
 
 
-> **Sample model used in this article.** The DAX below assumes a typical sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. The free starter model we ship uses `Sales[Units]` instead of `Quantity` and has no `UnitCost` / `DiscountPct` columns — rename those references if you follow along with the downloadable file ([free templates](/templates/)).
+> **Sample model used in this article.** The DAX below assumes a sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. [Download the companion model](/downloads/sample-sales-model.pbix) — it has exactly those columns plus a `Date` table with the relationship already in place, so every snippet below runs as written.
 
 ## What is DAX?
 

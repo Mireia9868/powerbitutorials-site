@@ -13,7 +13,7 @@ featured: true
 If DAX has a "boss function," it's `CALCULATE`. Every advanced pattern — time intelligence, percentage-of-total, cohort analysis, rolling averages — depends on it. This guide explains why `CALCULATE` is special, how to use it correctly, and the subtle behaviors that cause 90% of intermediate DAX bugs. Microsoft documents every case in the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax).
 
 
-> **Sample model used in this article.** The DAX below assumes a typical sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. The free starter model we ship uses `Sales[Units]` instead of `Quantity` and has no `UnitCost` / `DiscountPct` columns — rename those references if you follow along with the downloadable file ([free templates](/templates/)).
+> **Sample model used in this article.** The DAX below assumes a sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. [Download the companion model](/downloads/sample-sales-model.pbix) — it has exactly those columns plus a `Date` table with the relationship already in place, so every snippet below runs as written.
 
 ## Why CALCULATE matters
 
