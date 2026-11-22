@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/hub-design.css";
 
 const tools = [
   {
@@ -44,94 +45,128 @@ const tools = [
   title="Free Power BI Tools"
   description="Three free browser-based Power BI tools: a DAX formatter and linter, a date table generator for DAX and Power Query M, and a licence calculator. No signup."
 >
-  <article class="tools-hub">
-    <div class="container">
-      <span class="page-eyebrow">Tools</span>
-      <h1>Free tools for the parts that waste your afternoon</h1>
-      <p class="lede">
-        Small, single-purpose utilities that run in the browser. No account, no
-        upload, no “start your free trial”. Each one exists because writing the
-        same thing by hand for the tenth time is not a good use of an analyst.
-      </p>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;600&family=Inter:wght@400;500;600&family=Newsreader:wght@600;700&display=swap" rel="stylesheet" />
+  </Fragment>
 
-      <div class="tool-grid">
-        {tools.map((tool) => (
-          <a class="tool-card" href={tool.href}>
-            <span class="tool-tag">{tool.tag}</span>
-            <h2>{tool.title}</h2>
-            <p>{tool.body}</p>
-            <span class="tool-meta">{tool.meta}</span>
-            <span class="tool-arrow">Open tool →</span>
-          </a>
-        ))}
+  <div class="hub-v2">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="wrap">
+        <div>
+          <p class="kicker">Tools / 02</p>
+          <h1>Free tools for the parts that waste your afternoon</h1>
+          <p class="hero__sub">
+            Small, single-purpose utilities that run in the browser. No account,
+            no upload, no “start your free trial”. Each one exists because writing
+            the same thing by hand for the tenth time is not a good use of an analyst.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="/tools/dax-audit/">Open DAX Formatter</a>
+            <a class="btn btn--secondary" href="#toolbox">See all tools</a>
+          </div>
+        </div>
+        <div class="preview">
+          <p class="preview__tag">TOOL / DAX FORMATTER</p>
+          <p class="preview__title preview__title--code">Measure =
+DIVIDE( [Revenue], [Budget] )</p>
+          <p class="preview__spec">01   PASTE A MEASURE
+02   GET CLEAN FORMATTING
+03   REVIEW THE PATTERNS</p>
+        </div>
       </div>
+    </section>
 
-      <section class="hub-note">
-        <h2>Why so few?</h2>
-        <p>
-          Because a tool that tries to do everything ends up being a worse
-          version of Power BI Desktop. These three cover the gaps where the
-          desktop app gives you no help at all: formatting a formula you pasted
-          from somewhere, building a date table that survives time intelligence,
-          and working out what the licences will actually cost.
-        </p>
-        <p>
-          Everything runs client-side. The DAX you paste is never sent to a
-          server — you can open the page, disconnect from the network, and it
-          still works.
-        </p>
-      </section>
+    <!-- Toolbox -->
+    <section class="section section--base" id="toolbox">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">01 / The toolbox</p>
+          <h2>Five tools. One job each.</h2>
+          <p class="section__intro">
+            Everything runs client-side. The DAX you paste is never sent to a
+            server — you can open the page, disconnect from the network, and it
+            still works.
+          </p>
+        </div>
+        <div class="card-grid">
+          {tools.map((tool) => (
+            <article class="card">
+              <p class="card__badge">{tool.tag}</p>
+              <h3>{tool.title}</h3>
+              <p class="card__desc">{tool.body}</p>
+              <p class="card__meta">{tool.meta}</p>
+              <a class="card__link" href={tool.href}>Open tool <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </article>
+          ))}
+          <article class="card card--next">
+            <p class="card__badge">More coming</p>
+            <h3>Built when the gap is real</h3>
+            <p class="card__desc">
+              No tool that tries to do everything. If a repeated task shows up in
+              real models, it gets a single-purpose utility here.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-      <p class="hub-next">
-        Want the reasoning behind the checks rather than just the output?
-        <a href="/tutorials/dax-basics/">Start with the DAX basics guide</a>, or
-        read <a href="/tutorials/dax-troubleshooting-guide/">the fifteen DAX
-        errors that look cryptic</a>.
-      </p>
-    </div>
-  </article>
+    <!-- FAQ -->
+    <section class="section section--tint">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">02 / Good questions</p>
+          <h2>Why so few?</h2>
+        </div>
+        <div class="faq-row">
+          <span class="faq-row__num">01</span>
+          <div>
+            <h3>Why so few tools?</h3>
+            <p>
+              Because a tool that tries to do everything ends up being a worse
+              version of Power BI Desktop. These tools cover the gaps where the
+              desktop app gives you no help at all: formatting a formula you pasted
+              from somewhere, building a date table that survives time intelligence,
+              and working out what the licences will actually cost.
+            </p>
+          </div>
+        </div>
+        <div class="faq-row">
+          <span class="faq-row__num">02</span>
+          <div>
+            <h3>Is my DAX sent anywhere?</h3>
+            <p>
+              No. Everything runs client-side. Open the page, disconnect from the
+              network, and it still works.
+            </p>
+          </div>
+        </div>
+        <div class="faq-row">
+          <span class="faq-row__num">03</span>
+          <div>
+            <h3>Where do I start?</h3>
+            <p>
+              Start with the <a href="/tutorials/dax-basics/">DAX basics guide</a>,
+              or read <a href="/tutorials/dax-troubleshooting-guide/">the fifteen DAX
+              errors that look cryptic</a> — both explain the reasoning behind the
+              checks rather than just the output.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section section--soft final-cta">
+      <div class="wrap">
+        <p class="kicker">03 / Keep going</p>
+        <h2 class="statement">Fix the model, not just the measure.</h2>
+        <a class="btn btn--primary buy-btn" data-pack="finance-starter-pack" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy Finance Starter Pack · $39 →</a>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
-
-<style>
-  .tools-hub { padding: 56px 0 88px; }
-  .page-eyebrow {
-    display: inline-block; font-size: 0.8rem; font-weight: 600;
-    color: var(--c-accent-dark); letter-spacing: 0.08em; text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .tools-hub h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 18px; max-width: 24ch; }
-  .lede {
-    font-size: 1.08rem; color: var(--c-text-muted);
-    border-left: 3px solid var(--c-accent); padding-left: 18px;
-    margin-bottom: 40px; max-width: 66ch;
-  }
-  .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 44px; }
-  .tool-card {
-    display: flex; flex-direction: column; gap: 8px;
-    border: 1px solid var(--c-border); border-radius: var(--radius-lg);
-    padding: 22px 20px; color: inherit; text-decoration: none;
-    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .tool-card:hover {
-    border-color: var(--c-accent-border);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px -16px #00000033;
-    text-decoration: none;
-  }
-  .tool-tag {
-    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--c-accent-dark);
-  }
-  .tool-card h2 { font-size: 1.15rem; margin: 0; letter-spacing: -0.01em; }
-  .tool-card p { margin: 0; font-size: 0.92rem; line-height: 1.6; color: var(--c-text-muted); flex: 1; }
-  .tool-meta { font-size: 0.74rem; color: var(--c-text-dim); }
-  .tool-arrow { font-size: 0.86rem; font-weight: 700; color: var(--c-accent-dark); }
-  .hub-note { max-width: 68ch; margin-bottom: 36px; }
-  .hub-note h2 { font-size: 1.3rem; margin: 0 0 12px; }
-  .hub-note p { color: var(--c-text-muted); line-height: 1.72; margin: 0 0 14px; }
-  .hub-next { font-size: 0.95rem; color: var(--c-text-muted); max-width: 68ch; }
-  @media (max-width: 900px) {
-    .tool-grid { grid-template-columns: 1fr; }
-    .tools-hub h1 { font-size: 1.8rem; }
-  }
-</style>
