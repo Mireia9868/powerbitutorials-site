@@ -173,6 +173,10 @@ const websiteJsonLd = isHomepage ? {
       <script is:inline define:vars={{ GA4_MEASUREMENT_ID }}>
         window.dataLayer = window.dataLayer || [];
         function gtag() { window.dataLayer.push(arguments); }
+        // `define:vars` wraps this script in a function scope, so `gtag` was never
+        // global — every `typeof window.gtag === 'function'` guard in the custom
+        // event code therefore failed and silently dropped all custom events.
+        window.gtag = gtag;
         gtag('js', new Date());
         // Attach the A/C design variant to every hit (including the first page_view),
         // so the experiment is measurable without relying on consent-gated custom events.
