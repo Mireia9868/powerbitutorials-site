@@ -13,7 +13,7 @@ featured: true
 If DAX has a "boss function," it's `CALCULATE`. Every advanced pattern — time intelligence, percentage-of-total, cohort analysis, rolling averages — depends on it. This guide explains why `CALCULATE` is special, how to use it correctly, and the subtle behaviors that cause 90% of intermediate DAX bugs. Microsoft documents every case in the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax).
 
 
-> **Sample model used in this article.** The DAX below assumes a typical sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. The free starter model we ship uses `Sales[Units]` instead of `Quantity` and has no `UnitCost` / `DiscountPct` columns — rename those references if you follow along with the downloadable file ([free templates](/templates/)).
+> **Sample model used in this article.** The DAX below assumes a sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. [Download the companion model](/downloads/sample-sales-model.pbix) — it has exactly those columns plus a `Date` table with the relationship already in place, so every snippet below runs as written.
 
 ## Why CALCULATE matters
 
@@ -135,7 +135,7 @@ CALCULATE(
 Boolean filters like `Sales[Status] = "Paid"` are the simplest filter argument form. They work for a single column and a single value (or `IN` list). For more complex logic, use `FILTER`:
 
 <figure>
-  <img src="/images/tutorials/calculate-function/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the Paid Revenue measure built with CALCULATE and a Status = Paid filter" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/calculate-function/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the Paid Revenue measure built with CALCULATE and a Status = Paid filter" loading="lazy" width="920" height="520" />
   <figcaption><code>CALCULATE</code> replaces the filter context on <code>Status</code> with <code>"Paid"</code>. Everything else the visual filters on — region, date, product — still applies, which is why the same measure returns a different number for each row of a matrix.</figcaption>
 </figure>
 
@@ -262,7 +262,7 @@ RANKX(
 The `ALL(Region[RegionName])` in `RANKX` ensures the ranking considers every region, not just the filtered one. Without it, every region would rank #1 because it's the only one visible.
 
 <figure>
-  <img src="/images/tutorials/calculate-function/02-result-matrix.png" alt="Matrix visual by region comparing Total Sales, Paid Revenue and Revenue SUMX" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/calculate-function/02-result-matrix.png" alt="Matrix visual by region comparing Total Sales, Paid Revenue and Revenue SUMX" loading="lazy" width="920" height="520" />
   <figcaption>Three measures side by side in one matrix: the plain total, the <code>CALCULATE</code>-filtered <code>Paid Revenue</code>, and a <code>SUMX</code> iterator. Putting them in the same visual is the fastest way to see a filter mistake — if <code>Paid Revenue</code> equals <code>Total Sales</code> in any row, the filter argument is being ignored.</figcaption>
 </figure>
 

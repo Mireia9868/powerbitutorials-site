@@ -10,6 +10,7 @@ export const SITE_LANG = "en";
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/tutorials/", label: "Tutorials" },
+  { href: "/templates/", label: "Templates" },
   { href: "/tools/", label: "Tools" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },

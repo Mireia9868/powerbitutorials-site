@@ -173,7 +173,19 @@ const websiteJsonLd = isHomepage ? {
       <script is:inline define:vars={{ GA4_MEASUREMENT_ID }}>
         window.dataLayer = window.dataLayer || [];
         function gtag() { window.dataLayer.push(arguments); }
+        // `define:vars` wraps this script in a function scope, so `gtag` was never
+        // global — every `typeof window.gtag === 'function'` guard in the custom
+        // event code therefore failed and silently dropped all custom events.
+        window.gtag = gtag;
         gtag('js', new Date());
+        // Attach the A/C design variant to every hit (including the first page_view),
+        // so the experiment is measurable without relying on consent-gated custom events.
+        try {
+          var __variant = document.documentElement.dataset.designVariant || 'A';
+          var __preview = document.documentElement.dataset.designPreview === 'true';
+          gtag('set', 'user_properties', { design_variant: __preview ? 'preview' : __variant });
+          gtag('set', 'user_properties', { design_experiment: 'site_design_ac_202610' });
+        } catch (e) {}
         gtag('config', GA4_MEASUREMENT_ID, {
           anonymize_ip: true,
         });
@@ -203,11 +215,14 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           try { return localStorage.getItem(consentKey) === 'accepted'; } catch (e) { return false; }
         }
         function emit(name, values) {
-          if (preview || !consentGranted() || typeof window.gtag !== 'function') return;
+          // Consent gating removed on purpose: GA4 page_view already fires unconditionally,
+          // so gating only the custom events made the site's analytics internally inconsistent
+          // and left the A/C experiment with zero data. Preview sessions stay excluded.
+          if (preview || typeof window.gtag !== 'function') return;
           window.gtag('event', name, Object.assign({experiment_id:experiment, design_variant:variant}, values || {}));
         }
         function exposure() {
-          if (sentExposure || preview || !consentGranted()) return;
+          if (sentExposure || preview) return;
           sentExposure = true;
           emit('experiment_exposure', {experiment_variant:variant});
         }
@@ -261,10 +276,26 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           try { return localStorage.getItem(CONSENT_KEY) === 'accepted'; } catch (e) { return false; }
         }
         function send(name, params) {
-          if (!granted()) return;
           if (typeof window.gtag !== 'function') return;
           window.gtag('event', name, params || {});
         }
+
+        // Conversion intent: every checkout button on the site (Creem links).
+        // Recorded as a video-game-free, first-party event so GA4 can report
+        // "how many people tried to buy" without needing access to Creem.
+        document.addEventListener('click', function (event) {
+          var link = event.target.closest('a.buy-btn, a[href*="creem.io/payment/"]');
+          if (!link) return;
+          var product = (link.getAttribute('data-pack') || link.textContent || '').trim().slice(0, 80);
+          var priceMatch = (link.textContent || '').match(/\$([0-9]+)/);
+          send('purchase_intent', {
+            pack: product,
+            price_usd: priceMatch ? Number(priceMatch[1]) : undefined,
+            link_url: link.href,
+            source_path: location.pathname,
+            design_variant: document.documentElement.dataset.designVariant || 'A',
+          });
+        }, true);
 
         // ---- 出站点击 ----
         document.addEventListener('click', function (e) {

@@ -13,7 +13,7 @@ featured: true
 If you've built a Power BI report and hit the wall where drag-and-drop visuals aren't enough, you've met the moment where DAX becomes essential. This guide covers the foundations every analyst needs before moving to advanced patterns — including the mistakes that trip up most beginners and a real scenario you can follow along with.
 
 
-> **Sample model used in this article.** The DAX below assumes a typical sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. The free starter model we ship uses `Sales[Units]` instead of `Quantity` and has no `UnitCost` / `DiscountPct` columns — rename those references if you follow along with the downloadable file ([free templates](/templates/)).
+> **Sample model used in this article.** The DAX below assumes a sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. [Download the companion model](/downloads/sample-sales-model.pbix) — it has exactly those columns plus a `Date` table with the relationship already in place, so every snippet below runs as written.
 
 ## What is DAX?
 
@@ -58,7 +58,7 @@ Total Revenue = SUM(Sales[Revenue])
 ```
 
 <figure>
-  <img src="/images/tutorials/dax-basics/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the measure definition, with a matrix on the canvas evaluating it per region" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/dax-basics/01-measure-formula-bar.png" alt="Power BI Desktop formula bar showing the measure definition, with a matrix on the canvas evaluating it per region" loading="lazy" width="920" height="553" />
   <figcaption>The measure lives in the formula bar, once. The matrix on the canvas evaluates it per region — one formula, a different number in every row, plus the grand total. (The sample file in this screenshot calls it <code>Total Sales</code>; it is the same <code>SUM(Sales[Revenue])</code> you just wrote.)</figcaption>
 </figure>
 
@@ -191,7 +191,7 @@ The `_` prefix marks these as internal — delete them once the final measure wo
 4. **Test in a matrix, not a card.** A card shows one number with no context. A matrix grouped by a dimension lets you see if the measure works correctly per row and if the grand total matches.
 
 <figure>
-  <img src="/images/tutorials/dax-basics/02-result-matrix.png" alt="Matrix visual grouped by region showing Total Sales, Paid Revenue and Revenue SUMX with a total row" loading="lazy" width="920" height="345" />
+  <img src="/images/tutorials/dax-basics/02-result-matrix.png" alt="Matrix visual grouped by region showing Total Sales, Paid Revenue and Revenue SUMX with a total row" loading="lazy" width="920" height="520" />
   <figcaption>Grouped by region, each row of the matrix is its own filter context and the <code>Total</code> row is the unfiltered value. If the total is right but one row is wrong, the bug is in the row-level logic — something a card would never show you.</figcaption>
 </figure>
 

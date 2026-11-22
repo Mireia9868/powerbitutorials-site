@@ -239,6 +239,19 @@ const breadcrumbJsonLd = {
             </a>
           )}
         </nav>
+
+        <!-- Paid packs CTA — visible at the end of every article -->
+        <aside class="pack-cta">
+          <h2>Working on a real model?</h2>
+          <p>
+            The packs ship the model and the measures behind these articles:
+            a <strong>$9</strong> time-intelligence pack (date table + 12 measures)
+            and a <strong>$39</strong> finance pack (PBIX + PBIT + report pages).
+          </p>
+          <p>
+            <a class="pack-cta-btn" href="/templates/">See the packs →</a>
+          </p>
+        </aside>
       </div>
 
       <!-- Right: Ad sidebar -->
@@ -464,6 +477,27 @@ const breadcrumbJsonLd = {
   }
 
   /* Related */
+  .pack-cta {
+    margin: 40px 0 8px;
+    padding: 22px 24px;
+    border: 1px solid var(--c-border);
+    border-left: 4px solid var(--c-accent);
+    border-radius: 8px;
+    background: var(--c-bg-soft);
+  }
+  .pack-cta h2 { font-size: 1.15rem; margin: 0 0 8px; }
+  .pack-cta p { margin: 0 0 10px; color: var(--c-text-muted); }
+  .pack-cta-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 6px;
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .pack-cta-btn:hover { opacity: 0.9; }
+
   .related-section {
     padding: 56px 0 80px;
     margin-top: 56px;

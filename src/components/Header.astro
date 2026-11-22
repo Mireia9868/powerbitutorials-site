@@ -26,6 +26,8 @@ const isActive = (href: string) =>
       </ul>
     </nav>
 
+    <a class="header-cta" href="/templates/">Packs from $9</a>
+
     <div class="lang-switch">
       <details>
         <summary aria-label="Change language">
@@ -228,3 +230,21 @@ const isActive = (href: string) =>
     toggle.setAttribute("aria-expanded", String(!!open));
   });
 </script>
+
+<style>
+  .header-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    margin-right: 10px;
+    border-radius: 6px;
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .header-cta:hover { opacity: 0.9; }
+  @media (max-width: 720px) { .header-cta { display: none; } }
+</style>
