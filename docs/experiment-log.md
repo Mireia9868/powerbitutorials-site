@@ -11,7 +11,7 @@
 | 2026-11-19 | 内嵌工具打开事件埋点 | 新增事件 | `ed8fed2` |
 | 2026-11-22 | ① **根因修复**：`define:vars` 把 GA 初始化脚本包进函数作用域，`gtag` 从未挂到 `window`，所有 `typeof window.gtag === 'function'` 守卫静默失败 → 自定义事件 30 天 0 条；补 `window.gtag = gtag` 修复（提交 `ff205f4`）。② 变体改为写 GA4 user property `design_variant`（每个 hit 携带，含首个 page_view）；③ 自定义事件不再受 cookie 同意 gate（与 page_view 的采集口径对齐）；④ 新增 `purchase_intent` 转化事件（覆盖所有 Creem 购买按钮，`data-pack` 标注产品） | 实验从今天起才算真正开始 | `ff205f4` / `b914d91` |
 | 2026-11-22 | www → 裸域 301（`functions/_middleware.js`） | 归因域名统一 | `d7b8129` |
-| 2026-11-22 | `/templates/` 与 `/tools/` 页面级视觉改版（网格 hero、卡片网格、FAQ、final CTA），新增页面级样式 `src/styles/hub-design.css`；**仅这两个页面**，未改 BaseLayout / 全局 token / 全站实验脚本。A/C 两变体使用同一套结构，仅配色随 `data-design-variant` 变化；保留英文文案、Creem `buy-btn` + `data-pack`、GA4 埋点 | 两页视觉/结构变更，会进入参与率与 `purchase_intent` 统计；A/C 两组同步变化，不能把这两页的指标变化归因于变体差异 | `f126c82` |
+| 2026-11-22 | `/templates/` 与 `/tools/` 页面级视觉改版（网格 hero、卡片网格、FAQ、final CTA），新增页面级样式 `src/styles/hub-design.css`；**仅这两个页面**，未改 BaseLayout / 全局 token / 全站实验脚本。A/C 两变体使用同一套结构，仅配色随 `data-design-variant` 变化；保留英文文案、Creem `buy-btn` + `data-pack`、GA4 埋点 | 两页视觉/结构变更，会进入参与率与 `purchase_intent` 统计；A/C 两组同步变化，不能把这两页的指标变化归因于变体差异 | `901a4bd` |
 
 ### 基线（2026-10-23 → 2026-11-22，GA4 属性 548614588）
 
