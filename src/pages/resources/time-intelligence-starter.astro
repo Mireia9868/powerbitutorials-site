@@ -4,13 +4,13 @@ import { NEWSLETTER } from "../../consts";
 ---
 
 <BaseLayout
-  title="Free Time Intelligence Starter Pack"
-  description="A marked date table and 12 time-intelligence measures for Power BI, with the three bugs that make TOTALYTD return the wrong number."
+  title="Time Intelligence Starter Pack"
+  description="A marked date table and 12 time-intelligence measures for Power BI, with the three bugs that make TOTALYTD return the wrong number. $29 one-time."
 >
   <article class="lp">
     <div class="content-width">
 
-      <span class="page-eyebrow">Free download</span>
+      <span class="page-eyebrow">Paid pack · $29</span>
       <h1>The 12 time-intelligence measures every Power BI model needs</h1>
 
       <p class="lede">
@@ -55,55 +55,17 @@ import { NEWSLETTER } from "../../consts";
       </figure>
 
       <section class="signup">
-        <h2>Get the pack</h2>
-        <p class="signup-sub">One email with the download link. Then one email a week about a Power BI problem worth fixing.</p>
-
-        <!-- Buttondown 免费档没有 Automations（$29/月），所以不能靠 welcome email 交付。
-             这里改成：提交进 Buttondown（后台 double opt-in 会给用户发确认信），
-             同时页面上直接放出下载链接 —— 用户不必等任何邮件就能拿到文件。
-             代价是假邮箱也能下载，但这是免费包，不值得为此加摩擦。 -->
-        <form
-          class="signup-form"
-          id="pack-form"
-          action={NEWSLETTER.action}
-          method="post"
-          target={NEWSLETTER.iframeName}
-        >
-          <label class="sr-only" for="email">Email address</label>
-          <input
-            id="email"
-            type="email"
-            name={NEWSLETTER.fieldName}
-            placeholder="you@company.com"
-            autocomplete="email"
-            required
-          />
-          <button type="submit">Send me the pack</button>
-        </form>
-        <iframe name={NEWSLETTER.iframeName} style="display:none" title="subscription"></iframe>
-
-        <div class="reveal" id="pack-reveal" hidden>
-          <p class="reveal-title">Your download is ready</p>
-          <a class="reveal-link"
-             href="https://drive.google.com/drive/folders/1OoTyeEJI_EB10MtrtA9PFW07wBtRTpaI"
-             target="_blank" rel="noopener">
-            Open the Time Intelligence Starter Pack →
-          </a>
-          <p class="reveal-note">
-            One zip: README.pdf (start here), DateTable.pq, Measures.dax.
-          </p>
-        </div>
-
-        <noscript>
-          <p class="fineprint">
-            JavaScript is off, so the download link can't appear here.
-            Email <a href="mailto:hello@powerbitutorials.com">hello@powerbitutorials.com</a>
-            and I'll send the pack directly.
-          </p>
-        </noscript>
-
+        <h2>Get the pack — $29</h2>
+        <p class="signup-sub">
+          One-time payment, commercial use included. Checkout is handled by
+          Creem; the files are delivered as soon as the payment clears.
+        </p>
+        <p>
+          <a class="buy-btn" href="https://www.creem.io/payment/prod_6MWF9mi2WTSuvxlnNxSgwZ" rel="noopener">Buy Time Intelligence Starter Pack · $29 →</a>
+        </p>
         <p class="fineprint">
-          No spam. Unsubscribe in one click. I don't sell or share your address.
+          Instant download after payment · card, Apple Pay and Google Pay ·
+          VAT calculated at checkout · 12 months of corrections.
         </p>
       </section>
 
@@ -124,24 +86,7 @@ import { NEWSLETTER } from "../../consts";
 
     </div>
   </article>
-<script is:inline>
-  (function () {
-    var form = document.getElementById("pack-form");
-    var reveal = document.getElementById("pack-reveal");
-    if (!form || !reveal) return;
-    form.addEventListener("submit", function () {
-      // 表单提交到隐藏 iframe，页面不会跳转；
-      // 稍等一拍再把链接亮出来，避免用户以为是表单校验失败。
-      setTimeout(function () {
-        reveal.hidden = false;
-        reveal.scrollIntoView({ behavior: "smooth", block: "center" });
-        if (window.gtag) window.gtag("event", "lead_magnet_download", {
-          pack: "time_intelligence",
-        });
-      }, 500);
-    });
-  })();
-</script>
+
 </BaseLayout>
 
 <style>
@@ -272,4 +217,17 @@ import { NEWSLETTER } from "../../consts";
     .lp h1 { font-size: 1.8rem; }
     .signup { padding: 24px 20px; }
   }
+</style>
+
+<style is:global>
+  .buy-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .buy-btn:hover { opacity: 0.9; }
 </style>

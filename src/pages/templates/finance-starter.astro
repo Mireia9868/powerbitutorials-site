@@ -60,7 +60,7 @@ const jsonLd = {
         <iframe name={NEWSLETTER.iframeName} style="display:none" title="subscription"></iframe>
 
         <p class="micro">
-          $39 at launch · early access gets 30% off · PBIX + PBIT + source files ·
+          $39 one-time · PBIX + PBIT + README · commercial use included ·
           one email when it ships, nothing else
         </p>
 
@@ -185,22 +185,19 @@ const jsonLd = {
       </section>
 
       <section class="block">
-        <h2>One price, two licences</h2>
+        <h2>One price, one licence</h2>
         <div class="pricing">
           <div class="price-card">
-            <h3>Personal</h3>
+            <h3>Finance Starter Pack</h3>
             <p class="amount">$39</p>
-            <p>Use it in your own reports. Modify anything. Keep it.</p>
-          </div>
-          <div class="price-card">
-            <h3>Commercial</h3>
-            <p class="amount">$89</p>
-            <p>Include it in paid client deliverables. Still no reselling the template.</p>
+            <p>Personal and commercial use in one licence: use it in your own reports and in paid client deliverables. No reselling the files.</p>
+            <p><a class="buy-btn" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy now · $39 →</a></p>
           </div>
         </div>
         <p class="caption">
           One-time payment · lifetime use of this version · 12 months of bug
-          fixes · PBIX and PBIT included. Prices in USD; digital delivery.
+          fixes · PBIX + PBIT + README included. Prices in USD; VAT calculated
+          at checkout; digital delivery.
         </p>
       </section>
 
@@ -374,4 +371,17 @@ const jsonLd = {
     .signup-form { flex-direction: column; }
     .product h1 { font-size: 1.75rem; }
   }
+</style>
+
+<style is:global>
+  .buy-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .buy-btn:hover { opacity: 0.9; }
 </style>
