@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { NEWSLETTER } from "../../consts";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -13,7 +12,7 @@ const jsonLd = {
     "@type": "Offer",
     price: "39",
     priceCurrency: "USD",
-    availability: "https://schema.org/PreOrder",
+    availability: "https://schema.org/InStock",
     url: "https://powerbitutorials.com/templates/finance-starter/",
   },
 };
@@ -30,7 +29,7 @@ const jsonLd = {
   <article class="product">
     <div class="content-width">
 
-      <span class="page-eyebrow">Template · Early access</span>
+      <span class="page-eyebrow">Template · $39 one-time</span>
       <h1>A P&amp;L report you can open — and actually change.</h1>
       <p class="lede">
         Star schema, 46 audited measures, four finished pages, and 1,728 rows of
@@ -38,43 +37,18 @@ const jsonLd = {
         should be, not the way a screenshot pack is.
       </p>
 
-      <section class="signup" id="early-access">
-        <form
-          class="signup-form"
-          id="waitlist-form"
-          action={NEWSLETTER.action}
-          method="post"
-          target={NEWSLETTER.iframeName}
-        >
-          <label class="visually-hidden" for="email">Email address</label>
-          <input
-            id="email"
-            type="email"
-            name={NEWSLETTER.fieldName}
-            placeholder="you@company.com"
-            autocomplete="email"
-            required
-          />
-          <button type="submit">Join the early-access list</button>
-        </form>
-        <iframe name={NEWSLETTER.iframeName} style="display:none" title="subscription"></iframe>
-
-        <p class="micro">
-          $39 one-time · PBIX + PBIT + README · commercial use included ·
-          one email when it ships, nothing else
+      <section class="signup" id="get-the-pack">
+        <h2>Get the pack — $39</h2>
+        <p class="signup-sub">
+          One-time payment, commercial use included. Checkout is handled by
+          Creem; the files are delivered as soon as the payment clears.
         </p>
-
-        <div class="reveal" id="waitlist-reveal" hidden>
-          <p class="reveal-title">You’re on the list</p>
-          <p class="reveal-note">
-            I’ll email you the moment the pack is ready, with the early-access
-            code. If you don’t hear from me in two weeks, reply to that email and
-            I’ll tell you exactly where it stands.
-          </p>
-        </div>
-
+        <p>
+          <a class="buy-btn" data-pack="finance-starter-pack" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy Finance Starter Pack · $39 →</a>
+        </p>
         <p class="fineprint">
-          No spam. Unsubscribe in one click. I don’t sell or share your address.
+          PBIX + PBIT + README · VAT calculated at checkout · 12 months of bug
+          fixes · instant digital delivery.
         </p>
       </section>
 
@@ -230,39 +204,23 @@ const jsonLd = {
           on the six values in <code>L1</code>, so renaming the rest is safe.
         </p>
 
-        <h3>When does it ship?</h3>
+        <h3>How do I get the files?</h3>
         <p>
-          When the sample model passes the self-check list — the same list
-          published in the docs. The early-access list gets one email on launch
-          day, nothing before that.
+          Checkout is handled by Creem. The files are delivered as soon as the
+          payment clears; use the receipt email if you need to download them
+          again.
         </p>
       </section>
 
       <section class="closing">
         <h2>Start from a model that already works.</h2>
         <p>Two days of modelling, or one afternoon of adjusting. Your call.</p>
-        <a class="btn" href="#early-access">Join the early-access list</a>
+        <a class="btn" href="#get-the-pack">Get the pack now</a>
       </section>
 
     </div>
   </article>
 
-  <script is:inline>
-    (function () {
-      var form = document.getElementById("waitlist-form");
-      var reveal = document.getElementById("waitlist-reveal");
-      if (!form || !reveal) return;
-      form.addEventListener("submit", function () {
-        setTimeout(function () {
-          reveal.hidden = false;
-          reveal.scrollIntoView({ behavior: "smooth", block: "center" });
-          if (window.gtag) {
-            window.gtag("event", "waitlist_signup", { product: "finance_starter" });
-          }
-        }, 900);
-      });
-    })();
-  </script>
 </BaseLayout>
 
 <style>
@@ -280,28 +238,8 @@ const jsonLd = {
   }
 
   .signup { margin-bottom: 48px; max-width: 620px; }
-  .signup-form { display: flex; gap: 8px; }
-  .signup-form input {
-    flex: 1; padding: 12px 14px; font-size: 0.98rem; font-family: inherit;
-    border: 1px solid var(--c-border-strong); border-radius: var(--radius);
-    background: var(--c-bg); color: var(--c-text);
-  }
-  .signup-form input:focus { outline: 2px solid var(--c-accent); outline-offset: -1px; }
-  .signup-form button {
-    padding: 12px 20px; border: none; border-radius: var(--radius);
-    background: var(--c-accent); color: var(--c-accent-text);
-    font-size: 0.95rem; font-weight: 700; font-family: inherit; cursor: pointer;
-    white-space: nowrap;
-  }
-  .signup-form button:hover { background: var(--c-accent-hover); }
-  .micro { font-size: 0.82rem; color: var(--c-text-dim); margin: 10px 0 0; }
-  .reveal {
-    margin-top: 16px; padding: 16px 18px;
-    border: 1px solid var(--c-accent-border); background: var(--c-accent-soft);
-    border-radius: var(--radius);
-  }
-  .reveal-title { margin: 0 0 6px; font-weight: 700; }
-  .reveal-note { margin: 0; font-size: 0.9rem; color: var(--c-text-muted); }
+  .signup h2 { margin: 0 0 8px; font-size: 1.35rem; }
+  .signup-sub { color: var(--c-text-muted); margin: 0 0 20px; font-size: 0.95rem; }
   .fineprint { font-size: 0.78rem; color: var(--c-text-dim); margin: 10px 0 0; }
 
   .block { margin-bottom: 48px; max-width: 76ch; }
@@ -368,7 +306,6 @@ const jsonLd = {
 
   @media (max-width: 760px) {
     .claims, .two-col, .pricing { grid-template-columns: 1fr; }
-    .signup-form { flex-direction: column; }
     .product h1 { font-size: 1.75rem; }
   }
 </style>
