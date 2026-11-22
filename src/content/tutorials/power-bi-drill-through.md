@@ -1,6 +1,6 @@
 ---
-title: "Power BI Drill Through: How to Set Up Fields and Filters"
-description: "Set up drill through in Power BI: which fields to add, how filter passthrough works, cross-report drilling, and why the menu sometimes is not there."
+title: "Power BI Drill Through Fields: Setup, Filters & Cross-Report"
+description: "Power BI drill through fields: which ones to add, how filter passthrough works, cross-report drilling, and why the drill through menu sometimes is not there."
 pubDate: 2026-07-23
 category: "visualization"
 difficulty: "Intermediate"
@@ -9,6 +9,8 @@ author: Mireia
 featured: false
 draft: false
 ---
+
+Power BI drill through fields are the columns you place in a target page's **Drill through** well; they decide which data point a user can click and what filters carry over. Set those fields first, then the menu works.
 
 Drill through lets users click a data point and jump to a detailed report page filtered to that specific context. This guide covers setup, filter passthrough, cross-report drill through, and the design patterns that make drill-through reports intuitive.
 

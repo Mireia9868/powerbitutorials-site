@@ -1,6 +1,6 @@
 ---
-title: "DAX SWITCH: Syntax, 4 Patterns, and Why It Returns Blank"
-description: "SWITCH replaces nested IFs with readable logic. Four patterns, the order-of-evaluation rule, and the mistakes that make it return blank."
+title: "DAX SWITCH in Power BI: Syntax, 4 Patterns & BLANK Fix"
+description: "DAX SWITCH in Power BI replaces nested IFs with readable logic. Four patterns, the order-of-evaluation rule, and the mistakes that make SWITCH return BLANK."
 pubDate: 2026-07-26
 category: "dax"
 difficulty: "Intermediate"
@@ -8,7 +8,7 @@ tags: ["dax", "switch", "conditional-logic"]
 author: Mireia
 ---
 
-SWITCH is the DAX function for evaluating a single expression against multiple possible values and returning different results for each match. It replaces chains of nested IF statements with a flat, readable structure that is easier to maintain and debug.
+DAX SWITCH in Power BI evaluates one expression against multiple possible values and returns a result for each match. It replaces chains of nested IF statements with a flat, readable structure — but if no match is found and no default is supplied, it returns BLANK. The first section below shows that failure case and the fix.
 
 If you have ever written `IF(condition1, result1, IF(condition2, result2, IF(condition3, result3, default)))` and lost track of the parentheses, SWITCH is the fix. This guide covers the syntax, four practical patterns every analyst needs, the SWITCH-vs-IF decision, and the common mistakes that produce blank or unexpected results. Microsoft's [SWITCH reference](https://learn.microsoft.com/en-us/dax/switch-function-dax) covers the full syntax. The same argument list, with a runnable example, also sits in the [DAX function reference](/tools/dax-functions/#switch) alongside IF, COALESCE and ISBLANK.
 
