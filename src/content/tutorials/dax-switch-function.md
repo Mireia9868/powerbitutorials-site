@@ -142,6 +142,35 @@ Sales with Fallback = SWITCH(
 
 This ensures the visual always shows a number rather than an empty space, while still preserving the original logic for valid values.
 
+## Worked example: dynamic title and KPI from one SWITCH
+
+A single report page needs to show three KPIs — Sales, Profit and Margin — driven by a field parameter slicer, with a matching title and colour. One `SWITCH` on the selected value drives all three:
+
+```dax
+KPI Value =
+VAR Selection = SELECTEDVALUE ( 'Metric Selector'[Metric] )
+RETURN
+    SWITCH (
+        Selection,
+        "Sales",  [Total Sales],
+        "Profit", [Total Profit],
+        "Margin", [Margin %],
+        [Total Sales]   -- fallback
+    )
+```
+
+```dax
+KPI Colour =
+SWITCH (
+    SELECTEDVALUE ( 'Metric Selector'[Metric] ),
+    "Profit", "#22C55E",
+    "Margin", "#3B82F6",
+    "#F2C811"
+)
+```
+
+Put `[KPI Value]` in a card, bind `[KPI Colour]` to the card's font colour via **Conditional formatting → Field value**, and use `"KPI: " & SELECTEDVALUE('Metric Selector'[Metric])` as the title. Now one slicer reshapes three visuals. The `VAR` matters: it evaluates the selection once instead of repeating `SELECTEDVALUE` in every branch — the same habit recommended in the [DAX variables guide](/tutorials/dax-variables-guide/). For the full parameter setup see [field parameters](/tutorials/power-bi-field-parameters/), and if the three branches grow into ten, prefer a [CALCULATE-based selection pattern](/tutorials/calculate-function/) over a long SWITCH. Before shipping, time the card in [Performance Analyzer](/tutorials/power-bi-performance-optimization/) — a SWITCH over measures is cheap, but a SWITCH that re-scans the fact table in each branch is not.
+
 ## SWITCH vs IF: When to Use Which
 
 | Criterion | SWITCH | Nested IF |

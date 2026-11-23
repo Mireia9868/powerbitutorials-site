@@ -122,6 +122,20 @@ Load `Orders` and `Customers` as separate tables. In the Power BI model view, cr
 - Use **Option B (relationship)** for standard star schema designs. It's the recommended approach — less memory, more flexible, and follows best practices.
 - Use **Option A (merge)** only when you need the enriched table as a flat export, or when the relationship approach doesn't work (e.g., merging two fact tables with no shared dimension).
 
+## Worked example: append two years of monthly sales
+
+Real decision, real numbers. You have `Sales_2025` and `Sales_2026`, each with identical columns (`Date`, `Product`, `Region`, `Amount`), 120,000 rows and 135,000 rows. You want one continuous trend line.
+
+**Append is correct here** — same columns, more rows:
+
+```m
+Combined = Table.Combine({Sales_2025, Sales_2026})
+```
+
+One `Table.Combine` produces a 255,000-row table. Set each source's types identically first — if `Date` is text in one file and date in the other, the appended column becomes text and time intelligence silently breaks. In Power Query use **Changed Type** on both queries before appending, then confirm the merged column shows the `date` icon.
+
+**Merge would be wrong here** — it adds columns, not rows. Merging these two tables side by side would produce a wide table with duplicated `Amount_2025` / `Amount_2026` columns and no way to draw a single trend. The rule of thumb: append when the schema matches and you need more history; merge when you need to look up an attribute from another table. See the dedicated [append queries](/tutorials/power-query-append-queries/) and [merge queries](/tutorials/power-query-merge-queries/) guides for the full UI steps, and [data modeling star schema](/tutorials/data-modeling-star-schema/) for why keeping facts stacked and dimensions separate is the model Power BI handles fastest.
+
 ## Common mistakes
 
 **Mistake 1: Appending tables with mismatched column names.** `JanSales` has `Revenue`, `FebSales` has `RevenueAmount`. After append, you get both columns with `null` interleaving. Fix: rename columns to match before appending.
