@@ -1,6 +1,6 @@
 ---
-title: "Power Query Parameters: Build Dynamic, Reusable Data Sources"
-description: "Swap environments, date ranges or test data from a dropdown instead of editing M code. How to create parameters and pass them in."
+title: "Power BI Data Source Parameters: Setup in Power Query"
+description: "Use Power BI data source parameters to switch servers, paths and date ranges from a dropdown instead of editing M code. Setup and three working patterns."
 pubDate: 2026-07-18
 category: "power-query"
 difficulty: "Intermediate"
@@ -9,7 +9,9 @@ author: Mireia
 featured: false
 ---
 
-Hardcoding server names, file paths, and date ranges in Power Query works — until you need to switch from a development database to production, or change a reporting period. Parameters solve this by externalizing values into a manageable dropdown. This guide covers the fundamentals and the three patterns where parameters shine.
+Power BI data source parameters let you swap a server, database, file path or date range from a dropdown instead of editing M code. Create the parameter once, reference it in the source step, and change it in one place.
+
+Hardcoding those values works — until you need to move from development to production, or change a reporting period. This guide covers the fundamentals and the three patterns where data source parameters matter.
 
 ## What is a parameter?
 

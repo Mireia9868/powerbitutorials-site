@@ -147,6 +147,18 @@ Another pitfall: don't use `EARLIER` inside the date table calculated column log
 
 Once your date table is in place, every time intelligence measure becomes straightforward. The table is also where you add fiscal calendar logic, working-day flags, and relative date markers, all of which pay for themselves the moment a stakeholder asks for a rolling 13-week view.
 
+## When the date table does not work in a filter or slicer
+
+A date slicer that lists the right years but filters nothing is almost always a relationship or field-choice problem, not a DAX problem. Work through these checks in order — this is the fastest fix for a calendar table not working:
+
+1. **Marked as a date table?** Select the table → **Table tools → Mark as date table** and choose the contiguous `Date` column. Time intelligence and date filters rely on this flag.
+2. **Active relationship to the fact table?** In **Model view** confirm a solid (active) line from `Date[Date]` to the fact date column. A dashed line means inactive — date filters will not flow until you activate it or use `USERELATIONSHIP`.
+3. **Using the date table's column in the visual?** The slicer must use `Date[Date]` (or a hierarchy built from it), not `Sales[OrderDate]`. Filtering the fact column directly bypasses the marked table.
+4. **Does the range cover the facts?** A `CALENDAR` table starting in 2024 will not filter 2023 rows. Build it from the data with `CALENDAR ( MIN ( Sales[OrderDate] ), MAX ( Sales[OrderDate] ) )` or widen the fixed bounds.
+5. **Auto Date/Time still on?** **File → Options → Data Load → Time intelligence** — switch off Auto Date/Time so hidden date tables do not compete with yours.
+
+If all five pass and the slicer still does nothing, check **Edit interactions** between the slicer and the visual, then test in a fresh report with a single table visual to isolate the model from the page design.
+
 ## FAQ
 
 ### Q: Should I use a DAX calculated table or a Power Query table?

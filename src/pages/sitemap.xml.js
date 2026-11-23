@@ -10,6 +10,7 @@ export async function GET({ site }) {
   // 静态页面 (trailing slash matches Astro build.format: "directory")
   const staticPages = [
     { loc: "/", priority: "1.0", changefreq: "weekly" },
+    { loc: "/de/", priority: "0.7", changefreq: "weekly" },
     { loc: "/tutorials/", priority: "0.9", changefreq: "weekly" },
     { loc: "/about/", priority: "0.5", changefreq: "monthly" },
     { loc: "/author/mireia/", priority: "0.5", changefreq: "monthly" },
@@ -40,21 +41,37 @@ export async function GET({ site }) {
   }
 
   // 教程详情页
-  // 德语区（slug 前缀 de-）目前是 noindex 的半成品，不进 sitemap：
-  // 一个 noindex 的 URL 出现在 sitemap 里是明确的实现错误。
+  // noindex 的页（含德语半成品摘要）不进 sitemap —— 一个 noindex URL
+  // 出现在 sitemap 里是明确的实现错误。完整翻译的德语页正常收录。
+  const deTranslated = new Set(
+    tutorials.filter((t) => t.slug.startsWith("de-") && !t.data.draft && !t.data.noindex)
+      .map((t) => t.slug.slice(3))
+  );
   for (const t of tutorials) {
-    if (t.data.draft) continue;
-    if (t.slug.startsWith("de-")) continue;
+    if (t.data.draft || t.data.noindex) continue;
+    const loc = `${baseUrl}/tutorials/${t.slug}/`;
+    const alternates = [];
+    if (t.slug.startsWith("de-")) {
+      const en = t.slug.slice(3);
+      alternates.push({ hreflang: "de", href: loc });
+      alternates.push({ hreflang: "en", href: `${baseUrl}/tutorials/${en}/` });
+      alternates.push({ hreflang: "x-default", href: `${baseUrl}/tutorials/${en}/` });
+    } else if (deTranslated.has(t.slug)) {
+      alternates.push({ hreflang: "en", href: loc });
+      alternates.push({ hreflang: "de", href: `${baseUrl}/tutorials/de-${t.slug}/` });
+      alternates.push({ hreflang: "x-default", href: loc });
+    }
     urls.push({
-      loc: `${baseUrl}/tutorials/${t.slug}/`,
+      loc,
       priority: "0.8",
       changefreq: "monthly",
       lastmod: t.data.updatedDate?.toISOString() || t.data.pubDate.toISOString(),
+      alternates,
     });
   }
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls
   .map(
     (u) => `  <url>
@@ -62,6 +79,15 @@ ${urls
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>${
       u.lastmod ? `\n    <lastmod>${u.lastmod}</lastmod>` : ""
+    }${
+      u.alternates?.length
+        ? `\n${u.alternates
+            .map(
+              (a) =>
+                `    <xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${a.href}" />`
+            )
+            .join("\n")}`
+        : ""
     }
   </url>`
   )

@@ -20,6 +20,8 @@ const tutorials = defineCollection({
     author: z.string().default("Power BI Tutorials Team"),
     heroImage: z.string().optional(),
     draft: z.boolean().default(false),
+    /** 半成品页显式标记为 noindex（如未翻译完的德语摘要），不进 sitemap */
+    noindex: z.boolean().default(false),
     featured: z.boolean().default(false),
   }),
 });

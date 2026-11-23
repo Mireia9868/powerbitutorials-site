@@ -1,6 +1,6 @@
 ---
-title: "DAX SWITCH: Syntax, 4 Patterns, and Why It Returns Blank"
-description: "SWITCH replaces nested IFs with readable logic. Four patterns, the order-of-evaluation rule, and the mistakes that make it return blank."
+title: "DAX SWITCH in Power BI: Syntax, 4 Patterns & BLANK Fix"
+description: "DAX SWITCH in Power BI replaces nested IFs with readable logic. Four patterns, the order-of-evaluation rule, and the mistakes that make SWITCH return BLANK."
 pubDate: 2026-07-26
 category: "dax"
 difficulty: "Intermediate"
@@ -8,7 +8,7 @@ tags: ["dax", "switch", "conditional-logic"]
 author: Mireia
 ---
 
-SWITCH is the DAX function for evaluating a single expression against multiple possible values and returning different results for each match. It replaces chains of nested IF statements with a flat, readable structure that is easier to maintain and debug.
+DAX SWITCH in Power BI evaluates one expression against multiple possible values and returns a result for each match. It replaces chains of nested IF statements with a flat, readable structure — but if no match is found and no default is supplied, it returns BLANK. The first section below shows that failure case and the fix.
 
 If you have ever written `IF(condition1, result1, IF(condition2, result2, IF(condition3, result3, default)))` and lost track of the parentheses, SWITCH is the fix. This guide covers the syntax, four practical patterns every analyst needs, the SWITCH-vs-IF decision, and the common mistakes that produce blank or unexpected results. Microsoft's [SWITCH reference](https://learn.microsoft.com/en-us/dax/switch-function-dax) covers the full syntax. The same argument list, with a runnable example, also sits in the [DAX function reference](/tools/dax-functions/#switch) alongside IF, COALESCE and ISBLANK.
 
@@ -141,6 +141,35 @@ Sales with Fallback = SWITCH(
 ```
 
 This ensures the visual always shows a number rather than an empty space, while still preserving the original logic for valid values.
+
+## Worked example: dynamic title and KPI from one SWITCH
+
+A single report page needs to show three KPIs — Sales, Profit and Margin — driven by a field parameter slicer, with a matching title and colour. One `SWITCH` on the selected value drives all three:
+
+```dax
+KPI Value =
+VAR Selection = SELECTEDVALUE ( 'Metric Selector'[Metric] )
+RETURN
+    SWITCH (
+        Selection,
+        "Sales",  [Total Sales],
+        "Profit", [Total Profit],
+        "Margin", [Margin %],
+        [Total Sales]   -- fallback
+    )
+```
+
+```dax
+KPI Colour =
+SWITCH (
+    SELECTEDVALUE ( 'Metric Selector'[Metric] ),
+    "Profit", "#22C55E",
+    "Margin", "#3B82F6",
+    "#F2C811"
+)
+```
+
+Put `[KPI Value]` in a card, bind `[KPI Colour]` to the card's font colour via **Conditional formatting → Field value**, and use `"KPI: " & SELECTEDVALUE('Metric Selector'[Metric])` as the title. Now one slicer reshapes three visuals. The `VAR` matters: it evaluates the selection once instead of repeating `SELECTEDVALUE` in every branch — the same habit recommended in the [DAX variables guide](/tutorials/dax-variables-guide/). For the full parameter setup see [field parameters](/tutorials/power-bi-field-parameters/), and if the three branches grow into ten, prefer a [CALCULATE-based selection pattern](/tutorials/calculate-function/) over a long SWITCH. Before shipping, time the card in [Performance Analyzer](/tutorials/power-bi-performance-optimization/) — a SWITCH over measures is cheap, but a SWITCH that re-scans the fact table in each branch is not.
 
 ## SWITCH vs IF: When to Use Which
 

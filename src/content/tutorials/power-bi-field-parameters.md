@@ -106,6 +106,17 @@ Color by Metric = SWITCH(
 )
 ```
 
+## Worked example: one slicer switches the metric on a matrix
+
+A regional sales matrix must let readers toggle between Revenue, Profit and Order Count without duplicating three visuals. Field parameters solve this in four steps.
+
+1. **Create the parameter**: **Modeling → New parameter → Fields**, add `[Total Sales]`, `[Total Profit]`, `[Total Quantity]`. This generates a `Metric Selector` table.
+2. **Add it as a slicer**: drop `Metric Selector[Metric]` on a slicer set to **Dropdown** — see the [slicers guide](/tutorials/power-bi-slicers-best-practices/) for single-select setup.
+3. **Bind the matrix**: put the parameter field in the matrix **Values** well. The matrix columns now follow the slicer selection.
+4. **Add a dynamic title**: `"By region — " & SELECTEDVALUE('Metric Selector'[Metric])`.
+
+The result is one matrix doing the work of three, with a stable layout that does not jump when the user switches metrics. This pairs naturally with [drill through](/tutorials/power-bi-drill-through/) — keep the parameter selection when drilling into a region's detail page. If instead of measures you need to switch the *dimension* (Region vs Product), build a second field parameter over those columns; the mechanism is identical. For a comparison of when a parameter beats bookmarks or a [SWITCH measure](/tutorials/dax-switch-function/), see the next section.
+
 ## Field Parameters vs Bookmarks vs SWITCH Measures
 
 | Feature | Field Parameters | Bookmarks | SWITCH Measures |

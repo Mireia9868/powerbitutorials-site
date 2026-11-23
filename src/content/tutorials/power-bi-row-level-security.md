@@ -1,6 +1,6 @@
 ---
-title: "Power BI Row-Level Security: Control Who Sees What Data"
-description: "Static and dynamic RLS with USERNAME(), deployment to the service, and the model patterns that scale to multi-tenant reports."
+title: "Power BI Row Level Security (RLS): Setup & Guidelines"
+description: "Set up row level security in Power BI: static and dynamic RLS, USERPRINCIPALNAME, role deployment, and the guidelines that keep your roles maintainable."
 pubDate: 2026-07-23
 category: "data-modeling"
 difficulty: "Intermediate"
@@ -10,7 +10,7 @@ featured: false
 draft: false
 ---
 
-Row-Level Security (RLS) filters data at the row level based on the user viewing the report. This guide covers static RLS, dynamic RLS with USERNAME(), deployment to the Power BI Service, and the design patterns for multi-tenant security models.
+Row level security in Power BI filters data at the row level based on the user viewing the report. This guide covers static and dynamic RLS, USERPRINCIPALNAME(), role deployment in the Power BI Service, and the guidelines that keep multi-tenant models maintainable.
 
 When multiple users share a report but should only see their own data, RLS is the answer. A regional manager sees only their region. A sales rep sees only their customers. An executive sees everything. The same report, the same data model — different rows visible per user. This guide covers the two RLS approaches and the patterns that make them maintainable.
 

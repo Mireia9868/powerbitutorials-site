@@ -1,6 +1,6 @@
 ---
-title: "DAX Basics: What It Is and How It Works"
-description: "What DAX is, why measures and calculated columns are not interchangeable, and the five formulas to write on your first day, with the rules behind each."
+title: "What Is DAX in Power BI? Definition + 5 Formulas"
+description: "What DAX is in Power BI, with the five formulas you will use on day one, a worked measure, and the difference between a measure and a calculated column."
 pubDate: 2026-06-15
 updatedDate: 2026-07-20
 category: "dax"
@@ -9,6 +9,8 @@ tags: ["dax", "basics", "measures", "calculated-columns"]
 author: Mireia
 featured: true
 ---
+
+DAX (Data Analysis Expressions) is the formula language used by Power BI to calculate values from your data model. It is what turns a table of numbers into a measure you can slice, filter, and trust.
 
 If you've built a Power BI report and hit the wall where drag-and-drop visuals aren't enough, you've met the moment where DAX becomes essential. This guide covers the foundations every analyst needs before moving to advanced patterns — including the mistakes that trip up most beginners and a real scenario you can follow along with.
 

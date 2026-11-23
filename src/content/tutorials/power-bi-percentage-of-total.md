@@ -65,6 +65,27 @@ Here `ALL ( Sales[Product] )` removes only the product filter, leaving region (a
 
 On the grand total row, the numerator equals the denominator, so the measure shows 100%. That is correct. If you want the total row blank, wrap with `IF ( HASONEVALUE ( Product[Product] ), … )`.
 
+## Show the value and percentage together in a bar graph
+
+A frequent follow-up is a bar graph where the bar length is the raw value but the label also shows each category's total value percentage. Power BI has no single built-in "value + percent" label, so use one of these two patterns.
+
+**Pattern A — two measures, labels plus table.** Keep `[Total Sales]` as the bar value and add the `% of Total (ALLEXCEPT)` measure from Pattern 2 above. Turn on data labels for the bar value, and place the percentage measure in a compact table or the tooltip beside the chart. This is the most reliable option because a numeric measure drives the bar while the percentage stays readable.
+
+**Pattern B — concatenated text measure for the label:**
+
+```dax
+Sales with % =
+FORMAT ( [Total Sales], "#,##0" ) & "  (" &
+FORMAT (
+    DIVIDE ( [Total Sales], CALCULATE ( [Total Sales], ALL ( Sales[Product] ) ) ),
+    "0.0%"
+) & ")"
+```
+
+This renders `12,400 (18.2%)`. Use it in a tooltip or card, not as the bar label — a text measure cannot set bar length, so the chart still needs `[Total Sales]` on the Y-axis.
+
+The denominator choice from the patterns above still applies: `ALL ( Sales[Product] )` gives share of all products and ignores a product slicer; `ALLEXCEPT` keeps the slicer context. Decide which total you mean before building the label.
+
 ## FAQ
 
 **Q: Why does my % of total not add to 100%?**

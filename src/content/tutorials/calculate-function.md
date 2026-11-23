@@ -1,6 +1,6 @@
 ---
-title: "CALCULATE in Power BI: Syntax, Filter Context & 3 Patterns"
-description: "CALCULATE is the only DAX function that changes filter context. Follow its evaluation order, then apply three reusable patterns with formulas you can copy."
+title: "DAX CALCULATE in Power BI: Syntax, Filter Context & Patterns"
+description: "DAX CALCULATE in Power BI changes filter context. Follow its evaluation order, then apply three reusable patterns with copyable DAX formulas."
 pubDate: 2026-06-22
 updatedDate: 2026-07-20
 category: "dax"
@@ -10,7 +10,9 @@ author: Mireia
 featured: true
 ---
 
-If DAX has a "boss function," it's `CALCULATE`. Every advanced pattern — time intelligence, percentage-of-total, cohort analysis, rolling averages — depends on it. This guide explains why `CALCULATE` is special, how to use it correctly, and the subtle behaviors that cause 90% of intermediate DAX bugs. Microsoft documents every case in the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax).
+DAX CALCULATE in Power BI is the function that changes filter context. If DAX has a "boss function," it's `CALCULATE`: every advanced pattern — time intelligence, percentage-of-total, cohort analysis, rolling averages — depends on it.
+
+This guide explains why `CALCULATE` is special, how to use it correctly, and the subtle behaviors that cause 90% of intermediate DAX bugs. Microsoft documents every case in the [CALCULATE reference](https://learn.microsoft.com/en-us/dax/calculate-function-dax).
 
 
 > **Sample model used in this article.** The DAX below assumes a sales table with `Sales[Quantity]`, `Sales[UnitPrice]`, `Sales[UnitCost]`, `Sales[DiscountPct]` and `Sales[Revenue]`. [Download the companion model](/downloads/sample-sales-model.pbix) — it has exactly those columns plus a `Date` table with the relationship already in place, so every snippet below runs as written.

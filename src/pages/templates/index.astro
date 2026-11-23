@@ -1,186 +1,225 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/hub-design.css";
 ---
 
 <BaseLayout
   title="Power BI Templates"
   description="Ready-to-use Power BI templates with a documented model underneath: a finance pack, a time-intelligence pack, and free starters. One-time purchase, PBIX and PBIT included."
 >
-  <article class="templates">
-    <div class="content-width">
-      <span class="page-eyebrow">Templates</span>
-      <h1>Models you can open, read, and change.</h1>
-      <p class="lede">
-        Every template here ships with the model specification, the measure
-        library, and a build guide — because a PBIX without those is a
-        screenshot you can't maintain.
-      </p>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;600&family=Inter:wght@400;500;600&family=Newsreader:wght@600;700&display=swap" rel="stylesheet" />
+  </Fragment>
 
-      <a class="template-card" href="/templates/finance-starter/">
-        <span class="tag">Paid · $39</span>
-        <h2>Finance Starter Pack</h2>
-        <p>
-          A P&amp;L report you can open and read: star schema, commented
-          measures, four report pages, and budget vs actual that survives a
-          slicer. Ships as working PBIX plus a data-free PBIT template.
-        </p>
-        <span class="meta">$39 one-time · PBIX + PBIT + README · commercial use included</span>
-        <span class="arrow">See what's inside →</span>
-      </a>
+  <div class="hub-v2">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="wrap">
+        <div>
+          <p class="kicker">Templates / 01</p>
+          <h1>Models you can open, read, and change.</h1>
+          <p class="hero__sub">
+            Every template here ships with the model specification, the measure
+            library, and a build guide — because a PBIX without those is a
+            screenshot you can't maintain.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#library">See what's inside</a>
+            <a class="btn btn--secondary" href="#downloads">Download free PBIX</a>
+          </div>
+        </div>
+        <div class="preview">
+          <p class="preview__tag">FINANCE STARTER PACK / PBIX</p>
+          <p class="preview__title">P&amp;L Overview</p>
+          <p class="preview__spec">01   MODEL SPECIFICATION
+02   MEASURE LIBRARY
+03   BUILD GUIDE</p>
+        </div>
+      </div>
+    </section>
 
-      <a class="template-card" href="/resources/time-intelligence-starter/">
-        <span class="tag">Paid · $9</span>
-        <h2>Time Intelligence Starter Pack</h2>
-        <p>
-          A marked date table with fiscal-year support and 12 commented DAX
-          measures — YTD, QoQ, YoY, rolling 3M and 12M — plus the three bugs
-          that make <code>TOTALYTD</code> return a plausible wrong number.
-        </p>
-        <span class="meta">$9 one-time · DateTable.pq + Measures.dax + README · commercial use included</span>
-        <span class="arrow">See what's inside →</span>
-      </a>
+    <!-- Library -->
+    <section class="section section--base" id="library">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">01 / The library</p>
+          <h2>Five models. Each one documented.</h2>
+          <p class="section__intro">
+            Paid packs include the model spec, measure library and build guide.
+            Free PBIX files are complete, working reports.
+          </p>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <p class="card__badge">Paid · $39</p>
+            <h3>Finance Starter Pack</h3>
+            <p class="card__desc">
+              A P&amp;L report you can open and read: star schema, commented
+              measures, four report pages, and budget vs actual that survives a
+              slicer. Ships as working PBIX plus a data-free PBIT template.
+            </p>
+            <p class="card__meta">$39 one-time · PBIX + PBIT + README · commercial use included</p>
+            <a class="card__link" href="/templates/finance-starter/">See what's inside <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
 
-      <a class="template-card" href="/downloads/power-bi-sales-overview.pbix">
-        <span class="tag free">Free download</span>
-        <h2>Sales Overview</h2>
-        <p>
-          Three KPI cards, a region table and a region bar chart on one 1280×720
-          page. Built on the same <code>Sales</code> table and measure naming
-          used across this site, so the tutorials map straight onto it.
-        </p>
-        <span class="meta">PBIX + PBIT · 1280×720 · fictional 2026 demo data · free for personal and commercial use</span>
-        <span class="arrow">Download the PBIX →</span>
-      </a>
+          <article class="card">
+            <p class="card__badge">Paid · $9</p>
+            <h3>Time Intelligence Starter Pack</h3>
+            <p class="card__desc">
+              A marked date table with fiscal-year support and 12 commented DAX
+              measures — YTD, QoQ, YoY, rolling 3M and 12M — plus the three bugs
+              that make <code>TOTALYTD</code> return a plausible wrong number.
+            </p>
+            <p class="card__meta">$9 one-time · DateTable.pq + Measures.dax + README · commercial use included</p>
+            <a class="card__link" href="/resources/time-intelligence-starter/">See what's inside <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
 
-      <a class="template-card" href="/downloads/power-bi-monthly-revenue-trend.pbix">
-        <span class="tag free">Free download</span>
-        <h2>Monthly Revenue Trend</h2>
-        <p>
-          A twelve-month revenue line with three KPI cards and a region table —
-          the layout to copy when a request is simply "show me the trend".
-        </p>
-        <span class="meta">PBIX + PBIT · 1280×720 · fictional 2026 demo data · free for personal and commercial use</span>
-        <span class="arrow">Download the PBIX →</span>
-      </a>
+          <article class="card">
+            <p class="card__badge card__badge--free">Free download</p>
+            <h3>Sales Overview</h3>
+            <p class="card__desc">
+              Three KPI cards, a region table and a region bar chart on one
+              1280×720 page. Built on the same <code>Sales</code> table and measure
+              naming used across this site, so the tutorials map straight onto it.
+            </p>
+            <p class="card__meta">PBIX + PBIT · 1280×720 · fictional 2026 demo data · free for personal and commercial use</p>
+            <a class="card__link" href="/downloads/power-bi-sales-overview.pbix">Download the PBIX <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
 
-      <a class="template-card" href="/downloads/sample-sales-model.pbix">
-        <span class="tag free">Free download</span>
-        <h2>Sample Sales Model</h2>
-        <p>
-          The model the DAX tutorials are written against: a <code>Sales</code>
-          table with <code>Quantity</code>, <code>UnitPrice</code>,
-          <code>UnitCost</code>, <code>DiscountPct</code> and
-          <code>Revenue</code>, a real <code>Date</code> table with the
-          relationship in place, and four measures to start from. Paste a
-          snippet from any DAX article into it and it runs as written.
-        </p>
-        <span class="meta">PBIX + PBIT · 108 rows + 365-row date table · fictional 2026 demo data · free for personal and commercial use</span>
-        <span class="arrow">Download the PBIX →</span>
-      </a>
+          <article class="card">
+            <p class="card__badge card__badge--free">Free download</p>
+            <h3>Monthly Revenue Trend</h3>
+            <p class="card__desc">
+              A twelve-month revenue line with three KPI cards and a region table —
+              the layout to copy when a request is simply "show me the trend".
+            </p>
+            <p class="card__meta">PBIX + PBIT · 1280×720 · fictional 2026 demo data · free for personal and commercial use</p>
+            <a class="card__link" href="/downloads/power-bi-monthly-revenue-trend.pbix">Download the PBIX <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
 
-      <section class="note">
-        <h2>Buy the paid packs</h2>
-        <p>
+          <article class="card">
+            <p class="card__badge card__badge--free">Free download</p>
+            <h3>Sample Sales Model</h3>
+            <p class="card__desc">
+              The model the DAX tutorials are written against: a <code>Sales</code>
+              table with <code>Quantity</code>, <code>UnitPrice</code>,
+              <code>UnitCost</code>, <code>DiscountPct</code> and
+              <code>Revenue</code>, a real <code>Date</code> table with the
+              relationship in place, and four measures to start from. Paste a
+              snippet from any DAX article into it and it runs as written.
+            </p>
+            <p class="card__meta">PBIX + PBIT · 108 rows + 365-row date table · fictional 2026 demo data · free for personal and commercial use</p>
+            <a class="card__link" href="/downloads/sample-sales-model.pbix">Download the PBIX <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+
+          <article class="card card--next">
+            <p class="card__badge">Coming next</p>
+            <h3>Balance sheet &amp; cash flow pack</h3>
+            <p class="card__desc">
+              Built on the same dimensions. It only exists if this one sells.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buy -->
+    <section class="section section--soft" id="buy">
+      <div class="wrap">
+        <p class="kicker">02 / Buy the paid packs</p>
+        <h2 class="statement">The documentation is the product.</h2>
+        <p class="section__intro">
           Secure checkout by Creem. Card, Apple Pay and Google Pay. Files are
           delivered right after payment; VAT is calculated at checkout.
         </p>
-        <p>
-          <a class="buy-btn" data-pack="finance-starter-pack" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy Finance Starter Pack · $39 →</a>
-        </p>
-        <p>
-          <a class="buy-btn" data-pack="time-intelligence-pack" href="https://www.creem.io/payment/prod_6MWF9mi2WTSuvxlnNxSgwZ" rel="noopener">Buy Time Intelligence Starter Pack · $9 →</a>
-        </p>
-      </section>
+        <div class="buy-actions">
+          <a class="btn btn--primary buy-btn" data-pack="finance-starter-pack" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy Finance Starter Pack · $39 →</a>
+          <a class="btn btn--secondary buy-btn" data-pack="time-intelligence-pack" href="https://www.creem.io/payment/prod_6MWF9mi2WTSuvxlnNxSgwZ" rel="noopener">Buy Time Intelligence Starter Pack · $9 →</a>
+        </div>
+      </div>
+    </section>
 
-      <section class="note">
-        <h2>Template (.pbit) versions</h2>
-        <p>
-          Every free template above also ships as a Power BI template — the
-          model, relationships, measures and report pages, without the demo
-          rows. Open it, point it at your own table with the same column names,
-          and the visuals rehydrate.
-        </p>
-        <p>
-          <a href="/downloads/sales-overview-template.pbit">Sales Overview .pbit</a> ·
-          <a href="/downloads/monthly-revenue-trend-template.pbit">Monthly Revenue Trend .pbit</a> ·
+    <!-- PBIT -->
+    <section class="section section--base" id="downloads">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">03 / Template (.pbit) versions</p>
+          <h2>Point it at your own data.</h2>
+          <p class="section__intro">
+            Every free template above also ships as a Power BI template — the
+            model, relationships, measures and report pages, without the demo
+            rows. Open it, point it at your own table with the same column names,
+            and the visuals rehydrate.
+          </p>
+        </div>
+        <div class="download-links">
+          <a href="/downloads/sales-overview-template.pbit">Sales Overview .pbit</a>
+          <a href="/downloads/monthly-revenue-trend-template.pbit">Monthly Revenue Trend .pbit</a>
           <a href="/downloads/sample-sales-model.pbit">Sample Sales Model .pbit</a>
-        </p>
-      </section>
+        </div>
+      </div>
+    </section>
 
-      <section class="note">
-        <h2>Free vs paid</h2>
-        <p>
-          The free PBIX files above are complete, working reports — open them,
-          rename things, ship them inside your own work. The paid packs carry
-          what a PBIX alone cannot: the model specification, the measure
-          library with tests, and a build guide that keeps the file maintainable
-          after you change it.
-        </p>
-      </section>
+    <!-- Free vs paid -->
+    <section class="section section--soft">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">04 / Free vs paid</p>
+          <h2>The difference is what comes with the file.</h2>
+          <p class="section__intro">
+            The free PBIX files above are complete, working reports — open them,
+            rename things, ship them inside your own work. The paid packs carry
+            what a PBIX alone cannot: the model specification, the measure
+            library with tests, and a build guide that keeps the file maintainable
+            after you change it.
+          </p>
+        </div>
+      </div>
+    </section>
 
-      <section class="note">
-        <h2>Why so few?</h2>
-        <p>
-          Because a template is a model, not a colour scheme. Each one takes
-          about two weeks to build and a day to document, and shipping it
-          without the documentation is how the market ended up full of
-          dashboards that break on the first slice.
-        </p>
-        <p>
-          The next one is a balance sheet and cash flow pack, built on the same
-          dimensions. It only exists if this one sells.
-        </p>
-      </section>
-    </div>
-  </article>
+    <!-- FAQ -->
+    <section class="section section--base">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">05 / Good questions</p>
+          <h2>Why so few?</h2>
+        </div>
+        <div class="faq-row">
+          <span class="faq-row__num">01</span>
+          <div>
+            <h3>Why so few templates?</h3>
+            <p>
+              Because a template is a model, not a colour scheme. Each one takes
+              about two weeks to build and a day to document, and shipping it
+              without the documentation is how the market ended up full of
+              dashboards that break on the first slice.
+            </p>
+          </div>
+        </div>
+        <div class="faq-row">
+          <span class="faq-row__num">02</span>
+          <div>
+            <h3>What's coming next?</h3>
+            <p>
+              A balance sheet and cash flow pack, built on the same dimensions.
+              It only exists if this one sells.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section section--soft final-cta">
+      <div class="wrap">
+        <p class="kicker">06 / Start here</p>
+        <h2 class="statement">Take a model apart. Put it back together faster.</h2>
+        <a class="btn btn--primary buy-btn" data-pack="finance-starter-pack" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy Finance Starter Pack · $39 →</a>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
-
-<style>
-  .templates { padding: 56px 0 88px; }
-  .page-eyebrow {
-    display: inline-block; font-size: 0.8rem; font-weight: 600;
-    color: var(--c-accent-dark); letter-spacing: 0.08em; text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .templates h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 18px; max-width: 24ch; }
-  .lede {
-    font-size: 1.08rem; color: var(--c-text-muted);
-    border-left: 3px solid var(--c-accent); padding-left: 18px;
-    margin-bottom: 40px; max-width: 62ch;
-  }
-  .template-card {
-    display: block; border: 1px solid var(--c-border); border-radius: var(--radius-lg);
-    padding: 24px; color: inherit; text-decoration: none;
-    transition: border-color 0.15s ease, transform 0.15s ease;
-    margin-bottom: 44px;
-  }
-  .template-card:hover {
-    border-color: var(--c-accent-border); transform: translateY(-2px); text-decoration: none;
-  }
-  .tag.free { color: #157347; }
-  .tag {
-    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--c-accent-dark);
-  }
-  .template-card h2 { font-size: 1.25rem; margin: 8px 0 8px; }
-  .template-card p { color: var(--c-text-muted); font-size: 0.95rem; line-height: 1.65; margin: 0 0 10px; max-width: 62ch; }
-  .meta { display: block; font-size: 0.78rem; color: var(--c-text-dim); margin-bottom: 10px; }
-  .arrow { font-size: 0.88rem; font-weight: 700; color: var(--c-accent-dark); }
-  .note { max-width: 68ch; }
-  .note h2 { font-size: 1.3rem; margin: 0 0 12px; }
-  .note p { color: var(--c-text-muted); line-height: 1.72; margin: 0 0 14px; }
-  @media (max-width: 760px) { .templates h1 { font-size: 1.75rem; } }
-</style>
-
-<style is:global>
-  .buy-btn {
-    display: inline-block;
-    padding: 12px 20px;
-    border-radius: 8px;
-    background: var(--c-accent);
-    color: var(--c-accent-text);
-    font-weight: 700;
-    text-decoration: none;
-  }
-  .buy-btn:hover { opacity: 0.9; }
-</style>
