@@ -149,6 +149,19 @@ For deeper tuning, review `DAX Optimization Techniques` and the broader model de
 - Keep the number of decimal places consistent within a column.
 - Test tab order with a keyboard; the matrix exposes controls in hierarchy order.
 
+## Step 9: Remove the grey border and gridlines in a matrix table
+
+Out of the box the matrix draws light-grey gridlines around every cell and row. On a dense matrix they add noise and make the numbers harder to scan. To remove a matrix table's grey border:
+
+1. Select the matrix → **Format** pane → **Grid**.
+2. Turn **Gridlines** off, or set **Grid color** to the background colour (`#FFFFFF` on a white page) to keep the spacing without visible lines.
+3. Under **Row headers** and **Column headers**, set **Outline** / **Bottom border** to **Off** if the header band still shows a line.
+4. For a fully flat look, set a single **Background** colour and switch off alternating row shading under **Rows → Background**.
+
+If a border persists, it is usually conditional formatting: **Format → Conditional formatting → Cell elements** can apply a border through a rule, and that overrides the grid setting. Check the rules before assuming the grid toggle is broken.
+
+Keep at least one separator between subtotal and detail rows — font weight or a subtle background is enough — so removing the gridlines does not make the hierarchy unreadable.
+
 ## FAQ
 
 ### Q: Why does my matrix show blank values instead of zeros?

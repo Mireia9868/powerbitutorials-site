@@ -52,6 +52,29 @@ Measure Selector = {
 }
 ```
 
+## 5. Dropdown slicer: fit more filters in less space
+
+A dropdown slicer collapses its values behind a single control, so you can keep six or seven filters on one page without stacking full lists. It is the default choice when a field has more than about ten distinct values.
+
+1. Add a slicer, put the field in **Field**.
+2. In **Format → Slicer → Slicer type**, choose **Dropdown**.
+3. Turn on **Show search** if the list is longer than a screen, and enable **Multi-select** (Ctrl+click) for users who need several values at once.
+4. Set **Selection** to **All** so no filter is applied when the page first opens.
+
+The trade-off is discoverability: users cannot see which values are selected without opening the control. If the visible selection state matters more than space, use the checkbox slicer below. Dropdowns also work as hierarchy slicers — drop `Category` then `Subcategory` into one control — but a nested dropdown shows one level at a time, so keep the hierarchy two levels deep.
+
+The sync behaviour described in section 1 still applies: a dropdown synced across pages carries its selection exactly like a list slicer does.
+
+## 6. Checkbox slicer: let users see and multi-select values
+
+The checkbox slicer (**Format → Slicer → Slicer type → Checkbox**) shows a tick box next to every value, so the current selection is visible at a glance. It replaced the older "Tile" style and is the better pick for short lists — regions, channels, business years — where users regularly select several values.
+
+- **Best for:** 3–15 values, frequent multi-select, selection state that must be obvious without clicking.
+- **Search and Select all:** enable **Show search** for longer lists and **Show Select all** so users can reset in one click.
+- **Single value only?** Use a dropdown or a button-driven bookmark instead; a checkbox with one possible tick wastes space.
+
+One caution: checkbox slicers filter *other* visuals, but are not filtered by them unless you set **Edit interactions** deliberately. If the checkbox list collapses when a user clicks a chart, select the chart → **Format → Edit interactions** and set the slicer interaction to **None**. Keep the list short — a 200-value checkbox list becomes a scroll trap and makes the report feel slower than it is.
+
 ## Common mistakes
 
 - Putting the same slicer on every page without syncing → users think they reset it.

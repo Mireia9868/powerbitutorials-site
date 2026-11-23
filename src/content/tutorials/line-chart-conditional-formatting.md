@@ -120,6 +120,18 @@ Common failures and their causes:
 
 To confirm the measure is correct, drop it into a table visual with the axis field. The values you see are exactly what the color rule receives. If the table looks right and the chart does not, the problem is the formatting property, not the DAX.
 
+## Color a line chart with a continuous gradient
+
+The rules in Step 3 give each series one flat colour. When the colour should reflect a *value* along the line — margin, variance from target, temperature — use field-value formatting with a line color gradient instead.
+
+1. Select the line → **Format → Lines → Color** → **fx**.
+2. Choose **Format style: Field value** and pick the measure to map, for example `[Margin %]`.
+3. Set a **Minimum** and **Maximum** colour, and leave the min/max values on **Auto** so Power BI scales them to the data — or type fixed bounds when you need a stable scale across pages.
+
+This produces a continuous gradient: low values take the first colour, high values the second, and points in between are interpolated. It answers "which part of the line is off target" far faster than a flat-colour series with markers.
+
+Two limits are worth knowing. First, the gradient applies per data point, so a line with 500 points shades smoothly but a line with 12 points shows visible steps — increase granularity if the transition looks abrupt. Second, field-value formatting maps one measure to one line; a multi-series chart needs either a colour per series (Step 4) or separate lines. Keep the measure responsive to slicers: a calculated column freezes the colours, while a measure recalculates them as filters change.
+
 ## Performance Notes
 
 Field-value formatting runs one extra measure evaluation per data point. On a line chart with 500 points and four series, that is 2,000 additional evaluations. Simple SWITCH and comparison logic is negligible. Avoid measures that scan large fact tables inside the color logic, and never call an iterator over the fact table just to pick a color. If the visual feels slow, check it in Performance Analyzer before blaming the rule.
