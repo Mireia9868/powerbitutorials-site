@@ -8,6 +8,7 @@ difficulty: "Beginner"
 tags: ["power-query", "einstieg", "etl", "transformation", "m-language"]
 author: Mireia
 featured: false
+noindex: true
 ---
 
 Bevor Daten in einem Power BI-Modell landen, werden sie meist bereinigt und umgeformt. Genau dafür ist **Power Query** da — der integrierte ETL-Editor (Extract, Transform, Load). Dieser Artikel ist der Einstieg.

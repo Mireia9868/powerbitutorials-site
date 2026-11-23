@@ -17,7 +17,8 @@ export const NAV_LINKS = [
 ];
 
 // 语言
-// 德语区目前是 noindex 的半成品；切换器先放出来，等 de 内容到 15 篇再进 sitemap。
+// 德语区 2026-11-22 起正式上线：完整翻译页可索引 + 双向 hreflang；
+// 早期半成品摘要页仍 noindex（frontmatter noindex:true）。
 export const LANGUAGE_LINKS = [
   { code: "en", label: "English", short: "EN", href: "/" },
   { code: "de", label: "Deutsch", short: "DE", href: "/de/" },

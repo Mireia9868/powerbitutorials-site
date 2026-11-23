@@ -24,6 +24,11 @@ interface Props {
 const { tutorial } = Astro.props;
 const { Content, headings } = await tutorial.render();
 
+// 英文原文页反向指向德语译文（仅指向已 index 的德语页，noindex 的不算）
+const deTranslations = (await getCollection("tutorials", ({ data }) => !data.draft && !data.noindex))
+  .filter((t) => t.slug.startsWith("de-"))
+  .map((t) => t.slug.slice(3));
+
 const category = CATEGORIES.find((c) => c.slug === tutorial.data.category);
 const allTutorials = (await getCollection("tutorials", ({ data }) => !data.draft))
   .sort((a, b) => a.data.pubDate.getTime() - b.data.pubDate.getTime());
@@ -58,6 +63,26 @@ const updatedStr = tutorial.data.updatedDate?.toLocaleDateString("en-US", {
 const diffClass = tutorial.data.difficulty.toLowerCase();
 
 const tutorialUrl = new URL(`/tutorials/${tutorial.slug}`, Astro.site).href;
+
+// hreflang 语言簇：德语页 ↔ 英文原文双向互指，防止译文被当重复内容。
+// noindex 由 frontmatter 的 noindex 字段控制（半成品摘要页仍需屏蔽）。
+const isDe = tutorial.slug.startsWith("de-");
+const enSlug = isDe ? tutorial.slug.slice(3) : null;
+let hreflangs: { lang: string; href: string }[] = [];
+if (isDe) {
+  const enUrl = new URL(`/tutorials/${enSlug}`, Astro.site).href;
+  hreflangs = [
+    { lang: "de", href: tutorialUrl },
+    { lang: "en", href: enUrl },
+    { lang: "x-default", href: enUrl },
+  ];
+} else if (deTranslations.includes(tutorial.slug)) {
+  hreflangs = [
+    { lang: "en", href: tutorialUrl },
+    { lang: "de", href: new URL(`/tutorials/de-${tutorial.slug}`, Astro.site).href },
+    { lang: "x-default", href: tutorialUrl },
+  ];
+}
 
 // JSON-LD: TechArticle (SEO + AdSense E-E-A-T)
 const jsonLd = {
@@ -124,7 +149,9 @@ const breadcrumbJsonLd = {
   image={tutorial.data.heroImage}
   article={true}
   publishedTime={tutorial.data.pubDate}
-  noindex={tutorial.slug.startsWith("de-")}
+  noindex={tutorial.data.noindex}
+  lang={isDe ? "de" : undefined}
+  hreflangs={hreflangs}
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />

@@ -8,6 +8,7 @@ difficulty: "Beginner"
 tags: ["conditional-formatting", "bedingte-formatierung", "visualization", "farben", "power-bi"]
 author: Mireia
 featured: false
+noindex: true
 ---
 
 Bedingte Formatierung verwandelt eine flache Tabelle in einen Bericht, der sich von selbst abliest. Rote Werte, wenn ein Ziel verfehlt wird, grüne, wenn es übertroffen ist, ein Farbverlauf, der den Trend zeigt — all das ist in Power BI integriert.

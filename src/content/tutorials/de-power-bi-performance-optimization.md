@@ -8,6 +8,7 @@ difficulty: "Intermediate"
 tags: ["performance", "optimierung", "dax", "datenmodell", "power-bi"]
 author: Mireia
 featured: false
+noindex: true
 ---
 
 Ein Power BI-Bericht, der mehrere Sekunden zum Laden braucht, ist ein Problem — nicht nur für die Nutzererfahrung, sondern auch für die Glaubwürdigkeit Ihrer Dashboards. In diesem Artikel erfahren Sie, wo Performance typischerweise verloren geht und wie Sie sie zurückgewinnen.

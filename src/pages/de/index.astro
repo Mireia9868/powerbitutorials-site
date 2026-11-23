@@ -6,17 +6,15 @@ import TutorialCard from "../../components/TutorialCard.astro";
 const deTutorials = (await getCollection("tutorials", ({ slug, data }) => !data.draft && slug.startsWith("de-")))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-// NOTE: German section is intentionally paused (noindex, excluded from sitemap).
-// 3 tutorials is too thin to justify a language cluster, and they were served with
-// <html lang="en">. Re-enable once there are 15+ properly localised articles:
-// remove noindex here and in tutorials/[slug].astro, restore the sitemap filter,
-// and add a per-page lang override in BaseLayout.
+// NOTE: German section is live as of 2026-11-22. Only full translations are
+// indexed; thin summaries keep noindex:true in their frontmatter and stay out
+// of the sitemap. Each translated page carries reciprocal hreflang to its EN
+// original (and vice versa) to avoid duplicate-content signals.
 ---
 
 <BaseLayout
   title="Power BI Tutorials auf Deutsch"
   description="Power BI, DAX und Power Query Anleitungen auf Deutsch. Schritt für Schritt erklärt, von den Grundlagen bis zur Performance-Optimierung."
-  noindex={true}
   lang="de"
 >
   <div class="page-header">

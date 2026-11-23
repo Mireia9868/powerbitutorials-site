@@ -13,8 +13,10 @@ export interface Props {
   article?: boolean;
   publishedTime?: Date;
   noindex?: boolean;
-  /** <html lang> 覆盖：德语页要传 "de"，否则屏幕阅读器和搜索引擎都会按英文处理 */
+  /** <html lang> 覆盖：德语页传 "de"，否则屏幕阅读器和搜索引擎都会按英文处理 */
   lang?: string;
+  /** 语言簇 hreflang：成对指向译文与原文，避免搜索引擎把译文当重复内容 */
+  hreflangs?: { lang: string; href: string }[];
 }
 
 const {
@@ -25,6 +27,7 @@ const {
   publishedTime,
   noindex = false,
   lang = SITE_LANG,
+  hreflangs = [],
 } = Astro.props;
 
 // 品牌后缀只在加完之后仍然不超过 60 字符时才加。
@@ -126,6 +129,7 @@ const websiteJsonLd = isHomepage ? {
     <meta name="title" content={pageTitle} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {hreflangs.map((h) => <link rel="alternate" hreflang={h.lang} href={h.href} />)}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
