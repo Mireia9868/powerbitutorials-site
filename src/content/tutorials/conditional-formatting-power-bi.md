@@ -1,6 +1,6 @@
 ---
-title: "Conditional Formatting in Power BI: Rules, Data Bars & Icons"
-description: "Set background colour, data bars and icons from a rule, a field or a DAX measure, with threshold and variance examples and fixes for formats that stop applying."
+title: "Power BI Conditional Formatting: Rules, Bars & Icons"
+description: "Apply conditional formatting in Power BI by rule, field or DAX measure. Background colours, data bars and icons, with fixes for formats that stop working."
 pubDate: 2026-07-20
 category: "visualization"
 difficulty: "Beginner"
