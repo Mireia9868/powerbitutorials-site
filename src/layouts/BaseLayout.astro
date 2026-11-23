@@ -281,20 +281,29 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         }
 
         // Conversion intent: every checkout button on the site (Creem links).
-        // Recorded as a video-game-free, first-party event so GA4 can report
-        // "how many people tried to buy" without needing access to Creem.
+        // Recorded as a first-party event so GA4 can report "how many people
+        // tried to buy" without needing access to Creem's hosted checkout.
+        // value/currency are GA4's standard revenue params — once this event
+        // is marked as a key event in the GA4 UI, its value shows up in the
+        // key-events report. price_usd is kept for backward compatibility.
         document.addEventListener('click', function (event) {
           var link = event.target.closest('a.buy-btn, a[href*="creem.io/payment/"]');
           if (!link) return;
           var product = (link.getAttribute('data-pack') || link.textContent || '').trim().slice(0, 80);
           var priceMatch = (link.textContent || '').match(/\$([0-9]+)/);
-          send('purchase_intent', {
+          var priceUsd = priceMatch ? Number(priceMatch[1]) : undefined;
+          var params = {
             pack: product,
-            price_usd: priceMatch ? Number(priceMatch[1]) : undefined,
+            price_usd: priceUsd,
             link_url: link.href,
             source_path: location.pathname,
             design_variant: document.documentElement.dataset.designVariant || 'A',
-          });
+          };
+          if (priceUsd !== undefined) {
+            params.value = priceUsd;
+            params.currency = 'USD';
+          }
+          send('purchase_intent', params);
         }, true);
 
         // ---- 出站点击 ----
