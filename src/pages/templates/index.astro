@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { GUMROAD_TIME_INTELLIGENCE } from "../../consts";
+import { GUMROAD_FINANCE, GUMROAD_TIME_INTELLIGENCE } from "../../consts";
 import "../../styles/hub-design.css";
 ---
 
@@ -139,6 +139,7 @@ import "../../styles/hub-design.css";
           Files are delivered right after payment; VAT is calculated at checkout.
         </p>
         <div class="buy-actions">
+          <a class="btn btn--primary buy-btn" data-pack="finance-starter-pack" href={GUMROAD_FINANCE} rel="noopener">Buy Finance Starter Pack · $19 →</a>
           <a class="btn btn--secondary buy-btn" data-pack="time-intelligence-pack" href={GUMROAD_TIME_INTELLIGENCE} rel="noopener">Buy Time Intelligence Starter Pack · $9 →</a>
         </div>
       </div>

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { GUMROAD_TIME_INTELLIGENCE, SITE_URL } from "../consts";
+import { GUMROAD_FINANCE, GUMROAD_TIME_INTELLIGENCE, SITE_URL } from "../consts";
 
 const products = [
   {
@@ -21,19 +21,19 @@ const products = [
   },
   {
     name: "Finance Starter Pack",
-    price: "$39",
-    status: "In development",
-    statusClass: "soon",
+    price: "$19",
+    status: "Available now",
+    statusClass: "live",
     summary:
-      "P&L star schema, 46 audited measures, four page blueprints and 1,728 rows of sample data that reconcile.",
+      "Two PBIX files and two PBIT templates on one clean finance model: a category performance dashboard and the DAX teaching master, with a documented 3-measure setup.",
     includes: [
-      "Five CSVs, a fixed seed and a regeneration script",
-      "46 measures in four display folders",
-      "Model spec, page blueprints and a theme JSON",
+      "tmpl-finance.pbix — category dashboard, 3 KPI cards + table + bar chart",
+      "p03-dax.pbix — the DAX teaching master used across our articles",
+      "Two PBIT templates and a README model dictionary",
     ],
-    href: "/templates/finance-starter/",
-    cta: "See what's in it",
-    note: "Not on sale yet — the PBIX has to be assembled and checked on Windows first.",
+    href: GUMROAD_FINANCE,
+    cta: "Buy · $19",
+    note: "One-time payment. Instant download after checkout. A 46-measure P&L version is in build.",
   },
 ];
 
@@ -72,24 +72,13 @@ const jsonLd = {
       name: p.name,
       description: p.summary,
       url: p.href.startsWith("http") ? p.href : `${SITE_URL}${p.href}`,
-      ...(p.price === "$9"
-        ? {
-            offers: {
-              "@type": "Offer",
-              price: "9.00",
-              priceCurrency: "USD",
-              availability: "https://schema.org/InStock",
-              url: p.href,
-            },
-          }
-        : {
-            offers: {
-              "@type": "Offer",
-              price: "39.00",
-              priceCurrency: "USD",
-              availability: "https://schema.org/PreOrder",
-            },
-          }),
+      offers: {
+        "@type": "Offer",
+        price: p.price.replace("$", "") + ".00",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        url: p.href,
+      },
     },
   })),
 };
@@ -97,7 +86,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Pricing — Power BI Tutorials packs"
-  description="One-time prices for Power BI starter packs: a $9 time-intelligence pack available now, and a $39 finance pack in development. No subscriptions, 30-day refunds, commercial use included."
+  description="One-time Power BI packs: a $9 time-intelligence pack and a $19 finance starter pack, both available now. No subscriptions, 14-day refunds."
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 

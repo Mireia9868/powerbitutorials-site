@@ -179,3 +179,7 @@ export const SOCIAL_LINKS = {
   twitter: "",
   rss: "/rss.xml",
 };
+
+// Finance Starter Pack（$19，现货）—— Gumroad 商品建好后确认 slug 一致即可
+export const GUMROAD_FINANCE =
+  "https://mireia36.gumroad.com/l/finance-starter-pack";

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { GUMROAD_TIME_INTELLIGENCE } from "../../consts";
+import { GUMROAD_FINANCE, GUMROAD_TIME_INTELLIGENCE } from "../../consts";
 import "../../styles/hub-design.css";
 
 const tools = [
@@ -166,7 +166,12 @@ DIVIDE( [Revenue], [Budget] )</p>
       <div class="wrap">
         <p class="kicker">03 / Keep going</p>
         <h2 class="statement">Fix the model, not just the measure.</h2>
-        <a class="btn btn--primary buy-btn" data-pack="time-intelligence-pack" href={GUMROAD_TIME_INTELLIGENCE} rel="noopener">Get the Time Intelligence pack · $9 →</a>
+        <p style="margin-bottom:14px;">
+          <a class="btn btn--primary buy-btn" data-pack="finance-starter-pack" href={GUMROAD_FINANCE} rel="noopener">Get the Finance Starter Pack · $19 →</a>
+        </p>
+        <p>
+          <a class="btn btn--secondary buy-btn" data-pack="time-intelligence-pack" href={GUMROAD_TIME_INTELLIGENCE} rel="noopener">Get the Time Intelligence pack · $9 →</a>
+        </p>
       </div>
     </section>
   </div>
