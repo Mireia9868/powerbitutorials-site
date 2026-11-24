@@ -8,7 +8,7 @@ export const SITE_LANG = "en";
 
 // 结账地址：Gumroad 商品页（换商品后只改这一行）
 export const GUMROAD_TIME_INTELLIGENCE =
-  "https://powerbitutorials.gumroad.com/l/time-intelligence";
+  "https://mireia36.gumroad.com/l/time-intelligence";
 
 // 导航
 export const NAV_LINKS = [
