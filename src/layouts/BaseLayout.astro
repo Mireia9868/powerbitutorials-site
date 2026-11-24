@@ -44,6 +44,36 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 const isHomepage = Astro.url.pathname === "/";
 
+// 页面级 hreflang 回退：教程详情页会显式传入 hreflangs（语言簇互指），
+// 这里只处理没有传的四类页面，避免它们完全没有页面级语言声明。
+// Google 要求 hreflang 成簇双向、且每页自引用；德语侧只有 /de/ 一个入口，
+// 没有德语的 /tutorials/ 归档页和 /category/* 分类页，所以那两类只声明英文自引用，
+// 不硬指向不存在的德语 URL（否则会被判为错误互译信号）。
+const normalizedPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const absUrl = (p: string) => new URL(p, Astro.site).href;
+let resolvedHreflangs = hreflangs;
+if (resolvedHreflangs.length === 0) {
+  if (normalizedPath === "/de") {
+    resolvedHreflangs = [
+      { lang: "de", href: absUrl("/de/") },
+      { lang: "en", href: absUrl("/") },
+      { lang: "x-default", href: absUrl("/") },
+    ];
+  } else if (normalizedPath === "/") {
+    resolvedHreflangs = [
+      { lang: "en", href: absUrl("/") },
+      { lang: "de", href: absUrl("/de/") },
+      { lang: "x-default", href: absUrl("/") },
+    ];
+  } else if (normalizedPath === "/tutorials" || normalizedPath.startsWith("/category/")) {
+    const self = absUrl(`${normalizedPath}/`);
+    resolvedHreflangs = [
+      { lang: "en", href: self },
+      { lang: "x-default", href: self },
+    ];
+  }
+}
+
 // WebSite + Organization JSON-LD (homepage only — sitelinks search box + brand entity)
 const websiteJsonLd = isHomepage ? {
   "@context": "https://schema.org",
@@ -129,7 +159,7 @@ const websiteJsonLd = isHomepage ? {
     <meta name="title" content={pageTitle} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    {hreflangs.map((h) => <link rel="alternate" hreflang={h.lang} href={h.href} />)}
+    {resolvedHreflangs.map((h) => <link rel="alternate" hreflang={h.lang} href={h.href} />)}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
