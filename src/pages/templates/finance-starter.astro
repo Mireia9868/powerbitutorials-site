@@ -8,13 +8,7 @@ const jsonLd = {
   description:
     "A ready-to-use P&L model for Power BI: star schema, 46 audited DAX measures, four report pages, budget vs actual, and sample data you can regenerate.",
   brand: { "@type": "Brand", name: "Power BI Tutorials" },
-  offers: {
-    "@type": "Offer",
-    price: "39",
-    priceCurrency: "USD",
-    availability: "https://schema.org/InStock",
-    url: "https://powerbitutorials.com/templates/finance-starter/",
-  },
+  releasedEvent: undefined,
 };
 ---
 
@@ -29,26 +23,26 @@ const jsonLd = {
   <article class="product">
     <div class="content-width">
 
-      <span class="page-eyebrow">Template · $39 one-time</span>
+      <span class="page-eyebrow">Template · in development</span>
       <h1>A P&amp;L report you can open — and actually change.</h1>
       <p class="lede">
-        Star schema, 46 audited measures, four finished pages, and 1,728 rows of
+        Star schema, 46 audited measures, page blueprints, and 1,728 rows of
         sample data that make the numbers add up. Built the way a finance model
         should be, not the way a screenshot pack is.
       </p>
 
-      <section class="signup" id="get-the-pack">
-        <h2>Get the pack — $39</h2>
+      <section class="signup" id="status">
+        <h2>Not on sale yet</h2>
         <p class="signup-sub">
-          One-time payment, commercial use included. Checkout is handled by
-          Creem; the files are delivered as soon as the payment clears.
-        </p>
-        <p>
-          <a class="buy-btn" data-pack="finance-starter-pack" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy Finance Starter Pack · $39 →</a>
+          The model spec, the 46 measures and the page blueprints are finished.
+          The PBIX is being assembled and checked on Windows before anything is
+          sold — an untested PBIX is exactly the kind of file that produces
+          refunds, and this page is not going to ship one.
         </p>
         <p class="fineprint">
-          PBIX + PBIT + README · VAT calculated at checkout · 12 months of bug
-          fixes · instant digital delivery.
+          If you want the smaller pack that is finished today, the
+          <a href="/resources/time-intelligence-starter/">Time Intelligence
+          Starter Pack</a> is $9 and ships immediately.
         </p>
       </section>
 
@@ -158,23 +152,6 @@ const jsonLd = {
         </div>
       </section>
 
-      <section class="block">
-        <h2>One price, one licence</h2>
-        <div class="pricing">
-          <div class="price-card">
-            <h3>Finance Starter Pack</h3>
-            <p class="amount">$39</p>
-            <p>Personal and commercial use in one licence: use it in your own reports and in paid client deliverables. No reselling the files.</p>
-            <p><a class="buy-btn" data-pack="finance-starter-pack" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy now · $39 →</a></p>
-          </div>
-        </div>
-        <p class="caption">
-          One-time payment · lifetime use of this version · 12 months of bug
-          fixes · PBIX + PBIT + README included. Prices in USD; VAT calculated
-          at checkout; digital delivery.
-        </p>
-      </section>
-
       <section class="block faq">
         <h2>Questions</h2>
 
@@ -182,6 +159,13 @@ const jsonLd = {
         <p>
           Yes — the free Windows app — or the Power BI Service in a browser. No
           paid add-ons and no custom visuals.
+        </p>
+
+        <h3>Do I get a .pbix file?</h3>
+        <p>
+          In the finished version, yes: a PBIX with the sample data embedded and
+          a PBIT for connecting your own source. Neither exists yet — that is
+          the remaining work.
         </p>
 
         <h3>Can I use my own data?</h3>
@@ -206,16 +190,16 @@ const jsonLd = {
 
         <h3>How do I get the files?</h3>
         <p>
-          Checkout is handled by Creem. The files are delivered as soon as the
-          payment clears; use the receipt email if you need to download them
-          again.
+          Not yet — this pack has no checkout while the PBIX is being finished.
+          The Time Intelligence pack, which is finished, is sold through
+          Gumroad and delivers a download link immediately.
         </p>
       </section>
 
       <section class="closing">
         <h2>Start from a model that already works.</h2>
         <p>Two days of modelling, or one afternoon of adjusting. Your call.</p>
-        <a class="btn" href="#get-the-pack">Get the pack now</a>
+        <a class="btn" href="/resources/time-intelligence-starter/">Get the $9 pack that ships today</a>
       </section>
 
     </div>

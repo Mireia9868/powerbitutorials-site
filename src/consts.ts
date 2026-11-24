@@ -6,11 +6,16 @@ export const SITE_URL = "https://powerbitutorials.com";
 export const SITE_AUTHOR = "Mireia";
 export const SITE_LANG = "en";
 
+// 结账地址：Gumroad 商品页（换商品后只改这一行）
+export const GUMROAD_TIME_INTELLIGENCE =
+  "https://mireia36.gumroad.com/l/time-intelligence";
+
 // 导航
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/tutorials/", label: "Tutorials" },
   { href: "/templates/", label: "Templates" },
+  { href: "/pricing/", label: "Pricing" },
   { href: "/tools/", label: "Tools" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
@@ -32,6 +37,9 @@ export const CATEGORIES = [
     metaDescription:
       "DAX tutorials for filter context, CALCULATE, iterators and time intelligence. Every pattern comes with the evaluation rule it depends on and a worked example.",
     description: "Master the Data Analysis Expressions language.",
+    introLead:
+      "DAX is where a Power BI report stops being a reshuffled spreadsheet and starts producing numbers you could not get any other way — all of it running through filter context and row-by-row evaluation.",
+    introHeadings: ["WHAT DAX IS", "WHERE TO START", "COMMON MISTAKES"],
     intro: [
       "DAX is where a Power BI report stops being a reshuffled spreadsheet and starts producing numbers you could not get any other way: year-to-date revenue that respects a slicer, share of total that ignores one, ranking that recalculates at whatever granularity the visual asks for. Almost all of it runs through two ideas — filter context, and the row-by-row evaluation that iterators perform — and almost all DAX bugs come from losing track of which one is in play.",
       "If you are new to the language, start with the basics guide, then read filter context and row context before touching CALCULATE. That order matters: CALCULATE is short and simple only once you already understand what it is modifying. From there the natural progression is CALCULATE itself, then time intelligence, then the iterator functions — and only after that the optimisation material, because tuning a formula you do not understand is guesswork.",
@@ -44,6 +52,9 @@ export const CATEGORIES = [
     metaDescription:
       "Power Query tutorials for cleaning, merging and reshaping data. Query folding, M code, and the ten transformations analysts rebuild every single week.",
     description: "ETL and data preparation in Power BI.",
+    introLead:
+      "Power Query runs before any DAX does — connecting to a source, fixing column types, unpivoting months and merging lookups. Every click writes M code, and that code is what actually executes on refresh.",
+    introHeadings: ["WHAT POWER QUERY IS", "WHERE TO START", "WHAT TO LEAVE OUT"],
     intro: [
       "Power Query is the part of Power BI that runs before any DAX does: connecting to a source, fixing the column types, unpivoting the month columns, merging in the lookup table. Every click in the editor writes M code, and that code is what actually executes — on refresh, against the source, possibly on a schedule you are not watching.",
       "The sensible reading order is the getting-started walkthrough, then the transformations you will use every week (group by, unpivot, merge, append, conditional columns), then the M language underneath. Query folding belongs early too, even for beginners: folding is the difference between a refresh that takes four seconds and one that takes forty minutes, and a single step in the wrong place can break it without any error message appearing.",
@@ -56,6 +67,9 @@ export const CATEGORIES = [
     metaDescription:
       "Data modelling for Power BI: star schema, relationship cardinality, many-to-many, aggregations, and the reason bidirectional filters quietly cost you speed.",
     description: "Star schema, relationships, and model design.",
+    introLead:
+      "The model is the hardest part of Power BI to change later and the easiest to get wrong early. A star schema is not a style preference — it is the shape that lets VertiPaq compress well and DAX stay readable.",
+    introHeadings: ["WHY THE MODEL MATTERS", "WHERE TO START", "COMMON MISTAKES"],
     intro: [
       "The model is the part of Power BI that is hardest to change later and easiest to get wrong early. A star schema — fact tables of events, dimension tables that describe them, one-to-many relationships flowing downhill — is not a style preference. It is the shape that lets the VertiPaq engine compress well and lets DAX measures stay short enough to read.",
       "Start with the star schema guide and the relationship cardinality explainer, then the many-to-many and bidirectional material. Those two topics account for most of the models that look fine until a filter behaves unexpectedly, and both are easier to reason about once the one-to-many baseline is solid. Incremental refresh and aggregation belong here too, but they are scale decisions rather than design decisions.",
@@ -68,6 +82,9 @@ export const CATEGORIES = [
     metaDescription:
       "Power BI report design: choosing the right visual, conditional formatting, drill through, bookmarks, tooltips, and layouts that stay readable at a glance.",
     description: "Build interactive reports and dashboards.",
+    introLead:
+      "Report design in Power BI is mostly a decision about what to leave out: a page has room for one question, a visual has room for one comparison. Most hard-to-read reports are answering four at once.",
+    introHeadings: ["WHAT REPORT DESIGN IS", "WHERE TO START", "TWO RULES"],
     intro: [
       "Report design in Power BI is mostly a decision about what to leave out. A page has room for roughly one question; a visual has room for roughly one comparison. Most reports that feel hard to read are not badly styled — they are answering four questions at once with six charts that each try to answer all of them.",
       "The visual types guide is the place to start, followed by dashboard layout and then the interaction features: drill through, bookmarks, tooltips and slicers. Conditional formatting is worth learning properly rather than by trial and error, since it is the cheapest way to make a table readable without adding another visual to the page.",
@@ -80,6 +97,9 @@ export const CATEGORIES = [
     metaDescription:
       "Time intelligence in DAX: marking a date table, YTD and QTD, year-over-year, rolling windows, and the fiscal-year traps that fail without an error.",
     description: "Date-based calculations and YTD/MTD patterns.",
+    introLead:
+      "Year-to-date, month-over-month and rolling twelve weeks are most of what business reporting asks for — and where DAX fails most quietly. The functions are short; the date table underneath is usually the problem.",
+    introHeadings: ["WHAT TIME INTELLIGENCE IS", "WHERE TO START", "THE USUAL CULPRIT"],
     intro: [
       "Year-to-date, month-over-month, rolling twelve weeks — this is most of what business reporting actually asks for, and it is also where DAX fails most quietly. The functions are short. The reason they return the wrong number is almost never the function itself: it is the date table underneath.",
       "Read the calendar table setup before anything else. A marked date table that is contiguous, starts before your earliest fact and ends after your latest one, and is related to every fact table is the precondition for all of it. After that, the YTD/QTD/MTD pattern and the year-over-year comparisons cover the bulk of real requests, with rolling averages as the generalisation once windows stop being calendar-aligned.",
@@ -92,6 +112,9 @@ export const CATEGORIES = [
     metaDescription:
       "Power BI Service: publishing, scheduled refresh and gateway setup, row-level security, dataflows, and the capacity decisions that come before all of it.",
     description: "Workspaces, gateways, deployment, and administration.",
+    introLead:
+      "The service is where a report becomes something other people depend on: scheduled refresh through a gateway, row-level security, workspaces and capacity. Everything before it happened on one machine, in Desktop.",
+    introHeadings: ["WHAT THE SERVICE IS", "WHERE TO START", "COMMON ASSUMPTIONS"],
     intro: [
       "Everything up to this point happens on one machine, in Desktop. The service is where a report becomes something other people depend on: scheduled refresh through a gateway, row-level security that decides who sees which rows, workspaces that separate build from publish, and capacity that determines whether the thing stays fast at 9am on a Monday.",
       "Begin with the service-versus-desktop overview and incremental refresh, then read row-level security — including the dynamic version, since a static role rarely survives contact with real users. Dataflows and deployment pipelines come next, and only after that the capacity and licensing decisions, which are much easier to make once you know how the model will actually be refreshed and shared.",

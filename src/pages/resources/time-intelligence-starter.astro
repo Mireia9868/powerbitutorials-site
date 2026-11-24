@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { NEWSLETTER } from "../../consts";
+import { NEWSLETTER, GUMROAD_TIME_INTELLIGENCE } from "../../consts";
 ---
 
 <BaseLayout
@@ -47,13 +47,13 @@ import { NEWSLETTER } from "../../consts";
         <h2>Get the pack — $9</h2>
         <p class="signup-sub">
           One-time payment, commercial use included. Checkout is handled by
-          Creem; the files are delivered as soon as the payment clears.
+          Gumroad; the download link arrives immediately after payment.
         </p>
         <p>
-          <a class="buy-btn" data-pack="time-intelligence-pack" href="https://www.creem.io/payment/prod_6MWF9mi2WTSuvxlnNxSgwZ" rel="noopener">Buy Time Intelligence Starter Pack · $9 →</a>
+          <a class="buy-btn" data-pack="time-intelligence-pack" href={GUMROAD_TIME_INTELLIGENCE} rel="noopener">Buy Time Intelligence Starter Pack · $9 →</a>
         </p>
         <p class="fineprint">
-          Instant download after payment · card, Apple Pay and Google Pay ·
+          Instant download after payment · card, Apple Pay, Google Pay and PayPal ·
           VAT calculated at checkout · 12 months of corrections.
           One-time $9 — the lowest-priced pack on the site, priced to be an
           easy yes before you commit to a full template.

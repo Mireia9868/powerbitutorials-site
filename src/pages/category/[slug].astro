@@ -34,17 +34,44 @@ const tutorials = (await getCollection("tutorials", ({ slug, data }) => !data.dr
       </nav>
       <span class="page-eyebrow">Category</span>
       <h1>{category.label}</h1>
-      <p class="page-sub">{category.description}</p>
-      <p class="page-count">{tutorials.length} tutorial{tutorials.length === 1 ? "" : "s"} in this category</p>
+      <div class="page-heading-row">
+        <p class="page-sub">{category.description}</p>
+        <p class="page-count">· {tutorials.length} tutorial{tutorials.length === 1 ? "" : "s"}</p>
+      </div>
     </div>
   </div>
 
   {category.intro && category.intro.length > 0 && (
     <section class="category-intro">
       <div class="container">
-        <div class="category-intro__body">
-          {category.intro.map((para) => <p>{para}</p>)}
-        </div>
+        <details class="intro-fold">
+          <summary class="intro-fold__summary">
+            <span class="intro-fold__head">
+              <svg class="intro-fold__icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="intro-fold__title">About {category.label}</span>
+              <span class="intro-fold__time">2 min read</span>
+            </span>
+            <span class="intro-fold__lead">{category.introLead}</span>
+            <span class="intro-fold__cta">
+              <span class="intro-fold__cta-closed">Read the full introduction</span>
+              <span class="intro-fold__cta-open">Show less</span>
+              <svg class="intro-fold__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </summary>
+          <div class="intro-fold__body">
+            {category.intro.map((para, i) => (
+              <div class="intro-fold__section">
+                {category.introHeadings?.[i] && <h2 class="intro-fold__heading">{category.introHeadings[i]}</h2>}
+                <p>{para}</p>
+              </div>
+            ))}
+          </div>
+        </details>
       </div>
     </section>
   )}
@@ -70,18 +97,78 @@ const tutorials = (await getCollection("tutorials", ({ slug, data }) => !data.dr
 
 <style>
   .category-intro {
-    padding: 28px 0 8px;
+    padding: 14px 0 10px;
     border-bottom: 1px solid var(--c-border);
   }
-  .category-intro__body {
-    max-width: 760px;
-    font-size: 0.98rem;
-    line-height: 1.72;
+  .intro-fold {
+    border: 1px solid var(--c-accent-border);
+    background: var(--c-accent-soft);
+    border-radius: var(--radius);
+  }
+  .intro-fold__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px 12px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .intro-fold__summary::-webkit-details-marker { display: none; }
+  .intro-fold__summary::marker { content: ""; }
+  .intro-fold__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .intro-fold__icon { flex: none; color: var(--c-accent-dark); }
+  .intro-fold__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--c-accent-dark);
+  }
+  .intro-fold__time {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--c-text-dim);
+  }
+  .intro-fold__lead {
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: var(--c-text-muted);
   }
-  .category-intro__body p { margin: 0 0 14px; }
+  .intro-fold__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--c-accent-dark);
+  }
+  .intro-fold__summary:hover .intro-fold__cta { color: var(--c-text); }
+  .intro-fold__cta-open,
+  .intro-fold[open] .intro-fold__cta-closed { display: none; }
+  .intro-fold[open] .intro-fold__cta-open { display: inline; }
+  .intro-fold__chevron { transition: transform 0.15s ease; }
+  .intro-fold[open] .intro-fold__chevron { transform: rotate(180deg); }
+  .intro-fold__body {
+    max-width: 760px;
+    padding: 0 16px 16px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--c-text-muted);
+  }
+  .intro-fold__section { margin-top: 14px; }
+  .intro-fold__heading {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--c-accent-dark);
+    margin-bottom: 5px;
+  }
+  .intro-fold__body p { margin: 0; }
+
   .page-header {
-    padding: 40px 0 32px;
+    padding: 20px 0 14px;
     border-bottom: 1px solid var(--c-border);
     background: var(--c-bg-soft);
   }
@@ -91,7 +178,7 @@ const tutorials = (await getCollection("tutorials", ({ slug, data }) => !data.dr
     gap: 8px;
     font-size: 0.82rem;
     color: var(--c-text-dim);
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
   .breadcrumb a { color: var(--c-text-dim); }
   .breadcrumb a:hover { color: var(--c-accent); }
@@ -104,8 +191,14 @@ const tutorials = (await getCollection("tutorials", ({ slug, data }) => !data.dr
     text-transform: uppercase;
     margin-bottom: 8px;
   }
-  .page-header h1 { font-size: 2.2rem; margin-bottom: 8px; }
-  .page-sub { color: var(--c-text-muted); margin: 0 0 4px; }
+  .page-header h1 { font-size: 2.2rem; margin-bottom: 6px; }
+  .page-heading-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .page-sub { color: var(--c-text-muted); margin: 0; }
   .page-count { font-size: 0.85rem; color: var(--c-text-dim); margin: 0; }
 
   .tutorials-layout {

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { GUMROAD_TIME_INTELLIGENCE } from "../../consts";
 import "../../styles/hub-design.css";
 ---
 
@@ -55,14 +56,15 @@ import "../../styles/hub-design.css";
         </div>
         <div class="card-grid">
           <article class="card">
-            <p class="card__badge">Paid · $39</p>
+            <p class="card__badge">In development</p>
             <h3>Finance Starter Pack</h3>
             <p class="card__desc">
               A P&amp;L report you can open and read: star schema, commented
               measures, four report pages, and budget vs actual that survives a
-              slicer. Ships as working PBIX plus a data-free PBIT template.
+              slicer. The model spec and measure library are finished; the PBIX
+              is still being assembled.
             </p>
-            <p class="card__meta">$39 one-time · PBIX + PBIT + README · commercial use included</p>
+            <p class="card__meta">Not on sale yet</p>
             <a class="card__link" href="/templates/finance-starter/">See what's inside <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </article>
 
@@ -133,12 +135,11 @@ import "../../styles/hub-design.css";
         <p class="kicker">02 / Buy the paid packs</p>
         <h2 class="statement">The documentation is the product.</h2>
         <p class="section__intro">
-          Secure checkout by Creem. Card, Apple Pay and Google Pay. Files are
-          delivered right after payment; VAT is calculated at checkout.
+          Secure checkout by Gumroad. Card, Apple Pay, Google Pay and PayPal.
+          Files are delivered right after payment; VAT is calculated at checkout.
         </p>
         <div class="buy-actions">
-          <a class="btn btn--primary buy-btn" data-pack="finance-starter-pack" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy Finance Starter Pack · $39 →</a>
-          <a class="btn btn--secondary buy-btn" data-pack="time-intelligence-pack" href="https://www.creem.io/payment/prod_6MWF9mi2WTSuvxlnNxSgwZ" rel="noopener">Buy Time Intelligence Starter Pack · $9 →</a>
+          <a class="btn btn--secondary buy-btn" data-pack="time-intelligence-pack" href={GUMROAD_TIME_INTELLIGENCE} rel="noopener">Buy Time Intelligence Starter Pack · $9 →</a>
         </div>
       </div>
     </section>
@@ -218,7 +219,7 @@ import "../../styles/hub-design.css";
       <div class="wrap">
         <p class="kicker">06 / Start here</p>
         <h2 class="statement">Take a model apart. Put it back together faster.</h2>
-        <a class="btn btn--primary buy-btn" data-pack="finance-starter-pack" href="https://www.creem.io/payment/prod_2LHa27X5bFbdUZA4F3KiWe" rel="noopener">Buy Finance Starter Pack · $39 →</a>
+        <a class="btn btn--primary buy-btn" data-pack="time-intelligence-pack" href={GUMROAD_TIME_INTELLIGENCE} rel="noopener">Buy the Time Intelligence pack · $9 →</a>
       </div>
     </section>
   </div>

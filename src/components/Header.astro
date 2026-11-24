@@ -74,6 +74,8 @@ const isActive = (href: string) =>
     height: var(--header-height);
   }
   .logo {
+    white-space: nowrap;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -96,6 +98,7 @@ const isActive = (href: string) =>
     font-weight: 800;
   }
   .logo-accent { color: var(--c-accent-dark); }
+  .logo-text { white-space: nowrap; }
   .header-inner { gap: 10px; }
   .main-nav { margin-left: auto; }
   .main-nav ul {
