@@ -321,7 +321,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         // is marked as a key event in the GA4 UI, its value shows up in the
         // key-events report. price_usd is kept for backward compatibility.
         document.addEventListener('click', function (event) {
-          var link = event.target.closest('a.buy-btn, a[href*="creem.io/payment/"]');
+          var link = event.target.closest('a.buy-btn, a[href*="gumroad.com"]');
           if (!link) return;
           var product = (link.getAttribute('data-pack') || link.textContent || '').trim().slice(0, 80);
           var priceMatch = (link.textContent || '').match(/\$([0-9]+)/);
