@@ -188,7 +188,7 @@ export const GUMROAD_FINANCE =
 // the product is published. While empty, /templates/dashboard-pack/ renders as a
 // launch-list page and is noindexed; the buy button appears automatically once
 // the URL is filled in and the site is rebuilt.
-export const GUMROAD_DASHBOARD_PACK = "";
+export const GUMROAD_DASHBOARD_PACK = "https://mireia36.gumroad.com/l/dashboard-pack";
 
 // Analysis Patterns Pack (10 classic models, plain-text DAX/PQ) — set this to
 // the Gumroad product URL once the product is published. While empty the page
