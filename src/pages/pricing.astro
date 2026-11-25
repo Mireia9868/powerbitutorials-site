@@ -1,8 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { GUMROAD_FINANCE, GUMROAD_TIME_INTELLIGENCE, GUMROAD_ANALYSIS_PATTERNS, SITE_URL } from "../consts";
+import { GUMROAD_FINANCE, GUMROAD_TIME_INTELLIGENCE, GUMROAD_ANALYSIS_PATTERNS, GUMROAD_DASHBOARD_PACK, SITE_URL } from "../consts";
 
 const products = [
+  {
+    name: "Power BI Dashboard Pack",
+    price: "$19",
+    status: "New · Available now",
+    statusClass: "live",
+    summary:
+      "Ten complete PBIX reports on one clean sales model: executive, trend, region, category, margin, status, monthly, quarterly, region × category and detail explorer.",
+    includes: [
+      "10 PBIX reports — native visuals, no .pbiviz imports",
+      "One Sales + Date model with four documented measures",
+      "Field map, theme file, demo CSVs and 10 preview renders",
+    ],
+    href: GUMROAD_DASHBOARD_PACK,
+    cta: "Buy · $19",
+    note: "One-time payment. Instant download. 10 PBIX + docs + theme.",
+  },
   {
     name: "Time Intelligence Starter Pack",
     price: "$9",
@@ -102,7 +118,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Pricing — Power BI Tutorials packs"
-  description="One-time Power BI packs: a $9 time-intelligence pack, a $19 analysis patterns pack and a $19 finance starter pack. No subscriptions, instant download."
+  description="One-time Power BI packs: a $19 10-report dashboard pack, a $9 time-intelligence pack, a $19 analysis patterns pack and a $19 finance starter pack. No subscriptions, instant download."
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
