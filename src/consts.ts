@@ -183,3 +183,9 @@ export const SOCIAL_LINKS = {
 // Finance Starter Pack（$19，现货）—— Gumroad 商品建好后确认 slug 一致即可
 export const GUMROAD_FINANCE =
   "https://mireia36.gumroad.com/l/finance-starter-pack";
+
+// Dashboard Pack (10 PBIX templates) — set this to the Gumroad product URL when
+// the product is published. While empty, /templates/dashboard-pack/ renders as a
+// launch-list page and is noindexed; the buy button appears automatically once
+// the URL is filled in and the site is rebuilt.
+export const GUMROAD_DASHBOARD_PACK = "";

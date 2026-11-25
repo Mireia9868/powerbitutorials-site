@@ -1,0 +1,585 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { GUMROAD_DASHBOARD_PACK, NEWSLETTER } from "../../consts";
+import "../../styles/hub-design.css";
+
+const onSale = GUMROAD_DASHBOARD_PACK.trim().length > 0;
+const price = "$19";
+
+const jsonLd = onSale
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: "Power BI Dashboard Pack — 10 Ready-to-Use Reports",
+      description:
+        "Ten complete Power BI reports on one clean sales model. Native visuals, 1280×720 layouts, four documented measures, a marked date table and a page-by-page field map.",
+      brand: { "@type": "Brand", name: "Power BI Tutorials" },
+      offers: {
+        "@type": "Offer",
+        price: "19",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        url: GUMROAD_DASHBOARD_PACK,
+      },
+    }
+  : null;
+
+const templates = [
+  ["01", "Executive Overview", "The one-page management summary: four KPIs, monthly revenue, region, category mix and status."],
+  ["02", "Revenue Trend", "Monthly line, quarterly column and a quarter × category matrix for a trend review."],
+  ["03", "Regional Performance", "Region bars and a revenue-vs-margin scatter, with a region × category matrix underneath."],
+  ["04", "Category Portfolio", "Treemap, donut and bar for part-to-whole, plus a category × region matrix."],
+  ["05", "Margin Analysis", "A margin page that leads with Gross Margin%, not revenue — bar, line, scatter and matrix."],
+  ["06", "Order Status", "Paid vs open by region, a status donut, and a bar filtered to Open revenue."],
+  ["07", "Monthly Detail", "A tall month × category matrix for reading rows, with category and quarter context."],
+  ["08", "Quarterly Review", "Quarter × category columns, a margin line, and a quarter × region matrix for a QBR."],
+  ["09", "Region × Category", "Clustered and stacked comparisons plus a three-measure matrix on one page."],
+  ["10", "Detail Explorer", "Region and category slicers driving a transaction-level matrix. The page to start from when the answer is the rows."],
+];
+
+const gallery = [
+  ["01", "01-executive-overview", "Executive Overview", "Four KPI cards, a monthly revenue line, region bars, category donut and a region × category matrix."],
+  ["05", "05-margin-analysis", "Margin Analysis", "Gross margin is the headline KPI; category, month and region views sit underneath."],
+  ["06", "06-order-status", "Order Status", "Paid vs open, with a visual-level filter that isolates open revenue by region."],
+  ["09", "09-region-category", "Region × Category", "A clustered bar, a stacked bar and a three-measure matrix on one 1280×720 page."],
+  ["10", "10-detail-explorer", "Detail Explorer", "Region and category slicers driving a transaction-level matrix."],
+];
+---
+
+<BaseLayout
+  title="Power BI Dashboard Pack — 10 Reports"
+  description="Ten complete Power BI reports on one clean sales model. Native visuals, 1280×720 layouts, four measures, a marked date table and a page-by-page field map. $19 launch price."
+  image="/images/dashboard-pack/og-dashboard-pack.png"
+  noindex={!onSale}
+>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;600&family=Inter:wght@400;500;600&family=Newsreader:wght@600;700&display=swap" rel="stylesheet" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </Fragment>
+
+  <div class="hub-v2 dp">
+    <section class="hero dp-hero">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="wrap dp-hero__grid">
+        <div>
+          <p class="kicker">Templates / Dashboard Pack</p>
+          <h1>Ten dashboards.<br />One clean model.</h1>
+          <p class="hero__sub">
+            Ten complete Power BI reports, not ten screenshots with a PBIX
+            attached. Every visual is bound, every page is documented, and all of
+            them share one sales model and one 1280 × 720 design system.
+          </p>
+          <div class="dp-price">
+            <strong>{price}</strong>
+            <span>launch price · regular $29</span>
+          </div>
+          <div class="hero__actions">
+            {onSale ? (
+              <a class="btn btn--primary" href={GUMROAD_DASHBOARD_PACK} rel="noopener">Buy the pack · {price} →</a>
+            ) : (
+              <a class="btn btn--primary" href="#launch-list">Join the launch list →</a>
+            )}
+            <a class="btn btn--secondary" href="#inside">See the ten pages</a>
+          </div>
+          <p class="dp-fine">
+            {onSale
+              ? "Instant download · 10 PBIX + demo CSVs + theme + docs · commercial use in client work included"
+              : "Checkout is being connected. Join the list and you'll get the launch link first — no spam."}
+          </p>
+        </div>
+        <figure class="dp-hero__media">
+          <img
+            src="/images/dashboard-pack/01-executive-overview.png"
+            width="1280"
+            height="720"
+            alt="Executive Overview page from the Power BI Dashboard Pack"
+          />
+          <figcaption>01 · Executive Overview — one of ten 1280 × 720 pages</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--base" id="inside">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">01 / Inside the pack</p>
+          <h2>Ten pages, one visual language.</h2>
+          <p class="section__intro">
+            The layouts are deliberately different — a trend page is not a detail
+            page — but the header, KPI row, panel style, type scale and colour
+            tokens are shared. Change one, and the pack still looks like a pack.
+          </p>
+        </div>
+
+        <div class="dp-gallery">
+          {gallery.map(([num, slug, name, alt], i) => (
+            <figure class:list={["dp-shot", i === 0 && "dp-shot--wide"]}>
+              <img
+                src={`/images/dashboard-pack/${slug}.png`}
+                width="1600"
+                height="900"
+                alt={alt}
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+              <figcaption><span>{name}</span><span>{num} / 10</span></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">02 / What you get</p>
+          <h2>A working report, not a mood board.</h2>
+        </div>
+        <div class="dp-features">
+          <article>
+            <p class="dp-num">10</p>
+            <h3>PBIX reports</h3>
+            <p>One page each, sample data embedded, every field well bound. Open the file and edit — no “recreate this visual” step.</p>
+          </article>
+          <article>
+            <p class="dp-num">1</p>
+            <h3>Clean model</h3>
+            <p>A <code>Sales</code> fact table, a marked <code>Date</code> table, one active relationship and four documented measures. No hidden auto-date tables.</p>
+          </article>
+          <article>
+            <p class="dp-num">0</p>
+            <h3>Custom visuals</h3>
+            <p>Native Power BI visuals only. Nothing to install, nothing to license, nothing that breaks on the next Desktop update.</p>
+          </article>
+          <article>
+            <p class="dp-num">A4</p>
+            <h3>Field map</h3>
+            <p>A page-by-page map of every visual, field and measure, plus the rebranding checklist and the five mistakes that blank a matrix.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--base">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">03 / The ten</p>
+          <h2>Pick the page the question needs.</h2>
+          <p class="section__intro">
+            Each report is standalone. Use one, use five, or keep the set as a
+            reference library and copy the layout you need.
+          </p>
+        </div>
+        <ol class="dp-list">
+          {templates.map(([num, name, desc]) => (
+            <li>
+              <span class="dp-list__num">{num}</span>
+              <div>
+                <h3>{name}</h3>
+                <p>{desc}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="wrap dp-two-col">
+        <div>
+          <p class="kicker">04 / The numbers</p>
+          <h2>Check it before you buy.</h2>
+          <p class="section__intro">
+            The demo model is small on purpose: 108 sales rows and a 365-row date
+            table. Every card on every page reconciles to these totals with all
+            filters cleared.
+          </p>
+          <table class="dp-figures">
+            <tbody>
+              <tr><td>Total revenue</td><td>1,006,968</td></tr>
+              <tr><td>Total cost</td><td>450,654</td></tr>
+              <tr><td>Gross margin</td><td>55.2%</td></tr>
+              <tr><td>Units sold</td><td>5,980</td></tr>
+              <tr><td>Paid revenue</td><td>720,729</td></tr>
+              <tr><td>Open revenue</td><td>286,239</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dp-model">
+          <p class="kicker">The model</p>
+          <pre><code>Date 1 ────── * Sales
+Date[Date]     Sales[Date]</code></pre>
+          <p>
+            One active, single-direction relationship. Revenue is stored positive;
+            cost is <code>Quantity × UnitCost</code>; margin is
+            <code>DIVIDE</code>. The same four measures drive every page, so a
+            filter cannot make two cards disagree.
+          </p>
+          <p class="dp-muted">
+            Demo data is synthetic. No real company, customer or transaction is
+            represented.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--base">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">05 / Licence &amp; fit</p>
+          <h2>Built to be used, not repackaged.</h2>
+        </div>
+        <div class="dp-two-col dp-two-col--text">
+          <div>
+            <h3>What the licence allows</h3>
+            <ul class="dp-plain">
+              <li>Use the reports for personal and internal business reporting.</li>
+              <li>Modify the layout, measures and theme.</li>
+              <li>Use them in work you deliver to clients.</li>
+              <li>Install for up to five people in one organisation.</li>
+            </ul>
+            <h3>What it does not allow</h3>
+            <ul class="dp-plain">
+              <li>Reselling or redistributing the PBIX/source files.</li>
+              <li>Publishing them as a template pack, course asset or marketplace item.</li>
+              <li>Claiming authorship of the original reports.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>It is for you if</h3>
+            <ul class="dp-plain">
+              <li>you need a credible dashboard by Friday and would rather adjust a working page</li>
+              <li>you deliver client reports and want a consistent starting layout</li>
+              <li>you learn by opening a report and reading the field wells</li>
+            </ul>
+            <h3>It is not for you if</h3>
+            <ul class="dp-plain">
+              <li>you need a P&amp;L, balance sheet or cash flow model</li>
+              <li>you need custom visuals, maps or R/Python visuals</li>
+              <li>you want your own data already loaded and branded</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">06 / Questions</p>
+          <h2>The short answers.</h2>
+        </div>
+        <div class="dp-faq">
+          <details>
+            <summary>Do I need Power BI Desktop?</summary>
+            <p>Yes — the free Windows app — or Power BI Service in a browser. The PBIX files open in Desktop 2024 or later. There are no paid add-ons and no custom visuals.</p>
+          </details>
+          <details>
+            <summary>Can I use my own data?</summary>
+            <p>Yes. Point the two CSV queries at your own files, or replace the queries in Power Query. Keep the column names from the field map and every visual rehydrates.</p>
+          </details>
+          <details>
+            <summary>Are the previews screenshots?</summary>
+            <p>They are layout renders from the same demo data and the same PBIR geometry. Numbers, positions and colours match the files; font rasterisation and auto-axis ranges can differ slightly by Power BI version.</p>
+          </details>
+          <details>
+            <summary>Can I use these in client work?</summary>
+            <p>Yes. The licence covers client deliverables for up to five seats. You cannot resell or redistribute the files as a template.</p>
+          </details>
+          <details>
+            <summary>Is this a rebrand of the old demo reports?</summary>
+            <p>No. The source folder was used as a pattern library; the reports are rebuilt with native visuals on a new model. No third-party PBIX or <code>.pbiviz</code> is included.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--base final-cta" id="launch-list">
+      <div class="wrap">
+        {onSale ? (
+          <>
+            <p class="kicker">07 / Get the pack</p>
+            <h2 class="statement">Ten pages. One afternoon of adjustment.</h2>
+            <a class="btn btn--primary" href={GUMROAD_DASHBOARD_PACK} rel="noopener">Buy the Dashboard Pack · {price} →</a>
+            <p>Instant download. Commercial use in client work included.</p>
+          </>
+        ) : (
+          <>
+            <p class="kicker">07 / Launch list</p>
+            <h2 class="statement">The pack is finished. The checkout is not.</h2>
+            <p>
+              Ten PBIX files, the docs and the previews are built and packaged.
+              Join the list and you'll get the $19 launch link as soon as the
+              Gumroad product is live.
+            </p>
+            <form
+              class="dp-signup"
+              action={NEWSLETTER.action}
+              method="post"
+              target={NEWSLETTER.iframeName}
+            >
+              <input type="email" name={NEWSLETTER.fieldName} placeholder="you@company.com" aria-label="Email" required />
+              <input type="hidden" name="tag" value="dashboard-pack" />
+              <input type="hidden" name="embed" value="1" />
+              <button type="submit">Notify me</button>
+            </form>
+            <iframe name={NEWSLETTER.iframeName} title="Newsletter response" style="display:none"></iframe>
+            <p class="dp-fine">No spam. One email when the checkout is live.</p>
+          </>
+        )}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .dp .dp-hero { padding-bottom: 56px; }
+  .dp .dp-hero__grid {
+    display: grid;
+    grid-template-columns: 1.02fr 0.98fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .dp .dp-hero h1 { max-width: 12ch; }
+  .dp .dp-price {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 22px 0 0;
+  }
+  .dp .dp-price strong {
+    font-family: var(--font-display);
+    font-size: 54px;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: var(--c-text);
+  }
+  .dp .dp-price span { font-size: 13px; color: var(--c-text-dim); }
+  .dp .dp-fine {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--c-text-dim);
+    max-width: 48ch;
+  }
+  .dp .dp-hero__media {
+    margin: 0;
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(16, 42, 67, 0.16);
+    transform: rotate(-1deg);
+  }
+  .dp .dp-hero__media img { width: 100%; height: auto; }
+  .dp .dp-hero__media figcaption {
+    font-size: 11px;
+    color: var(--c-text-dim);
+    padding: 10px 12px;
+    border-top: 1px solid var(--c-border);
+    background: var(--c-bg-soft);
+  }
+
+  .dp .dp-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .dp .dp-shot {
+    margin: 0;
+    border: 1px solid var(--c-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .dp .dp-shot--wide { grid-column: 1 / -1; }
+  .dp .dp-shot img { width: 100%; height: auto; display: block; }
+  .dp .dp-shot figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--c-text-muted);
+    border-top: 1px solid var(--c-border);
+    background: var(--c-bg-soft);
+  }
+  .dp .dp-shot figcaption span:last-child {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--c-text-dim);
+  }
+
+  .dp .dp-features {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .dp .dp-features article {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 10px;
+    padding: 22px;
+  }
+  .dp .dp-num {
+    font-family: var(--font-display);
+    font-size: 38px;
+    line-height: 1;
+    color: var(--c-accent-dark);
+    margin-bottom: 14px;
+  }
+  .dp .dp-features h3 { font-size: 15px; margin-bottom: 8px; }
+  .dp .dp-features p { font-size: 13px; line-height: 21px; color: var(--c-text-muted); }
+
+  .dp .dp-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
+    border-top: 1px solid var(--c-border);
+  }
+  .dp .dp-list li {
+    display: flex;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .dp .dp-list__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--c-text-dim);
+    padding-top: 4px;
+    flex: none;
+  }
+  .dp .dp-list h3 { font-size: 15px; margin-bottom: 4px; }
+  .dp .dp-list p { font-size: 13px; line-height: 20px; color: var(--c-text-muted); margin: 0; }
+
+  .dp .dp-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .dp .dp-two-col--text { gap: 56px; }
+  .dp .dp-two-col h2 { font-size: 34px; line-height: 1.15; margin-bottom: 16px; }
+  .dp .dp-two-col h3 { font-size: 15px; margin: 22px 0 8px; }
+  .dp .dp-two-col p { font-size: 14px; line-height: 23px; color: var(--c-text-muted); }
+
+  .dp .dp-figures {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    font-size: 13px;
+  }
+  .dp .dp-figures td {
+    padding: 9px 0;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .dp .dp-figures td:last-child {
+    text-align: right;
+    font-family: var(--font-mono);
+    color: var(--c-text);
+  }
+  .dp .dp-model {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 10px;
+    padding: 26px;
+  }
+  .dp .dp-model pre {
+    margin: 12px 0 18px;
+    padding: 18px;
+    background: #0B1F33;
+    color: #E6F1FF;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+  .dp .dp-muted { font-size: 12px !important; color: var(--c-text-dim) !important; }
+
+  .dp .dp-plain {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .dp .dp-plain li {
+    position: relative;
+    padding: 7px 0 7px 22px;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--c-text-muted);
+  }
+  .dp .dp-plain li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--c-accent-dark);
+  }
+
+  .dp .dp-faq { border-top: 1px solid var(--c-border); }
+  .dp .dp-faq details { border-bottom: 1px solid var(--c-border); padding: 16px 0; }
+  .dp .dp-faq summary {
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--c-text);
+    list-style: none;
+  }
+  .dp .dp-faq summary::-webkit-details-marker { display: none; }
+  .dp .dp-faq summary::after { content: "+"; float: right; color: var(--c-text-dim); }
+  .dp .dp-faq details[open] summary::after { content: "−"; }
+  .dp .dp-faq p { font-size: 14px; line-height: 23px; color: var(--c-text-muted); margin-top: 10px; max-width: 78ch; }
+
+  .dp .dp-signup {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    max-width: 480px;
+  }
+  .dp .dp-signup input[type="email"] {
+    flex: 1 1 260px;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+    background: var(--c-bg);
+    color: var(--c-text);
+  }
+  .dp .dp-signup button {
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .dp .dp-signup button:hover { background: var(--c-accent-hover); }
+
+  @media (max-width: 900px) {
+    .dp .dp-hero__grid,
+    .dp .dp-gallery,
+    .dp .dp-list,
+    .dp .dp-two-col,
+    .dp .dp-features { grid-template-columns: 1fr; }
+    .dp .dp-hero__media { transform: none; }
+    .dp .dp-list { gap: 0; }
+    .dp .dp-features { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .dp .dp-features { grid-template-columns: 1fr; }
+    .dp .dp-price strong { font-size: 42px; }
+  }
+</style>
