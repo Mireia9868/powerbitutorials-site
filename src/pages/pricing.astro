@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { GUMROAD_FINANCE, GUMROAD_TIME_INTELLIGENCE, SITE_URL } from "../consts";
+import { GUMROAD_FINANCE, GUMROAD_TIME_INTELLIGENCE, GUMROAD_ANALYSIS_PATTERNS, SITE_URL } from "../consts";
 
 const products = [
   {
@@ -18,6 +18,22 @@ const products = [
     href: GUMROAD_TIME_INTELLIGENCE,
     cta: "Buy · $9",
     note: "One-time payment. Instant download after checkout.",
+  },
+  {
+    name: "Analysis Patterns Pack",
+    price: "$19",
+    status: GUMROAD_ANALYSIS_PATTERNS ? "Available now" : "Coming soon",
+    statusClass: GUMROAD_ANALYSIS_PATTERNS ? "live" : "soon",
+    summary:
+      "Ten classic business patterns as plain-text DAX and Power Query: RFM, market basket, ABC/Pareto, BCG, NPS, Top-N, customer movement, forecasting and more.",
+    includes: [
+      "10 commented DAX files and 2 Power Query scripts",
+      "10 build guides with column names, self-checks and trap notes",
+      "Pack README and licence — 23 text files, no PBIX lock-in",
+    ],
+    href: GUMROAD_ANALYSIS_PATTERNS || "/templates/analysis-patterns/",
+    cta: GUMROAD_ANALYSIS_PATTERNS ? "Buy · $19" : "See details",
+    note: GUMROAD_ANALYSIS_PATTERNS ? "One-time payment. Instant download after checkout." : "Launching soon — join the list on the product page.",
   },
   {
     name: "Finance Starter Pack",
@@ -86,7 +102,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Pricing — Power BI Tutorials packs"
-  description="One-time Power BI packs: a $9 time-intelligence pack and a $19 finance starter pack, both available now. No subscriptions, instant download."
+  description="One-time Power BI packs: a $9 time-intelligence pack, a $19 analysis patterns pack and a $19 finance starter pack. No subscriptions, instant download."
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 

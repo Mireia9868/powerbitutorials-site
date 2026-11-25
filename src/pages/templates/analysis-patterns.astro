@@ -1,0 +1,499 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { GUMROAD_ANALYSIS_PATTERNS, NEWSLETTER } from "../../consts";
+import "../../styles/hub-design.css";
+
+const onSale = GUMROAD_ANALYSIS_PATTERNS.trim().length > 0;
+const price = "$19";
+
+const jsonLd = onSale
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: "Analysis Patterns Pack — 10 Classic Power BI Models",
+      description:
+        "Ten self-contained Power BI analysis patterns in plain text: commented DAX, Power Query scripts and build guides for RFM, market basket, ABC/Pareto, BCG, NPS, Top-N, customer movement, forecasting, grand totals and date tables.",
+      brand: { "@type": "Brand", name: "Power BI Tutorials" },
+      offers: {
+        "@type": "Offer",
+        price: "19",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        url: GUMROAD_ANALYSIS_PATTERNS,
+      },
+    }
+  : null;
+
+const patterns = [
+  ["01", "RFM Segmentation", "Score customers on recency, frequency and monetary value, then segment them into champions, loyal, at-risk and hibernating. RANKX-based, so it adapts when your dataset grows.", "Measures.dax · README.md"],
+  ["02", "Market Basket Analysis", "Build product pairs in Power Query and measure support, confidence and lift — the real association signal, not just co-occurrence counts.", "Measures.dax · MakePairs.pq · README.md"],
+  ["03", "ABC / Pareto", "Rank products by revenue and classify them A/B/C by cumulative share. Live under slicers because it is measure-based, not a frozen calculated column.", "Measures.dax · README.md"],
+  ["04", "BCG Portfolio Matrix", "Plot relative market share against market growth and classify each product as a star, cash cow, question mark or dog.", "Measures.dax · README.md"],
+  ["05", "Net Promoter Score", "Promoters minus detractors, computed correctly from raw responses. Includes the latest-year variant — because averaging monthly NPS gives the wrong answer.", "Measures.dax · README.md"],
+  ["06", "Dynamic Top-N + Other", "A what-if slicer picks the top N products, and a single residual row completes the total so the visual always reconciles to 100%.", "Measures.dax · README.md"],
+  ["07", "Customer Gain / Loss", "Split the active base into new, retained and lost customers period over period, with the revenue attached to each group.", "Measures.dax · README.md"],
+  ["08", "Sales Forecast (YoY)", "A defensible baseline: prior-year actual times a chosen growth rate, with a rolling-3M variant and variance tracking.", "Measures.dax · README.md"],
+  ["09", "Grand Total Fixes", "The four reasons a total row disagrees with the rows above it — summed ratios, wrong grain, missing weighted logic and meaningless ranks — each with a working fix.", "Measures.dax · README.md"],
+  ["10", "Dynamic Date Dimension", "A marked date table with fiscal-year support and ISO weeks, plus the eight time-intelligence measures that depend on it.", "DateTable.pq · Measures.dax · README.md"],
+];
+---
+
+<BaseLayout
+  title="Analysis Patterns Pack — 10 Classic Power BI Models"
+  description="Ten Power BI analysis patterns in plain text: commented DAX, Power Query and build guides. RFM, market basket, ABC/Pareto, BCG, NPS, Top-N and more. $19 once."
+  noindex={!onSale}
+>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;600&family=Inter:wght@400;500;600&family=Newsreader:wght@600;700&display=swap" rel="stylesheet" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </Fragment>
+
+  <div class="hub-v2 ap">
+    <section class="hero ap-hero">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="wrap ap-hero__grid">
+        <div>
+          <p class="kicker">Templates / Analysis Patterns</p>
+          <h1>Ten models you can read,<br />not just open.</h1>
+          <p class="hero__sub">
+            Classic business analysis patterns rebuilt as plain-text DAX and
+            Power Query. Every measure is commented with the trap it avoids,
+            every README lists the exact columns and a self-check — so you can
+            tell it works before you put it in front of a client.
+          </p>
+          <div class="ap-price">
+            <strong>{price}</strong>
+            <span>launch price · regular $29</span>
+          </div>
+          <div class="hero__actions">
+            {onSale ? (
+              <a class="btn btn--primary" href={GUMROAD_ANALYSIS_PATTERNS} rel="noopener">Buy the pack · {price} →</a>
+            ) : (
+              <a class="btn btn--primary" href="#launch-list">Join the launch list →</a>
+            )}
+            <a class="btn btn--secondary" href="#inside">See the ten patterns</a>
+          </div>
+          <p class="ap-fine">
+            {onSale
+              ? "Instant download · 23 plain-text files · commercial use in client work included"
+              : "Checkout is being connected. Join the list and you'll get the launch link first — no spam."}
+          </p>
+        </div>
+        <figure class="ap-hero__media">
+          <div class="ap-code">
+            <p class="ap-code__tag">MEASURES.DAX / 09 — GRAND TOTAL FIXES</p>
+            <pre><code>Margin % (display) =
+IF (
+    HASONEVALUE ( Sales[Category] ),
+    [Margin %],
+    DIVIDE ( ... weighted ... )
+)</code></pre>
+          </div>
+          <figcaption>Every pattern ships as readable text — no PBIX lock-in.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--base" id="inside">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">01 / Inside the pack</p>
+          <h2>Ten questions, ten working answers.</h2>
+          <p class="section__intro">
+            Each pattern is self-contained: a commented DAX file, a build guide
+            with the exact column names it assumes, and a self-check section so
+            you know it is wired correctly before you add visuals.
+          </p>
+        </div>
+        <ol class="ap-list">
+          {patterns.map(([num, name, desc, files]) => (
+            <li>
+              <span class="ap-list__num">{num}</span>
+              <div>
+                <h3>{name}</h3>
+                <p>{desc}</p>
+                <p class="ap-list__files">{files}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">02 / What you get</p>
+          <h2>Text files, not a black box.</h2>
+        </div>
+        <div class="ap-features">
+          <article>
+            <p class="ap-num">23</p>
+            <h3>Plain-text files</h3>
+            <p>Ten commented DAX files, two Power Query scripts, ten build guides, a pack README and a licence. Open them in any editor.</p>
+          </article>
+          <article>
+            <p class="ap-num">0</p>
+            <h3>PBIX lock-in</h3>
+            <p>No binaries, no custom visuals, no third-party reports. Paste the measures into your own model and they run as written.</p>
+          </article>
+          <article>
+            <p class="ap-num">10</p>
+            <h3>Self-checks</h3>
+            <p>Each README says what the numbers must reconcile to, so a wrong result is a wiring problem you can find — not a mystery.</p>
+          </article>
+          <article>
+            <p class="ap-num">A4</p>
+            <h3>Trap notes</h3>
+            <p>Every measure explains the mistake it prevents: fiscal YTD, summed ratios, ALL vs ALLSELECTED, the total-row traps.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--base">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">03 / Where the ideas came from</p>
+          <h2>Classic patterns, rebuilt from scratch.</h2>
+          <p class="section__intro">
+            The ten topics were chosen from a reference library of classic Power
+            BI examples. Every file in this pack was written fresh against
+            generic table names — no third-party PBIX, DAX or narrative is
+            included or redistributed.
+          </p>
+        </div>
+        <div class="ap-note">
+          <p><strong>Why text?</strong> A PBIX is a screenshot you cannot grep. A commented measure is something you can read, change and defend in a review. This pack is for people who want to understand the model, not just inherit it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">04 / Licence &amp; fit</p>
+          <h2>Built to be used, not repackaged.</h2>
+        </div>
+        <div class="ap-two-col">
+          <div>
+            <h3>What the licence allows</h3>
+            <ul class="ap-plain">
+              <li>Use the measures and scripts in your own reports and client work.</li>
+              <li>Modify column names, thresholds and logic to fit your model.</li>
+              <li>Install for up to five people in one organisation.</li>
+            </ul>
+            <h3>What it does not allow</h3>
+            <ul class="ap-plain">
+              <li>Reselling or redistributing the `.dax`, `.pq` or README files.</li>
+              <li>Bundling them into another template pack, course or marketplace item.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>It is for you if</h3>
+            <ul class="ap-plain">
+              <li>you need a correct pattern to drop into a model today</li>
+              <li>you want to see the DAX and understand why it is written that way</li>
+              <li>you deliver client reports and need a reliable starting point</li>
+            </ul>
+            <h3>It is not for you if</h3>
+            <ul class="ap-plain">
+              <li>you want a finished PBIX with your data already loaded</li>
+              <li>you need custom visuals or a full dashboard design system</li>
+              <li>you do not want to touch Power Query or the model at all</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--base">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">05 / Questions</p>
+          <h2>The short answers.</h2>
+        </div>
+        <div class="ap-faq">
+          <details>
+            <summary>Do I need Power BI Desktop?</summary>
+            <p>Yes — the free Windows app — or Power BI Service in a browser. The files are plain text, so you can read them anywhere, but running the DAX needs a Power BI model.</p>
+          </details>
+          <details>
+            <summary>Will the measures work with my column names?</summary>
+            <p>Not without a rename. Each README lists the exact columns it assumes. Rename your columns to match, or change the names in the DAX — there is no hidden dependency on a specific dataset.</p>
+          </details>
+          <details>
+            <summary>Do I get a .pbix file?</summary>
+            <p>No. This pack is deliberately plain text: DAX, Power Query and Markdown. If you want ready-made reports with sample data, look at the Dashboard Pack instead.</p>
+          </details>
+          <details>
+            <summary>Are these copied from the template library?</summary>
+            <p>No. The ten topics were selected from classic examples as a pattern library. Every file here was written from scratch against generic tables, and no third-party report or code is redistributed.</p>
+          </details>
+          <details>
+            <summary>Can I use these in client work?</summary>
+            <p>Yes. The licence covers your own reports and paid client deliverables. What it excludes is reselling or republishing the files as your own pack or course.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft final-cta" id="launch-list">
+      <div class="wrap">
+        {onSale ? (
+          <>
+            <p class="kicker">06 / Get the pack</p>
+            <h2 class="statement">Ten patterns. One afternoon of adjustment.</h2>
+            <a class="btn btn--primary" href={GUMROAD_ANALYSIS_PATTERNS} rel="noopener">Buy the Analysis Patterns Pack · {price} →</a>
+            <p>Instant download. Commercial use in client work included.</p>
+          </>
+        ) : (
+          <>
+            <p class="kicker">06 / Launch list</p>
+            <h2 class="statement">The pack is finished. The checkout is not.</h2>
+            <p>
+              Twenty-three files, ten build guides and all the previews are
+              ready. Join the list and you'll get the $19 launch link as soon as
+              the Gumroad product is live.
+            </p>
+            <form
+              class="ap-signup"
+              action={NEWSLETTER.action}
+              method="post"
+              target={NEWSLETTER.iframeName}
+            >
+              <input type="email" name={NEWSLETTER.fieldName} placeholder="you@company.com" aria-label="Email" required />
+              <input type="hidden" name="tag" value="analysis-patterns" />
+              <input type="hidden" name="embed" value="1" />
+              <button type="submit">Notify me</button>
+            </form>
+            <iframe name={NEWSLETTER.iframeName} title="Newsletter response" style="display:none"></iframe>
+            <p class="ap-fine">No spam. One email when the checkout is live.</p>
+          </>
+        )}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .ap .ap-hero { padding-bottom: 56px; }
+  .ap .ap-hero__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .ap .ap-hero h1 { max-width: 15ch; }
+  .ap .ap-price {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 22px 0 0;
+  }
+  .ap .ap-price strong {
+    font-family: var(--font-display);
+    font-size: 54px;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: var(--c-text);
+  }
+  .ap .ap-price span { font-size: 13px; color: var(--c-text-dim); }
+  .ap .ap-fine {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--c-text-dim);
+    max-width: 48ch;
+  }
+  .ap .ap-hero__media {
+    margin: 0;
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(16, 42, 67, 0.16);
+    transform: rotate(-1deg);
+  }
+  .ap .ap-code { padding: 22px; }
+  .ap .ap-code__tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--c-text-dim);
+    margin-bottom: 14px;
+  }
+  .ap .ap-code pre {
+    margin: 0;
+    padding: 18px;
+    background: #0B1F33;
+    color: #E6F1FF;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+  .ap .ap-hero__media figcaption {
+    font-size: 11px;
+    color: var(--c-text-dim);
+    padding: 10px 12px;
+    border-top: 1px solid var(--c-border);
+    background: var(--c-bg-soft);
+  }
+
+  .ap .ap-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
+    border-top: 1px solid var(--c-border);
+  }
+  .ap .ap-list li {
+    display: flex;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .ap .ap-list__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--c-text-dim);
+    padding-top: 4px;
+    flex: none;
+  }
+  .ap .ap-list h3 { font-size: 15px; margin-bottom: 5px; }
+  .ap .ap-list p { font-size: 13px; line-height: 20px; color: var(--c-text-muted); margin: 0; }
+  .ap .ap-list__files {
+    font-family: var(--font-mono) !important;
+    font-size: 10px !important;
+    letter-spacing: 0.3px;
+    color: var(--c-text-dim) !important;
+    margin-top: 6px !important;
+  }
+
+  .ap .ap-features {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .ap .ap-features article {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 10px;
+    padding: 22px;
+  }
+  .ap .ap-num {
+    font-family: var(--font-display);
+    font-size: 38px;
+    line-height: 1;
+    color: var(--c-accent-dark);
+    margin-bottom: 14px;
+  }
+  .ap .ap-features h3 { font-size: 15px; margin-bottom: 8px; }
+  .ap .ap-features p { font-size: 13px; line-height: 21px; color: var(--c-text-muted); }
+
+  .ap .ap-note {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 10px;
+    padding: 24px;
+    max-width: 78ch;
+  }
+  .ap .ap-note p { font-size: 14px; line-height: 23px; color: var(--c-text-muted); margin: 0; }
+  .ap .ap-note strong { color: var(--c-text); }
+
+  .ap .ap-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .ap .ap-two-col h2 { font-size: 34px; line-height: 1.15; margin-bottom: 16px; }
+  .ap .ap-two-col h3 { font-size: 15px; margin: 22px 0 8px; }
+  .ap .ap-two-col h3:first-child { margin-top: 0; }
+  .ap .ap-two-col p { font-size: 14px; line-height: 23px; color: var(--c-text-muted); }
+
+  .ap .ap-plain {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .ap .ap-plain li {
+    position: relative;
+    padding: 7px 0 7px 22px;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--c-text-muted);
+  }
+  .ap .ap-plain li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--c-accent-dark);
+  }
+
+  .ap .ap-faq { border-top: 1px solid var(--c-border); }
+  .ap .ap-faq details { border-bottom: 1px solid var(--c-border); padding: 16px 0; }
+  .ap .ap-faq summary {
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--c-text);
+    list-style: none;
+  }
+  .ap .ap-faq summary::-webkit-details-marker { display: none; }
+  .ap .ap-faq summary::after { content: "+"; float: right; color: var(--c-text-dim); }
+  .ap .ap-faq details[open] summary::after { content: "−"; }
+  .ap .ap-faq p { font-size: 14px; line-height: 23px; color: var(--c-text-muted); margin-top: 10px; max-width: 78ch; }
+
+  .ap .ap-signup {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    max-width: 480px;
+  }
+  .ap .ap-signup input[type="email"] {
+    flex: 1 1 260px;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+    background: var(--c-bg);
+    color: var(--c-text);
+  }
+  .ap .ap-signup button {
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--c-accent);
+    color: var(--c-accent-text);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .ap .ap-signup button:hover { background: var(--c-accent-hover); }
+
+  @media (max-width: 900px) {
+    .ap .ap-hero__grid,
+    .ap .ap-list,
+    .ap .ap-two-col,
+    .ap .ap-features { grid-template-columns: 1fr; }
+    .ap .ap-hero__media { transform: none; }
+    .ap .ap-list { gap: 0; }
+    .ap .ap-features { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .ap .ap-features { grid-template-columns: 1fr; }
+    .ap .ap-price strong { font-size: 42px; }
+  }
+</style>

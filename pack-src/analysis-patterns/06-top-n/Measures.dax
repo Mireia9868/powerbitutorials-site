@@ -1,0 +1,63 @@
+// ============================================================
+// 06 — DYNAMIC TOP-N WITH "OTHER" BUCKET
+// Assumes: Sales[ProductKey], Sales[NetRevenue], Products[ProductKey].
+// A what-if parameter `TopN` (whole number 1-20) must exist.
+// The pattern shows the top N products plus one "Other" row that
+// completes the total — so the visual always reconciles to 100%.
+// ============================================================
+
+Product Revenue = SUM ( Sales[NetRevenue] )
+
+Total Revenue (all) =
+CALCULATE (
+    [Product Revenue],
+    REMOVEFILTERS ( Products )
+)
+
+Product Rank =
+RANKX (
+    ALLSELECTED ( Products[ProductKey] ),
+    CALCULATE ( [Product Revenue] ),
+    ,
+    DESC,
+    DENSE
+)
+
+// Revenue for the selected top N only.
+Top N Revenue =
+VAR N = SELECTEDVALUE ( TopN[TopN], 5 )
+RETURN
+SUMX (
+    FILTER (
+        VALUES ( Products[ProductKey] ),
+        [Product Rank] <= N
+    ),
+    CALCULATE ( [Product Revenue] )
+)
+
+// Everything outside the top N, as one residual row.
+Other Revenue = [Total Revenue (all)] - [Top N Revenue]
+
+// A display measure for a custom "category" axis built with a
+// disconnected table `RankBucket` containing 1..20 plus "Other".
+Display Revenue =
+VAR N = SELECTEDVALUE ( TopN[TopN], 5 )
+VAR Bucket = SELECTEDVALUE ( RankBucket[Label] )
+RETURN
+SWITCH (
+    TRUE (),
+    ISNUMBER ( Bucket ) && Bucket <= N,
+        CALCULATE (
+            [Product Revenue],
+            FILTER (
+                VALUES ( Products[ProductKey] ),
+                [Product Rank] = Bucket
+            )
+        ),
+    Bucket = "Other", [Other Revenue],
+    BLANK ()
+)
+
+// Percent of total for the same display axis.
+Display % =
+DIVIDE ( [Display Revenue], [Total Revenue (all)] )

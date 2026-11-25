@@ -1,0 +1,54 @@
+// ============================================================
+// 09 — GRAND TOTAL FIXES
+// Assumes: Sales[Category], Sales[NetRevenue], Sales[Units],
+//          Sales[UnitPrice]. Demonstrates the four most common
+// reasons a total row disagrees with the rows above it.
+// ============================================================
+
+// --- Fix 1: non-additive ratio --------------------------------
+// A ratio cannot be summed. Average price must be recomputed at
+// the level the visual is showing.
+Unit Price (correct) =
+DIVIDE ( SUM ( Sales[NetRevenue] ), SUM ( Sales[Units] ) )
+
+// Wrong version for comparison: SUM of a per-row ratio.
+Unit Price (wrong) = SUM ( Sales[UnitPrice] )
+
+// --- Fix 2: iterate the visible grain -------------------------
+// A category count at total should be the sum of per-category
+// counts, not a count of all rows.
+Categories with Sales =
+COUNTROWS (
+    FILTER (
+        VALUES ( Sales[Category] ),
+        CALCULATE ( SUM ( Sales[NetRevenue] ) ) > 0
+    )
+)
+
+// --- Fix 3: HASONEVALUE to switch logic at total --------------
+// Show the selected category's margin at row level, but a weighted
+// margin at the total — never a simple average of row margins.
+Margin % =
+VAR Revenue = SUM ( Sales[NetRevenue] )
+VAR Cost = SUM ( Sales[UnitCost] * Sales[Units] )
+RETURN
+DIVIDE ( Revenue - Cost, Revenue )
+
+Margin % (display) =
+IF (
+    HASONEVALUE ( Sales[Category] ),
+    [Margin %],
+    DIVIDE (
+        SUMX ( VALUES ( Sales[Category] ), SUM ( Sales[NetRevenue] ) * [Margin %] ),
+        SUM ( Sales[NetRevenue] )
+    )
+)
+
+// --- Fix 4: ISINSCOPE to blank an invalid total ---------------
+// A "rank" or "score" has no meaning on a total row.
+Rank (display) =
+IF (
+    ISINSCOPE ( Sales[Category] ),
+    RANKX ( ALLSELECTED ( Sales[Category] ), CALCULATE ( SUM ( Sales[NetRevenue] ) ) ),
+    BLANK ()
+)

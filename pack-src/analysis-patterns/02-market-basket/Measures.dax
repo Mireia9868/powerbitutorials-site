@@ -1,0 +1,45 @@
+// ============================================================
+// 02 — MARKET BASKET ANALYSIS
+// Assumes a pair table `BasketPairs` produced by MakePairs.pq with
+// columns: OrderKey, ProductA, ProductB (ordered, no self-pairs),
+// plus the single-product table `BasketSingles` with OrderKey, Product.
+// Support / Confidence / Lift follow their standard definitions.
+// ============================================================
+
+Orders (basket) = DISTINCTCOUNT ( BasketSingles[OrderKey] )
+
+// Support(A) = fraction of all orders containing A.
+Product Orders =
+CALCULATE (
+    DISTINCTCOUNT ( BasketSingles[OrderKey] ),
+    REMOVEFILTERS ( BasketPairs ),
+    TREATAS ( VALUES ( BasketPairs[ProductA] ), BasketSingles[Product] )
+)
+
+Support (A) =
+DIVIDE ( [Product Orders], [Orders (basket)] )
+
+// Pair Orders = orders containing both A and B.
+Pair Orders = DISTINCTCOUNT ( BasketPairs[OrderKey] )
+
+Support (A,B) =
+DIVIDE ( [Pair Orders], [Orders (basket)] )
+
+// Confidence(A -> B): of orders with A, how many also have B.
+Confidence (A->B) =
+DIVIDE ( [Pair Orders], [Product Orders] )
+
+// Lift > 1 means the pair is bought together more often than chance.
+Lift =
+DIVIDE ( [Confidence (A->B)], [Support (B)] )
+
+Support (B) =
+CALCULATE (
+    DISTINCTCOUNT ( BasketSingles[OrderKey] ),
+    REMOVEFILTERS ( BasketPairs ),
+    TREATAS ( VALUES ( BasketPairs[ProductB] ), BasketSingles[Product] )
+)
+
+// A practical filter for a top pair table: only show real signal.
+Pairs to Show =
+IF ( [Pair Orders] >= 5 && [Lift] > 1, [Pair Orders] )

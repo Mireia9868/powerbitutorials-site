@@ -1,0 +1,59 @@
+// ============================================================
+// 04 — BCG PORTFOLIO MATRIX
+// Assumes: Sales[ProductKey], Sales[NetRevenue], Products[ProductKey],
+//          and a market benchmark table `Market` with ProductKey,
+//          MarketRevenue (total category revenue including competitors).
+// Plot relative market share (x) against market growth (y).
+// ============================================================
+
+Product Revenue = SUM ( Sales[NetRevenue] )
+
+Market Revenue = SUM ( Market[MarketRevenue] )
+
+// Relative market share = our share / largest competitor's share.
+// Simplified: our revenue divided by the market leader's revenue.
+Market Leader Revenue =
+CALCULATE (
+    MAX ( Market[MarketRevenue] ),
+    REMOVEFILTERS ( Products )
+)
+
+Relative Market Share =
+DIVIDE ( [Product Revenue], [Market Leader Revenue] )
+
+// Market growth: current period vs prior period, from a Year column.
+Revenue CY = [Product Revenue]
+
+Revenue PY =
+CALCULATE (
+    [Product Revenue],
+    REMOVEFILTERS ( 'Date' ),
+    PARALLELPERIOD ( 'Date'[Date], -1, YEAR )
+)
+
+Market Growth =
+DIVIDE ( [Revenue CY] - [Revenue PY], [Revenue PY] )
+
+// Classify into the four BCG quadrants. Threshold 1.0 for share
+// (leader or not) and 0.10 for growth — both are configurable.
+BCG Class =
+IF (
+    NOT ISINSCOPE ( Products[ProductKey] ),
+    BLANK (),
+    SWITCH (
+        TRUE (),
+        [Relative Market Share] >= 1.0 && [Market Growth] >= 0.10, "Star",
+        [Relative Market Share] >= 1.0 && [Market Growth] <  0.10, "Cash Cow",
+        [Relative Market Share] <  1.0 && [Market Growth] >= 0.10, "Question Mark",
+        "Dog"
+    )
+)
+
+Products in Class =
+CALCULATE (
+    DISTINCTCOUNT ( Products[ProductKey] ),
+    FILTER (
+        VALUES ( Products[ProductKey] ),
+        NOT ISBLANK ( [BCG Class] )
+    )
+)

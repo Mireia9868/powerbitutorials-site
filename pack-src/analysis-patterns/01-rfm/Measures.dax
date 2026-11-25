@@ -1,0 +1,97 @@
+// ============================================================
+// 01 — RFM SEGMENTATION
+// Assumes: Sales[CustomerKey], Sales[OrderKey], Sales[OrderDate],
+//          Sales[NetRevenue], and a marked Date table.
+// Base measures first; scores reference them, never repeat logic.
+// ============================================================
+
+// --- Base measures -------------------------------------------
+
+Total Revenue = SUM ( Sales[NetRevenue] )
+
+Orders = DISTINCTCOUNT ( Sales[OrderKey] )
+
+Customers = DISTINCTCOUNT ( Sales[CustomerKey] )
+
+// Anchor "today" to the last date in the model, not TODAY().
+// TODAY() makes an old dataset show every customer as lapsed.
+Last Model Date = MAX ( 'Date'[Date] )
+
+Last Order Date =
+CALCULATE (
+    MAX ( Sales[OrderDate] ),
+    REMOVEFILTERS ( 'Date' )
+)
+
+// Recency in days. Keep it as a scalar so it can be scored.
+Recency =
+DATEDIFF ( [Last Order Date], [Last Model Date], DAY )
+
+// --- Scores (1 = best) ---------------------------------------
+// RANKX over customers gives a true rank, unlike a fixed bucket.
+// Ascending on Recency because fewer days is better.
+
+R Score =
+RANKX (
+    ALLSELECTED ( Customers[CustomerKey] ),
+    CALCULATE ( [Recency] ),
+    ,
+    ASC,
+    DENSE
+)
+
+F Score =
+RANKX (
+    ALLSELECTED ( Customers[CustomerKey] ),
+    CALCULATE ( [Orders] ),
+    ,
+    DESC,
+    DENSE
+)
+
+M Score =
+RANKX (
+    ALLSELECTED ( Customers[CustomerKey] ),
+    CALCULATE ( [Total Revenue] ),
+    ,
+    DESC,
+    DENSE
+)
+
+// --- Segmentation --------------------------------------------
+// Work at customer granularity, then let the cell label drive the story.
+
+RFM Cell =
+IF (
+    ISINSCOPE ( Customers[CustomerKey] ),
+    [R Score] & [F Score] & [M Score]
+)
+
+Segment =
+VAR R = [R Score]
+VAR F = [F Score]
+VAR M = [M Score]
+RETURN
+IF (
+    NOT ISINSCOPE ( Customers[CustomerKey] ),
+    BLANK (),
+    SWITCH (
+        TRUE (),
+        R <= 20 && F <= 20 && M <= 20, "Champions",
+        R <= 40 && F <= 40,             "Loyal",
+        R <= 40 && F > 40,              "Promising",
+        R > 40  && F <= 40 && M <= 40,  "At risk",
+        R > 60  && F > 60,              "Hibernating",
+        "Needs attention"
+    )
+)
+
+// Count of customers in each segment — the measure to put on a card.
+Customers in Segment =
+CALCULATE (
+    DISTINCTCOUNT ( Sales[CustomerKey] ),
+    FILTER (
+        VALUES ( Customers[CustomerKey] ),
+        NOT ISBLANK ( [Segment] )
+    )
+)

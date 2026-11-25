@@ -189,3 +189,9 @@ export const GUMROAD_FINANCE =
 // launch-list page and is noindexed; the buy button appears automatically once
 // the URL is filled in and the site is rebuilt.
 export const GUMROAD_DASHBOARD_PACK = "";
+
+// Analysis Patterns Pack (10 classic models, plain-text DAX/PQ) — set this to
+// the Gumroad product URL once the product is published. While empty the page
+// renders as a launch-list and is noindexed; the buy button appears
+// automatically when the URL is filled in and the site is rebuilt.
+export const GUMROAD_ANALYSIS_PATTERNS = "";

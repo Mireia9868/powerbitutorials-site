@@ -1,0 +1,70 @@
+// ============================================================
+// 03 — ABC / PARETO ANALYSIS
+// Assumes: Sales[ProductKey], Sales[NetRevenue], Products[ProductKey].
+// Classifies products by cumulative share of revenue (A ~ top 70%,
+// B ~ next 20%, C ~ last 10%). RANKX + running total, no calculated
+// columns needed, so it responds to slicers.
+// ============================================================
+
+Product Revenue = SUM ( Sales[NetRevenue] )
+
+Total Revenue (all) =
+CALCULATE (
+    [Product Revenue],
+    REMOVEFILTERS ( Products )
+)
+
+// Rank products by revenue, descending. DENSE keeps ties together.
+Product Rank =
+RANKX (
+    ALLSELECTED ( Products[ProductKey] ),
+    CALCULATE ( [Product Revenue] ),
+    ,
+    DESC,
+    DENSE
+)
+
+// Cumulative revenue up to and including this product's rank.
+Cumulative Revenue =
+VAR ThisRank = [Product Rank]
+RETURN
+SUMX (
+    FILTER (
+        ALLSELECTED ( Products[ProductKey] ),
+        [Product Rank] <= ThisRank
+    ),
+    CALCULATE ( [Product Revenue] )
+)
+
+Cumulative % =
+DIVIDE ( [Cumulative Revenue], [Total Revenue (all)] )
+
+// Classify at product level only; blank on a total row.
+ABC Class =
+IF (
+    NOT ISINSCOPE ( Products[ProductKey] ),
+    BLANK (),
+    SWITCH (
+        TRUE (),
+        [Cumulative %] <= 0.70, "A",
+        [Cumulative %] <= 0.90, "B",
+        "C"
+    )
+)
+
+// Count of products in each class — for a card or bar chart.
+Products in Class =
+CALCULATE (
+    DISTINCTCOUNT ( Products[ProductKey] ),
+    FILTER (
+        VALUES ( Products[ProductKey] ),
+        NOT ISBLANK ( [ABC Class] )
+    )
+)
+
+// Revenue by class, for the classic Pareto bar.
+Revenue by Class =
+SUMX (
+    VALUES ( Products[ProductKey] ),
+    [Product Revenue]
+)
