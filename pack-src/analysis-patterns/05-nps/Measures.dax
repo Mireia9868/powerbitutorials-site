@@ -1,0 +1,58 @@
+// ============================================================
+// 05 — NET PROMOTER SCORE
+// Assumes: Responses[Score] (integer 0-10), Responses[ResponseKey],
+//          Responses[CustomerKey], Responses[ResponseDate].
+// Promoters 9-10, Passives 7-8, Detractors 0-6.
+// NPS = % promoters - % detractors. Range -100 to +100.
+// ============================================================
+
+Responses (count) = COUNT ( Responses[ResponseKey] )
+
+Promoters =
+CALCULATE (
+    [Responses (count)],
+    Responses[Score] >= 9
+)
+
+Passives =
+CALCULATE (
+    [Responses (count)],
+    Responses[Score] >= 7,
+    Responses[Score] <= 8
+)
+
+Detractors =
+CALCULATE (
+    [Responses (count)],
+    Responses[Score] <= 6
+)
+
+// Return a blank when there are no responses, not a misleading zero.
+NPS =
+IF (
+    [Responses (count)] = 0,
+    BLANK (),
+    DIVIDE ( [Promoters] - [Detractors], [Responses (count)] ) * 100
+)
+
+Promoter % = DIVIDE ( [Promoters], [Responses (count)] )
+
+Detractor % = DIVIDE ( [Detractors], [Responses (count)] )
+
+// Count-by-category measure for a stacked bar of the three groups.
+Response Group =
+SWITCH (
+    TRUE (),
+    SELECTEDVALUE ( Responses[Score] ) >= 9, "Promoter",
+    SELECTEDVALUE ( Responses[Score] ) >= 7, "Passive",
+    "Detractor"
+)
+
+// NPS for the most recent period only — avoids averaging across time.
+NPS (latest year) =
+VAR LatestYear = MAX ( 'Date'[Year] )
+RETURN
+CALCULATE (
+    [NPS],
+    'Date'[Year] = LatestYear
+)

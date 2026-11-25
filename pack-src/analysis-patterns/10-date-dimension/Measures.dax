@@ -1,0 +1,54 @@
+// ============================================================
+// 10 — DYNAMIC DATE DIMENSION (measures)
+// Companion to DateTable.pq. These are the measures that make the
+// date table useful once it is marked and related.
+// ============================================================
+
+// The three classic traps are: fiscal YTD with TOTALYTD,
+// PREVIOUSMONTH vs DATEADD, and ALL vs ALLSELECTED.
+
+Revenue = SUM ( Sales[NetRevenue] )
+
+// Calendar YTD — works only if the date table is marked.
+Revenue YTD =
+TOTALYTD ( [Revenue], 'Date'[Date] )
+
+// Fiscal YTD — TOTALYTD needs the year-end date for a fiscal year.
+// A July-start fiscal year ends on 30 June.
+Revenue YTD (fiscal) =
+TOTALYTD ( [Revenue], 'Date'[Date], "6/30" )
+
+// Prior month with DATEADD. PREVIOUSMONTH breaks on a partial
+// month; DATEADD shifts by the exact interval from current context.
+Revenue PM =
+CALCULATE (
+    [Revenue],
+    DATEADD ( 'Date'[Date], -1, MONTH )
+)
+
+Revenue MoM % =
+DIVIDE ( [Revenue] - [Revenue PM], [Revenue PM] )
+
+Revenue YoY =
+CALCULATE (
+    [Revenue],
+    SAMEPERIODLASTYEAR ( 'Date'[Date] )
+)
+
+Revenue YoY % =
+DIVIDE ( [Revenue] - [Revenue YoY], [Revenue YoY] )
+
+// Rolling 12 months — the generalisation of YoY for daily data.
+Revenue Rolling 12M =
+CALCULATE (
+    [Revenue],
+    DATESINPERIOD ( 'Date'[Date], MAX ( 'Date'[Date] ), -12, MONTH )
+)
+
+// Share of total that respects the user's slicer but ignores the
+// current row. ALLSELECTED is the correct choice here.
+Share of Selected Total =
+DIVIDE (
+    [Revenue],
+    CALCULATE ( [Revenue], ALLSELECTED ( 'Date' ) )
+)

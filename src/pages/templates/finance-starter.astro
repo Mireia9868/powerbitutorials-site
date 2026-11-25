@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { GUMROAD_FINANCE } from "../../consts";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Product",
   name: "Finance Starter Pack for Power BI",
   description:
-    "A ready-to-use P&L model for Power BI: star schema, 46 audited DAX measures, four report pages, budget vs actual, and sample data you can regenerate.",
+    "A Power BI finance starter pack available now: two PBIX files and two PBIT templates on one clean model, with a documented 3-measure setup. A 46-measure P&L model is in build.",
   brand: { "@type": "Brand", name: "Power BI Tutorials" },
   releasedEvent: undefined,
 };
@@ -14,7 +15,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Finance Starter Pack for Power BI"
-  description="A ready-to-use P&L model for Power BI: star schema, 46 audited DAX measures, four report pages, budget vs actual, and sample data you can regenerate."
+  description="Power BI finance starter pack: two PBIX files, two PBIT templates, 3 measures and a documented model for $19. A 46-measure P&L version is in build."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -23,30 +24,44 @@ const jsonLd = {
   <article class="product">
     <div class="content-width">
 
-      <span class="page-eyebrow">Template · in development</span>
-      <h1>A P&amp;L report you can open — and actually change.</h1>
+      <span class="page-eyebrow">Template · starter pack available now</span>
+      <h1>A finance pack you can open today — a bigger one is in build.</h1>
       <p class="lede">
-        Star schema, 46 audited measures, page blueprints, and 1,728 rows of
-        sample data that make the numbers add up. Built the way a finance model
-        should be, not the way a screenshot pack is.
+        Two Power BI files on one clean finance model: a category performance
+        dashboard and the DAX teaching master, plus PBIT versions for your own
+        data. Three measures, 108 rows of demo data, and a README that explains
+        every column. $19.
       </p>
 
       <section class="signup" id="status">
-        <h2>Not on sale yet</h2>
+        <h2>Available now — $19</h2>
         <p class="signup-sub">
-          The model spec, the 46 measures and the page blueprints are finished.
-          The PBIX is being assembled and checked on Windows before anything is
-          sold — an untested PBIX is exactly the kind of file that produces
-          refunds, and this page is not going to ship one.
+          What is in the zip: <strong>tmpl-finance.pbix</strong> (category
+          performance dashboard — 3 KPI cards, category table, category bar
+          chart, 1280×720), <strong>p03-dax.pbix</strong> (the DAX teaching
+          master with three measures), <strong>tmpl-finance.pbit</strong> and
+          <strong>dax-formula-bar-template.pbit</strong> (the same reports as
+          templates, empty model, ready for your data), and
+          <strong>README.md</strong> (model dictionary).
+        </p>
+        <p style="margin: 20px 0 8px;">
+          <a class="buy-btn btn btn--primary" data-pack="finance-starter-pack" href={GUMROAD_FINANCE} rel="noopener">Buy Power BI Finance Starter Pack · $19 →</a>
         </p>
         <p class="fineprint">
-          If you want the smaller pack that is finished today, the
-          <a href="/resources/time-intelligence-starter/">Time Intelligence
-          Starter Pack</a> is $9 and ships immediately.
+          Checkout is Gumroad — card, Apple Pay, Google Pay and PayPal. The
+          download link arrives immediately. If a file will not open or the pack
+          does not match this page, email hello@powerbitutorials.com and I will
+          fix it.
+        </p>
+        <p class="fineprint">
+          The <strong>46-measure P&amp;L model</strong> described further down is
+          the pro version and is still in build. The starter pack above is a
+          working subset of it, priced as a starter.
         </p>
       </section>
 
       <section class="block">
+        <p class="kicker">The pro version · in build</p>
         <h2>Most finance templates break the moment you slice them.</h2>
         <p>
           Templates sold online are usually a PBIX with a nice screenshot and
@@ -190,16 +205,18 @@ const jsonLd = {
 
         <h3>How do I get the files?</h3>
         <p>
-          Not yet — this pack has no checkout while the PBIX is being finished.
-          The Time Intelligence pack, which is finished, is sold through
-          Gumroad and delivers a download link immediately.
+          The starter pack is on sale now above — checkout is Gumroad and the
+          download link arrives immediately. The 46-measure pro version has no
+          checkout yet; the PBIX still has to be assembled and checked on
+          Windows before it ships.
         </p>
       </section>
 
       <section class="closing">
         <h2>Start from a model that already works.</h2>
         <p>Two days of modelling, or one afternoon of adjusting. Your call.</p>
-        <a class="btn" href="/resources/time-intelligence-starter/">Get the $9 pack that ships today</a>
+        <a class="btn btn--primary buy-btn" data-pack="finance-starter-pack" href={GUMROAD_FINANCE} rel="noopener">Get the starter pack · $19</a>
+        <a class="btn" href="/resources/time-intelligence-starter/">Or the $9 time-intelligence pack</a>
       </section>
 
     </div>

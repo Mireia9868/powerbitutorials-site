@@ -1,0 +1,74 @@
+// ============================================================
+// 07 — CUSTOMER GAIN / LOSS
+// Assumes: Sales[CustomerKey], Sales[OrderDate], Sales[NetRevenue],
+//          and a marked Date table with Year/Month.
+// Classifies each customer's activity in the selected period vs
+// the prior period: New, Retained, Lost, Reactivated.
+// ============================================================
+
+Customers (period) =
+DISTINCTCOUNT ( Sales[CustomerKey] )
+
+Customers (prior) =
+CALCULATE (
+    [Customers (period)],
+    PREVIOUSPERIOD ( 'Date'[Date] )
+)
+
+// A customer active now but not before = New or Reactivated.
+// We distinguish using whether they were ever active before the
+// current period (all history up to the start of this period).
+Customers ever before =
+VAR PeriodStart = MIN ( 'Date'[Date] )
+RETURN
+CALCULATE (
+    DISTINCTCOUNT ( Sales[CustomerKey] ),
+    FILTER (
+        ALL ( 'Date' ),
+        'Date'[Date] < PeriodStart
+    )
+)
+
+New Customers =
+COUNTROWS (
+    FILTER (
+        VALUES ( Sales[CustomerKey] ),
+        [Customers (period)] > 0
+            && NOT ( [Customers (prior)] > 0 )
+            && NOT ( Sales[CustomerKey] IN
+                 CALCULATETABLE ( VALUES ( Sales[CustomerKey] ),
+                     FILTER ( ALL ( 'Date' ), 'Date'[Date] < MIN ( 'Date'[Date] ) ) ) )
+    )
+)
+
+Retained Customers =
+COUNTROWS (
+    FILTER (
+        VALUES ( Sales[CustomerKey] ),
+        [Customers (prior)] > 0 && [Customers (period)] > 0
+    )
+)
+
+Lost Customers =
+COUNTROWS (
+    FILTER (
+        VALUES ( Sales[CustomerKey] ),
+        [Customers (prior)] > 0
+            && CALCULATE ( [Customers (period)] ) = 0
+    )
+)
+
+// Net movement in the customer base.
+Net Customer Change = [New Customers] - [Lost Customers]
+
+// Revenue attached to each movement class, for a value breakdown.
+Revenue (period) = SUM ( Sales[NetRevenue] )
+
+Revenue from Retained =
+CALCULATE (
+    [Revenue (period)],
+    FILTER (
+        VALUES ( Sales[CustomerKey] ),
+        [Customers (prior)] > 0
+    )
+)

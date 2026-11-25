@@ -1,5 +1,5 @@
 import { getCollection } from "astro:content";
-import { CATEGORIES } from "../consts";
+import { CATEGORIES, GUMROAD_DASHBOARD_PACK } from "../consts";
 
 export async function GET({ site }) {
   const baseUrl = site?.toString().replace(/\/$/, "") || "https://powerbitutorials.com";
@@ -17,6 +17,9 @@ export async function GET({ site }) {
     { loc: "/templates/", priority: "0.8", changefreq: "monthly" },
     { loc: "/pricing/", priority: "0.9", changefreq: "monthly" },
     { loc: "/templates/finance-starter/", priority: "0.9", changefreq: "monthly" },
+    ...(GUMROAD_DASHBOARD_PACK
+      ? [{ loc: "/templates/dashboard-pack/", priority: "0.9", changefreq: "monthly" }]
+      : []),
     { loc: "/tools/", priority: "0.8", changefreq: "monthly" },
     { loc: "/tools/embed/", priority: "0.4", changefreq: "yearly" },
     { loc: "/tools/license-calculator/", priority: "0.7", changefreq: "monthly" },

@@ -1,8 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { GUMROAD_TIME_INTELLIGENCE, SITE_URL } from "../consts";
+import { GUMROAD_FINANCE, GUMROAD_TIME_INTELLIGENCE, GUMROAD_ANALYSIS_PATTERNS, GUMROAD_DASHBOARD_PACK, SITE_URL } from "../consts";
 
 const products = [
+  {
+    name: "Power BI Dashboard Pack",
+    price: "$19",
+    status: "New · Available now",
+    statusClass: "live",
+    summary:
+      "Ten complete PBIX reports on one clean sales model: executive, trend, region, category, margin, status, monthly, quarterly, region × category and detail explorer.",
+    includes: [
+      "10 PBIX reports — native visuals, no .pbiviz imports",
+      "One Sales + Date model with four documented measures",
+      "Field map, theme file, demo CSVs and 10 preview renders",
+    ],
+    href: GUMROAD_DASHBOARD_PACK,
+    cta: "Buy · $19",
+    note: "One-time payment. Instant download. 10 PBIX + docs + theme.",
+  },
   {
     name: "Time Intelligence Starter Pack",
     price: "$9",
@@ -20,20 +36,36 @@ const products = [
     note: "One-time payment. Instant download after checkout.",
   },
   {
-    name: "Finance Starter Pack",
-    price: "$39",
-    status: "In development",
-    statusClass: "soon",
+    name: "Analysis Patterns Pack",
+    price: "$19",
+    status: GUMROAD_ANALYSIS_PATTERNS ? "Available now" : "Coming soon",
+    statusClass: GUMROAD_ANALYSIS_PATTERNS ? "live" : "soon",
     summary:
-      "P&L star schema, 46 audited measures, four page blueprints and 1,728 rows of sample data that reconcile.",
+      "Ten classic business patterns as plain-text DAX and Power Query: RFM, market basket, ABC/Pareto, BCG, NPS, Top-N, customer movement, forecasting and more.",
     includes: [
-      "Five CSVs, a fixed seed and a regeneration script",
-      "46 measures in four display folders",
-      "Model spec, page blueprints and a theme JSON",
+      "10 commented DAX files and 2 Power Query scripts",
+      "10 build guides with column names, self-checks and trap notes",
+      "Pack README and licence — 23 text files, no PBIX lock-in",
     ],
-    href: "/templates/finance-starter/",
-    cta: "See what's in it",
-    note: "Not on sale yet — the PBIX has to be assembled and checked on Windows first.",
+    href: GUMROAD_ANALYSIS_PATTERNS || "/templates/analysis-patterns/",
+    cta: GUMROAD_ANALYSIS_PATTERNS ? "Buy · $19" : "See details",
+    note: GUMROAD_ANALYSIS_PATTERNS ? "One-time payment. Instant download after checkout." : "Launching soon — join the list on the product page.",
+  },
+  {
+    name: "Finance Starter Pack",
+    price: "$19",
+    status: "Available now",
+    statusClass: "live",
+    summary:
+      "Two PBIX files and two PBIT templates on one clean finance model: a category performance dashboard and the DAX teaching master, with a documented 3-measure setup.",
+    includes: [
+      "tmpl-finance.pbix — category dashboard, 3 KPI cards + table + bar chart",
+      "p03-dax.pbix — the DAX teaching master used across our articles",
+      "Two PBIT templates and a README model dictionary",
+    ],
+    href: GUMROAD_FINANCE,
+    cta: "Buy · $19",
+    note: "One-time payment. Instant download after checkout. A 46-measure P&L version is in build.",
   },
 ];
 
@@ -51,8 +83,8 @@ const faqs = [
     a: "Yes. The licence covers your own reports and paid client work. What it does not cover is reselling, redistributing or republishing the files as your own template, course or product.",
   },
   {
-    q: "How do refunds work?",
-    a: "Thirty days, any reason. Reply to your receipt or email hello@powerbitutorials.com and the payment is returned. If a measure is wrong for your model, tell me what it does — I would rather fix it than refund it.",
+    q: "What if a file is broken or does not match the page?",
+    a: "Email hello@powerbitutorials.com with what you expected and what you got. Broken files are replaced, and anything that does not match the description is corrected or made right.",
   },
   {
     q: "Who handles payment and tax?",
@@ -72,24 +104,13 @@ const jsonLd = {
       name: p.name,
       description: p.summary,
       url: p.href.startsWith("http") ? p.href : `${SITE_URL}${p.href}`,
-      ...(p.price === "$9"
-        ? {
-            offers: {
-              "@type": "Offer",
-              price: "9.00",
-              priceCurrency: "USD",
-              availability: "https://schema.org/InStock",
-              url: p.href,
-            },
-          }
-        : {
-            offers: {
-              "@type": "Offer",
-              price: "39.00",
-              priceCurrency: "USD",
-              availability: "https://schema.org/PreOrder",
-            },
-          }),
+      offers: {
+        "@type": "Offer",
+        price: p.price.replace("$", "") + ".00",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        url: p.href,
+      },
     },
   })),
 };
@@ -97,7 +118,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Pricing — Power BI Tutorials packs"
-  description="One-time prices for Power BI starter packs: a $9 time-intelligence pack available now, and a $39 finance pack in development. No subscriptions, 30-day refunds, commercial use included."
+  description="One-time Power BI packs: a $19 10-report dashboard pack, a $9 time-intelligence pack, a $19 analysis patterns pack and a $19 finance starter pack. No subscriptions, instant download."
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
@@ -142,10 +163,6 @@ const jsonLd = {
           a setup step is unclear, the file is replaced and buyers are notified.
         </li>
         <li>
-          <strong>A thirty-day refund, any reason.</strong> No form, no
-          interrogation — reply to the receipt and the payment goes back.
-        </li>
-        <li>
           <strong>Plain text.</strong> Power Query scripts, DAX files and Markdown.
           No PBIX lock-in, no custom visuals, nothing that breaks on a Power BI
           update.
@@ -182,8 +199,8 @@ const jsonLd = {
         Something not covered here? Email
         <a href="mailto:hello@powerbitutorials.com">hello@powerbitutorials.com</a>
         — the same address that appears on the
-        <a href="/contact/">contact page</a>, and the one used for purchases and
-        refunds.
+        <a href="/contact/">contact page</a>, and the one used for purchases,
+        corrections and broken files.
       </p>
 
     </div>

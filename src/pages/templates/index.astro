@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { GUMROAD_TIME_INTELLIGENCE } from "../../consts";
+import { GUMROAD_FINANCE, GUMROAD_TIME_INTELLIGENCE, GUMROAD_DASHBOARD_PACK, GUMROAD_ANALYSIS_PATTERNS } from "../../consts";
 import "../../styles/hub-design.css";
 ---
 
@@ -48,7 +48,7 @@ import "../../styles/hub-design.css";
       <div class="wrap">
         <div class="section__head">
           <p class="kicker">01 / The library</p>
-          <h2>Five models. Each one documented.</h2>
+          <h2>Seven models. Each one documented.</h2>
           <p class="section__intro">
             Paid packs include the model spec, measure library and build guide.
             Free PBIX files are complete, working reports.
@@ -56,16 +56,40 @@ import "../../styles/hub-design.css";
         </div>
         <div class="card-grid">
           <article class="card">
-            <p class="card__badge">In development</p>
+            <p class="card__badge">New · 10 reports</p>
+            <h3>Dashboard Pack</h3>
+            <p class="card__desc">
+              Ten complete Power BI reports on one clean sales model: executive,
+              trend, region, category, margin, status, monthly, quarterly,
+              region × category and a detail explorer. Native visuals, a shared
+              1280×720 system, and a page-by-page field map.
+            </p>
+            <p class="card__meta">10 PBIX · demo data · theme · docs · launch price $19</p>
+            <a class="card__link" href="/templates/dashboard-pack/">Preview the pack <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+
+          <article class="card">
+            <p class="card__badge">Paid · $19</p>
             <h3>Finance Starter Pack</h3>
             <p class="card__desc">
               A P&amp;L report you can open and read: star schema, commented
               measures, four report pages, and budget vs actual that survives a
-              slicer. The model spec and measure library are finished; the PBIX
-              is still being assembled.
+              slicer. The model spec and measure library are included.
             </p>
-            <p class="card__meta">Not on sale yet</p>
+            <p class="card__meta">$19 one-time · PBIX + model spec + measure library · commercial use included</p>
             <a class="card__link" href="/templates/finance-starter/">See what's inside <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+
+          <article class="card">
+            <p class="card__badge">Paid · $19</p>
+            <h3>Analysis Patterns Pack</h3>
+            <p class="card__desc">
+              Ten classic business patterns rebuilt as plain-text DAX and Power
+              Query: RFM, market basket, ABC/Pareto, BCG, NPS, Top-N, customer
+              movement, forecasting, total-row fixes and a fiscal date table.
+            </p>
+            <p class="card__meta">$19 one-time · 23 text files · 10 build guides · commercial use included</p>
+            <a class="card__link" href="/templates/analysis-patterns/">See the ten patterns <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8H13M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </article>
 
           <article class="card">
@@ -139,7 +163,14 @@ import "../../styles/hub-design.css";
           Files are delivered right after payment; VAT is calculated at checkout.
         </p>
         <div class="buy-actions">
+          <a class="btn btn--primary buy-btn" data-pack="finance-starter-pack" href={GUMROAD_FINANCE} rel="noopener">Buy Finance Starter Pack · $19 →</a>
           <a class="btn btn--secondary buy-btn" data-pack="time-intelligence-pack" href={GUMROAD_TIME_INTELLIGENCE} rel="noopener">Buy Time Intelligence Starter Pack · $9 →</a>
+          {GUMROAD_ANALYSIS_PATTERNS && (
+            <a class="btn btn--secondary buy-btn" data-pack="analysis-patterns-pack" href={GUMROAD_ANALYSIS_PATTERNS} rel="noopener">Buy Analysis Patterns Pack · $19 →</a>
+          )}
+          {GUMROAD_DASHBOARD_PACK && (
+            <a class="btn btn--secondary buy-btn" data-pack="dashboard-pack" href={GUMROAD_DASHBOARD_PACK} rel="noopener">Buy Dashboard Pack · $19 →</a>
+          )}
         </div>
       </div>
     </section>

@@ -1,0 +1,20 @@
+ANALYSIS PATTERNS PACK — LICENCE
+
+Copyright (c) 2026 Power BI Tutorials (Mireia). All rights reserved.
+
+PERMITTED
+- Use the files in your own reports and in reports you deliver to clients.
+- Modify measures, queries and documentation to fit your model.
+- Install the pack for up to five people in one organisation.
+
+NOT PERMITTED
+- Reselling, redistributing or republishing the .dax, .pq or README files.
+- Bundling them into another template pack, course or marketplace product.
+- Claiming authorship of the original measures and documentation.
+
+The files are provided as-is. Corrections are supplied for 12 months from
+purchase. Email hello@powerbitutorials.com with the pattern number and the
+problem.
+
+No warranty is given that the patterns fit a model they were not written for.
+The sample column names are a convention, not a promise about your data.

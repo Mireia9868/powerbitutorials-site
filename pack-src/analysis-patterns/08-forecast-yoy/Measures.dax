@@ -1,0 +1,56 @@
+// ============================================================
+// 08 — SALES FORECAST (YOY GROWTH METHOD)
+// Assumes: Sales[OrderDate], Sales[NetRevenue], a marked Date table,
+//          and a what-if parameter `GrowthRate` (decimal, e.g. 0.05).
+// Forecast = prior year actual x (1 + chosen growth rate).
+// Deliberately simple: a transparent baseline you can defend,
+// not a black-box model.
+// ============================================================
+
+Revenue = SUM ( Sales[NetRevenue] )
+
+Revenue PY =
+CALCULATE (
+    [Revenue],
+    SAMEPERIODLASTYEAR ( 'Date'[Date] )
+)
+
+// The growth rate the user dials in on the slicer.
+Growth = SELECTEDVALUE ( GrowthRate[GrowthRate], 0.05 )
+
+Forecast =
+IF (
+    ISBLANK ( [Revenue PY] ),
+    BLANK (),
+    [Revenue PY] * ( 1 + [Growth] )
+)
+
+// Difference and variance vs the forecast.
+Forecast Variance = [Revenue] - [Forecast]
+
+Forecast Variance % =
+DIVIDE ( [Forecast Variance], [Forecast] )
+
+// A rolling 3-month average of prior-year revenue, for a smoother
+// baseline when single months are noisy.
+Revenue PY (3M avg) =
+AVERAGEX (
+    DATESINPERIOD ( 'Date'[Date], MAX ( 'Date'[Date] ), -3, MONTH ),
+    CALCULATE ( [Revenue PY] )
+)
+
+Forecast (3M avg) =
+IF (
+    ISBLANK ( [Revenue PY (3M avg)] ),
+    BLANK (),
+    [Revenue PY (3M avg)] * ( 1 + [Growth] )
+)
+
+// Flag months where actual beat forecast — useful as a KPI card.
+Months Above Forecast =
+COUNTROWS (
+    FILTER (
+        VALUES ( 'Date'[YearMonth] ),
+        NOT ISBLANK ( [Forecast] ) && [Revenue] > [Forecast]
+    )
+)
