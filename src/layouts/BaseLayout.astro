@@ -211,6 +211,8 @@ const websiteJsonLd = isHomepage ? {
         // global — every `typeof window.gtag === 'function'` guard in the custom
         // event code therefore failed and silently dropped all custom events.
         window.gtag = gtag;
+        // Expose for the checkout-link attribution code below (gtag 'get').
+        window.__GA4_MEASUREMENT_ID = GA4_MEASUREMENT_ID;
         gtag('js', new Date());
         // Attach the A/C design variant to every hit (including the first page_view),
         // so the experiment is measurable without relying on consent-gated custom events.
@@ -223,6 +225,15 @@ const websiteJsonLd = isHomepage ? {
         gtag('config', GA4_MEASUREMENT_ID, {
           anonymize_ip: true,
         });
+        // Pre-fetch client_id into a cache. gtag('get') is callback-based and
+        // too slow to run inside a click handler (the browser navigates away
+        // before it resolves). The buy-link handler reads this cache instead.
+        window.__GA4_CLIENT_ID = '';
+        try {
+          gtag('get', GA4_MEASUREMENT_ID, 'client_id', function (cid) {
+            window.__GA4_CLIENT_ID = cid || '';
+          });
+        } catch (e) {}
       </script>
     )}
 
@@ -314,36 +325,48 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           window.gtag('event', name, params || {});
         }
 
-        // Conversion intent: every checkout button on the site (Creem links).
-        // Recorded as a first-party event so GA4 can report "how many people
-        // tried to buy" without needing access to Creem's hosted checkout.
-        // value/currency are GA4's standard revenue params — once this event
-        // is marked as a key event in the GA4 UI, its value shows up in the
-        // key-events report. price_usd is kept for backward compatibility.
+        // CHECKOUT CLICK (not a purchase). Fires the instant a buy button is
+        // clicked — it says nothing about whether payment completed.
+        // Deliberately emits NO value/currency: those params make GA4 show fake
+        // revenue in the key-events report. Real revenue comes only from the
+        // Gumroad webhook -> server-side 'purchase' event (see functions/api/gumroad-webhook.js).
+        // Do NOT mark this as a key event in the GA4 UI.
+        // Also appends GA4 client_id + source_url to the Gumroad URL so the
+        // webhook can attribute the eventual sale back to this visitor/page.
         document.addEventListener('click', function (event) {
           var link = event.target.closest('a.buy-btn, a[href*="gumroad.com"]');
           if (!link) return;
           var product = (link.getAttribute('data-pack') || link.textContent || '').trim().slice(0, 80);
-          var priceMatch = (link.textContent || '').match(/\$([0-9]+)/);
-          var priceUsd = priceMatch ? Number(priceMatch[1]) : undefined;
-          var params = {
+          var href = link.href;
+          // Gumroad echoes arbitrary query params in url_params on the ping.
+          // Read the pre-fetched client_id cache — a synchronous gtag('get')
+          // inside a click handler would never resolve before navigation.
+          try {
+            var cid = window.__GA4_CLIENT_ID;
+            if (href.indexOf('gumroad.com') !== -1 && cid) {
+              var u = new URL(href, location.href);
+              u.searchParams.set('client_id', cid);
+              u.searchParams.set('source_url', location.pathname);
+              link.href = u.toString();
+              href = link.href;
+            }
+          } catch (e) {}
+          send('checkout_click', {
             pack: product,
-            price_usd: priceUsd,
-            link_url: link.href,
+            link_url: href,
             source_path: location.pathname,
             design_variant: document.documentElement.dataset.designVariant || 'A',
-          };
-          if (priceUsd !== undefined) {
-            params.value = priceUsd;
-            params.currency = 'USD';
-          }
-          send('purchase_intent', params);
+          });
         }, true);
 
         // ---- 出站点击 ----
         document.addEventListener('click', function (e) {
           var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
           if (!a) return;
+          // A gumroad/buy link already emits checkout_click above. Emitting
+          // outbound_click too double-counted the same click (both events had
+          // identical 4 events / 2 users in the 28d export).
+          if (a.closest('a.buy-btn, a[href*="gumroad.com"]')) return;
           var url;
           try { url = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
           if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
