@@ -141,7 +141,10 @@ FUNNEL_EVENTS = [
     ("实质滚动", "scroll_depth"),
     ("探索工具/模板", None),          # 用页面路径判定，见下
     ("模板页访问", None),
-    ("购买意向", "purchase_intent"),
+    # 旧事件 purchase_intent 于 2026-11-25 改名 checkout_click 且去掉了
+    # value/currency —— 它只是点击，不是成交，绝不能当转化终点。
+    ("结账点击(非成交)", "checkout_click"),
+    ("真实成交(purchase)", "purchase"),   # 仅 Gumroad webhook 服务端回传
     ("订阅提交", "form_submit"),
 ]
 # 路径判定必须互斥，否则 /templates/finance-starter 会被两个环节重复计数，
@@ -155,8 +158,9 @@ FUNNEL_ACTIONS = {
     "产生互动→实质滚动": "正文太长或排版劝退：给跳动最高的 3 页加目录锚点 + 把结论前置到首屏。",
     "实质滚动→探索工具/模板": "教程页缺少横向入口：在正文 1/3 处插入对应工具/模板卡（当前教程页零 Gumroad 链接）。",
     "探索工具/模板→模板页访问": "工具页没有承接购买：工具结果页底部加 1 条直达 Gumroad 的转换 CTA。",
-    "模板页访问→购买意向": "产品页说服不足：补 1 张真实 PBIX 截图 + 明确 $9/$19 的差异对比表。",
-    "购买意向→订阅提交": "意向用户未被捕获：加入邮件捕获弹窗/内嵌表单，目标 28 天 form_submit ≥300。",
+    "模板页访问→结账点击(非成交)": "产品页说服不足：补 1 张真实 PBIX 截图 + 明确 $9/$19 的差异对比表。",
+    "结账点击(非成交)→真实成交(purchase)": "点击没变成付款：确认 Gumroad webhook 已配置（Settings>Advanced>Ping），且 Secrets 已填 GA4_API_SECRET / GUMROAD_WEBHOOK_TOKEN。",
+    "真实成交(purchase)→订阅提交": "成交后未进邮件列表：在 Gumroad 感谢页加 Buttondown 订阅入口。",
 }
 
 def _funnel_filter(field, values, begins=False):
@@ -336,6 +340,7 @@ def main():
         for e in ferr:
             info.append(f"漏斗数据不完整：{e}")
         A("> 口径：各环节去重用户数（totalUsers），非事件数；同一用户多步只计一次。")
+        A("> 「结账点击」是点击购买按钮，不是成交；「真实成交」只来自 Gumroad webhook 服务端回传的 purchase 事件。")
         A("")
         A("| 环节 | 用户数 | 上一步→本步 | 累计转化（vs 到达） |")
         A("|---|---:|---:|---:|")
@@ -365,7 +370,8 @@ def main():
             A(f"- **流失率最高：{r_label}** — {r_rate:.1f}%（{r_up:,}→{r_down:,}）")
             # 优化动作优先指向「变现链后段」的高流失环节（模板页及之后），
             # 前段流量流失另由内容侧处理，避免每天重复同一条建议。
-            late = [d for d in real_drops if d[0].startswith(("模板页访问", "购买意向", "探索工具"))]
+            late = [d for d in real_drops if d[0].startswith(
+                ("模板页访问", "结账点击", "真实成交", "探索工具"))]
             focus = sorted(late, key=lambda x: x[1] / x[2] if x[2] else 0, reverse=True)
             focus = focus[0] if focus else by_rate
             f_label, f_lost, f_up, f_down = focus
@@ -375,12 +381,18 @@ def main():
             A(f"- 针对该板块的动作：{action}")
             if f_rate >= 50:
                 alerts.append(f"[漏斗] {f_label} 流失 {f_rate:.1f}%（{f_up:,}→{f_down:,}），变现链最大断点")
-        # 硬指标告警：购买意向为 0 时无论流失排序都要暴露
-        intent = dict(funnel).get("购买意向", 0)
-        if intent == 0:
-            alerts.append("[变现] 近 28 天购买意向 = 0：检查 Gumroad 链接是否可达、CTA 是否直达")
-        elif intent < 10:
-            info.append(f"近 28 天购买意向仅 {intent} 人，样本太小，暂不做转化率归因")
+        # 硬指标告警：真实成交为 0 时必须暴露，并区分「没人点」与「点了没回传」
+        clicks = dict(funnel).get("结账点击(非成交)", 0)
+        purchases = dict(funnel).get("真实成交(purchase)", 0)
+        if purchases == 0 and clicks > 0:
+            alerts.append(
+                f"[变现] 近 28 天结账点击 {clicks} 人但真实成交 = 0："
+                "优先查 Gumroad webhook 是否配置、Secrets(GA4_API_SECRET/GUMROAD_WEBHOOK_TOKEN) 是否填写；"
+                "不要再把 checkout_click 当作成交")
+        elif purchases == 0:
+            info.append("[变现] 近 28 天真实成交 = 0 且无结账点击：CTA 触达是瓶颈，先解决入口")
+        elif purchases < 10:
+            info.append(f"近 28 天真实成交仅 {purchases} 人，样本太小，暂不做转化率归因")
     else:
         A("- ⚠️ 无 GA4 授权 → 本段不输出任何漏斗数字（不用静态快照冒充实时转化数据）。")
         A("- 配好 Secrets 后自动启用：事件环节取 totalUsers，模板/工具页取 pagePath 去重用户。")
