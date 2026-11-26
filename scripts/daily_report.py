@@ -129,6 +129,92 @@ def ga4_pull(pid):
     except Exception as e:
         return {"error": str(e)}
 
+# ---- 转化漏斗（近 28 天滚动，对齐用户导出的 GA4 事件口径）----
+# 环节定义：名称 / 事件名（用 totalUsers 去重人数）/ 或页面路径前缀
+# 说明：漏斗用「用户数」而非「事件数」，否则同一人多次滚动会被重复计入。
+FUNNEL_DAYS = 28
+FUNNEL_START = (Y - datetime.timedelta(days=FUNNEL_DAYS - 1)).isoformat()
+FUNNEL_END = Y.isoformat()
+FUNNEL_EVENTS = [
+    ("到达站点", "page_view"),
+    ("产生互动", "user_engagement"),
+    ("实质滚动", "scroll_depth"),
+    ("探索工具/模板", None),          # 用页面路径判定，见下
+    ("模板页访问", None),
+    ("购买意向", "purchase_intent"),
+    ("订阅提交", "form_submit"),
+]
+# 路径判定必须互斥，否则 /templates/finance-starter 会被两个环节重复计数，
+# 导致「探索→模板」转化率虚高、丢失人数被抹平。
+EXPLORE_PREFIXES = ("/tools",)          # /tools/* 视为工具探索（与模板页互斥）
+PRODUCT_PREFIXES = ("/templates", "/resources/time-intelligence-starter")
+
+# 每一步的「可落地优化动作」——只在诊断输出，不自动改代码。
+FUNNEL_ACTIONS = {
+    "到达站点→产生互动": "首屏与搜索意图错配：检查 Top 落地页 H1/首段是否匹配查询词；不匹配的页面 48h 内重写首屏。",
+    "产生互动→实质滚动": "正文太长或排版劝退：给跳动最高的 3 页加目录锚点 + 把结论前置到首屏。",
+    "实质滚动→探索工具/模板": "教程页缺少横向入口：在正文 1/3 处插入对应工具/模板卡（当前教程页零 Gumroad 链接）。",
+    "探索工具/模板→模板页访问": "工具页没有承接购买：工具结果页底部加 1 条直达 Gumroad 的转换 CTA。",
+    "模板页访问→购买意向": "产品页说服不足：补 1 张真实 PBIX 截图 + 明确 $9/$19 的差异对比表。",
+    "购买意向→订阅提交": "意向用户未被捕获：加入邮件捕获弹窗/内嵌表单，目标 28 天 form_submit ≥300。",
+}
+
+def _funnel_filter(field, values, begins=False):
+    from google.analytics.data_v1beta.types import Filter, FilterExpression, FilterExpressionList
+    exprs = []
+    for v in values:
+        if begins:
+            sf = Filter.StringFilter(value=v, match_type=Filter.StringFilter.MatchType.BEGINS_WITH)
+            exprs.append(FilterExpression(filter=Filter(field_name=field, string_filter=sf)))
+        else:
+            exprs.append(FilterExpression(
+                filter=Filter(field_name=field,
+                              in_list_filter=Filter.InListFilter(values=list(values)))))
+    return FilterExpression(or_group=FilterExpressionList(expressions=exprs))
+
+def ga4_funnel(pid):
+    """返回 [(环节名, 去重用户数)]；任一步失败则该步为 0 并记 error。"""
+    from google.analytics.data_v1beta import BetaAnalyticsDataClient, RunReportRequest, DateRange, Metric, Dimension
+    client = BetaAnalyticsDataClient.from_service_account_json(str(SA_JSON))
+    dr = [DateRange(start_date=FUNNEL_START, end_date=FUNNEL_END)]
+    out, errors = [], []
+    try:
+        ev_names = [e for _, e in FUNNEL_EVENTS if e]
+        r = client.run_report(RunReportRequest(
+            property=f"properties/{pid}", date_ranges=dr,
+            dimensions=[Dimension(name="eventName")],
+            metrics=[Metric(name="totalUsers")],
+            dimension_filter=_funnel_filter("eventName", ev_names),
+        ))
+        ev_users = {row.dimension_values[0].value: int(row.metric_values[0].value)
+                    for row in r.rows}
+    except Exception as e:
+        ev_users, _ = {}, errors.append(f"事件漏斗：{e}")
+
+    def path_users(prefixes):
+        try:
+            r = client.run_report(RunReportRequest(
+                property=f"properties/{pid}", date_ranges=dr,
+                dimensions=[Dimension(name="pagePath")],
+                metrics=[Metric(name="totalUsers")],
+                dimension_filter=_funnel_filter("pagePath", prefixes, begins=True),
+            ))
+            return sum(int(row.metric_values[0].value) for row in r.rows)
+        except Exception as e:
+            errors.append(f"页面漏斗：{e}")
+            return 0
+
+    explore = path_users(EXPLORE_PREFIXES)
+    product = path_users(PRODUCT_PREFIXES)
+    for name, ev in FUNNEL_EVENTS:
+        if ev:
+            out.append((name, ev_users.get(ev, 0)))
+        elif name == "探索工具/模板":
+            out.append((name, explore))
+        elif name == "模板页访问":
+            out.append((name, product))
+    return out, errors
+
 def gsc_query(creds, start, end, dimension, row_limit=20):
     from googleapiclient.discovery import build
     sc = build("webmasters", "v3", credentials=creds)
@@ -242,8 +328,66 @@ def main():
             A("- ⚠️ 无 GSC 数据（待授权或手动导出）")
     A("")
 
+    # 转化漏斗（近 28 天滚动，与用户导出口径一致）
+    A(f"## 四、转化漏斗（近 {FUNNEL_DAYS} 天 {FUNNEL_START} ~ {FUNNEL_END}）")
+    funnel = None
+    if creds_flag and pid:
+        funnel, ferr = ga4_funnel(pid)
+        for e in ferr:
+            info.append(f"漏斗数据不完整：{e}")
+        A("> 口径：各环节去重用户数（totalUsers），非事件数；同一用户多步只计一次。")
+        A("")
+        A("| 环节 | 用户数 | 上一步→本步 | 累计转化（vs 到达） |")
+        A("|---|---:|---:|---:|")
+        base = funnel[0][1] if funnel else 0
+        prev = None
+        drops = []
+        for name, users in funnel:
+            if prev is None:
+                step_rate = "—"
+            else:
+                step_rate = f"{users/prev*100:.1f}%" if prev else "—"
+                drops.append((f"{prev_name}→{name}", prev - users, prev, users))
+            cum = f"{users/base*100:.2f}%" if base else "—"
+            A(f"| {name} | {users:,} | {step_rate} | {cum} |")
+            prev, prev_name = users, name
+        A("")
+        # 诊断：同时给「绝对丢失最多」和「流失率最高」两个视角。
+        # 只看绝对人数会永远指向第一步（到达→互动），掩盖后段近乎归零的变现断点。
+        real_drops = [d for d in drops if d[1] > 0]
+        if real_drops:
+            by_volume = sorted(real_drops, key=lambda x: x[1], reverse=True)[0]
+            by_rate = sorted(real_drops, key=lambda x: x[1] / x[2] if x[2] else 0, reverse=True)[0]
+            v_label, v_lost, v_up, v_down = by_volume
+            r_label, r_lost, r_up, r_down = by_rate
+            r_rate = r_lost / r_up * 100 if r_up else 0
+            A(f"- **丢失人数最多：{v_label}** — {v_lost:,} 人（{v_up:,}→{v_down:,}）")
+            A(f"- **流失率最高：{r_label}** — {r_rate:.1f}%（{r_up:,}→{r_down:,}）")
+            # 优化动作优先指向「变现链后段」的高流失环节（模板页及之后），
+            # 前段流量流失另由内容侧处理，避免每天重复同一条建议。
+            late = [d for d in real_drops if d[0].startswith(("模板页访问", "购买意向", "探索工具"))]
+            focus = sorted(late, key=lambda x: x[1] / x[2] if x[2] else 0, reverse=True)
+            focus = focus[0] if focus else by_rate
+            f_label, f_lost, f_up, f_down = focus
+            f_rate = f_lost / f_up * 100 if f_up else 0
+            A(f"- **本轮优化板块：{f_label}**（流失 {f_rate:.1f}%）")
+            action = FUNNEL_ACTIONS.get(f_label, "定位该环节落地页，排查内容/入口/信任信号。")
+            A(f"- 针对该板块的动作：{action}")
+            if f_rate >= 50:
+                alerts.append(f"[漏斗] {f_label} 流失 {f_rate:.1f}%（{f_up:,}→{f_down:,}），变现链最大断点")
+        # 硬指标告警：购买意向为 0 时无论流失排序都要暴露
+        intent = dict(funnel).get("购买意向", 0)
+        if intent == 0:
+            alerts.append("[变现] 近 28 天购买意向 = 0：检查 Gumroad 链接是否可达、CTA 是否直达")
+        elif intent < 10:
+            info.append(f"近 28 天购买意向仅 {intent} 人，样本太小，暂不做转化率归因")
+    else:
+        A("- ⚠️ 无 GA4 授权 → 本段不输出任何漏斗数字（不用静态快照冒充实时转化数据）。")
+        A("- 配好 Secrets 后自动启用：事件环节取 totalUsers，模板/工具页取 pagePath 去重用户。")
+    A("")
+
     # 内容引擎达成（无论是否授权都可见）
-    A(f"## 四、内容引擎达成（本地）")
+    A(f"## 五、内容引擎达成（本地）")
     urls = fetch_live_urls()
     dm, ll = production_progress()
     if urls is None:
@@ -268,7 +412,7 @@ def main():
     A(f"- 今日待办：发布当日草稿 + 1 个技术微任务（内链/schema/索引/CTR 轮换）")
     A("")
 
-    A(f"## 五、告警与提示")
+    A(f"## 六、告警与提示")
     if alerts:
         A(f"- 🚨 {len(alerts)} 条：")
         for a in alerts: A(f"  - {a}")
